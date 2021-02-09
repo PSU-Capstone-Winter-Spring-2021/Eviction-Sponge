@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect, Route, Switch} from "react-router-dom";
 import axios from 'axios';
+import Header from "./Header";
 
 function App() {
 	  const [data, setData] = useState({ hits: [] });
