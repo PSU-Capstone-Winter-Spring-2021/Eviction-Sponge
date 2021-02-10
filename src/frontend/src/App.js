@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import logo from './logo.svg';
 import './App.css';
 import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
+=======
+import React, { useState, useEffect } from 'react';
+import { Redirect, Route, Switch} from "react-router-dom";
+import axios from 'axios';
+import Header from "./Header";
+>>>>>>> db689854acbf3fcbaa9a935e22309b47eb57909f
 
 function App() {
   return (
