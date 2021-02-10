@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# PyCache files
+src/backend/endpoints/__pycache__/
+*.py[cod]
