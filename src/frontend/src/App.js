@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch} from "react-router-dom";
 import axios from '../node_modules/axios';
-import Header from "./Header";
+//import Header from "./Header";
+import OECILogin from "./components/OeciLogin";
 import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
   return (
   <>
+  <OECILogin />
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
   <Navbar bg="dark" variant="dark">
     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
     <Nav className="mr-auto">
