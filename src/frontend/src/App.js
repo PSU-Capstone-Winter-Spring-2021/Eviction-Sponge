@@ -1,28 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Route, Switch} from "react-router-dom";
-import axios from 'axios';
+import axios from '../node_modules/axios';
 import Header from "./Header";
+import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
-	  const [data, setData] = useState({ hits: [] });
-	 
-	  useEffect(async () => {
-		      const result = await axios(
-			            'https://hn.algolia.com/api/v1/search?query=redux',
-			          );
-		   
-		      setData(result.data);
-		    });
-	 
-	  return (
-		      <ul>
-		        {data.hits.map(item => (
-				        <li key={item.objectID}>
-				          <a href={item.url}>{item.title}</a>
-				        </li>
-				      ))}
-		      </ul>
-		    );
+  return (
+  <>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+  <Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+    </Form>
+  </Navbar>
+  <br />
+  <Navbar bg="primary" variant="dark">
+    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-light">Search</Button>
+    </Form>
+  </Navbar>
+
+  <br />
+  <Navbar bg="light" variant="light">
+    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-primary">Search</Button>
+    </Form>
+  </Navbar>
+      </header>
+    </div>
+  </>
+  );
 }
- 
+
 export default App;
