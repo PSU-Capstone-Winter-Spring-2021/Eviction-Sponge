@@ -1,12 +1,14 @@
-import os
-
+from os import path
 from flask import Flask
 
+from endpoints import hello, static
 
-def create_app(test_config=None):
-    # create and configure the app
-    app = Flask(__name__)
+FRONTEND_BUILD_DIR = path.abspath(path.join(path.dirname(__file__), "..", "frontend"))
 
+def create_app():
+    app = Flask(__name__, static_folder=FRONTEND_BUILD_DIR)
+
+<<<<<<< HEAD
     if __name__ == '__main__':
       app.run(host = 'localhost', port = '5000')
       
@@ -20,5 +22,13 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
+=======
+    hello.register(app)
+    static.register(app)
+>>>>>>> backendstart
 
     return app
+
+if __name__ == '__main__':
+    application = create_app()
+    application.run(host="localhost", port=5000, debug=True)
