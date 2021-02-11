@@ -8,9 +8,12 @@ class OeciLogin extends React.Component {
         password: "",
     };
 
-    constructor() {
+    constructor(props) {
         // TODO: Figure out what arguments go into the super call
-        super({}, {});
+        super(props);
+        this.state= {value: ''};
+        
+        this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
@@ -20,8 +23,7 @@ class OeciLogin extends React.Component {
     };
 
     onChange = (e) => {
-        // @ts-ignore // TODO: can't figure out why this.setState({}) makes it unhappy
-        this.setState({ text: e.currentTarget.value });
+        this.setState({ value: e.target.value });
         // So, afaik onChange calls handleChange automatically. Some sites recommend this code tidbit be in onChange,
         // others in handleChange. Not sure why.
     };
@@ -29,7 +31,6 @@ class OeciLogin extends React.Component {
     // gather all the user-entered data and post it for the backend to deal with
     handleSubmit(event) {
         event.preventDefault();
-        // @ts-ignore // TODO: can't figure out why this.setState({}) makes it unhappy
         const data = new FormData(event.target);
 
         fetch('/api/form-submit-url', {
@@ -41,7 +42,7 @@ class OeciLogin extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     User ID:
                 </label>
@@ -62,7 +63,7 @@ class OeciLogin extends React.Component {
                     value={this.state.password}
                     onChange={this.onChange}
                 />
-                <button> Submit </button>
+                <input type="submit" value="Log In" />
             </form>
         )
     }
