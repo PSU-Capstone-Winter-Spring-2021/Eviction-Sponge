@@ -3,6 +3,7 @@ import { Redirect, Route, Switch} from "react-router-dom";
 import axios from '../node_modules/axios';
 //import Header from "./Header";
 import OECILogin from "./components/OeciLogin";
+import PartnersTable from "./components/PartnersTable";
 import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
     </Form>
   </Navbar>
       </header>
+  <PartnersTable>
+    
+  </PartnersTable>
     </div>
   </>
   );
