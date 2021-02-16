@@ -6,13 +6,19 @@ from flask import request, make_response, current_app
 class OeciLogin(MethodView):
     def post(self):
         data = request.form
-        print(data)
+
         # Check for data validity:
-        #if data is None or data[0] is None or data[1] is None:
-            #current_app.logger.error("400: Missing one or more required fields")
-        #credentials = {"oeci_username": data["oecilogin"], "oeci_password": data["oecipassword"]}
-        # TODO: login
-        #print(credentials)
+        if data is None:
+            current_app.logger.error("400: Missing one or more required fields")
+        if data['oecilogin'] is None:
+            current_app.logger.error("400: Missing OECI login username")
+        if data['oecipassword'] is None:
+            current_app.logger.error("400: Missing OECI login password")
+
+        credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
+        print(credentials)
+
+        # TODO: pass login info to crawler to start process
 
         response = make_response()
         return response, 201
