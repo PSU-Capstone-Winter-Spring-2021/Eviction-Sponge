@@ -1,7 +1,7 @@
 from os import path
 from flask import Flask, request, make_response
 
-from endpoints import hello, static
+from endpoints import hello, static, oeci_login
 
 FRONTEND_BUILD_DIR = path.abspath(path.join(path.dirname(__file__), "..", "frontend"))
 
@@ -24,6 +24,7 @@ def create_app():
 
     hello.register(app)
     static.register(app)
+    oeci_login.register(app)
 
 
     return app
