@@ -3,7 +3,6 @@ import { Redirect, Route, Switch} from "react-router-dom";
 import axios from '../node_modules/axios';
 //import Header from "./Header";
 import OECILogin from "./components/OeciLogin";
-import Footer from "./components/Footer";
 import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -53,7 +52,6 @@ function App() {
   </Navbar>
       </header>
     </div>
-  <Footer />
   </>
   );
 }
