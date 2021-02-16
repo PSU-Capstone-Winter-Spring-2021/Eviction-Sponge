@@ -58,7 +58,7 @@ class OeciLogin extends React.Component {
                 </label>
                 <input
                     id="password"
-                    name="oecilogin"
+                    name="oecipassword"
                     type="password"
                     value={this.state.password}
                     onChange={this.onChange}
