@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, Route, Switch} from "react-router-dom";
+import { Redirect, Route, Router, Switch} from "react-router-dom";
 import axios from '../node_modules/axios';
+import history from "./history";
+import Landing from "./components/Landing";
 //import Header from "./Header";
 import OECILogin from "./components/OeciLogin";
 import PartnersTable from "./components/PartnersTable";
@@ -10,6 +12,11 @@ import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-boots
 function App() {
   return (
   <>
+  <Router history={history}>
+    <Switch>
+      <Route component={Landing} exact={true} path="/" />
+    </Switch>
+  </Router>
   <OECILogin />
     <div className="App">
       <header className="App-header">
