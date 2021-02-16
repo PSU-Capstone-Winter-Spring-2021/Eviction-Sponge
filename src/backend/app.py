@@ -1,5 +1,5 @@
 from os import path
-from flask import Flask, request
+from flask import Flask, request, make_response
 
 from endpoints import hello, static
 
@@ -11,7 +11,16 @@ def create_app():
     @app.route('/api/form-submit-url', methods=['POST'])
     def handleLogin():
         print("login attempted with user", request.form['oecilogin'], "and password", request.form['oecipassword'])
-        return "You attempted to login"
+        response = make_response()
+        response.set_cookie(
+            "oeci_token",
+            #secure=os.getenv("TIER") == "production",
+            httponly=False,
+            samesite="strict",
+            #value=encrypted_credentials,
+            value="Test Cookie. <TODO> Set encrypted credentials here"
+        )
+        return response, 201
 
     hello.register(app)
     static.register(app)
