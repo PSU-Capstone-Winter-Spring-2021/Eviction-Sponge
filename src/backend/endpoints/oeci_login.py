@@ -6,7 +6,9 @@ from flask import request, make_response, current_app
 class OeciLogin(MethodView):
     def post(self):
         data = request.form
+        print(request.cookies)
 
+        response = make_response()
         # Check for data validity:
         if data is None:
             current_app.logger.error("400: Missing one or more required fields")
@@ -17,10 +19,10 @@ class OeciLogin(MethodView):
 
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
         print(credentials)
+        response.set_cookie("test", "success")
 
         # TODO: pass login info to crawler to start process
 
-        response = make_response()
         return response, 201
 
 
