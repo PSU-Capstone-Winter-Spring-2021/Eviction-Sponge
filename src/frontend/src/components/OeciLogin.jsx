@@ -33,7 +33,8 @@ class OeciLogin extends React.Component {
         event.preventDefault();
         const data = new FormData(event.target);
 
-        fetch('/api/form-submit-url', {
+        //fetch('/api/form-submit-url', {
+        fetch('/login', {
             method: 'POST',
             body: data,
         });
@@ -58,7 +59,7 @@ class OeciLogin extends React.Component {
                 </label>
                 <input
                     id="password"
-                    name="oecilogin"
+                    name="oecipassword"
                     type="password"
                     value={this.state.password}
                     onChange={this.onChange}
