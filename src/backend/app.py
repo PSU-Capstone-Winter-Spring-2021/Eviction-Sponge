@@ -1,12 +1,26 @@
+import pkgutil
+from importlib import import_module
+
 from os import path
 from flask import Flask, request, make_response
 
-from endpoints import hello, static, oeci_login
+import endpoints
 
 FRONTEND_BUILD_DIR = path.abspath(path.join(path.dirname(__file__), "..", "frontend", "build"))
 
+
+def __register_endpoints(app):
+    # for each endpoint in the endpoints folder...
+    for _, endpoint_name, _ in pkgutil.iter_modules(endpoints.__path__):
+        # import it and call it's register function
+        endpoint = import_module(f"{endpoints.__name__}.{endpoint_name}")
+        register = getattr(endpoint, "register") # returns pointer to endpoint.register()
+        register(app)
+
+
 def create_app():
     app = Flask(__name__, static_folder=FRONTEND_BUILD_DIR)
+    __register_endpoints(app)
 
     # @app.route('/api/form-submit-url', methods=['POST'])
     # def handleLogin():
@@ -23,12 +37,8 @@ def create_app():
     #     response.set_cookie("test", "success")
     #     return response, 201
 
-
-    hello.register(app)
-    static.register(app)
-    oeci_login.register(app)
-
     return app
+
 
 if __name__ == '__main__':
     application = create_app()
