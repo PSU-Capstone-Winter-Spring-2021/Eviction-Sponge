@@ -1,7 +1,8 @@
 from flask.views import MethodView
 from flask import request, make_response, current_app
+import json
 
-
+from crawler.crawler import Crawler
 
 class OeciLogin(MethodView):
     def post(self):
@@ -18,10 +19,18 @@ class OeciLogin(MethodView):
             current_app.logger.error("400: Missing OECI login password")
 
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
+        # TODO: encrypt credentials
+        credentials_string = json.dumps(credentials)
         print(credentials)
-        response.set_cookie("test", "success")
 
-        # TODO: pass login info to crawler to start process
+        if Crawler.attempt_login(data['oecilogin'], data['oecipassword']) == 0:
+            response.set_cookie(
+                "oeci_token",
+                samesite="strict",
+                value=credentials_string
+            )
+        else:
+            current_app.logger.error("400: OECI login attempt failed")
 
         return response, 201
 
