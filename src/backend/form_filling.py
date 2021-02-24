@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class FormData:
-    county: str
+    county_name: str
     case_number: str
 
     plaintiff_line1: str
