@@ -22,10 +22,3 @@ class Crawler:
         else:
             # failure
             return 1
-
-# for testing only
-def main():
-    Crawler.attempt_login('QQLMUL01', 'QQLMUL01')
-
-if __name__ == "__main__":
-    main()
