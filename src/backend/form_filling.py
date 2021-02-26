@@ -13,3 +13,12 @@ class FormData:
     defendant_line2: str
     defendant_line3: str
     defendant_line4: str
+
+    full_name: str
+    mailing_address: str
+    city_state_zip: str
+    phone_number: str
+
+
+
+
