@@ -1,8 +1,16 @@
 import requests
 
 
+class UnableToReachOECI(Exception):
+    pass
+
+
+class InvalidLoginCreds(Exception):
+    pass
+
+
 # attempt login function that takes in a username and password and
-# returns a success (0) or failure (1)
+# returns a success (0) or throws an exception detailing why failure occured
 # attempts to login to the OECI website
 
 class Crawler:
@@ -18,10 +26,11 @@ class Crawler:
         content = r.text
         if "Case Records" in content:
             # success
-            return 0
+            return content
+        elif "Oregon eCourt is temporarily unavailable due to maintenance" in content:
+            raise UnableToReachOECI
         else:
-            # failure
-            return 1
+            raise InvalidLoginCreds
 
 
 if __name__ == "__main__":
