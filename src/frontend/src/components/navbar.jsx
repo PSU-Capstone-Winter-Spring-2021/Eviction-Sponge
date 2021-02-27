@@ -2,9 +2,6 @@ import React from "react";
 import { Button, Navbar,Nav,Form,FormControl } from 'react-bootstrap'
 
 export default class navbar extends React.Component{
-    componentDidMount(){
-        document.title = "Navbar - RecordSponge";
-    }
     render(){
         return(
             <main>
