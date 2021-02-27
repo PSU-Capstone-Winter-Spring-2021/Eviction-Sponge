@@ -1,6 +1,6 @@
 from flask.views import MethodView
 from flask import request, make_response, current_app
-
+from src.backend.crawler import Crawler
 
 
 class OeciLogin(MethodView):
@@ -18,13 +18,14 @@ class OeciLogin(MethodView):
             current_app.logger.error("400: Missing OECI login password")
 
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
-        print(credentials)
+        #print(credentials)
+        result = Crawler.attempt_login(credentials['username'], credentials['password'])
+        if result == 1: # if login failed
+            current_app.logger.error("Error 401: unable to login to OCEI database")
+            # TODO: separate login fail due to invalid credentials and login failied due to unable to reach database
+
         response.set_cookie("test", "success")
-
-        # TODO: pass login info to crawler to start process
-
         return response, 201
-
 
 
 def register(app):
