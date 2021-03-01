@@ -1,13 +1,14 @@
-from os import path
+from os import path, getenv
 from flask import Flask, request, make_response
 
+from config import app_config
 from endpoints import hello, static, oeci_login
 
 FRONTEND_BUILD_DIR = path.abspath(path.join(path.dirname(__file__), "..", "frontend", "build"))
 
-def create_app():
+def create_app(env_name):
     app = Flask(__name__, static_folder=FRONTEND_BUILD_DIR)
-
+    app.config.from_object(app_config[env_name])
     # @app.route('/api/form-submit-url', methods=['POST'])
     # def handleLogin():
     #     print("login attempted with user", request.form['oecilogin'], "and password", request.form['oecipassword'])
@@ -31,5 +32,6 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    application = create_app()
-    application.run(host="localhost", port=5000, debug=True)
+    tier = getenv("TIER", default="development")
+    application = create_app(tier)
+    application.run(host="localhost", port=5000)
