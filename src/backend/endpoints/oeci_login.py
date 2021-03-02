@@ -1,6 +1,12 @@
 from flask.views import MethodView
-from flask import request, make_response, current_app
+from flask import request, make_response, current_app, abort, jsonify
+from src.backend.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
 
+
+# log an error message and stop process
+def error(code, message):
+    current_app.logger.error("code %i %s" % (code, message), stack_info=True)
+    return abort(make_response(jsonify(message=message), code))
 
 
 class OeciLogin(MethodView):
@@ -11,20 +17,24 @@ class OeciLogin(MethodView):
         response = make_response()
         # Check for data validity:
         if data is None:
-            current_app.logger.error("400: Missing one or more required fields")
+            error(400, "Missing one or more required fields")
         if data['oecilogin'] is None:
-            current_app.logger.error("400: Missing OECI login username")
+            error(400, "Missing OECI login username")
         if data['oecipassword'] is None:
-            current_app.logger.error("400: Missing OECI login password")
+            error(400, "Missing OECI login password")
 
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
-        print(credentials)
+
+        # Try to log into OECI database
+        try:
+            Crawler.attempt_login(credentials['username'], credentials['password'])
+        except UnableToReachOECI:
+            error(404, "Unable to reach OECI database")
+        except InvalidLoginCreds:
+            error(401, "Invalid login credentials")
+
         response.set_cookie("test", "success")
-
-        # TODO: pass login info to crawler to start process
-
         return response, 201
-
 
 
 def register(app):
