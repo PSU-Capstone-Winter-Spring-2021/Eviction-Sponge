@@ -7,25 +7,21 @@ import Landing from "./components/Landing";
 import OECILogin from "./components/OeciLogin";
 import PartnersTable from "./components/PartnersTable";
 import Footer from "./components/Footer";
-import navbar from "./components/navbar";
+import Navbar from "./components/navbar";
+import Search from "./components/Search";
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
   return (
   <>
   <Router history={history}>
+    <Navbar/>
     <Switch>
       <Route component={Landing} exact={true} path="/" />
+      <Route component={OECILogin} exact={true} path="/Login"/>
+      <Route component={Search} exact={true} path="/Search"/>
     </Switch>
   </Router>
-  <OECILogin />
-    <div className="App">
-      <header className="App-header">
-      </header>
-  <PartnersTable>
-    
-  </PartnersTable>
-    </div>
     <Footer />
   </>
 
