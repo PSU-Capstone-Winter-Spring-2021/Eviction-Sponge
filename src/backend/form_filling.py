@@ -5,6 +5,8 @@ from dataclasses import dataclass
 class FormData:
     county_name: str
     case_number: str
+    case_name: str
+    date_of_judgement: str
 
     plaintiff_line1: str
     plaintiff_line2: str
@@ -14,14 +16,16 @@ class FormData:
     defendant_line3: str
     defendant_line4: str
 
-    full_name: str
-    mailing_address: str
+    def_full_name: str
+    def_mailing_address: str
     city_state_zip: str
     phone_number: str
 
+    plaintiff_address: str
+
 # Everything that says none is a checkbox, and I have not figured out how to make those work yet
 @dataclass 
-class PDF_data_template:
+class PDF_form_template:
     COUNTY_1: str
     COUNTY_2: str
     PLAINTIFF_1_1: str
@@ -49,7 +53,7 @@ class PDF_data_template:
     DATE_OF_JUDGEMENT: str
     DATE: str
     NAME_PRINTED: str
-    ADDRESS: str
+    DEFENDANT_ADDRESS: str
     CITY_STATE_ZIP: str
     PHONE: str
     DATE_2: str
@@ -59,6 +63,7 @@ class PDF_data_template:
     DATE_3: str
     DEFENDANT_NAME_1: str
     DEFENDANT_NAME_2: str
+    DEFENDANT_NAME_3: str
     DEFENDANT_ADDRESS: str
     PLAINTIFF_NAME: str
     DO_NOT_FILL: str

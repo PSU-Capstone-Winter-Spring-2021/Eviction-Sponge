@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-
 import pdfrw
 import datetime
+from form_filling import FormData, PDF_form_template
+
 
 # Data dict names:
 # COUNTY
@@ -27,14 +28,12 @@ import datetime
 # DEFENDANT_NAME_#
 # PLAINTIFF_ADDRESS_CITYSTATEZIP_PHONE -single line [Address    CityStateZip     PHONE]
 # OBJECTION_DATE - don't fill
+
+
 @dataclass
-
 class CreatePDF:
-
     TEMPLATE_PATH = 'template.pdf'
     OUTPUT_PATH = 'output.pdf'
-
-
 
     test_dict = {
         'COUNTY_1': 'Multnomah',
@@ -80,7 +79,41 @@ class CreatePDF:
         'DO_NOT_CLICK': False
     }
 
-    def fill_pdf(input_pdf_path, output_pdf_path, data_dict):
+    def data_dict_to_pdf_dict(self, input_dict):
+        output = PDF_form_template(
+            DEFENDANT_ADDRESS=input_dict['def_mailing_address'],
+            CITY_STATE_ZIP=input_dict['city_state_zip'],
+            COUNTY_1=input_dict['county_name'],
+            COUNTY_2=input_dict['county_name'],
+            PLAINTIFF_1_1=input_dict['plaintiff_line1'],
+            PLAINTIFF_1_2=input_dict['plaintiff_line2'],
+            PLAINTIFF_2_1=input_dict['plaintiff_line1'],
+            PLAINTIFF_2_2=input_dict['plaintiff_line2'],
+            DEFENDANT_1_1=input_dict['defendant_line1'],
+            DEFENDANT_1_2=input_dict['defendant_line2'],
+            DEFENDANT_1_3=input_dict['defendant_line3'],
+            DEFENDANT_1_4=input_dict['defendant_line4'],
+            DEFENDANT_2_1=input_dict['defendant_line1'],
+            DEFENDANT_2_2=input_dict['defendant_line2'],
+            DEFENDANT_2_3=input_dict['defendant_line3'],
+            DEFENDANT_2_4=input_dict['defendant_line4'],
+            DATE=datetime.date.today(),
+            DATE_2=datetime.date.today(),
+            DATE_3=datetime.date.today(),
+            CASE=input_dict['case_name'],
+            CASE_NO_1=input_dict['case_number'],
+            CASE_NO_2=input_dict['case_number'],
+            DEFENDANT_NAME_1=input_dict['defendant_line1'],
+            DEFENDANT_NAME_2=input_dict['defendant_line1'],
+            DEFENDANT_NAME_3=input_dict['defendant_line1'],
+            DATE_OF_JUDGEMENT=input_dict['date_of_judgement'],
+            PHONE=input_dict['phone_number'],
+            PLAINTIFF_NAME=input_dict['plaintiff_line1']
+        )
+        # sort out plaintiff address here @ input['mailing_address']
+        # DISMISSAL, RESTITUTION, MONEY, JUDGEMENT, STIPULATION, TERMS all bool
+
+    def fill_pdf(self, input_pdf_path, output_pdf_path, data_dict):
         ANNOT_KEY = '/Annots'
         ANNOT_FIELD_KEY = '/T'
         ANNOT_VAL_KEY = '/V'
@@ -108,4 +141,5 @@ class CreatePDF:
 
         pdfrw.PdfWriter().write(output_pdf_path, template_pdf)
 
-    fill_pdf("src/backend/files/Fillable_FED-Motion-SetAside-2020-01-01.pdf", "src/backend/files/test_result.pdf", test_dict)
+    fill_pdf("src/backend/files/Fillable_FED-Motion-SetAside-2020-01-01.pdf", "src/backend/files/test_result.pdf",
+             test_dict)
