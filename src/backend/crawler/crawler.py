@@ -77,15 +77,16 @@ class Crawler:
     def _read_case(session, case):
         # cache the link
         if session:
-            cache_response = session.get(case.case_detail_link)
-            Crawler.cached_links[case.case_detail_link] = cache_response
+            session_response = session.get(case.case_detail_link)
+            Crawler.cached_links[case.case_detail_link] = session_response
         else:
-            cache_response = Crawler.cached_links[case.case_detail_link]
+            session_response = Crawler.cached_links[case.case_detail_link]
 
-        if cache_response.status_code != 200 or not cache_response.text:
+        # check if response has acceptable code and text exists
+        if session_response.status_code != 200 or session_response.text is None:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
-        # TODO: write something to parse the cache_response.txt into case_parser_data
-        case_parser_data = CaseParser.feed(cache_response.text)
+        # TODO: write something to parse the session_response.text into case_parser_data
+        case_parser_data = CaseParser.feed(session_response.text)
 
         # TODO: Here we'd select certain useful data items, find the balance due, etc for the case, and return that
