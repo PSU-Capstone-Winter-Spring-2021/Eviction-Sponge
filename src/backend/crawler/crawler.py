@@ -5,7 +5,6 @@ from requests import Session
 from src.backend.crawler.util import URL, Payload, LRUCache
 from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
-from src.backend.crawler.parsers.record_parser import RecordParser
 from concurrent.futures.thread import ThreadPoolExecutor
 
 
@@ -53,7 +52,6 @@ class Crawler:
         # read the records and generate a list of relevant cases
         with ThreadPoolExecutor(max_workers=50) as executor:
             oeci_cases = []
-            # TODO: write something to parse the cases and add relevant into (i.e. balance due)
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result.cases):
                 oeci_cases.append(oeci_case)
         return oeci_cases
@@ -73,4 +71,21 @@ class Crawler:
         payload = Payload.payload(param_parser, last_name, first_name, middle_name)
         response = session.post(search_url, data=payload, timeout=30)
 
-        # TODO: write something to parse records retrieved
+        # TODO: write something to parse records retrieved, like their RecordParser
+
+    @staticmethod
+    def _read_case(session, case):
+        # cache the link
+        if session:
+            cache_response = session.get(case.case_detail_link)
+            Crawler.cached_links[case.case_detail_link] = cache_response
+        else:
+            cache_response = Crawler.cached_links[case.case_detail_link]
+
+        if cache_response.status_code != 200 or not cache_response.text:
+            raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
+
+        # TODO: write something to parse the cache_response.txt into case_parser_data
+        case_parser_data = CaseParser.feed(cache_response.text)
+
+        # TODO: Here we'd select certain useful data items, find the balance due, etc for the case, and return that
