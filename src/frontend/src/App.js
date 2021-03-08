@@ -8,6 +8,7 @@ import OECILogin from "./components/OeciLogin";
 import PartnersTable from "./components/PartnersTable";
 import Footer from "./components/Footer";
 import navbar from "./components/navbar";
+import './styles/_globals.css'
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -22,9 +23,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-  <PartnersTable>
-    
-  </PartnersTable>
+  <PartnersTable></PartnersTable>
     </div>
     <Footer />
   </>
