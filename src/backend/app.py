@@ -23,6 +23,7 @@ def create_app(env_name):
     app = Flask(__name__, static_folder=FRONTEND_BUILD_DIR)
     __register_endpoints(app)
     app.config.from_object(app_config[env_name])
+    app.config.from_mapping(TIER=env_name)
 
     # @app.route('/api/form-submit-url', methods=['POST'])
     # def handleLogin():
