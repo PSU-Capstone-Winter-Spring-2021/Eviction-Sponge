@@ -5,6 +5,7 @@ from requests import Session
 from src.backend.crawler.util import URL, Payload, LRUCache
 from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
+from src.backend.crawler.parsers.record_parser import RecordParser
 from concurrent.futures.thread import ThreadPoolExecutor
 
 
@@ -16,13 +17,12 @@ class InvalidLoginCreds(Exception):
     pass
 
 
-# attempt login function that takes in a username and password and
-# returns a success (0) or throws an exception detailing why failure occured
-# attempts to login to the OECI website
-
 class Crawler:
     cached_links = LRUCache(1000)
 
+    # attempt login function that takes in a username and password and
+    # returns a success (0) or throws an exception detailing why failure occurred
+    # attempts to login to the OECI website
     @staticmethod
     def attempt_login(username, password):
         url = URL.login_url()
@@ -40,7 +40,8 @@ class Crawler:
 
     @staticmethod
     def search(session: Session, login_response, first_name, last_name, middle_name=""):
-        # TODO: What is login_response?
+        # What is login_response? used to verify that the credentials are still valid.
+        # boolean function that attempts to login again
 
         # get search page, post it with node data
         search_url = URL.search_url()
@@ -48,6 +49,11 @@ class Crawler:
 
         # get the record info out of node_response
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
+
+        if len(search_result.cases) >= 300: # max number of cases we want to address
+            raise ValueError(
+                f"Found {len(search_result.cases)} matching cases, exceeding the limit of 300."
+            )
 
         # read the records and generate a list of relevant cases
         with ThreadPoolExecutor(max_workers=50) as executor:
@@ -71,7 +77,10 @@ class Crawler:
         payload = Payload.payload(param_parser, last_name, first_name, middle_name)
         response = session.post(search_url, data=payload, timeout=30)
 
-        # TODO: write something to parse records retrieved, like their RecordParser
+        record_parser = RecordParser()
+        record_parser.feed(response.text)
+        return record_parser
+
 
     @staticmethod
     def _read_case(session, case):
