@@ -2,10 +2,13 @@ import functools
 
 import requests
 from requests import Session
+from dataclasses import replace
 from src.backend.crawler.util import URL, Payload, LRUCache
 from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
 from src.backend.crawler.parsers.record_parser import RecordParser
+from src.backend.crawler.parsers.case_parser import CaseParser
+from src.backend.models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
 
 
@@ -95,7 +98,9 @@ class Crawler:
         if session_response.status_code != 200 or session_response.text is None:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
-        # TODO: write something to parse the session_response.text into case_parser_data
         case_parser_data = CaseParser.feed(session_response.text)
+        district_attorney_number = case_parser_data.district_attorney_number
+        balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
 
-        # TODO: Here we'd select certain useful data items, find the balance due, etc for the case, and return that
+        updated_summary = replace(case, district_attorney_number=district_attorney_number, balance_due_in_cents=balance_due_in_cents, edit_status=EditStatus.UNCHANGED)
+        return updated_summary
