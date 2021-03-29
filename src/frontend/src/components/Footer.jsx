@@ -18,12 +18,12 @@ class Footer extends React.Component {
         return (
             <footer className = "footer">
                 <p>
-                    <a href="#">Home</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Partners</a>
-                    <a href="#">Manual</a>
-                    <a href="#">Search</a>
-                    <a href="#">Etc</a>
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
+                    <a href="/partners">Partners</a>
+                    <a href="/manual">Manual</a>
+                    <a href="/record-search">Search</a>
+                    <a href="/etc">Etc</a>
                 </p>
             </footer>
         )

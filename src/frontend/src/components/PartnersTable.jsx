@@ -64,7 +64,7 @@ class PartnersTable extends React.Component{
                         <span className = "dbtnText">{partner.name}</span>
                         <span>{partner.area}</span>
                         <span>
-                            {index == this.state.active ? (
+                            {index === this.state.active ? (
                                 <span aria-hidden = "true"></span>
                             ) : (
                                 <span aria-hidden = "true"></span>
