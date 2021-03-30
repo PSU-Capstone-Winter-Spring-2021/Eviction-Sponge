@@ -15,29 +15,34 @@ EVENTS_TO_EXCLUDE = ["", "dispositions"]
 @dataclass
 class CaseParserData:
     district_attorney_number: str
-    hashed_charge_data: Dict[int, Dict[str, str]]
+    # hashed_charge_data: Dict[int, Dict[str, str]]
     hashed_dispo_data: Dict[int, Dict[str, str]]
     balance_due: str
-    probation_revoked: Optional[date]
+    # probation_revoked: Optional[date]
 
 
+# CaseParser parses detailed case info, whose links were gathered by RecordParser
 class CaseParser:
     @staticmethod
     def feed(data) -> CaseParserData:
         soup = BeautifulSoup(data, "html.parser")
         district_attorney_number = CaseParser.__parse_district_attorney_number(soup)
-        hashed_charge_data = CaseParser.__build_charge_table_data(soup)
-        (
-            hashed_dispo_data,
-            probation_revoked_date_string,
-        ) = CaseParser.__build_hashed_dispo_data_and_probation_revoked(soup)
+        # hashed_charge_data = CaseParser.__build_charge_table_data(soup)
+        # (
+        #    hashed_dispo_data,
+        #    probation_revoked_date_string,
+        # ) = CaseParser.__build_hashed_dispo_data_and_probation_revoked(soup)
+        hashed_dispo_data = CaseParser.__build_hashed_dispo_data(soup)
+        # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
+
         balance_due = CaseParser.__build_balance_due(soup)
         if probation_revoked_date_string:
             probation_revoked = datetime.date(datetime.strptime(probation_revoked_date_string, "%m/%d/%Y"))
         else:
             probation_revoked = None  # type: ignore
-        return CaseParserData(district_attorney_number, hashed_charge_data, hashed_dispo_data, balance_due,
-                              probation_revoked)
+        # return CaseParserData(district_attorney_number, hashed_charge_data, hashed_dispo_data, balance_due,
+        #                      probation_revoked)
+        return CaseParserData(district_attorney_number, hashed_dispo_data, balance_due)
 
     @staticmethod
     def __parse_district_attorney_number(soup) -> str:
@@ -66,22 +71,33 @@ class CaseParser:
 
     # Note that one disposition event may have rulings for one or more charges
     # and thus the accumulator pattern.
+    # @staticmethod
+    # def __build_hashed_dispo_data_and_probation_revoked(soup) -> Tuple[Dict[int, Dict[str, str]], Optional[str]]:
+    #    disposition_events, other_events = CaseParser.__parse_events(soup)
+    #    acc: Dict[int, Dict[str, str]] = {}
+    #    for event in disposition_events:
+    #        if CaseParser.__valid_event_table(event):
+    #            disposition_data = CaseParser.__parse_event_table(event)
+    #            if disposition_data:
+    #                acc = {**acc, **disposition_data}
+    #    latest_probation_revoked_date = None
+    #    for event in other_events:
+    #        if CaseParser.__valid_event_table(event):
+    #            probation_revoked_date = CaseParser.__parse_probation_revoked(event)
+    #            if probation_revoked_date:
+    #                latest_probation_revoked_date = probation_revoked_date
+    #    return acc, latest_probation_revoked_date
+
     @staticmethod
-    def __build_hashed_dispo_data_and_probation_revoked(soup) -> Tuple[Dict[int, Dict[str, str]], Optional[str]]:
+    def __build_hashed_dispo_data(soup):
         disposition_events, other_events = CaseParser.__parse_events(soup)
         acc: Dict[int, Dict[str, str]] = {}
         for event in disposition_events:
             if CaseParser.__valid_event_table(event):
                 disposition_data = CaseParser.__parse_event_table(event)
-                if disposition_data:
-                    acc = {**acc, **disposition_data}
-        latest_probation_revoked_date = None
-        for event in other_events:
-            if CaseParser.__valid_event_table(event):
-                probation_revoked_date = CaseParser.__parse_probation_revoked(event)
-                if probation_revoked_date:
-                    latest_probation_revoked_date = probation_revoked_date
-        return acc, latest_probation_revoked_date
+
+    # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
+
 
     @staticmethod
     def __parse_probation_revoked(event):
@@ -117,6 +133,7 @@ class CaseParser:
 
     @staticmethod
     def __valid_event_table(event):
+        # return true if event.text is a disposition or empty string
         return not CaseParser.__normalize_text(event.text) in EVENTS_TO_EXCLUDE
 
     @staticmethod
