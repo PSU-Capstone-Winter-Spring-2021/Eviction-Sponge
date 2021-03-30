@@ -9,7 +9,6 @@ WORKDIR /src/backend
 ENV WORKON_HOME=/src/venvs
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=../..
 
 RUN apk add --update --no-cache \
     libgcc libstdc++ libx11 glib libxrender libxext libintl \
