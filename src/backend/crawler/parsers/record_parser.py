@@ -3,6 +3,7 @@ from html.parser import HTMLParser
 from src.backend.models.case_model import CaseCreator
 
 
+# Record Parser gathers information from the list of cases returned by OECI when a name is searched
 class RecordParser(HTMLParser):
     BASE_URI = "https://publicaccess.courts.oregon.gov/PublicAccessLogin/"
 
@@ -14,11 +15,9 @@ class RecordParser(HTMLParser):
         self.within_nested_tr = False
         self.collect_data = False
         self.case_number = ""  # column 1
-        self.citation_number = []  # column 2
-        self.info = []  # column 3
-        self.date_location = []  # column 4
-        self.type_status = []  # column 5
-        self.charges = []  # column 6+
+        self.style = ""  # column 2
+        self.date_location = []  # column 3
+        self.type_status = []  # column 4
         self.case_detail_link = ""
 
     def handle_starttag(self, tag, attrs):
@@ -36,19 +35,20 @@ class RecordParser(HTMLParser):
                 self.__reset_case()
             self.__reset_flags()
 
-    def handle_data(self, data):
-        if self.__within_valid_table_row():
-            switcher = {
-                1: self.__set_case_number,
-                2: self.__set_citation_number,
-                3: self.__set_info,
-                4: self.__set_date_location,
-                5: self.__set_type_status,
-            }
-            switcher.get(self.column, self._set_charges)(data)
-
-        elif "Charge(s)" == data:
-            self.collect_data = True
+    # afaik, the following function is not needed as we have no columns with an unpredictable number of entries
+    # def handle_data(self, data):
+    #    if self.__within_valid_table_row():
+    #        switcher = {
+    #            1: self.__set_case_number,
+    #            2: self.__set_style,
+    #            3: self.__set_date_location,
+    #            4: self.__set_type_status,
+    #        }
+    #        # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
+    #        switcher.get(self.column, self._set_charges)(data)
+    #
+    #    elif "Charge(s)" == data:
+    #        self.collect_data = True
 
     def error(self, message):
         pass
@@ -56,11 +56,8 @@ class RecordParser(HTMLParser):
     def __set_case_number(self, data):
         self.case_number = data
 
-    def __set_citation_number(self, data):
-        self.citation_number.append(data)
-
-    def __set_info(self, data):
-        self.info.append(data)
+    def __set_style(self, data):
+        self.style = data
 
     def __set_date_location(self, data):
         self.date_location.append(data)
@@ -68,16 +65,12 @@ class RecordParser(HTMLParser):
     def __set_type_status(self, data):
         self.type_status.append(data)
 
-    def _set_charges(self, data):
-        self.charges.append(data)
-
     def __record_case(self):
         self.cases.append(
             CaseCreator.create(
-                self.info,
                 self.case_number,
-                "", # district_attorney_number
-                self.citation_number,
+                "",  # district_attorney_number
+                self.style,
                 self.date_location,
                 self.type_status,
                 self.case_detail_link,
@@ -86,16 +79,15 @@ class RecordParser(HTMLParser):
 
     def __reset_case(self):
         self.case_number = ""  # column 1
-        self.citation_number = []  # column 2
-        self.info = []  # column 3
-        self.date_location = []  # column 4
-        self.type_status = []  # column 5
-        self.charges = []  # column 6+
+        self.style = ""  # column 2
+        self.date_location = []  # column 3
+        self.type_status = []  # column 4
         self.case_detail_link = ""
 
     def __valid_row(self):
-        valid_length = 1
-        return len(self.info) >= valid_length
+        # verify all data entries were filled
+        return (len(self.case_number) > 0) and (len(self.style) > 0) \
+               and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
     def __reset_flags(self):
         self.column = 0

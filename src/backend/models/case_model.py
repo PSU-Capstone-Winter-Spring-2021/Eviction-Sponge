@@ -29,8 +29,8 @@ class EditStatus(str, Enum):
 class CaseSummary:
     name: str
     case_number: str
+    style: str
     district_attorney_number: str
-    citation_number: str
     location: str
     date: date
     violation_type: str
@@ -58,7 +58,6 @@ class OeciCase:
                 name="",
                 case_number=case_number,
                 district_attorney_number="",
-                citation_number="",
                 location="",
                 date=date.today(),
                 violation_type="",
@@ -74,26 +73,22 @@ class OeciCase:
 class CaseCreator:
     @staticmethod
     def create(
-        info,
         case_number,
         district_attorney_number,
-        citation_number,
+        style,
         date_location,
         type_status,
         case_detail_link,
         balance="0",
     ) -> CaseSummary:
-        name = info[0]
-        citation_number = citation_number[0] if citation_number else ""
         date, location = date_location
         date = date.fromdatetime(datetime.strptime(date, "%m/%d/%Y"))
         violation_type, current_status = type_status
         balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(balance)
         return CaseSummary(
-            name,
             case_number,
+            style,
             district_attorney_number,
-            citation_number,
             location,
             date,
             violation_type,

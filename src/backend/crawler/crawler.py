@@ -50,7 +50,8 @@ class Crawler:
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
-        # get the record info out of node_response
+        # generate a list of case records
+        # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
         if len(search_result.cases) >= 300: # max number of cases we want to address
