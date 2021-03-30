@@ -4,8 +4,6 @@ import requests
 from requests import Session
 from src.backend.crypto import DataCipher
 from src.backend.crawler import Crawler
-import os
-
 
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
@@ -23,16 +21,17 @@ class Search(MethodView):
         if data.get('last_name') is None:
             error(400, "Missing last name")
 
-        # response = make_response()
-        credentials = {'first': data['first_name'], 'last': data['last_name'],
-                       'middle': data['middle_name']}
+        search_credentials = {'first': data['first_name'],
+                              'last': data['last_name'],
+                              'middle': data['middle_name']}
+
         username, password = Search._oeci_login_params(request)
-        # s = requests.Session()
-        # s.get()
-        verify_credentials = Crawler.attempt_login(username, password)
-        # call search method
-        search_results = Crawler.search(session, verify_credentials, credentials['first'], credentials['last'],
-                                        credentials['middle'])
+        verify_login_credentials = Crawler.attempt_login(username, password)
+        # Call search method
+        search_results = Crawler.search(verify_login_credentials,
+                                        search_credentials['first'],
+                                        search_credentials['last'],
+                                        search_credentials['middle'])
         return json.dumps(search_results)
 
     @staticmethod
