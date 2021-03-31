@@ -20,7 +20,7 @@ FROM base AS build
 
 RUN apk add build-base git libffi-dev openssl-dev cargo
 
-COPY requirements.txt Pipfile* /src/backend/
+COPY Pipfile* /src/backend/
 RUN cd /src/backend && pipenv install
 
 # ---
