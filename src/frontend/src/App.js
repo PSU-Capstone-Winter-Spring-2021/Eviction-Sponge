@@ -9,6 +9,7 @@ import PartnersTable from "./components/PartnersTable";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
 import Search from "./components/Search";
+import SearchCase from './components/searchcase';
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route component={OECILogin} exact={true} path="/Login"/>
       <Route component={Search} exact={true} path="/Search"/>
     </Switch>
+    // <SearchCase/>
   </Router>
     <Footer />
   </>
