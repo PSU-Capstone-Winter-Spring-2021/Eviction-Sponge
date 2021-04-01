@@ -17,7 +17,7 @@ class CaseParserData:
     # district_attorney_number: str
     # hashed_charge_data: Dict[int, Dict[str, str]]
     hashed_dispo_data: Dict[int, Dict[str, str]]
-    balance_due: str
+    # balance_due: str
     closed_date: date
     # probation_revoked: Optional[date]
 
@@ -38,14 +38,13 @@ class CaseParser:
         closed_date = CaseParser.__parse_closed_date(soup)  # TODO: replace w/ closed date, currently gathers filed date
         # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
 
-        balance_due = CaseParser.__build_balance_due(soup)
         # if probation_revoked_date_string:
         #     probation_revoked = datetime.date(datetime.strptime(probation_revoked_date_string, "%m/%d/%Y"))
         # else:
         #     probation_revoked = None  # type: ignore
         # return CaseParserData(district_attorney_number, hashed_charge_data, hashed_dispo_data, balance_due,
         #                      probation_revoked)
-        return CaseParserData(hashed_dispo_data, balance_due, closed_date)
+        return CaseParserData(hashed_dispo_data, closed_date)
 
     @staticmethod
     def __parse_closed_date(soup) -> date:
@@ -120,13 +119,14 @@ class CaseParser:
     def __is_other_events_and_hearings(event):
         return CaseParser.__normalize_text(event.text) == "other events and hearings".replace(" ", "")
 
-    @staticmethod
-    def __build_balance_due(soup) -> str:
-        financial_information = soup.find("div", class_=SECTION_TITLE_CLASS, string="Financial Information")
-        if financial_information:
-            return financial_information.parent.parent.find("b").text
-        else:
-            return "0"
+    # MOVED TO STRETCH GOAL:
+    # @staticmethod
+    # def __build_balance_due(soup) -> str:
+    #     financial_information = soup.find("div", class_=SECTION_TITLE_CLASS, string="Financial Information")
+    #     if financial_information:
+    #         return financial_information.parent.parent.find("b").text
+    #     else:
+    #         return "0"
 
     @staticmethod
     def __normalize_text(text):

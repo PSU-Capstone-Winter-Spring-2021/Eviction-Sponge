@@ -56,6 +56,7 @@ class OeciCase:
             CaseSummary(
                 name="",
                 case_number=case_number,
+                style="",
                 location="",
                 date=date.today(),
                 violation_type="",

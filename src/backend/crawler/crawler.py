@@ -54,16 +54,19 @@ class Crawler:
         # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
-        if len(search_result.cases) >= 300: # max number of cases we want to address
+        if len(search_result.cases) >= 300:  # max number of cases we want to address
             raise ValueError(
                 f"Found {len(search_result.cases)} matching cases, exceeding the limit of 300."
             )
 
         # read the records and generate a list of relevant cases
         with ThreadPoolExecutor(max_workers=50) as executor:
-            oeci_cases = []
+            oeci_cases = {}
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
-                oeci_cases.append(oeci_case)
+                key = oeci_case.case_number
+                value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
+                         oeci_case.date, "judgement not implemented yet")
+                oeci_cases.update({key: value})
         return oeci_cases
 
     @staticmethod
@@ -85,7 +88,6 @@ class Crawler:
         record_parser.feed(response.text)
         return record_parser.cases
 
-
     @staticmethod
     def _read_case(session, case):
         # cache the link
@@ -100,8 +102,8 @@ class Crawler:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
         case_parser_data = CaseParser.feed(session_response.text)
-        balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
+        # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
 
-        updated_summary = replace(case, balance_due_in_cents=balance_due_in_cents, date=closed_date, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, date=closed_date, edit_status=EditStatus.UNCHANGED)
         return updated_summary
