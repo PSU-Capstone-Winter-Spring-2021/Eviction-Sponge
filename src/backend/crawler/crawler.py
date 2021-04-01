@@ -101,6 +101,7 @@ class Crawler:
 
         case_parser_data = CaseParser.feed(session_response.text)
         balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
+        closed_date = case_parser_data.closed_date
 
-        updated_summary = replace(case, balance_due_in_cents=balance_due_in_cents, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, balance_due_in_cents=balance_due_in_cents, date=closed_date, edit_status=EditStatus.UNCHANGED)
         return updated_summary
