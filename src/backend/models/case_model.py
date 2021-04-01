@@ -74,7 +74,6 @@ class CaseCreator:
     @staticmethod
     def create(
         case_number,
-        district_attorney_number,
         style,
         date_location,
         type_status,
@@ -88,7 +87,6 @@ class CaseCreator:
         return CaseSummary(
             case_number,
             style,
-            district_attorney_number,
             location,
             date,
             violation_type,
