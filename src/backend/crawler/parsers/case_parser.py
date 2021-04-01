@@ -14,10 +14,11 @@ EVENTS_TO_EXCLUDE = ["", "dispositions"]
 
 @dataclass
 class CaseParserData:
-    district_attorney_number: str
+    # district_attorney_number: str
     # hashed_charge_data: Dict[int, Dict[str, str]]
     hashed_dispo_data: Dict[int, Dict[str, str]]
     balance_due: str
+    closed_date: date
     # probation_revoked: Optional[date]
 
 
@@ -26,30 +27,38 @@ class CaseParser:
     @staticmethod
     def feed(data) -> CaseParserData:
         soup = BeautifulSoup(data, "html.parser")
-        district_attorney_number = CaseParser.__parse_district_attorney_number(soup)
+
         # hashed_charge_data = CaseParser.__build_charge_table_data(soup)
         # (
         #    hashed_dispo_data,
         #    probation_revoked_date_string,
         # ) = CaseParser.__build_hashed_dispo_data_and_probation_revoked(soup)
-        hashed_dispo_data = CaseParser.__build_hashed_dispo_data(soup)
+
+        hashed_dispo_data = {1: {"hello": "world"}}  # CaseParser.__build_hashed_dispo_data(soup)
+        closed_date = CaseParser.__parse_closed_date(soup)  # TODO: replace w/ closed date, currently gathers filed date
         # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
 
         balance_due = CaseParser.__build_balance_due(soup)
-        if probation_revoked_date_string:
-            probation_revoked = datetime.date(datetime.strptime(probation_revoked_date_string, "%m/%d/%Y"))
-        else:
-            probation_revoked = None  # type: ignore
+        # if probation_revoked_date_string:
+        #     probation_revoked = datetime.date(datetime.strptime(probation_revoked_date_string, "%m/%d/%Y"))
+        # else:
+        #     probation_revoked = None  # type: ignore
         # return CaseParserData(district_attorney_number, hashed_charge_data, hashed_dispo_data, balance_due,
         #                      probation_revoked)
-        return CaseParserData(district_attorney_number, hashed_dispo_data, balance_due)
+        return CaseParserData(hashed_dispo_data, balance_due, closed_date)
 
     @staticmethod
-    def __parse_district_attorney_number(soup) -> str:
-        DISTRICT_ATTORNEY_KEY = "District Attorney Number:"
+    def __parse_closed_date(soup) -> date:
+        # Explanation:  Search the HTML of the page for a <th class="ssTableHeaderLabel"...> and collect
+        # all these (no more than 10 though, which should never occur...)
+        # Then, create a dictionary of the ssTableHeaderLabel string: value in it's standard data cell
+        # Last, lookup our target string, "Date Filed:", and grab the value associated with this key
+        # Convert it to a date and return it
+        CLOSED_DATE_KEY = "Date Filed:"
         labels = soup.find_all("th", "ssTableHeaderLabel", limit=10)
         table = {tag.string: tag.parent.find("td").string for tag in labels}
-        return table.get(DISTRICT_ATTORNEY_KEY, "")
+        str_date = table.get(CLOSED_DATE_KEY, "")
+        return datetime.strptime(str_date, "%m/%d/%Y")  # 0-padded decimal month, 0-padded decimal day, 4-digit year
 
     @staticmethod
     def __build_charge_table_data(soup) -> Dict[int, Dict[str, str]]:
@@ -96,16 +105,8 @@ class CaseParser:
             if CaseParser.__valid_event_table(event):
                 disposition_data = CaseParser.__parse_event_table(event)
 
+    # TODO: change DATE retrieved to CLOSED DATE
     # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
-
-
-    @staticmethod
-    def __parse_probation_revoked(event):
-        event_parts = event.contents
-        assert len(event_parts) == 4
-        date, empty_one, empty_two, event_table_wrapper = event_parts
-        if FuzzySearch.search(event_table_wrapper.text, PROBATION_REVOKED_SEARCH_TERMS):
-            return date.text
 
     @staticmethod
     def __parse_events(soup):
@@ -133,7 +134,7 @@ class CaseParser:
 
     @staticmethod
     def __valid_event_table(event):
-        # return true if event.text is a disposition or empty string
+        # return true if event.text is not a disposition or empty string
         return not CaseParser.__normalize_text(event.text) in EVENTS_TO_EXCLUDE
 
     @staticmethod

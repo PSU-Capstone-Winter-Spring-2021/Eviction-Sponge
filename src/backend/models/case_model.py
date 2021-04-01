@@ -30,7 +30,6 @@ class CaseSummary:
     name: str
     case_number: str
     style: str
-    district_attorney_number: str
     location: str
     date: date
     violation_type: str
@@ -57,7 +56,6 @@ class OeciCase:
             CaseSummary(
                 name="",
                 case_number=case_number,
-                district_attorney_number="",
                 location="",
                 date=date.today(),
                 violation_type="",
@@ -74,7 +72,6 @@ class CaseCreator:
     @staticmethod
     def create(
         case_number,
-        district_attorney_number,
         style,
         date_location,
         type_status,
@@ -88,7 +85,6 @@ class CaseCreator:
         return CaseSummary(
             case_number,
             style,
-            district_attorney_number,
             location,
             date,
             violation_type,

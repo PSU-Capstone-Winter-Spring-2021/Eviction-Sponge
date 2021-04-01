@@ -50,7 +50,7 @@ class Crawler:
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
-        # generate a list of case records
+        # generate a list of case records, specifically a list of CaseSummary from case_parser.py
         # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
@@ -62,7 +62,7 @@ class Crawler:
         # read the records and generate a list of relevant cases
         with ThreadPoolExecutor(max_workers=50) as executor:
             oeci_cases = []
-            for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result.cases):
+            for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
                 oeci_cases.append(oeci_case)
         return oeci_cases
 
@@ -83,7 +83,7 @@ class Crawler:
 
         record_parser = RecordParser()
         record_parser.feed(response.text)
-        return record_parser
+        return record_parser.cases
 
 
     @staticmethod
@@ -100,8 +100,8 @@ class Crawler:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
         case_parser_data = CaseParser.feed(session_response.text)
-        district_attorney_number = case_parser_data.district_attorney_number
         balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
+        closed_date = case_parser_data.closed_date
 
-        updated_summary = replace(case, district_attorney_number=district_attorney_number, balance_due_in_cents=balance_due_in_cents, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, balance_due_in_cents=balance_due_in_cents, date=closed_date, edit_status=EditStatus.UNCHANGED)
         return updated_summary

@@ -69,7 +69,6 @@ class RecordParser(HTMLParser):
         self.cases.append(
             CaseCreator.create(
                 self.case_number,
-                "",  # district_attorney_number
                 self.style,
                 self.date_location,
                 self.type_status,
