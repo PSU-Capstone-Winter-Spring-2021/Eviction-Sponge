@@ -30,7 +30,6 @@ class CaseSummary:
     name: str
     case_number: str
     style: str
-    district_attorney_number: str
     location: str
     date: date
     violation_type: str
@@ -57,7 +56,6 @@ class OeciCase:
             CaseSummary(
                 name="",
                 case_number=case_number,
-                district_attorney_number="",
                 location="",
                 date=date.today(),
                 violation_type="",
