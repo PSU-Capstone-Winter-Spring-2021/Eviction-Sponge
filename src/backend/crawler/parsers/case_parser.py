@@ -35,7 +35,7 @@ class CaseParser:
         # ) = CaseParser.__build_hashed_dispo_data_and_probation_revoked(soup)
 
         hashed_dispo_data = {1: {"hello": "world"}}  # CaseParser.__build_hashed_dispo_data(soup)
-        closed_date = CaseParser.__parse_closed_date(soup)  # TODO: replace w/ closed date, currently gathers filed date
+        closed_date = CaseParser.__parse_closed_date(soup)
         # ------------------- UPDATED THIS FAR, WORKING ON ABOVE LINE ------------------- #
 
         # if probation_revoked_date_string:
@@ -48,16 +48,19 @@ class CaseParser:
 
     @staticmethod
     def __parse_closed_date(soup) -> date:
-        # Explanation:  Search the HTML of the page for a <th class="ssTableHeaderLabel"...> and collect
-        # all these (no more than 10 though, which should never occur...)
-        # Then, create a dictionary of the ssTableHeaderLabel string: value in it's standard data cell
-        # Last, lookup our target string, "Date Filed:", and grab the value associated with this key
-        # Convert it to a date and return it
-        CLOSED_DATE_KEY = "Date Filed:"
-        labels = soup.find_all("th", "ssTableHeaderLabel", limit=10)
-        table = {tag.string: tag.parent.find("td").string for tag in labels}
-        str_date = table.get(CLOSED_DATE_KEY, "")
-        return datetime.strptime(str_date, "%m/%d/%Y")  # 0-padded decimal month, 0-padded decimal day, 4-digit year
+        # Explanation:  Search the HTML of the page for <th class="ssTableHeaderLabel"...> tags
+        # Loop through these and look for a <td header="COtherEventsAndHearings...> on the same level,
+        # and check its string for the substring "Closed", which indicates we're looking at the right tag
+        # When/if found, return the date string from the original tag (& convert to date data type)
+        # If not found, return an impossible date
+        CLOSED_DATE_KEY = "Closed"
+        labels = soup.find_all("th", "ssTableHeaderLabel")
+        for tag in labels:
+            inner_string = tag.parent.find("td", header="COtherEventsAndHearings").string
+            if CLOSED_DATE_KEY in inner_string:
+                # date format: 0-padded decimal month, 0-padded decimal day, 4-digit year
+                return datetime.strptime(tag.string, "%m/%d/%Y")
+        return datetime(0000, 00, 00)
 
     @staticmethod
     def __build_charge_table_data(soup) -> Dict[int, Dict[str, str]]:
