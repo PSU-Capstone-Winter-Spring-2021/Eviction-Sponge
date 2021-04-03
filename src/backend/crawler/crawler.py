@@ -65,7 +65,7 @@ class Crawler:
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
                 key = oeci_case.case_number
                 value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
-                         oeci_case.date, "judgement not implemented yet")
+                         oeci_case.date, oeci_case.judgements)
                 oeci_cases.update({key: value})
         return oeci_cases
 
@@ -104,6 +104,7 @@ class Crawler:
         case_parser_data = CaseParser.feed(session_response.text)
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
+        judgements = case_parser_data.judgements
 
-        updated_summary = replace(case, date=closed_date, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, date=closed_date, judgements=judgements, edit_status=EditStatus.UNCHANGED)
         return updated_summary

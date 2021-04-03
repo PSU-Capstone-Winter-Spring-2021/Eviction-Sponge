@@ -4,6 +4,8 @@ from datetime import datetime, date
 import re
 from enum import Enum
 
+from typing import List
+
 
 class ChargeEligibilityStatus(str, Enum):
     UNKNOWN = "Unknown"
@@ -34,6 +36,7 @@ class CaseSummary:
     date: date
     violation_type: str
     current_status: str
+    judgements: List[str]
     case_detail_link: str
     balance_due_in_cents: int
     edit_status: EditStatus
@@ -61,6 +64,7 @@ class OeciCase:
                 date=date.today(),
                 violation_type="",
                 current_status="",
+                judgements=[],
                 case_detail_link="",
                 balance_due_in_cents=0,
                 edit_status=EditStatus.UNCHANGED,
@@ -78,6 +82,7 @@ class CaseCreator:
         type_status,
         case_detail_link,
         balance="0",
+        judgements=[],
     ) -> CaseSummary:
         date, location = date_location
         date = date.fromdatetime(datetime.strptime(date, "%m/%d/%Y"))
@@ -90,6 +95,7 @@ class CaseCreator:
             date,
             violation_type,
             current_status,
+            judgements,
             case_detail_link,
             balance_due_in_cents,
             EditStatus.UNCHANGED,
