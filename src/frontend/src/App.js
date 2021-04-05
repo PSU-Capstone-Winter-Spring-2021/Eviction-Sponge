@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
 import './styles/_globals.css'
 import About from "./components/About";
+import RecordSearch from "./components/RecordSearch";
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -19,9 +20,10 @@ function App() {
     <Navbar />
     <Switch>
       <Route component={Landing} exact={true} path="/" />
-      <Route component={OECILogin} exact={true} path="/OECI" />
+      <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
       <Route component={About} exact={true} path="/about" />
+      <Route component={RecordSearch} exact={true} path="/record-search" />
     </Switch>
     <Footer />
   </Router>
