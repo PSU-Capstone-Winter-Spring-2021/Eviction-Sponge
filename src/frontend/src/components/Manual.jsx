@@ -1,5 +1,5 @@
 import React from "react";
-
+import "bootstrap/dist/css/bootstrap.css";
 
 class Manual extends React.Component {
 
@@ -16,55 +16,55 @@ class Manual extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <div>
-                <p>
-                    <h1>
-                        Introduction
-                    </h1>
-                    <a>
-                        introduction text
-                    </a>
-                </p>
-                <p>
-                    <h1>
-                        General Info
-                    </h1>
-                    <a>
-                        general info text
-                    </a>
-                </p>
-                <p>
-                    <h1>
-                        How to Use EvictionSponge
-                    </h1>
-                    <a>
-                        how to use text
-                    </a>
-                </p>
-                <p>
-                    <h1>
-                        Assumptions
-                    </h1>
-                    <a>
-                        <h2>
-                            assumption 1
-                        </h2>
-                        text
-                        <h2>
-                            assumption 2
-                        </h2>
-                        text
-                    </a>
-                </p>
+         <div className="container bg-light w-100 m-0 mw-100 px-0">
+                <div className="row px-3">
+                    <div className="col col-9 border text-left">
+                        <div className="">
+                            <h2>
+                                Introduction
+                            </h2>
+                            <p className="font-weight-light">
+                            EvictionSponge is a web application used to facilitate the expungement process for evictions that occured in Oregon. It is built by a team of students at PSU for their capstone project and is based on the RecordSponge project by Code for PDX. The codebase is published under an open source MIT license.
+        <br />This Manual explains how EvictionSponge is used and the process of expunging eviction records. 
+                            </p>
+                        </div>
+                        <div className="">
+                            <h2>
+                                General Info
+                            </h2>
+                            <a>
+                                general info text
+                            </a>
+                        </div>
+                        <p>
+                            <h2>
+                                How to Use EvictionSponge
+                            </h2>
+                            <a>
+                                how to use text
+                            </a>
+                        </p>
+                        <p>
+                            <h2>
+                                Assumptions
+                            </h2>
+                            <a>
+                                <h2>
+                                    assumption 1
+                                </h2>
+                                text
+                                <h2>
+                                    assumption 2
+                                </h2>
+                                text
+                            </a>
+                        </p>
+                    </div>
+                    <div className="col-3 border">
+                        
+                    </div>
+                </div>
             </div>
-            /*
-            <textarea>
-                Step 1: Hit Search, if it's been implemented
-                Step 2: Login
-                Step 3: Search yourself
-                Step 4: ???
-                Step 5: Profit!
-            </textarea>*/
         )
     }
 }
