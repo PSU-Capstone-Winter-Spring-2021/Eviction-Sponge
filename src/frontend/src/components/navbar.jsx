@@ -1,33 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Logo from "../Logo";
+import Logo from "./Logo";
 import { Button, Navbar,Nav,Form,FormControl } from 'react-bootstrap'
 
 export default class navbar extends React.Component{
     render(){
         return(
-          <div className="bg-white shadow">
-          <nav 
-            className="mw8 relative center flex flex-wrap justify-between pa3"
+          <div>
+          <nav className="navbar"
             aria-label="Primary"
           >
-            <div className="logo mb4 mb0-ns">
-              {/* <Link to="/" aria-label="Home">
+            <div className="logo">
+              {<Link to="/" aria-label="Home">
                 <Logo />
-              </Link> */}
+              </Link>}
+              <h1 className = "pageTitle">EvictionSponge</h1>
             </div>
-            <div className="mt5 mt2-ns">
+            <div className = "navButtons">
               <Link
                 to="/manual"
-                className="link hover-blue f5 fw6 pv2 ph0 ph3-ns mr4-ns"
               >
                 Manual
               </Link>
               <Link
                 to="/record-search"
-                className="absolute top-1 right-1 static-ns bg-blue white bg-animate hover-bg-dark-blue f5 fw6 br2 pv2 ph3"
               >
-                Search
+                <Button className = "button">Search</Button>
               </Link>
             </div>
           </nav>

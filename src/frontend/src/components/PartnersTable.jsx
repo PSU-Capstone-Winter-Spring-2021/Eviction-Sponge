@@ -54,54 +54,54 @@ class PartnersTable extends React.Component{
         };
 
         partners = partnerData.map((partner, index) => (
-            <li className="bt bw2 b--lightest-blue1">
+            <li>
                 <Disclosure
                     open={index === this.state.active}
                     id={index}
                     onChange={() => toggleOpen(index)}
                 >
-                    <DisclosureButton className = "flex-ns w-100 relative navy hover-blue pv3 ph3">
-                        <span className = "w-70 db pr3 mb2 mb0-ns">{partner.name + " "}</span>
-                        <span className = "w-30 pr3">{partner.area}</span>
-                        <span classname = "absolute top-0 right-0 pt3 ph3">
-                            {index == this.state.active ? (
-                                <span aria-hidden = "true" className = "fas fa-angle-up"></span>
+                    <DisclosureButton className = "dbtnStyle">
+                        <span className = "dbtnText">{partner.name}</span>
+                        <span>{partner.area}</span>
+                        <span>
+                            {index === this.state.active ? (
+                                <span aria-hidden = "true"></span>
                             ) : (
-                                <span aria-hidden = "true" className = "fas fa-angle-down"></span>
+                                <span aria-hidden = "true"></span>
                             )}
                         </span>
                     </DisclosureButton>
                     <DisclosurePanel>
-                        <div classname = "b1 bw2 f5 b--blue pv3 ph3 mb3 ml3">
-                            <ul className = "flex-ns mb3">
-                                <li className = "flex-ns mb3">
-                                    <span className = "w10rem db fw6 mr3">{"Locations "}</span>
+                        <div>
+                            <ul>
+                                <li>
+                                    <span>{"Locations "}</span>
                                     <span>{partner.locations}</span>
                                 </li>
-                                <li className = "flex-ns mb3">
-                                    <span className = "w10rem db fw6 mr3">{"Income Restrictions "}</span>
+                                <li>
+                                    <span>{"Income Restrictions "}</span>
                                     <span>{partner.incomeRestrictions}</span>
                                 </li>
-                                <li className = "flex-ns mb3">
-                                    <span className = "w10rem db fw6 mr3">{"Analysis Cost "}</span>
+                                <li>
+                                    <span>{"Analysis Cost "}</span>
                                     <span>{partner.analysisCost}</span>
                                 </li>
-                                <li className = "flex-ns mb3">
-                                    <span className = "w10rem db fw6 mr3">{"Court Fees "}</span>
+                                <li>
+                                    <span>{"Court Fees "}</span>
                                     <span>{partner.courtFees}</span>
                                 </li>
                             </ul>
-                            <p className = "mw6 lh-copy mb3">
+                            <p>
                                 <span>{partner.feeInfo}</span>
                             </p>
-                            <hr className = "bt b--black-05 mb3" />
-                            <p className = "fw6 mb3">{"Contact: "}</p>
-                            <ul classname = "list mb3">
+                            <hr/>
+                            <p>{"Contact: "}</p>
+                            <ul>
                                 {partner.contacts.map((contact, index) => (
-                                    <li className = "mb3">{contact}</li>
+                                    <li>{contact}</li>
                                 ))}
                             </ul>
-                            <a href={partner.website} className = "link hover-blue bb">
+                            <a href={partner.website}>
                                 {partner.website}
                             </a>
                         </div>
@@ -110,11 +110,13 @@ class PartnersTable extends React.Component{
             </li>
         ));
         return (
-            <div className = "ba bw3 br3 b--lightest-blue1 bg-white mb4">
-                <div className="flex items-center justify-between">
-                    <h3 className = "f3 fw9 pv4 ph3">Partners</h3>
+            <div className = "partnerTableBorder">
+                <div className = "partnerTable">
+                    <div>
+                        <h3>Partners</h3>
+                    </div>
+                    <ul>{partners}</ul>
                 </div>
-                <ul className = "list">{partners}</ul>
             </div>
         );
     }
