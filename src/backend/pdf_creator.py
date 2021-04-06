@@ -2,6 +2,21 @@ from dataclasses import dataclass
 import pdfrw
 import datetime
 from form_filling import FormData, PDF_form_template
+from src.backend.tests import pdf_test_dicts
+from pathlib import Path
+
+# CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
+# CreatePDF.data_dict_to_pdf_dict takes the data from the search function and spreads it out to the needed
+#         form data dict. The PDF needs each form to have a separate name even if the data is the same :(
+#         The template in form_filling can probably be removed or added to this, not sure which is better
+# CreatePDF.fill_pdf does the actual work of filling the pdf with the data from the pdf dict. It looks odd,
+#         but Adobe doesn't make this easy to automate.
+# CreatePDF.create_form_name will name the pdf with the the name of the first defendant as
+#         firstname_lastname.pdf
+# CreatePDF.PDF_filler does is a wrapper that takes the initial input dict from search, does all of the work
+#         then returns the absolute path to the pdf.
+# Need to remember to add a one-liner to delete the file when the program exits or a new run is started.
+# Something along the lines of 'file(filename).exists.os.remove()'
 
 
 # Data dict names:
@@ -29,95 +44,97 @@ from form_filling import FormData, PDF_form_template
 # PLAINTIFF_ADDRESS_CITYSTATEZIP_PHONE -single line [Address    CityStateZip     PHONE]
 # OBJECTION_DATE - don't fill
 
+TEMPLATE_PATH = 'template.pdf'
+OUTPUT_PATH = 'output1.pdf'
+PDF_FORM_LOCATION = 'C:\\Users\\danfo\\Desktop\\PSU\\Capstone\\Eviction-Sponge\\src\\backend\\files\\EvictionPDF.pdf'
 
 @dataclass
 class CreatePDF:
-    TEMPLATE_PATH = 'template.pdf'
-    OUTPUT_PATH = 'output.pdf'
 
-    test_dict = {
-        'COUNTY_1': 'Multnomah',
-        'COUNTY_2': 'Multnomah',
-        'PLAINTIFF_1_1': "The Burger King",
-        'PLAINTIFF_1_2': "",
-        'DEFENDANT_1_1': 'Hamburgler',
-        'DEFENDANT_1_2': "Grimace",
-        'DEFENDANT_1_3': "",
-        'DEFENDANT_1_4': "",
-        'PLAINTIFF_2_1': "The Burger King",
-        'PLAINTIFF_2_2': "",
-        'DEFENDANT_2_1': 'Hamburgler',
-        'DEFENDANT_2_2': "Grimace",
-        'DEFENDANT_2_3': "",
-        'DEFENDANT_2_4': "",
-        'MOTION': 'Hamburgler',
-        'CASE': 'Burger King v Hamburgler',
-        'CASE_NO_1': '8675309',
-        'CASE_NO_2': '8675309',
-        'DISMISSAL': False,
-        'RESTITUTION': True,
-        'MONEY': True,
-        'JUDGEMENT': True,
-        'STIPULATION': False,
-        'TERMS': False,
-        'DATE_OF_JUDGEMENT': '5/29/2015',
-        'DATE': datetime.date.today(),
-        'NAME_PRINTED': 'Hamburgler',
-        'ADDRESS': '10050 SW Barbur Blvd',
-        'CITY_STATE_ZIP': 'Portland OR, 97219',
-        'PHONE': '(503) 246-6711',
-        'DATE_2': datetime.date.today(),
-        'PLAINTIFF_ADDRESS_1': '11539 SW',
-        'PLAINTIFF_ADDRESS_2': 'Pacific Hwy',
-        'PLAINTIFF_ADDRESS_3': 'Tigard, OR 97223',
-        'DATE_3': datetime.date.today(),
-        'DEFENDANT_NAME_1': "Hamburgler",
-        'DEFENDANT_NAME_2': "Hamburgler",
-        'DEFENDANT_ADDRESS': '10050 SW Barbur Blvd',
-        'PLAINTIFF_NAME': "The Burger King",
-        'DO_NOT_FILL': "",
-        'DO_NOT_CLICK': False
-    }
+    def fit_address(self, address):
+        first_line = 22
+        first_line_full = False
+        second_line = 72
+        second_line_full = False
+        third_line = 65
+        third_line_full = False
+        first_line_string = ''
+        second_line_string = ''
+        third_line_string = ''
+        address_list = address.split()
+        for stuff in address_list:
+            if len(stuff) > first_line or first_line_full:
+                first_line_full = True
+                if len(stuff) > second_line or second_line_full:
+                    second_line_full = True
+                    if len(stuff) > third_line or third_line_full:
+                        third_line_full = True
+                        # this is sticking everything extra on the third line; isn't optimal
+                        third_line_string += stuff + " "
+                    else:
+                        third_line_string += stuff + " "
+                        third_line = third_line - len(stuff) - 1
+                        continue
+                else:
+                    second_line_string += stuff + " "
+                    second_line = second_line - len(stuff) - 1
+                    continue
+            else:
+                first_line_string += stuff + " "
+                first_line = first_line - len(stuff) - 1
+                continue
+
+        address_output = [first_line_string, second_line_string, third_line_string]
+        return address_output
 
     def data_dict_to_pdf_dict(self, input_dict):
-        output = PDF_form_template(
-            DEFENDANT_ADDRESS=input_dict['def_mailing_address'],
-            CITY_STATE_ZIP=input_dict['city_state_zip'],
+        address_list = self.fit_address(input_dict['plaintiff_address'])
+        output = dict(
             COUNTY_1=input_dict['county_name'],
-            COUNTY_2=input_dict['county_name'],
             PLAINTIFF_1_1=input_dict['plaintiff_line1'],
             PLAINTIFF_1_2=input_dict['plaintiff_line2'],
-            PLAINTIFF_2_1=input_dict['plaintiff_line1'],
-            PLAINTIFF_2_2=input_dict['plaintiff_line2'],
+            CASE_NO_1=input_dict['case_number'],
             DEFENDANT_1_1=input_dict['defendant_line1'],
             DEFENDANT_1_2=input_dict['defendant_line2'],
             DEFENDANT_1_3=input_dict['defendant_line3'],
             DEFENDANT_1_4=input_dict['defendant_line4'],
+            DEFENDANT_NAME_1=input_dict['defendant_line1'],
+            CASE=input_dict['case_name'],
+            DISMISSAL=input_dict['dismissal'],
+            RESTITUTION=input_dict['restitution'],
+            MONEY=input_dict['money'],
+            JUDGEMENT=input_dict['judgement'],
+            DATE_OF_JUDGEMENT=input_dict['date_of_judgement'],
+            STIPULATION=input_dict['stipulation'],
+            TERMS=input_dict['terms'],
+            DATE_1=str(datetime.date.today().strftime("%m-%d-%Y")),
+            DEFENDANT_NAME_2=input_dict['defendant_line1'],
+            DEFENDANT_ADDRESS=input_dict['def_mailing_address'],
+            CITY_STATE_ZIP=input_dict['city_state_zip'],
+            PHONE=input_dict['phone_number'],
+            DATE_2=str(datetime.date.today().strftime("%m-%d-%Y")),
+            PLAINTIFF_ADDRESS_1=address_list[0],
+            PLAINTIFF_ADDRESS_2=address_list[1],
+            PLAINTIFF_ADDRESS_3=address_list[2],
+            DATE_3=str(datetime.date.today().strftime("%m-%d-%Y")),
+            DEFENDANT_NAME_3=input_dict['defendant_line1'],
+            COUNTY_2=input_dict['county_name'],
+            PLAINTIFF_2_1=input_dict['plaintiff_line1'],
+            PLAINTIFF_2_2=input_dict['plaintiff_line2'],
+            CASE_NO_2=input_dict['case_number'],
             DEFENDANT_2_1=input_dict['defendant_line1'],
             DEFENDANT_2_2=input_dict['defendant_line2'],
             DEFENDANT_2_3=input_dict['defendant_line3'],
             DEFENDANT_2_4=input_dict['defendant_line4'],
-            DATE=datetime.date.today(),
-            DATE_2=datetime.date.today(),
-            DATE_3=datetime.date.today(),
-            CASE=input_dict['case_name'],
-            CASE_NO_1=input_dict['case_number'],
-            CASE_NO_2=input_dict['case_number'],
-            DEFENDANT_NAME_1=input_dict['defendant_line1'],
-            DEFENDANT_NAME_2=input_dict['defendant_line1'],
-            DEFENDANT_NAME_3=input_dict['defendant_line1'],
-            DATE_OF_JUDGEMENT=input_dict['date_of_judgement'],
-            PHONE=input_dict['phone_number'],
-            PLAINTIFF_NAME=input_dict['plaintiff_line1']
+            PLAINTIFF_NAME=input_dict['plaintiff_line1'],
+            DO_NOT_FILL="",
+            DO_NOT_CLICK=False
         )
-        # sort out plaintiff address here @ input['mailing_address']
-        # DISMISSAL, RESTITUTION, MONEY, JUDGEMENT, STIPULATION, TERMS all bool
+        return output
 
     def fill_pdf(self, input_pdf_path, output_pdf_path, data_dict):
         ANNOT_KEY = '/Annots'
         ANNOT_FIELD_KEY = '/T'
-        ANNOT_VAL_KEY = '/V'
-        ANNOT_RECT_KEY = '/Rect'
         SUBTYPE_KEY = '/Subtype'
         WIDGET_SUBTYPE_KEY = '/Widget'
         template_pdf = pdfrw.PdfReader(input_pdf_path)
@@ -139,7 +156,24 @@ class CreatePDF:
                                 )
                                 annotation.update(pdfrw.PdfDict(AP=''))
 
-        pdfrw.PdfWriter().write(output_pdf_path, template_pdf)
+        send_out = pdfrw.PdfWriter()
+        send_out.write(output_pdf_path, template_pdf)
 
-    fill_pdf("src/backend/files/Fillable_FED-Motion-SetAside-2020-01-01.pdf", "src/backend/files/test_result.pdf",
-             test_dict)
+    def create_form_name(self, input_dict):
+        defendant_name_list = input_dict["defendant_line1"].split()
+        filename = ''
+        for stuff in defendant_name_list:
+            filename += stuff + "_"
+        filename = filename[:-1]
+        filename = filename + ".pdf"
+        return filename
+
+    def PDF_filler(self, input_dict):
+        output = CreatePDF.data_dict_to_pdf_dict(self, input_dict)
+        output_name = CreatePDF.create_form_name(self, input_dict)
+        CreatePDF.fill_pdf(self, PDF_FORM_LOCATION, output_name, output)
+        return Path(output_name).absolute()
+
+
+# taco = CreatePDF()
+# taco.PDF_filler(pdf_test_dicts.test_dict_2)
