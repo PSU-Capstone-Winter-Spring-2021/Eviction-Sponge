@@ -3,7 +3,7 @@ from flask import request, make_response, current_app, abort, jsonify, json
 import requests
 from requests import Session
 from src.backend.crypto import DataCipher
-from src.backend.crawler import Crawler
+from src.backend.crawler.crawler import Crawler
 
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
