@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime, date
+from typing import List
 
 from bs4 import BeautifulSoup
 
@@ -37,7 +38,7 @@ class CaseParser:
         return datetime(0000, 00, 00)
 
     @staticmethod
-    def __parse_judgements(soup) -> list(str):
+    def __parse_judgements(soup) -> List[str]:
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be
         # chronological
