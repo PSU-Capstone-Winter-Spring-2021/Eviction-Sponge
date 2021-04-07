@@ -60,7 +60,7 @@ class Manual extends React.Component {
                                 </li>
                             </ul>
                     </div>
-                    <div className="col-3 border d-xs-none d-md-block sticky-top h-25">
+                    <div className="col-3 border d-none d-md-block sticky-top h-25">
                         <nav>
                             nav here
                         </nav>
