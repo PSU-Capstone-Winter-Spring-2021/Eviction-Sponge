@@ -22,9 +22,9 @@ class Search extends React.Component {
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
         let postName = {
-            "firstName" : firstName,
-            "middleName": middleName,
-            "lastName": lastName
+            "first_name" : firstName,
+            "middle_name": middleName,
+            "last_name": lastName
         }
         console.log("clicked, names: " + postName);
         this.setState({Submitted: true});
