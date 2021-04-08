@@ -1,6 +1,6 @@
 from flask import current_app, abort, make_response, jsonify, request
 from flask.views import MethodView
-from src.backend.pdf_creator import CreatePDF
+from pdf_creator import CreatePDF
 
 
 def error(code, message):
@@ -20,4 +20,4 @@ class Pdf(MethodView):
 
 
 def register(app):
-    app.add_url_rule("/pdf", view_func=CreatePDF.as_view("pdf"))
+    app.add_url_rule("/pdf", view_func=Pdf.as_view("pdf"))

@@ -1,4 +1,5 @@
 import React from "react";
+import PartnersTable from "./PartnersTable";
 
 class Landing extends React.Component {
     componentDidMount() {
@@ -8,8 +9,22 @@ class Landing extends React.Component {
         return (
             <>
                 <main>
-                    <h1>EvictionSponge</h1>
-                    <div>This is the eviction sponge landing page</div>
+                    <div className = "landing">
+                        cool message
+                    </div>
+                    <div className="landingText">
+                        <h1>
+                            Easing the Process of<br/>Eviction Expungement
+                        </h1>
+                        <p>
+                            Eviction Sponge is a software that helps organizations
+                            <br/>
+                            determine if an individual is elligable for eviction
+                            <br/>
+                            expungement.
+                        </p>
+                    </div>
+                    <PartnersTable />
                 </main>
             </>
         );

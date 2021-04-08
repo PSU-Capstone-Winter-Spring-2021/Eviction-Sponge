@@ -5,9 +5,12 @@ import history from "./history";
 import Landing from "./components/Landing";
 //import Header from "./Header";
 import OECILogin from "./components/OeciLogin";
-import PartnersTable from "./components/PartnersTable";
+import Manual from "./components/Manual";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
+import './styles/_globals.css'
+import About from "./components/About";
+import RecordSearch from "./components/RecordSearch";
 import Search from "./components/Search";
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
@@ -15,14 +18,16 @@ function App() {
   return (
   <>
   <Router history={history}>
-    <Navbar/>
+    <Navbar />
     <Switch>
       <Route component={Landing} exact={true} path="/" />
-      <Route component={OECILogin} exact={true} path="/Login"/>
-      <Route component={Search} exact={true} path="/Search"/>
+      <Route component={OECILogin} exact={true} path="/oeci-login" />
+      <Route component={Manual} exact={true} path="/manual" />
+      <Route component={About} exact={true} path="/about" />
+      <Route component={RecordSearch} exact={true} path="/record-search" />
     </Switch>
-  </Router>
     <Footer />
+  </Router>
   </>
 
   );

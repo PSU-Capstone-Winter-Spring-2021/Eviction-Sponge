@@ -51,6 +51,7 @@ class OeciLogin extends React.Component {
                     id="userId"
                     name="oecilogin"
                     type="text"
+                    placeholder="User ID"
                     value={this.state.userId}
                     onChange={this.onChange}
                 />
@@ -61,6 +62,7 @@ class OeciLogin extends React.Component {
                     id="password"
                     name="oecipassword"
                     type="password"
+                    placeholder = "Password"
                     value={this.state.password}
                     onChange={this.onChange}
                 />
