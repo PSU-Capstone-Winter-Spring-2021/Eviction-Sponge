@@ -1,6 +1,8 @@
 from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify
-from crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
+
+from crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
+
 import os
 
 from crypto import DataCipher

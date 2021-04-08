@@ -23,7 +23,13 @@ class FormData:
 
     plaintiff_address: str
 
-# Everything that says none is a checkbox, and I have not figured out how to make those work yet
+    dismissal: bool
+    restitution: bool
+    money: bool
+    judgement: bool
+    stipulation: bool
+    terms: bool
+
 @dataclass 
 class PDF_form_template:
     COUNTY_1: str
@@ -40,19 +46,17 @@ class PDF_form_template:
     DEFENDANT_2_2: str
     DEFENDANT_2_3: str
     DEFENDANT_2_4: str
-    MOTION: str
     CASE: str
     CASE_NO_1: str
     CASE_NO_2: str
-    DISMISSAL: None
-    RESTITUTION: None
-    MONEY: None
-    JUDGEMENT: None
-    STIPULATION: None
-    TERMS: None
+    DISMISSAL: bool
+    RESTITUTION: bool
+    MONEY: bool
+    JUDGEMENT: bool
+    STIPULATION: bool
+    TERMS: bool
     DATE_OF_JUDGEMENT: str
     DATE: str
-    NAME_PRINTED: str
     DEFENDANT_ADDRESS: str
     CITY_STATE_ZIP: str
     PHONE: str
@@ -67,4 +71,4 @@ class PDF_form_template:
     DEFENDANT_ADDRESS: str
     PLAINTIFF_NAME: str
     DO_NOT_FILL: str
-    DO_NOT_CLICK: None
+    DO_NOT_CLICK: bool

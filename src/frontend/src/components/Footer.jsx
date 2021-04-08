@@ -8,16 +8,23 @@ class Footer extends React.Component {
         super(props);
     };*/
 
+    componentDidMount(){
+        // document.title is the string in the tab, update it to reflect current component
+        document.title = "footer"
+    };
+
     // HTML(?) for the component
     render() {
         return (
-            <footer>
-                <p><a href="#">Home</a></p>
-                <p><a href="#">About Us</a></p>
-                <p><a href="#">Partners</a></p>
-                <p><a href="#">Manual</a></p>
-                <p><a href="#">Search</a></p>
-                <p><a href="#">Etc</a></p>
+            <footer className = "footer">
+                <p>
+                    <a href="/">Home</a>
+                    <a href="/about">About Us</a>
+                    <a href="/partners">Partners</a>
+                    <a href="/manual">Manual</a>
+                    <a href="/record-search">Search</a>
+                    <a href="/etc">Etc</a>
+                </p>
             </footer>
         )
     }

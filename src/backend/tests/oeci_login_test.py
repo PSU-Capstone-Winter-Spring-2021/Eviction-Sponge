@@ -4,7 +4,7 @@ import sys
 import pytest
 
 from src.backend.endpoints import oeci_login
-from src.backend.crawler import UnableToReachOECI, InvalidLoginCreds
+from src.backend.crawler.crawler import UnableToReachOECI, InvalidLoginCreds
 
 # Need this little tidbit for pytest to work
 myPath = os.path.dirname(os.path.abspath(__file__))

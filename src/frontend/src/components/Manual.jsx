@@ -82,7 +82,6 @@ class Manual extends React.Component {
                 </p>
             </a>
         </>
-
         )
     }
 }
