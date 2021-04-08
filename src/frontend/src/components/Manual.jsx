@@ -13,58 +13,75 @@ class Manual extends React.Component {
         document.title = "Manual"
     };
 
-    // HTML(?) for the component
+    // HTML for the component
     render() {
         return (
-            <div>
+        <>
+            <nav>
+            <ul className="list">
+              <li>
+                <a href="#introduction">
+                  Introduction
+                </a>
+              </li>
+              <li>
+                <a href="#information">
+                  General Information
+                </a>
+              </li>
+              <li>
+                <a href="#overview">
+                  Use EvictionSponge
+                </a>
+              </li>
+              <li>
+                <a href="#assumptions">
+                  Assumptions
+                </a>
+              </li>
+              <li>
+                <a href="#search">
+                  Search
+                </a>
+              </li>
+              <li>
+                <a href="#file">
+                  File for Eviction Expungement
+                </a>
+              </li>
+            </ul>
+            </nav>
+            <a name="introduction">
                 <p>
-                    <h1>
-                        Introduction
-                    </h1>
-                    <a>
-                        introduction text
-                    </a>
+                    Introduction
                 </p>
+            </a>
+            <a name="information">
                 <p>
-                    <h1>
-                        General Info
-                    </h1>
-                    <a>
-                        general info text
-                    </a>
+                    General Information
                 </p>
+            </a>
+            <a name="overview">
                 <p>
-                    <h1>
-                        How to Use EvictionSponge
-                    </h1>
-                    <a>
-                        how to use text
-                    </a>
+                    Use EvictionSponge
                 </p>
+            </a>
+            <a name="assumptions">
                 <p>
-                    <h1>
-                        Assumptions
-                    </h1>
-                    <a>
-                        <h2>
-                            assumption 1
-                        </h2>
-                        text
-                        <h2>
-                            assumption 2
-                        </h2>
-                        text
-                    </a>
+                    Assumptions
                 </p>
-            </div>
-            /*
-            <textarea>
-                Step 1: Hit Search, if it's been implemented
-                Step 2: Login
-                Step 3: Search yourself
-                Step 4: ???
-                Step 5: Profit!
-            </textarea>*/
+            </a>
+            <a name="search">
+                <p>
+                    Search
+                </p>
+            </a>
+            <a name="file">
+                <p>
+                    File for Eviction Expungement
+                </p>
+            </a>
+        </>
         )
     }
 }
