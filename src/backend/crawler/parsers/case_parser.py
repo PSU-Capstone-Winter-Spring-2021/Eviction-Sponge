@@ -3,6 +3,7 @@ from datetime import datetime, date
 from typing import List
 
 from bs4 import BeautifulSoup
+from typing import List
 
 
 @dataclass
@@ -19,6 +20,9 @@ class CaseParser:
 
         closed_date = CaseParser.__parse_closed_date(soup)
         judgements = CaseParser.__parse_judgements(soup)
+        # If there were no judgements in the disposition section, check if they got put in the other events
+        if not judgements:
+            judgements = CaseParser.__parse_secondary_judgements(soup)
         return CaseParserData(closed_date, judgements)
 
     @staticmethod
@@ -50,3 +54,14 @@ class CaseParser:
             if disposition_tag == None:
                 return judgements
             judgements.append(disposition_tag.string)
+
+    @staticmethod
+    def __parse_secondary_judgements(soup) -> List[str]:
+        JUDGEMENT_KEY = "Judgement"
+        judgements = []
+        labels = soup.find_all("td", "COtherEventsAndHearings")
+        for tag in labels:
+            inner_string = tag.string
+            if JUDGEMENT_KEY in inner_string:
+                judgements.append(inner_string)
+        return judgements

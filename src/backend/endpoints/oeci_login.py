@@ -1,11 +1,11 @@
 from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify
 
-from crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
+from src.backend.crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
 
 import os
 
-from crypto import DataCipher
+from src.backend.crypto import DataCipher
 
 # log an error message and stop process
 def error(code, message):
