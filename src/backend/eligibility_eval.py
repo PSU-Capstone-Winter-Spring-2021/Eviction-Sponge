@@ -1,9 +1,13 @@
 from datetime import datetime, date
+import re
 
 SECONDS_IN_YEAR = 31536000
 
 # Good:
 #   "Judgement - Dismissal"
+#   "Judgement - Small Claims Dismissal"
+#   "Judgement - General Dismissal"
+#   probably others as well
 #   5 Years or older
 
 
@@ -28,6 +32,7 @@ def isEligible(style, location, violation_type, current_status, closed_date, jud
         if not judgements:
             return False, "Unable to Determine Eligibility - Needs Review"
         for judgement in judgements:
-            if "Judgement - Dismissal" in judgement or "Judgement - General Dismissal":
+            # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
+            # "Dismissal", with any characters in between
+            if re.match(r"^Judgement.*Dismissal". judgement):
                 return True, "Eligible"
-                # TODO: find a amended disposition/judgement case for another if/else
