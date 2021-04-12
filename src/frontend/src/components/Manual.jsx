@@ -16,131 +16,122 @@ class Manual extends React.Component {
     // HTML for the component
     render() {
         return (
-            <div className="container bg-light w-100 m-0 mw-100 px-0">
+            <main className="container bg-light w-100 m-0 mw-100 px-0">
                 <div className="row mx-0">
-                    <div className="col border d-xs-block d-sm-none">
-                        <nav>
-                            <ul className="list-unstyled">
-                            <li>
-                                <a href="#introduction">
-                                Introduction
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#information">
-                                General Information
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#howto">
-                                How to Use EvictionSponge
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#assumptions">
-                                Assumptions
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#search">
-                                Search
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#file">
-                                File for Eviction Expungement
-                                </a>
-                            </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    <nav className="col border d-xs-block d-sm-none">
+                        <ul className="list-unstyled">
+                        <li>
+                            <a href="#introduction">
+                            Introduction
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#information">
+                            General Information
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#howto">
+                            How to Use EvictionSponge
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#assumption1">
+                            Assumption 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#search">
+                            Search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#file">
+                            File for Eviction Expungement
+                            </a>
+                        </li>
+                        </ul>
+                     </nav>
                 </div>
                 <div className="row mx-0 justify-content-center">
-                    <div className="col-sm-6 text-left">
-                        <div>
+                    <div className="col-sm-9 col-lg-6 text-left">
+                        <section>
                             <h2 id="introduction">
                                 Introduction
                             </h2>
-                            <p className="font-weight-light">
-                            EvictionSponge is a web application used to facilitate the expungement process for evictions that occured in Oregon. It is built by a team of students at PSU for their capstone project and is based on the RecordSponge project by Code for PDX. The codebase is published under an open source MIT license.
-                            <br />This Manual explains how EvictionSponge is used and the process of expunging eviction records. 
-                            </p>
-                        </div>
-                        <div className="">
+                            <p className="">EvictionSponge is a web application used to facilitate the expungement process for evictions that occured in Oregon. It is built by a team of students at PSU for their capstone project and is based on the RecordSponge project by Code for PDX. The codebase is published under an open source MIT license.</p>
+                            <p>This Manual explains how EvictionSponge is used and the process of expunging eviction records. </p>
+                        </section>
+                        <section className="">
                             <h2>General Info</h2>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim atque, autem dolor ab voluptatem voluptas officiis esse fugiat quos quisquam eligendi ea quasi aut labore cum mollitia impedit dolorum a.
-                                Debitis, nisi nobis a deleniti quam accusantium veniam dignissimos consectetur sit delectus, quidem voluptatum unde laborum aliquid illo quo molestiae perspiciatis! Quis vero earum ullam explicabo. Quae ratione rem illo!
-                                Aut ratione veritatis necessitatibus ipsam! Sunt assumenda fuga omnis odit voluptatem temporibus nulla quaerat minima vitae corporis debitis cum quas illo nisi consequuntur, unde esse officia, alias nemo recusandae laboriosam.
-                                Officia error reprehenderit pariatur ab! Minus dolor distinctio ipsa reiciendis hic in aliquid sunt tenetur praesentium, omnis eum vel asperiores illo deserunt quos perferendis laboriosam. Est corporis similique iusto rem.
-                                Magnam, nulla tempore, est atque vitae facere tenetur consequatur iste itaque, velit obcaecati omnis et dolorum ratione quis minima? Dicta deserunt magnam eius quasi! Vel enim quia ut animi ipsum!
-                                Eum ex consectetur nihil dolor dolore voluptas fugiat, rerum hic sed iure obcaecati error quis tenetur eveniet sunt animi reiciendis mollitia quod ipsa qui tempora quae cum illum! Eligendi, asperiores.
-                                Dolores dolore, inventore illum consequuntur eius soluta distinctio! Quidem, repudiandae ad. Earum optio exercitationem expedita quis, veniam doloremque, harum ea eaque laborum hic consequatur placeat incidunt deleniti maxime nulla iure?
-                                Dolorum magni dicta, illo delectus iure eos ut ipsa placeat, consectetur atque doloribus ducimus sed dolorem neque voluptatem! Molestiae ullam nihil eligendi neque accusantium pariatur, cumque asperiores ducimus error nam!
-                            </p>
-                        </div>
-                        <div>
-                            <h2 id="howto">How to Use EvictionSponge</h2>
-                            <p>how to use text</p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, cupiditate.
-                            Molestias eos animi voluptatum quo consectetur eveniet quibusdam tempore neque!
-                            Culpa voluptate quas molestias explicabo provident vero eos optio. Modi?
-                            Non blanditiis aperiam pariatur autem ex quisquam magni assumenda commodi.
-                            Optio est, quos sapiente ab doloremque odit. Natus, consectetur ratione!
-                            Praesentium voluptates, non tenetur reiciendis alias quas asperiores cumque atque.
-                            Quisquam nesciunt sit harum beatae pariatur! Non id nam aperiam?
-                            Ab, libero fuga? Magnam molestiae, nisi iure quos quaerat sed?
-                            Libero numquam cum architecto illum iusto velit aut maiores laborum?
-                            Quae, atque? Blanditiis deserunt ipsum in molestiae saepe magni enim?
-                            <h2>Assumptions</h2>
-                            <ul>
-                                <li>
-                                    <h3>Assumption 1</h3>
-                                </li>
-                                <li>
-                                    <h3>Assumption 2</h3>
-                                </li>
-                            </ul>
-                        </div>
+                                <p>Having an eviction on your record can make finding affordable housing difficult. An eviction expungement may help remedy this for people who are in this situation because an expungement means that the eviction record is erased and the court treats the eviction as if it never happened. Evictions should not show up during a background check and the tenant can answer “no” regarding evictions on future applications. EvictionSponge aims to make finding eligible expungements easy and accessible.</p>
+                                <p>Eviction expungement in Oregon was introduced in January, 2021. EvictionSponge can only find eviction records for Oregon cases.</p>
+                            <h3 className="h5">There are a few requirements for an eviction to be eligible for expungement:</h3>
+                                <ul>
+                                    <li>The tenant won and the eviction was dismissed</li>
+                                    <p className="font-weight-bold my-1">or</p>
+                                    <li>The final court judgement is at least five years old, and</li>
+                                    <li>The tenant doesn't owe any money that was included in the judgement, and</li>
+                                    <li>The tenant has complied with any terms in court agreements</li>
+                                </ul>
+                            <p>We still need partners to administer EvictionSponge. Please contact <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a> if you would like to set up EvictionSponge at your organization.</p>
+                        </section>
+                        <section>
+                            <h2>How to Use EvictionSponge</h2>
+                                <h3>Overview</h3>
+                                    <ol>
+                                        <li>Log in
+                                            <ul>
+                                                <li>You will need an Oregon eCourt Case Information (OECI) account to search for civil records. You can purchase a subscription here.</li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Search records</a> by First and Last name</li>
+                                        <li>Assure that <a href="#assumption1">Assumption 1</a> is met</li>
+                                        <li>Confirm positive search results with Michael: <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a></li>
+                                        <li>Complete forms</li>
+                                        <li>Instruct clients to file paperwork in appropriate courts</li>
+                                    </ol>
+                            <h2 id="assumption1">Assumption 1</h2>
+                            <p className="font-weight-bold">The tenant does not owe money to the landlord on the case or they pay it before filing the application.</p>
+                            <p>This assumption is redundant with an assumption needed for correct analysis. EvictionSponge has no record of payments so charges marked as eligible do not take into account any payments made. EvictionSponge does it’s best to find the correct monetary value owed, but it is possible that it is incorrect in some cases, please verify the total amount owed before instructing the client to make any payments.</p>
+                        </section>
                     </div>
-                    <div className="col-3 border d-none d-sm-block sticky-top h-25">
-                        <nav>
-                            <ul className="list-unstyled text-left">
-                            <li>
-                                <a href="#introduction">
-                                Introduction
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#information">
-                                General Information
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#howto">
-                                How to Use EvictionSponge
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#assumptions">
-                                Assumptions
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#search">
-                                Search
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#file">
-                                File for Eviction Expungement
-                                </a>
-                            </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    <nav className="col-sm-3 border d-none d-sm-block sticky-top h-25">
+                        <ul className="list-unstyled text-left">
+                        <li>
+                            <a href="#introduction">
+                            Introduction
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#information">
+                            General Information
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#howto">
+                            How to Use EvictionSponge
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#assumption1">
+                            Assumption 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#search">
+                            Search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#file">
+                            File for Eviction Expungement
+                            </a>
+                        </li>
+                        </ul>
+                    </nav>
                 </div>
-            </div>
+            </main>
         )
     }
 }
