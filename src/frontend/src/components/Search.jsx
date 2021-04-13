@@ -23,15 +23,16 @@ class Search extends React.Component {
         let lastName = String(document.getElementById("lastName").value);
         let postName = {
             "first_name" : firstName,
-            "middle_name": middleName,
-            "last_name": lastName
+            "last_name": lastName,
+            "middle_name": middleName
         }
         console.log("clicked, names: " + postName);
         this.setState({Submitted: true});
-        await axios.post(url, postname).then(res => {
+        await axios.post(url, postName).then(res => {
             if(res !== null) {
-                found = true;
-                this.setState({Results: results})
+                this.state.Found = true;
+                this.setState({Results: res});
+                console.log(res);
             }
         })
     }
