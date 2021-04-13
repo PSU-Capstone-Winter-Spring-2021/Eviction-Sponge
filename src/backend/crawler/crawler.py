@@ -10,6 +10,7 @@ from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
 from models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
+from eligibility_eval import isEligible
 
 
 class UnableToReachOECI(Exception):
@@ -67,9 +68,10 @@ class Crawler:
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
                 if oeci_case.type not in ACCEPTABLE_TYPES:
                     continue
+                eligibility = isEligible(oeci_case.current_status, oeci_case.date, oeci_case.judgements)  # (Bool, Str)
                 key = oeci_case.case_number
                 value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
-                         oeci_case.date, oeci_case.judgements)
+                         oeci_case.date, oeci_case.judgements, eligibility)
                 oeci_cases.update({key: value})
         return oeci_cases
 
