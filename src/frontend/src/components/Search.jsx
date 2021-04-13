@@ -22,11 +22,11 @@ class Search extends React.Component {
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
         let postName = {
-            "first" : firstName,
-            "last": lastName,
-            "middle": middleName
+            "first_name" : firstName,
+            "last_name": lastName,
+            "middle_name": middleName
         }
-        console.log("clicked, names: " + postName.first_name + postName.last_name);
+        console.log("clicked, names: " + postName.first_name + " " + postName.last_name +", " + postName.middle_name);
         this.setState({Submitted: true});
         await axios.post("/search", postName).then(res => {
             if(res !== null) {
