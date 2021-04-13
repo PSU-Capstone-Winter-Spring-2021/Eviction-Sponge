@@ -17,7 +17,7 @@ class Search extends React.Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        let url= " ";
+        //let url= "/search";
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
@@ -26,9 +26,9 @@ class Search extends React.Component {
             "last_name": lastName,
             "middle_name": middleName
         }
-        console.log("clicked, names: " + postName);
+        console.log("clicked, names: " + postName.first_name + postName.last_name);
         this.setState({Submitted: true});
-        await axios.post(url, postName).then(res => {
+        await axios.post("/search", postName).then(res => {
             if(res !== null) {
                 this.state.Found = true;
                 this.setState({Results: res});

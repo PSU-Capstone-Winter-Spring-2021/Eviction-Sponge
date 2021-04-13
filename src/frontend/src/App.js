@@ -24,7 +24,7 @@ function App() {
       <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
       <Route component={About} exact={true} path="/about" />
-      <Route component={RecordSearch} exact={true} path="/record-search" />
+      <Route component={Search} exact={true} path="/record-search" />
     </Switch>
     <Footer />
   </Router>
