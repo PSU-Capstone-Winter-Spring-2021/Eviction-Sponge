@@ -13,6 +13,7 @@ SECONDS_IN_YEAR = 31536000
 
 # Bad:
 #   Anything else
+#   "Stipulated" appearing somewhere in the judgement
 #   Open case -> failed
 
 def isEligible(current_status, closed_date, judgements) -> (bool, str):
