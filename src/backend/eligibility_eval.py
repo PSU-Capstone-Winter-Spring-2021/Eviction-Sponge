@@ -34,5 +34,5 @@ def isEligible(style, location, violation_type, current_status, closed_date, jud
         for judgement in judgements:
             # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
             # "Dismissal", with any characters in between
-            if re.match(r"^Judgement.*Dismissal". judgement):
+            if re.match(r"^Judgement.*Dismissal", judgement):
                 return True, "Eligible"
