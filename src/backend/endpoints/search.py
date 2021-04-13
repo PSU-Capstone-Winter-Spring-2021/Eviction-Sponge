@@ -2,8 +2,9 @@ from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
 import requests
 from requests import Session
-from crypto import DataCipher
-from crawler.crawler import Crawler
+from src.backend.crypto import DataCipher
+from src.backend.crawler.crawler import Crawler
+
 
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
@@ -45,4 +46,3 @@ class Search(MethodView):
 
 def register(app):
     app.add_url_rule("/search", view_func=Search.as_view("search"))
-
