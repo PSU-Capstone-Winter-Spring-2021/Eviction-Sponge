@@ -5,6 +5,7 @@ from requests import Session
 from crypto import DataCipher
 from crawler.crawler import Crawler
 
+
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
     return abort(make_response(jsonify(message=message), code))
@@ -45,4 +46,3 @@ class Search(MethodView):
 
 def register(app):
     app.add_url_rule("/search", view_func=Search.as_view("search"))
-

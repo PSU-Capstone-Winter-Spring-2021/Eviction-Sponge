@@ -16,10 +16,11 @@ define colors here
 body{
     background-color: white;
     color: var(--dark-green);
-    padding: 40px;
+    /* padding: 40px; */
     font-family: 'Roboto Slab', serif;
     text-align: center;
     padding-top: 40px;
+    box-sizing: border-box;
 }
 
 .navbar {

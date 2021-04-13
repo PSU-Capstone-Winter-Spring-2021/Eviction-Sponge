@@ -60,9 +60,13 @@ class Crawler:
             )
 
         # read the records and generate a list of relevant cases
+        ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
+                            "Landlord/Tenant - Residential or Return of Personal Property"]
         with ThreadPoolExecutor(max_workers=50) as executor:
             oeci_cases = {}
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
+                if oeci_case.type not in ACCEPTABLE_TYPES:
+                    continue
                 key = oeci_case.case_number
                 value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
                          oeci_case.date, oeci_case.judgements)
