@@ -1,5 +1,5 @@
 from flask.views import MethodView
-from flask import request, make_response, current_app, abort, jsonify
+from flask import request, make_response, current_app, abort, jsonify, redirect
 
 from crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
 
@@ -46,7 +46,7 @@ class OeciLogin(MethodView):
         except InvalidLoginCreds:
             error(401, "Invalid login credentials")
 
-        return response, 201
+        return redirect('/search', code=302)
 
 
 def register(app):
