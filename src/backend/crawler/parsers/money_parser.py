@@ -29,12 +29,12 @@ class MoneyParser:
                 if SATISFIED in stuff:
                     # Change this to return string
                     print("Costs appear to be satisfied.")
-                    # return "Costs appear to be satisfied."
+                    return "Costs appear to be satisfied."
                 # Not checking for unsatisfied, because the string is not a given
                 if TOTAL in stuff:
                     the_total = MoneyParser.extract_money(stuff, money_list)
                     print("The amount owed is " + the_total)
-                    # return "The amount owed is " + the_total
+                    return "The amount owed is " + the_total
                 if INTEREST in stuff:
                     amount = MoneyParser.extract_one_money(stuff)
                     interest_rate = MoneyParser.extract_interest(stuff)
@@ -49,11 +49,13 @@ class MoneyParser:
                     money_list.append(amount_with_interest)
                     continue
                 else:
+                    if not type(stuff) == str:
+                        continue
                     MoneyParser.extract_money(stuff, money_list)
-                    
+
         for stuff in money_list:
             final_total += float(stuff)
-            print(stuff)
+            print("The amount owed appears to be $" + str(final_total))
             return "The amount owed appears to be $" + str(final_total)
 
     @staticmethod
