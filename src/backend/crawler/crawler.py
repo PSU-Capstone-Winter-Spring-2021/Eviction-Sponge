@@ -49,14 +49,16 @@ class Crawler:
         # get search page, post it with node data
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
+        # print(node_response.text)
 
         # generate a list of case records, specifically a list of CaseSummary from case_parser.py
         # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
+        ### search_result is empty! ###
 
-        if len(search_result.cases) >= 300:  # max number of cases we want to address
+        if len(search_result) >= 300:  # max number of cases we want to address
             raise ValueError(
-                f"Found {len(search_result.cases)} matching cases, exceeding the limit of 300."
+                f"Found {len(search_result)} matching cases, exceeding the limit of 300."
             )
 
         # read the records and generate a list of relevant cases
