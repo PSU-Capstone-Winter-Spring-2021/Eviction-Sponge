@@ -10,6 +10,7 @@ from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
 from models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
+from eligibility_eval import isEligible
 
 
 class UnableToReachOECI(Exception):
@@ -66,23 +67,34 @@ class Crawler:
                             "Landlord/Tenant - Residential or Return of Personal Property"]
         with ThreadPoolExecutor(max_workers=50) as executor:
             oeci_cases = {}
+            # below line is a fancy way of replacing the default date and judgement list with the actual closed date
+            # and judgement list found when parsing the case
             for oeci_case in executor.map(functools.partial(Crawler._read_case, session=session), search_result):
+                # Skip over non-eviction cases
                 if oeci_case.type not in ACCEPTABLE_TYPES:
                     continue
+
+                # Test if this eviction is eligible for expungement:
+                eligibility = isEligible(oeci_case.current_status, oeci_case.date, oeci_case.judgements)  # (Bool, Str)
+
+                # Build a dictionary of all eviction cases found
                 key = oeci_case.case_number
                 value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
-                         oeci_case.date, oeci_case.judgements)
+                         oeci_case.date, oeci_case.judgements, eligibility)
                 oeci_cases.update({key: value})
+                # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
         return oeci_cases
 
+    # Grab the node_id of the parser given the login_response, and post it
     @staticmethod
     def _fetch_search_page(session, search_url, login_response):
-        # get the node_id of the parser given the login_response, and post it
         node_parser = NodeParser()
         node_parser.feed(login_response)
         payload = {"NodeID": node_parser.node_id, "NodeDesc": "All+Locations"}
         return session.post(search_url, data=payload, timeout=30)
 
+    # Search the database for cases that match the names provided, and feed the results to RecordParser
+    # for later parsing
     @staticmethod
     def _search_record(session, node_response, search_url, first_name, last_name, middle_name):
         param_parser = ParamParser()
@@ -94,6 +106,7 @@ class Crawler:
         record_parser.feed(response.text)
         return record_parser.cases
 
+    # Parse the detailed case page for judgements and the closed date of a case
     @staticmethod
     def _read_case(session, case):
         # cache the link
@@ -107,6 +120,7 @@ class Crawler:
         if session_response.status_code != 200 or session_response.text is None:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
+        # parse the case to gather the actual closed date and judgement list, then replace the default with them
         case_parser_data = CaseParser.feed(session_response.text)
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date

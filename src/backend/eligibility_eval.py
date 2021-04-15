@@ -3,6 +3,7 @@ import re
 
 SECONDS_IN_YEAR = 31536000
 
+
 # Good:
 #   "Judgement - Dismissal"
 #   "Judgement - Small Claims Dismissal"
@@ -10,12 +11,12 @@ SECONDS_IN_YEAR = 31536000
 #   probably others as well
 #   5 Years or older
 
-
 # Bad:
 #   Anything else
+#   "Stipulated" appearing somewhere in the judgement
 #   Open case -> failed
 
-def isEligible(style, location, violation_type, current_status, closed_date, judgements) -> (bool, str):
+def isEligible(current_status, closed_date, judgements) -> (bool, str):
     # if status = open, not eligible
     # if >=5 years old, eligible
     # else if <5 years old, check judgement:
@@ -34,5 +35,6 @@ def isEligible(style, location, violation_type, current_status, closed_date, jud
         for judgement in judgements:
             # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
             # "Dismissal", with any characters in between
-            if re.match(r"^Judgement.*Dismissal", judgement):
+            if re.match(r"^[jJ]udgement.*[dD]ismissal", judgement) and not re.match(r"[sS]tipulated", judgement):
                 return True, "Eligible"
+    return False, "Not Eligible"
