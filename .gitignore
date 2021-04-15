@@ -109,3 +109,4 @@ src/backend/endpoints/__pycache__/
 
 passwords.txt
 bfg-1.13.2.jar
+src/backend/endpoints/__pycache__/hello.cpython-39.pyc
