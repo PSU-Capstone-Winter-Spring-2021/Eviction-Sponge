@@ -33,11 +33,11 @@ class Search(MethodView):
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
-        search_results = {
-            1234: {
-                'Name':"Thomas Pollard"
-            }
-        }
+        # search_results = {
+        #     1234: {
+        #         'Name':"Thomas Pollard"
+        #     }
+        # }
         return json.dumps(search_results)
 
     @staticmethod
