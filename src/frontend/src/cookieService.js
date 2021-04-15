@@ -1,5 +1,15 @@
 import history from "./history";
 
+export function checkCookieExists(cookieName){
+    var name = cookieName + "=";
+    if(document.cookie.split(';').some((item)=>item.trim().startsWith(name))){
+        console.log('The cookie "' + cookieName + '" exists');
+        return true;
+    }
+    console.log('The cookie "' + cookieName + '" does not exists')
+    return false;
+}
+
 export function decodeCookie(cookieName){
     var name = cookieName + "=";
     var decodedCookie = decodeURIComponent(document.cookie).split(';');
@@ -22,7 +32,7 @@ export function removeCookie(){
 }
 
 export function hasOeciToken(){
-    return decodeCookie("oeci_token") ? true : false;
+    return checkCookieExists("oeci_token");
 }
 
 export function isAdmin(){
