@@ -22,7 +22,6 @@ class MoneyParser:
         labels = soup.find_all("td", class_="ssMenuText ssSmallText")
         for tag in labels:
             for stuff in tag:
-                print(tag.text)
                 if not only_first_date:
                     interest_date = MoneyParser.beginning_interest_date(stuff)
                     only_first_date = True

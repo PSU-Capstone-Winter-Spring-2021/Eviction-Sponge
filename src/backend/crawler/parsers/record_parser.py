@@ -1,6 +1,6 @@
 from html.parser import HTMLParser
 
-from models.case_model import CaseCreator
+from src.backend.models.case_model import CaseCreator
 
 
 # Record Parser gathers information from the list of cases returned by OECI when a name is searched

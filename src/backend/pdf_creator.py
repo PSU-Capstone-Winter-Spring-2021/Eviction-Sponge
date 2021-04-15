@@ -48,7 +48,7 @@ TEMPLATE_PATH = 'template.pdf'
 OUTPUT_PATH = 'output1.pdf'
 PDF_FORM_LOCATION = 'C:\\Users\\danfo\\Desktop\\PSU\\Capstone\\Eviction-Sponge\\src\\backend\\files\\EvictionPDF.pdf'
 
-@dataclass
+
 class CreatePDF:
 
     def fit_address(self, address):
