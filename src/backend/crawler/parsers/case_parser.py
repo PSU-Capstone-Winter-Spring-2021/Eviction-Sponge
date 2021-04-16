@@ -35,14 +35,17 @@ class CaseParser:
         CLOSED_DATE_KEY = "Closed"
         labels = soup.find_all("th", "ssTableHeaderLabel")
         for tag in labels:
-            inner_string = tag.parent.find("td", header="COtherEventsAndHearings")
+            inner_string = tag.parent.find("td", headers="COtherEventsAndHearings")
             if inner_string is None:
                 continue
-            inner_string = inner_string.string
+
+            # soup.find returns a bytes-like, so convert it to characters so we can check for substrings
+            inner_string = inner_string.renderContents().decode("utf-8")
             if CLOSED_DATE_KEY in inner_string:
                 # date format: 0-padded decimal month, 0-padded decimal day, 4-digit year
-                return datetime.strptime(tag.string, "%m/%d/%Y")
-        # TODO: closed date not found, fix this
+                # Specifically, decode soup's bytes-like into characters, then parse those characters into a date,
+                # and finally remove the time from the date:
+                return datetime.strptime(tag.renderContents().decode("utf-8"), "%m/%d/%Y").date()
         return datetime(9999, 10, 10)
 
     @staticmethod
@@ -69,6 +72,7 @@ class CaseParser:
 
     @staticmethod
     def __parse_secondary_judgements(soup) -> List[str]:
+        # TODO: this probably doesn't work
         JUDGEMENT_KEY = "Judgement"
         judgements = []
         labels = soup.find_all("td", "COtherEventsAndHearings")

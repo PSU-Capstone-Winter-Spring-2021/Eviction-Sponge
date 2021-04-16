@@ -25,7 +25,7 @@ def isEligible(current_status, closed_date, judgements) -> (bool, str):
     if current_status == "Open":
         return False, "Not Eligible - Case Still Open"
 
-    years_since = ((datetime.date(datetime.now()) - closed_date.date()).total_seconds()) / SECONDS_IN_YEAR
+    years_since = ((datetime.date(datetime.now()) - closed_date).total_seconds()) / SECONDS_IN_YEAR
     if years_since >= 5:
         return True, "Eligible"
     else:
