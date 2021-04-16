@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import re
 
 from src.backend.models.case_model import CaseCreator
 
@@ -46,7 +47,6 @@ class RecordParser(HTMLParser):
             switcher.get(self.column, self.__set_type_status)(data)
 
         elif data == "Type":
-            #print("data == type")
             self.collect_data = True
 
     def error(self, message):
@@ -56,7 +56,8 @@ class RecordParser(HTMLParser):
         self.case_number = data
 
     def __set_style(self, data):
-        self.style = data
+        # For some reason, whitespaces in the style are encoded as new lines, so fix that:
+        self.style = re.sub('\n', ' ', data)
 
     def __set_date_location(self, data):
         self.date_location.append(data)
@@ -65,7 +66,6 @@ class RecordParser(HTMLParser):
         self.type_status.append(data)
 
     def __record_case(self):
-        #print("record_case\n")
         self.cases.append(
             CaseCreator.create(
                 self.case_number,
@@ -85,7 +85,6 @@ class RecordParser(HTMLParser):
 
     def __valid_row(self):
         # verify all data entries were filled
-        #print("valid_row\n")
         return (len(self.case_number) > 0) and (len(self.style) > 0) \
                and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
@@ -111,7 +110,6 @@ class RecordParser(HTMLParser):
             self.within_tr_tag = True
 
     def __collect_tr_data(self, tag):
-        #print("collect_tr_data\n")
         return tag == "tr" and self.collect_data
 
     def __nested_table_row(self, tag):

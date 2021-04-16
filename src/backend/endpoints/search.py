@@ -35,7 +35,6 @@ class Search(MethodView):
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
-        print(search_results)
 
         return json.dumps(search_results)
 

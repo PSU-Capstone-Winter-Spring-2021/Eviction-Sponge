@@ -87,7 +87,6 @@ class Crawler:
 
                 # Build a dictionary of all eviction cases found
                 key = oeci_case.case_number
-                # TODO: replace "\n" with " " in style
                 value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
                          oeci_case.date, oeci_case.judgements, eligibility)
                 oeci_cases.update({key: value})
