@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime, date
-from typing import List
+import re
 
 from bs4 import BeautifulSoup
 from typing import List
@@ -55,28 +55,16 @@ class CaseParser:
         judgements = []
         for i in range(20, 0, -1):
             disposition_header = "CDisp RDISPDATE" + str(i)
-            disposition_tag = soup.find("td", header=disposition_header)
+            disposition_tag = soup.find("td", headers=disposition_header)
             if disposition_tag is None:
                 continue
-            judgements.append(disposition_tag.string)
-        print(len(judgements))
 
-        #disposition_header = "CDisp RDISPDATE"
-        #disposition_headers = soup.find_all("td") #, header=disposition_header)
+            # soup.find returns a bytes-like, so convert it to characters and then strip everything but the part in bold
+            # (<b> this is bolded </b>), as the bold section contains the judgement
+            as_string = disposition_tag.renderContents().decode("utf-8")
+            judgement_string = (re.sub('^.*?<b>', '', as_string)).split("</b>")[0]
+            judgements.append(judgement_string)
 
-        #good_soup = []
-        #td_soup = soup.find_all('td')
-        #for a_soup in td_soup:
-        #    header = a_soup.get('headers')
-        #    print(a_soup.get('headers'))
-        #    if header is None:
-        #        continue
-        #    if "CDisp RDISPDATE" in header:
-        #        good_soup.append(a_soup)
-        #print(len(good_soup))
-
-        #judgements = [link for link in soup.find_all('td') if (link.get('headers') is not None) and ('CDisp RDISPDATE' in link.get('headers'))]
-        print(len(judgements))
         return judgements
 
     @staticmethod
