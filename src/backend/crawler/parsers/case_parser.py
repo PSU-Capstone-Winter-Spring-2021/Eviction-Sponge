@@ -53,13 +53,13 @@ class CaseParser:
 
         # If we run out of judgements, return what we have.  Note that having no judgements is acceptable.
         judgements = []
-        #for i in range(20, 0, -1):
-        #    disposition_header = "CDisp RDISPDATE" + str(i)
-        #    disposition_tag = soup.find("td", header=disposition_header)
-        #    if disposition_tag is None:
-        #        continue
-        #    judgements.append(disposition_tag.string)
-        #print(len(judgements))
+        for i in range(20, 0, -1):
+            disposition_header = "CDisp RDISPDATE" + str(i)
+            disposition_tag = soup.find("td", header=disposition_header)
+            if disposition_tag is None:
+                continue
+            judgements.append(disposition_tag.string)
+        print(len(judgements))
 
         #disposition_header = "CDisp RDISPDATE"
         #disposition_headers = soup.find_all("td") #, header=disposition_header)
@@ -75,7 +75,7 @@ class CaseParser:
         #        good_soup.append(a_soup)
         #print(len(good_soup))
 
-        judgements = [link for link in soup.find_all('td') if (link.get('headers') is not None) and ('CDisp RDISPDATE' in link.get('headers'))]
+        #judgements = [link for link in soup.find_all('td') if (link.get('headers') is not None) and ('CDisp RDISPDATE' in link.get('headers'))]
         print(len(judgements))
         return judgements
 

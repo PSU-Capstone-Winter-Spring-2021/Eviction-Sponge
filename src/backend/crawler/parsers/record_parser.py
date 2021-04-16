@@ -112,7 +112,7 @@ class RecordParser(HTMLParser):
 
     def __collect_tr_data(self, tag):
         #print("collect_tr_data\n")
-        return tag == "tr" and self.collect_data  # always false
+        return tag == "tr" and self.collect_data
 
     def __nested_table_row(self, tag):
         return tag == "tr" and self.within_tr_tag
