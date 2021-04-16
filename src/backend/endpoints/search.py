@@ -13,6 +13,8 @@ def error(code, message):
 
 class Search(MethodView):
     def post(self):
+        import time # -----------------------------------------------------
+        start_time = time.time() # -----------------------------------------------------
         data = request.get_json()
         # Check for data validity:
         if data is None:
@@ -35,6 +37,8 @@ class Search(MethodView):
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
+
+        print("--- %s seconds ---" % (time.time() - start_time))
 
         return json.dumps(search_results)
 

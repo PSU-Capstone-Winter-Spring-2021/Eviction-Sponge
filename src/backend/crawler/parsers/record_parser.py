@@ -41,10 +41,11 @@ class RecordParser(HTMLParser):
             switcher = {
                 1: self.__set_case_number,
                 2: self.__set_style,
-                3: self.__set_date_location,  # 4: self.__set_type_status,
+                3: self.__set_date_location,
             }
             # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
             switcher.get(self.column, self.__set_type_status)(data)
+            # switcher.get(case = self.column, default = self.__set_type_status), pass in argument (data)
 
         elif data == "Type":
             self.collect_data = True
@@ -85,7 +86,8 @@ class RecordParser(HTMLParser):
 
     def __valid_row(self):
         # verify all data entries were filled
-        return (len(self.case_number) > 0) and (len(self.style) > 0) \
+        # edge case: style is empty.  I've found one such case that satisfies this
+        return (len(self.case_number) > 0) and (len(self.style) >= 0) \
                and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
     def __reset_flags(self):
