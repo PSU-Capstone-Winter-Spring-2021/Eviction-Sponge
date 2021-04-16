@@ -26,18 +26,17 @@ class Search(MethodView):
                               'last': data['last_name'],
                               'middle': data['middle_name']}
 
+        session = requests.Session()
+
         username, password = Search._oeci_login_params(request)
-        verify_login_credentials = Crawler.attempt_login(username, password)
+        verify_login_credentials = Crawler.attempt_login(session, username, password)
         # Call search method
-        search_results = Crawler.search(requests.Session(), verify_login_credentials,
+        search_results = Crawler.search(session, verify_login_credentials,
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
-        # search_results = {
-        #     1234: {
-        #         'Name':"Thomas Pollard"
-        #     }
-        # }
+        print(search_results)
+
         return json.dumps(search_results)
 
     @staticmethod

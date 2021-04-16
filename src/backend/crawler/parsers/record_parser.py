@@ -1,6 +1,6 @@
 from html.parser import HTMLParser
 
-from models.case_model import CaseCreator
+from src.backend.models.case_model import CaseCreator
 
 
 # Record Parser gathers information from the list of cases returned by OECI when a name is searched
@@ -35,20 +35,19 @@ class RecordParser(HTMLParser):
                 self.__reset_case()
             self.__reset_flags()
 
-    # afaik, the following function is not needed as we have no columns with an unpredictable number of entries
-    # def handle_data(self, data):
-    #    if self.__within_valid_table_row():
-    #        switcher = {
-    #            1: self.__set_case_number,
-    #            2: self.__set_style,
-    #            3: self.__set_date_location,
-    #            4: self.__set_type_status,
-    #        }
-    #        # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
-    #        switcher.get(self.column, self._set_charges)(data)
-    #
-    #    elif "Charge(s)" == data:
-    #        self.collect_data = True
+    def handle_data(self, data):
+        if self.__within_valid_table_row():
+            switcher = {
+                1: self.__set_case_number,
+                2: self.__set_style,
+                3: self.__set_date_location,  # 4: self.__set_type_status,
+            }
+            # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
+            switcher.get(self.column, self.__set_type_status)(data)
+
+        elif data == "Type":
+            #print("data == type")
+            self.collect_data = True
 
     def error(self, message):
         pass
@@ -66,6 +65,7 @@ class RecordParser(HTMLParser):
         self.type_status.append(data)
 
     def __record_case(self):
+        #print("record_case\n")
         self.cases.append(
             CaseCreator.create(
                 self.case_number,
@@ -85,6 +85,7 @@ class RecordParser(HTMLParser):
 
     def __valid_row(self):
         # verify all data entries were filled
+        #print("valid_row\n")
         return (len(self.case_number) > 0) and (len(self.style) > 0) \
                and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
@@ -110,13 +111,14 @@ class RecordParser(HTMLParser):
             self.within_tr_tag = True
 
     def __collect_tr_data(self, tag):
-        return tag == "tr" and self.collect_data
+        #print("collect_tr_data\n")
+        return tag == "tr" and self.collect_data  # always false
 
     def __nested_table_row(self, tag):
         return tag == "tr" and self.within_tr_tag
 
     def __exiting_nested_table(self, tag):
-        return tag == "tr" and self.within_nested_tr
+        return tag == "tr" and self.within_nested_tr  # tr = table row
 
     def __within_valid_table_row(self):
         return self.within_tr_tag and self.collect_data
