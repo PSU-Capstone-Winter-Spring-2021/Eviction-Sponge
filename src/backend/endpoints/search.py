@@ -5,6 +5,9 @@ from requests import Session
 from crypto import DataCipher
 from crawler.crawler import Crawler
 
+# Set to True to display time taken to execute search
+TIMER = True
+
 
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
@@ -13,8 +16,10 @@ def error(code, message):
 
 class Search(MethodView):
     def post(self):
-        import time # -----------------------------------------------------
-        start_time = time.time() # -----------------------------------------------------
+        if TIMER:
+            import time
+            start_time = time.time()
+
         data = request.get_json()
         # Check for data validity:
         if data is None:
@@ -38,7 +43,11 @@ class Search(MethodView):
                                         search_credentials['last'],
                                         search_credentials['middle'])
 
-        print("--- %s seconds ---" % (time.time() - start_time))
+        if TIMER:
+            print("--- %s seconds ---" % (time.time() - start_time))
+        # To view all search results:
+        # for key, value in search_results.items():
+        #     print(key, " : ", value)
 
         return json.dumps(search_results)
 
