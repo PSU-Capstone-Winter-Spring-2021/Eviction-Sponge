@@ -35,7 +35,7 @@ def isEligible(current_status, closed_date, judgements) -> (bool, str):
         for judgement in judgements:
             # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
             # "Dismissal", with any characters in between
-            if re.match(r"^[jJ]udgement.*[dD]ismissal", judgement) and not re.match(r"[sS]tipulated", judgement):
+            if re.match(r"^[jJ]udgment.*[dD]ismissal", judgement) and not re.match(r"[sS]tipulated", judgement):
                 return True, "Eligible"
             continue
     return False, "Not Eligible"
