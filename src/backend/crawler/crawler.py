@@ -44,14 +44,13 @@ class Crawler:
 
     @staticmethod
     def search(session, login_response, first_name, last_name, middle_name=""):
-        # What is login_response? used to verify that the credentials are still valid.
-        # boolean function that attempts to login again
+        # login_response is used to verify that the credentials are still valid
 
-        # get search page, post it with node data
-        url = URL.login_url()
-        payload = {'UserName': '', 'Password': '', 'ValidateUser': '1',
-                   'dbKeyAuth': 'JusticePA', 'SignOn': 'Sign+On'}
-        r = requests.post(url, payload)
+        # We don't appear to need the following, but just in case it breaks again:
+        # url = URL.login_url()
+        # payload = {'UserName': '', 'Password': '', 'ValidateUser': '1',
+        #            'dbKeyAuth': 'JusticePA', 'SignOn': 'Sign+On'}
+        # r = requests.post(url, payload)
 
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
