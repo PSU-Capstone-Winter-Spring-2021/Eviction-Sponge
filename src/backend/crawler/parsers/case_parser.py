@@ -72,12 +72,14 @@ class CaseParser:
 
     @staticmethod
     def __parse_secondary_judgements(soup) -> List[str]:
-        # TODO: this probably doesn't work
-        JUDGEMENT_KEY = "Judgement"
+        # Apparently, it's spelled Judgment in American English.  The OECI database uses "Judgment", so it's necessary
+        # here, but I don't fancy replacing every other use of the word to match
+        JUDGEMENT_KEY = "Judgment"
         judgements = []
-        labels = soup.find_all("td", "COtherEventsAndHearings")
+        labels = soup.find_all("td", headers=re.compile(r"COtherEventsAndHearings RCDER[0-9]+"))
         for tag in labels:
-            inner_string = tag.string
+            inner_string = tag.renderContents().decode("utf-8")
             if JUDGEMENT_KEY in inner_string:
-                judgements.append(inner_string)
+                # Trim everything before and after the Judgement, which will be in bold (<b> this is bolded </b>)
+                judgements.append((re.sub('^.*?<b>', '', inner_string)).split("</b>")[0])
         return judgements
