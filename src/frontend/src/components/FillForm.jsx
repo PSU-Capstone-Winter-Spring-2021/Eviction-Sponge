@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import InvalidInputs from "./InvalidInputs";
+import fileDownload from "js-file-download";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -99,9 +100,22 @@ class FillForm extends React.Component {
                 !this.state.invalidBirthDate
             ) {
                 const formData = toPdfFormFormat(this.state);
-                console.log(formData)
-                axios.post('/pdf', formData)
-                    .then(response => console.log(response.json()));
+                axios(`/pdf`, {
+                    method: 'POST',
+                    responseType: 'blob',
+                    data: formData
+                }).then(response => {
+                    const filename = response.headers["content-disposition"]
+                        .split("filename=")[1]
+                        .split(" ")[0];
+                    const file = new Blob(
+                        [response.data],
+                        { type: 'application/pdf' });
+
+                    fileDownload(file, filename);
+                }).catch(error => {
+                    console.log(error);
+                });
             }
         });
     };
@@ -109,13 +123,35 @@ class FillForm extends React.Component {
     render() {
         return (
             <main className="container">
+                <h1 className="text-left">Generate Expungement Form</h1>
+                <p className="text-left">
+                    This will fill and download the required paperwork form as a PDF
+                    file for the eviction record that is eligible for expungement.
+                </p>
+
+                <p className="text-left">
+                    On this page, you may optionally provide the person's name,
+                    address, and other information and it will be used to populate
+                    the form. It is not required if you would prefer to fill out
+                    the information later, and we do not save any of this
+                    information.
+                </p>
+
+                <p className="text-left">
+                    Please read the complete instructions in the
+                    {" "}<a href="/manual">Manual</a>{" "}
+                    for filing the required form for expungement. After downloading
+                    the PDF, review their contents to verify that all the required
+                    information is present and correct.
+                </p>
+                <hr />
                 <form onSubmit={this.handleSubmit} noValidate={true}>
                     <fieldset>
-                        <legend className="col-form-label col-form-label-lg">
+                        <legend className="col-form-label col-form-label-lg text-left">
                             Case Information
                         </legend>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="county_name">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="county_name">
                                 County Name
                             </label>
                             <input
@@ -129,7 +165,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="case_number">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="case_number">
                                 Case Number
                             </label>
                             <input
@@ -143,7 +179,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="case_name">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="case_name">
                                 Case Name
                             </label>
                             <input
@@ -157,7 +193,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="date_of_judgement">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="date_of_judgement">
                                 Date of judgement
                             </label>
                             <input
@@ -173,11 +209,11 @@ class FillForm extends React.Component {
                     </fieldset>
                     <hr />
                     <fieldset>
-                        <legend className="col-form-label col-form-label-lg">
+                        <legend className="col-form-label col-form-label-lg text-left">
                             Plaintiff (Landlord or Agent)
                         </legend>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_line1">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_line1">
                                 Plaintiff 1
                             </label>
                             <input
@@ -191,7 +227,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_line2">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_line2">
                                 Plaintiff 2
                             </label>
                             <input
@@ -207,11 +243,11 @@ class FillForm extends React.Component {
                     </fieldset>
                     <hr />
                     <fieldset className="form-group">
-                        <legend className="col-form-label col-form-label-lg">
+                        <legend className="col-form-label col-form-label-lg text-left">
                             Defendant (Tenant or Occupant)
                         </legend>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="defendant_line1">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="defendant_line1">
                                 Defendant 1
                             </label>
                             <input
@@ -225,7 +261,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="defendant_line2">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="defendant_line2">
                                 Defendant 2
                             </label>
                             <input
@@ -239,7 +275,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="defendant_line3">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="defendant_line3">
                                 Defendant 3
                             </label>
                             <input
@@ -253,7 +289,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="defendant_line4">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="defendant_line4">
                                 Defendant 4
                             </label>
                             <input
@@ -269,10 +305,11 @@ class FillForm extends React.Component {
                     </fieldset>
                     <hr />
                     <fieldset>
-                        <legend className="col-form-label col-form-label-lg">
+                        <legend className="col-form-label col-form-label-lg text-left">
                             Declaration
                         </legend>
-                        <div className="form-group">
+
+                        <div className="form-group text-left">
                             <div className="form-group form-check">
                                 <input
                                     className="form-check-input"
@@ -364,7 +401,7 @@ class FillForm extends React.Component {
                         </div>
 
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="def_full_name">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="def_full_name">
                                 Full Name
                             </label>
                             <input
@@ -378,7 +415,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="def_mailing_address">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="def_mailing_address">
                                 Mailing Street Address
                             </label>
                             <input
@@ -392,7 +429,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="def_city">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="def_city">
                                 City
                             </label>
                             <input
@@ -406,7 +443,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="def_state">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="def_state">
                                 State
                             </label>
                             <input
@@ -421,7 +458,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="def_zip">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="def_zip">
                                 Zip Code
                             </label>
                             <input
@@ -435,7 +472,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="phone_number">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="phone_number">
                                 Phome Number
                             </label>
                             <input
@@ -451,11 +488,11 @@ class FillForm extends React.Component {
                     </fieldset>
                     <hr />
                     <fieldset>
-                        <legend className="col-form-label col-form-label-lg">
+                        <legend className="col-form-label col-form-label-lg text-left">
                             Plaintiff Mailing Address
                         </legend>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_mailing_address">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_mailing_address">
                                 Street Address
                             </label>
                             <input
@@ -469,7 +506,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_city">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_city">
                                 City
                             </label>
                             <input
@@ -483,7 +520,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_state">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_state">
                                 State
                             </label>
                             <input
@@ -497,7 +534,7 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label" htmlFor="plaintiff_zip">
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="plaintiff_zip">
                                 Zip Code
                             </label>
 
@@ -545,22 +582,43 @@ class FillForm extends React.Component {
 }
 
 const toPdfFormFormat = (s) => {
-    const defCityStateZip = `${s.def_city}, ${s.def_state} ${s.def_zip}`
-    const plaintiffAddress = `${s.plaintiff_mailing_address}, ${s.plaintiff_city}, ${s.plaintiff_state} ${s.plaintiff_zip}`
+    const defCityStateZip = build_address({
+        city: s.def_city,
+        state: s.def_state,
+        zip: s.def_zip
+    })
 
-    const newProps = { 'city_state_zip': defCityStateZip, 'plaintiff_address': plaintiffAddress }
-    let newState = { ...s, ...newProps }
+    const plaintiffAddress = build_address({
+        address: s.plaintiff_mailing_address,
+        city: s.plaintiff_city,
+        state: s.plaintiff_state,
+        zip: s.plaintiff_zip
+    })
 
-    delete newState['def_city']
-    delete newState['def_state']
-    delete newState['def_zip']
-    delete newState['plaintiff_mailing_address']
-    delete newState['plaintiff_city']
-    delete newState['plaintiff_state']
-    delete newState['plaintiff_zip']
+    let pdfData = {
+        ...s,
+        'city_state_zip': defCityStateZip,
+        'plaintiff_address': plaintiffAddress
+    }
 
-    return newState
+    delete pdfData['def_city']
+    delete pdfData['def_state']
+    delete pdfData['def_zip']
+    delete pdfData['plaintiff_mailing_address']
+    delete pdfData['plaintiff_city']
+    delete pdfData['plaintiff_state']
+    delete pdfData['plaintiff_zip']
+    delete pdfData['invalid_defendant_zip_code']
+    delete pdfData['invalid_plaintiff_zip_code']
+    delete pdfData['invalid_phone']
 
+    return pdfData
+}
+
+const build_address = ({ address = '', city = '', state = '', zip = '' }) => {
+    const addressCityState = [address, city, state].filter(Boolean).join(', ');
+    const addressCityStateZip = [addressCityState, zip].filter(Boolean).join(' ')
+    return addressCityStateZip
 }
 
 export default FillForm;
