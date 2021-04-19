@@ -5,6 +5,7 @@ from requests import Session
 from crypto import DataCipher
 from crawler.crawler import Crawler
 
+
 def error(code, message):
     current_app.logger.error("code %i %s" % (code, message), stack_info=True)
     return abort(make_response(jsonify(message=message), code))
@@ -28,10 +29,15 @@ class Search(MethodView):
         username, password = Search._oeci_login_params(request)
         verify_login_credentials = Crawler.attempt_login(username, password)
         # Call search method
-        search_results = Crawler.search(verify_login_credentials,
+        search_results = Crawler.search(requests.Session(), verify_login_credentials,
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
+        # search_results = {
+        #     1234: {
+        #         'Name':"Thomas Pollard"
+        #     }
+        # }
         return json.dumps(search_results)
 
     @staticmethod
@@ -40,9 +46,8 @@ class Search(MethodView):
         if not "oeci_token" in request.cookies.keys():
             error(401, "Missing login credentials to OECI.")
         decrypted_credentials = cipher.decrypt(request.cookies["oeci_token"])
-        return decrypted_credentials["oeci_username"], decrypted_credentials["oeci_password"]
+        return decrypted_credentials["username"], decrypted_credentials["password"]
 
 
 def register(app):
     app.add_url_rule("/search", view_func=Search.as_view("search"))
-

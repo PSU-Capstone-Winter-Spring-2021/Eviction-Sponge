@@ -16,10 +16,11 @@ define colors here
 body{
     background-color: white;
     color: var(--dark-green);
-    padding: 40px;
+    /* padding: 40px; */
     font-family: 'Roboto Slab', serif;
     text-align: center;
     padding-top: 40px;
+    box-sizing: border-box;
 }
 
 .navbar {
@@ -67,20 +68,14 @@ body{
     padding-right: 15px;
     padding-left: 15px;
     /*padding: 5px 15px;*/
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .dbtnStyle {
     background-color: white;
     border: 1px dotted var(--light-green);
     color: var(--green);
-    padding: 15px 20px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 20px;
-    width: 700px;
 }
 
 .dbtnStyle:hover {
@@ -116,11 +111,8 @@ body{
 .landing {
     background-color: var(--light-green);
     color: white;
-    padding-top: 30px;
-    padding-bottom: 30px;
     text-align: center;
     font-size: 20px;
-    margin-bottom: 30px;
 }
 
 .landingText {

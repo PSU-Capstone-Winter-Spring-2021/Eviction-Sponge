@@ -12,24 +12,25 @@ import './styles/_globals.css'
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
 import FillFrom from "./components/FillForm"
+import Search from "./components/Search";
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
   return (
-    <>
-      <Router history={history}>
-        <Navbar />
-        <Switch>
-          <Route component={Landing} exact={true} path="/" />
-          <Route component={OECILogin} exact={true} path="/oeci-login" />
-          <Route component={Manual} exact={true} path="/manual" />
-          <Route component={About} exact={true} path="/about" />
-          <Route component={RecordSearch} exact={true} path="/record-search" />
-          <Route component={FillFrom} exact={true} path="/fill-form" />
-        </Switch>
-        <Footer />
-      </Router>
-    </>
+  <>
+  <Router history={history}>
+    <Navbar />
+    <Switch>
+      <Route component={Landing} exact={true} path="/" />
+      <Route component={OECILogin} exact={true} path="/oeci-login" />
+      <Route component={Manual} exact={true} path="/manual" />
+      <Route component={About} exact={true} path="/about" />
+      <Route component={Search} exact={true} path="/record-search" />
+      <Route component={FillFrom} exact={true} path="/fill-form" />
+    </Switch>
+    <Footer />
+  </Router>
+  </>
 
   );
 }
