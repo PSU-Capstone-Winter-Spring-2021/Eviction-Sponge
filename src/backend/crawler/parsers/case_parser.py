@@ -86,6 +86,8 @@ class CaseParser:
             money_list = []
             total_money_list = []
             final_total = 0
+            interest_rate = 0
+            amount_before_interest = 0
             labels = soup.find_all("td", class_="ssMenuText ssSmallText")
             for tag in labels:
                 for stuff in tag:
@@ -95,7 +97,7 @@ class CaseParser:
                         interest_date = MoneyParser.beginning_interest_date(stuff)
                         only_first_date = True
                     if INTEREST in stuff:
-                        amount = MoneyParser.extract_one_money(stuff)
+                        amount_before_interest = MoneyParser.extract_one_money(stuff)
                         interest_rate = MoneyParser.extract_interest(stuff)
                         from_date = datetime.datetime.strptime(interest_date, '%m/%d/%Y')
                         today = datetime.datetime.today()
@@ -103,8 +105,8 @@ class CaseParser:
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
                         interest_time = time_in_seconds/31536000
-                        total_interest = float(amount) * float(interest_rate) * float(interest_time)
-                        amount_with_interest = float(amount) + total_interest
+                        total_interest = float(amount_before_interest) * float(interest_rate) * float(interest_time)
+                        amount_with_interest = float(amount_before_interest) + total_interest
                         if TOTAL in stuff:
                             if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
                                 continue
@@ -134,6 +136,9 @@ class CaseParser:
                         stuff = stuff[1:]
                     final_total += float(stuff)
                 final_total = "{:.2f}".format(final_total)
+                if interest_rate is not None:
+                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% for a total of " + str(final_total) + "."
+                    return extra_string + " The total amount owed appears to be $" + str(final_total)
                 print("The amount owed appears to be $" + str(final_total))
                 return "The amount owed appears to be $" + str(final_total)
             else:
