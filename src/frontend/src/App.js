@@ -12,6 +12,13 @@ import './styles/_globals.css'
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
 import Search from "./components/Search";
+import SearchPage from "./components/SearchPage";
+import FlashcardList from "./components/FlashcardList";
+//Example of FlashCardList
+  // <div className="container">
+  //     <FlashcardList flashcards={flashcards} />
+  //   </div>
+// import SearchCase from './components/searchcase';
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -26,6 +33,12 @@ function App() {
       <Route component={About} exact={true} path="/about" />
       <Route component={Search} exact={true} path="/record-search" />
     </Switch>
+<<<<<<< HEAD
+=======
+    <SearchPage />
+    {/* // <SearchCase/> */}
+  </Router>
+>>>>>>> searchComponent
     <Footer />
   </Router>
   </>
