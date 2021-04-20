@@ -48,6 +48,7 @@ class Search(MethodView):
         # To view all search results:
         # for key, value in search_results.items():
         #     print(key, " : ", value)
+        print(search_results)
 
         return json.dumps(search_results)
 
