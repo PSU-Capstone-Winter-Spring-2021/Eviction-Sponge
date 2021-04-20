@@ -2,8 +2,11 @@ from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
 import requests
 from requests import Session
-from src.backend.crypto import DataCipher
-from src.backend.crawler.crawler import Crawler
+from crypto import DataCipher
+from crawler.crawler import Crawler
+
+# Set to True to display time taken to execute search
+TIMER = False
 
 
 def error(code, message):
@@ -13,6 +16,10 @@ def error(code, message):
 
 class Search(MethodView):
     def post(self):
+        if TIMER:
+            import time
+            start_time = time.time()
+
         data = request.get_json()
         # Check for data validity:
         if data is None:
@@ -26,13 +33,24 @@ class Search(MethodView):
                               'last': data['last_name'],
                               'middle': data['middle_name']}
 
+        session = requests.Session()
+
         username, password = Search._oeci_login_params(request)
-        verify_login_credentials = Crawler.attempt_login(username, password)
+        verify_login_credentials = Crawler.attempt_login(session, username, password)
         # Call search method
-        search_results = Crawler.search(verify_login_credentials,
+        search_results = Crawler.search(session, verify_login_credentials,
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
+
+        if TIMER:
+            print("--- %s seconds ---" % (time.time() - start_time))
+        # To view all search results:
+        # for key, value in search_results.items():
+        #     print(key, " : ", value)
+        print(search_results)
+
+        print(search_results)
         return json.dumps(search_results)
 
     @staticmethod
@@ -41,7 +59,7 @@ class Search(MethodView):
         if not "oeci_token" in request.cookies.keys():
             error(401, "Missing login credentials to OECI.")
         decrypted_credentials = cipher.decrypt(request.cookies["oeci_token"])
-        return decrypted_credentials["oeci_username"], decrypted_credentials["oeci_password"]
+        return decrypted_credentials["username"], decrypted_credentials["password"]
 
 
 def register(app):

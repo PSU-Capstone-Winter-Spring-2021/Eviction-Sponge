@@ -11,6 +11,15 @@ import Navbar from "./components/navbar";
 import './styles/_globals.css'
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
+import Search from "./components/Search";
+import PartnersPage from "./components/PartnersPage";
+import SearchPage from "./components/SearchPage";
+import FlashcardList from "./components/FlashcardList";
+//Example of FlashCardList
+  // <div className="container">
+  //     <FlashcardList flashcards={flashcards} />
+  //   </div>
+// import SearchCase from './components/searchcase';
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -23,7 +32,8 @@ function App() {
       <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
       <Route component={About} exact={true} path="/about" />
-      <Route component={RecordSearch} exact={true} path="/record-search" />
+      <Route component={Search} exact={true} path="/record-search" />
+      <Route component={PartnersPage} exact={true} path="/partners" />
     </Switch>
     <Footer />
   </Router>
