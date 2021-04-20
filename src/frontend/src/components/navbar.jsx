@@ -16,14 +16,16 @@ export default class navbar extends React.Component{
               <Logo />
             </Link>
             <h1 className="col-lg-1">EvictionSponge</h1>
-            <div className= "col">
+            <div className= "col-md">
               <Link
                 to="/manual"
+                className="mx-2"
               >
                 Manual
               </Link>
               <Link
                 to="/record-search"
+                className="mx-2"
               >
                 <Button className = "button">Search</Button>
               </Link>
