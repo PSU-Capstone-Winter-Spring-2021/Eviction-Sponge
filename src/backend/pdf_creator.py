@@ -46,7 +46,7 @@ from pathlib import Path
 
 TEMPLATE_PATH = 'template.pdf'
 OUTPUT_PATH = 'output1.pdf'
-PDF_FORM_LOCATION = 'C:\\Users\\danfo\\Desktop\\PSU\\Capstone\\Eviction-Sponge\\src\\backend\\files\\EvictionPDF.pdf'
+PDF_FORM_LOCATION = Path('./files/EvictionPDF.pdf')
 
 
 class CreatePDF:
@@ -172,7 +172,7 @@ class CreatePDF:
         output = CreatePDF.data_dict_to_pdf_dict(self, input_dict)
         output_name = CreatePDF.create_form_name(self, input_dict)
         CreatePDF.fill_pdf(self, PDF_FORM_LOCATION, output_name, output)
-        return Path(output_name).absolute()
+        return str(Path(output_name).absolute())
 
 
 # taco = CreatePDF()
