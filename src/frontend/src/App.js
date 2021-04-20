@@ -33,12 +33,6 @@ function App() {
       <Route component={About} exact={true} path="/about" />
       <Route component={Search} exact={true} path="/record-search" />
     </Switch>
-<<<<<<< HEAD
-=======
-    <SearchPage />
-    {/* // <SearchCase/> */}
-  </Router>
->>>>>>> searchComponent
     <Footer />
   </Router>
   </>
