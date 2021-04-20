@@ -3,14 +3,14 @@ import functools
 import requests
 from requests import Session
 from dataclasses import replace
-from src.backend.crawler.util import URL, Payload, LRUCache
-from src.backend.crawler.parsers.node_parser import NodeParser
-from src.backend.crawler.parsers.param_parser import ParamParser
-from src.backend.crawler.parsers.record_parser import RecordParser
-from src.backend.crawler.parsers.case_parser import CaseParser
-from src.backend.models.case_model import CaseCreator, EditStatus
+from crawler.util import URL, Payload, LRUCache
+from crawler.parsers.node_parser import NodeParser
+from crawler.parsers.param_parser import ParamParser
+from crawler.parsers.record_parser import RecordParser
+from crawler.parsers.case_parser import CaseParser
+from models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
-from src.backend.eligibility_eval import isEligible
+from eligibility_eval import isEligible
 
 
 class UnableToReachOECI(Exception):
@@ -86,8 +86,8 @@ class Crawler:
 
                 # Build a dictionary of all eviction cases found
                 key = oeci_case.case_number
-                value = (oeci_case.style, oeci_case.location, oeci_case.violation_type, oeci_case.current_status,
-                         oeci_case.date, oeci_case.judgements, eligibility)
+                value ={'style': oeci_case.style, 'location': oeci_case.location, 'violation_type': oeci_case.violation_type, 'status': oeci_case.current_status, 'date': oeci_case.date, 'judgements': oeci_case.judgements, 'eligibility': eligibility}
+
                 oeci_cases.update({key: value})
                 # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
         return oeci_cases

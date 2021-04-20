@@ -49,6 +49,7 @@ class Search(MethodView):
         # for key, value in search_results.items():
         #     print(key, " : ", value)
 
+        print(search_results)
         return json.dumps(search_results)
 
     @staticmethod
