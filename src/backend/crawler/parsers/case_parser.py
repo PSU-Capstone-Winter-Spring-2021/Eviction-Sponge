@@ -26,7 +26,7 @@ class CaseParser:
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser.__parse_secondary_judgements(soup)
-        return CaseParserData(closed_date, judgements)
+        return CaseParserData(closed_date, judgements, money)
 
     @staticmethod
     def __parse_closed_date(soup) -> date:
