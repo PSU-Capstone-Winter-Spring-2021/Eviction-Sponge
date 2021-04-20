@@ -16,7 +16,7 @@ class Footer extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <footer className = "footer">
+            <footer className = "footer bg-light">
                 <p>
                     <a href="/">Home</a>
                     <a href="/about">About Us</a>

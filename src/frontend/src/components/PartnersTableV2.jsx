@@ -11,7 +11,7 @@ class PartnersTableV2 extends React.Component{
 
     render(){
         let partners = partnerData.map((partner, index) => (
-            <Card className="row bg-white">
+            <Card className="row bg-light">
                 <Accordion.Toggle
                 as={Card.Header}
                 eventKey={partner.id}
