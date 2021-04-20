@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import "../styles/Search.css"
+import "../styles/Search.css";
+import {checkOeciRedirect} from "../cookieService";
 
 class Search extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class Search extends React.Component {
         };
     }
     componentDidMount() {
+        this.props.demo || checkOeciRedirect();
         document.title="EvictionSponge";
     }
 

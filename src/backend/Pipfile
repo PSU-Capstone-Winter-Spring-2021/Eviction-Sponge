@@ -8,6 +8,8 @@ flask = "*"
 requests = "*"
 cryptography = "*"
 uwsgi = "*"
+pdfrw = "*"
+bs4 = "*"
 
 [dev-packages]
 
