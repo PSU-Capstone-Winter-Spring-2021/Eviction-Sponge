@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime, date
 from typing import List
-
+from src.backend.crawler.parsers.money_parser import MoneyParser
 from bs4 import BeautifulSoup
 from typing import List
 
@@ -17,7 +17,7 @@ class CaseParser:
     @staticmethod
     def feed(data) -> CaseParserData:
         soup = BeautifulSoup(data, "html.parser")
-
+        money = MoneyParser.parse_money(data)
         closed_date = CaseParser.__parse_closed_date(soup)
         judgements = CaseParser.__parse_judgements(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
