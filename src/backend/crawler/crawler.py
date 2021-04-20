@@ -84,10 +84,11 @@ class Crawler:
                 # Test if this eviction is eligible for expungement:
                 eligibility = isEligible(oeci_case.current_status, oeci_case.date, oeci_case.judgements)  # (Bool, Str)
 
-                # Build a dictionary of all eviction cases found
+                # Build a dictionary of all eviction cases found.  Using json format
                 key = oeci_case.case_number
-                value ={'style': oeci_case.style, 'location': oeci_case.location, 'violation_type': oeci_case.violation_type, 'status': oeci_case.current_status, 'date': oeci_case.date, 'judgements': oeci_case.judgements, 'eligibility': eligibility}
-
+                value = {'style': oeci_case.style, 'location': oeci_case.location,
+                         'violation_type': oeci_case.violation_type, 'status': oeci_case.current_status,
+                         'date': oeci_case.date, 'judgements': oeci_case.judgements, 'eligibility': eligibility}
                 oeci_cases.update({key: value})
                 # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
         return oeci_cases
