@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime, date
 from typing import List
-from src.backend.crawler.parsers.money_parser import MoneyParser
+from crawler.parsers.money_parser import MoneyParser
 from bs4 import BeautifulSoup
 from typing import List
 
