@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, Route, Router, Switch} from "react-router-dom";
+import { Redirect, Route, Router, Switch } from "react-router-dom";
 import axios from '../node_modules/axios';
 import history from "./history";
 import Landing from "./components/Landing";
@@ -11,7 +11,16 @@ import Navbar from "./components/navbar";
 import './styles/_globals.css'
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
+import FillFrom from "./components/FillForm"
 import Search from "./components/Search";
+import PartnersPage from "./components/PartnersPage";
+import SearchPage from "./components/SearchPage";
+import FlashcardList from "./components/FlashcardList";
+//Example of FlashCardList
+  // <div className="container">
+  //     <FlashcardList flashcards={flashcards} />
+  //   </div>
+// import SearchCase from './components/searchcase';
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
@@ -25,6 +34,8 @@ function App() {
       <Route component={Manual} exact={true} path="/manual" />
       <Route component={About} exact={true} path="/about" />
       <Route component={Search} exact={true} path="/record-search" />
+      <Route component={FillFrom} exact={true} path="/fill-form" />
+      <Route component={PartnersPage} exact={true} path="/partners" />
     </Switch>
     <Footer />
   </Router>

@@ -1,6 +1,7 @@
 from flask.views import MethodView
-from flask import request, make_response, current_app, abort, jsonify
+from flask import request, make_response, current_app, abort, jsonify, redirect
 
+import requests
 from crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
 
 import os
@@ -16,7 +17,7 @@ def error(code, message):
 class OeciLogin(MethodView):
     def post(self):
         data = request.form
-        print(request.cookies)
+        #print(request.cookies)
 
         # Check for data validity:
         if data is None:
@@ -34,7 +35,7 @@ class OeciLogin(MethodView):
 
         # Try to log into OECI database
         try:
-            Crawler.attempt_login(credentials['username'], credentials['password'])
+            Crawler.attempt_login(requests.Session(), credentials['username'], credentials['password'])
             response.set_cookie(
                 "oeci_token",
                 secure=os.getenv("TIER") == "production",
@@ -46,7 +47,7 @@ class OeciLogin(MethodView):
         except InvalidLoginCreds:
             error(401, "Invalid login credentials")
 
-        return response, 201
+        return redirect('/search', code=302)
 
 
 def register(app):
