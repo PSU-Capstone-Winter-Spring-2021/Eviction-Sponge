@@ -12,6 +12,7 @@ import './styles/_globals.css'
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
 import Search from "./components/Search";
+import PartnersPage from "./components/PartnersPage";
 import SearchPage from "./components/SearchPage";
 import FlashcardList from "./components/FlashcardList";
 //Example of FlashCardList
@@ -32,6 +33,7 @@ function App() {
       <Route component={Manual} exact={true} path="/manual" />
       <Route component={About} exact={true} path="/about" />
       <Route component={Search} exact={true} path="/record-search" />
+      <Route component={PartnersPage} exact={true} path="/partners" />
     </Switch>
     <Footer />
   </Router>
