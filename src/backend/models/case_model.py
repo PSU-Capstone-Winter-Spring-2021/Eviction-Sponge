@@ -84,15 +84,16 @@ class CaseCreator:
         balance="0",
         judgements=[],
     ) -> CaseSummary:
-        date, location = date_location
-        date = date.fromdatetime(datetime.strptime(date, "%m/%d/%Y"))
+        myDate, location = date_location
+        myDate = datetime.date(datetime.strptime(myDate, "%m/%d/%Y"))
         violation_type, current_status = type_status
         balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(balance)
         return CaseSummary(
+            "",
             case_number,
             style,
             location,
-            date,
+            myDate,
             violation_type,
             current_status,
             judgements,

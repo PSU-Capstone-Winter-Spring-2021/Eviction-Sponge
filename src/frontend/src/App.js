@@ -13,6 +13,13 @@ import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
 import Search from "./components/Search";
 import PartnersPage from "./components/PartnersPage";
+import SearchPage from "./components/SearchPage";
+import FlashcardList from "./components/FlashcardList";
+//Example of FlashCardList
+  // <div className="container">
+  //     <FlashcardList flashcards={flashcards} />
+  //   </div>
+// import SearchCase from './components/searchcase';
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
