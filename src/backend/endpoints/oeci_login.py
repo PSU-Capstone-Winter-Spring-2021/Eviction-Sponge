@@ -47,7 +47,7 @@ class OeciLogin(MethodView):
         except InvalidLoginCreds:
             error(401, "Invalid login credentials")
 
-        return redirect('/search', code=302)
+        return response, 201
 
 
 def register(app):

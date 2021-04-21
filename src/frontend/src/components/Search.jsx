@@ -20,6 +20,8 @@ class Search extends React.Component {
     async handleSubmit(e) {
         e.preventDefault();
         //let url= "/search";
+        //check if cookie exists (user deleted cookie)
+        checkOeciRedirect();
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
