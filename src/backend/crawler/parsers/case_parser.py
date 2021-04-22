@@ -5,7 +5,6 @@ from crawler.parsers.money_parser import MoneyParser
 from bs4 import BeautifulSoup
 from typing import List
 import re
-import datetime
 
 
 @dataclass
@@ -99,8 +98,8 @@ class CaseParser:
                     if INTEREST in stuff:
                         amount_before_interest = MoneyParser.extract_one_money(stuff)
                         interest_rate = MoneyParser.extract_interest(stuff)
-                        from_date = datetime.datetime.strptime(interest_date, '%m/%d/%Y')
-                        today = datetime.datetime.today()
+                        from_date = datetime.strptime(interest_date, '%m/%d/%Y')
+                        today = datetime.today()
                         time_difference = today - from_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
@@ -164,19 +163,24 @@ class CaseParser:
         # The following function extracts only the first item that could be money from a string
         @staticmethod
         def extract_one_money(string):
+            show_me_the_money = 0
+            string = string.replace(",", "")
             for stuff in string.split():
-                money = re.match("^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
+                money = re.search(r"^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
                 if money:
-                    if '$' in money[0]:
-                        money[0].replace("$", "")
-            return money[0]
+                    show_me_the_money = money.string
+                if '$' in show_me_the_money:
+                    show_me_the_money = show_me_the_money.replace("$", "")
+            return show_me_the_money
 
         # The following function extracts what could be interest from a string
         @staticmethod
         def extract_interest(string):
             for stuff in string.split():
-                interest = re.match("^[0-9]+(.[0-9]{1,2})?%", stuff)
-                return interest.replace("%", "")
+                interest = re.search(r"^[0-9]+(.[0-9]{1,2})?%", stuff)
+                if interest:
+                    the_interest = interest.string
+                    return the_interest.replace("%", "")
 
         # The following function extracts a date
         @staticmethod
