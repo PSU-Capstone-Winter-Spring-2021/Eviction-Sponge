@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from datetime import datetime, date
+import re
+
 from bs4 import BeautifulSoup
 from typing import List
-import re
-import datetime
 
 
 @dataclass
@@ -89,6 +89,7 @@ class CaseParser:
 
         @staticmethod
         def parse_money(soup):
+            return "$0.00"
             TOTAL = "Total:"
             DOLLAR_SIGN = "$"
             INTEREST = "%"
@@ -108,13 +109,13 @@ class CaseParser:
                     index = labels.index(tag)
                     # print(tag.text)
                     if not only_first_date:
-                        interest_date = MoneyParser.beginning_interest_date(stuff)
+                        interest_date = CaseParser.MoneyParser.beginning_interest_date(stuff)
                         only_first_date = True
                     if INTEREST in stuff:
-                        amount = MoneyParser.extract_one_money(stuff)
-                        interest_rate = MoneyParser.extract_interest(stuff)
-                        from_date = datetime.datetime.strptime(interest_date, '%m/%d/%Y')
-                        today = datetime.datetime.today()
+                        amount = CaseParser.MoneyParser.extract_one_money(stuff)
+                        interest_rate = CaseParser.MoneyParser.extract_interest(stuff)
+                        from_date = datetime.strptime(interest_date, '%m/%d/%Y')
+                        today = datetime.today()
                         time_difference = today - from_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
@@ -133,14 +134,14 @@ class CaseParser:
                     if TOTAL in stuff:
                         if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
                             continue
-                        the_total = MoneyParser.extract_one_money(stuff)
+                        the_total = CaseParser.MoneyParser.extract_one_money(stuff)
                         total_money_list.append(the_total)
                     else:
                         if not type(stuff) == str:
                             continue
                         if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
                             continue
-                        MoneyParser.extract_money(stuff, money_list)
+                        CaseParser.MoneyParser.extract_money(stuff, money_list)
             if not total_money_list and not money_list:
                 print("There appears to be no remaining amount owed.")
                 return "There appears to be no remaining amount owed."
@@ -163,7 +164,7 @@ class CaseParser:
         @staticmethod
         def extract_money(string, money_list):
             for stuff in string.split():
-                money = re.findall("^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
+                money = re.findall(r"^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
                 for cash in money:
                     if "$" in cash:
                         cash.replace("$", "")
@@ -176,7 +177,7 @@ class CaseParser:
         @staticmethod
         def extract_one_money(string):
             for stuff in string.split():
-                money = re.match("^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
+                money = re.match(r"^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
                 if money:
                     if '$' in money[0]:
                         money[0].replace("$", "")
@@ -186,7 +187,7 @@ class CaseParser:
         @staticmethod
         def extract_interest(string):
             for stuff in string.split():
-                interest = re.match("^[0-9]+(.[0-9]{1,2})?%", stuff)
+                interest = re.match(r"^[0-9]+(.[0-9]{1,2})?%", stuff)
                 return interest.replace("%", "")
 
         # The following function extracts a date
@@ -195,4 +196,4 @@ class CaseParser:
             if string:
                 for stuff in str(string).split():
                     # hoping the courts are consistent with date format...
-                    return re.match("d{2}/d{2}/d{4}", stuff)
+                    return re.match(r"d{2}/d{2}/d{4}", stuff)
