@@ -11,11 +11,11 @@ class PartnersTableV2 extends React.Component{
 
     render(){
         let partners = partnerData.map((partner, index) => (
-            <Card className="row bg-white">
+            <Card className="row bg-light">
                 <Accordion.Toggle
                 as={Card.Header}
                 eventKey={partner.id}
-                className="row bg-white align-items-center">
+                className="row bg-light align-items-center">
                     <span className="col-6 text-left">{partner.name}</span>
                     <span className="col-6 text-right">{partner.area}</span>
                 </Accordion.Toggle>

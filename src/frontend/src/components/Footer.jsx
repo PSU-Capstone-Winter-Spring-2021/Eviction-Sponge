@@ -16,7 +16,7 @@ class Footer extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <footer className = "container-lg bg-white text-left">
+            <footer className = "container-lg text-left">
                 <p className="row">
                     <a className="col-2" href="/">Home</a>
                     <a className="col-2" href="/about">About Us</a>

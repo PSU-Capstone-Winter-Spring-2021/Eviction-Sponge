@@ -45,7 +45,7 @@ class Search extends React.Component {
         const notFound = <p class="notFoundText">No results found.</p>
         return (
             <>
-            <form>
+            <form class="bg-light">
                 <div class="searchInputs">
                 {/* <label for="firstName">First Name</label> */}
                 <input class="searchField" type="text" id="firstName" name="firstName" required="true" placeholder="First Name"/>
