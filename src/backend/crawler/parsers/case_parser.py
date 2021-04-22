@@ -151,7 +151,7 @@ class CaseParser:
         @staticmethod
         def extract_money(string, money_list):
             for stuff in string.split():
-                money = re.findall("^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
+                money = re.findall(r"^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
                 for cash in money:
                     if "$" in cash:
                         cash.replace("$", "")
@@ -188,4 +188,4 @@ class CaseParser:
             if string:
                 for stuff in str(string).split():
                     # hoping the courts are consistent with date format...
-                    return re.match("d{2}/d{2}/d{4}", stuff)
+                    return re.match(r"d{2}/d{2}/d{4}", stuff)
