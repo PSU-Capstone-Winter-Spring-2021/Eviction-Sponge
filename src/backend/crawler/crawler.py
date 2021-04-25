@@ -12,10 +12,6 @@ from models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
 from eligibility_eval import isEligible
 
-# Set to True to display time taken to execute each function
-TIMER = True
-if TIMER: import time
-
 
 class UnableToReachOECI(Exception):
     pass
@@ -28,9 +24,7 @@ class InvalidLoginCreds(Exception):
 class Crawler:
     cached_links = LRUCache(1000)
 
-    # attempt login function that takes in a username and password and
-    # returns a success (0) or throws an exception detailing why failure occurred
-    # attempts to login to the OECI website
+    # Attempt to login to the OECI database.  Throws a relevant exception when unable to reach it
     @staticmethod
     def attempt_login(session, username, password):
         url = URL.login_url()
@@ -47,61 +41,51 @@ class Crawler:
         else:
             raise InvalidLoginCreds
 
+    # Search the OECI database for eviction cases relevant to the search name
+    # Return a j-son style dictionary (for easy json.dump'ing in search.py) of cases in the form:
+    # {case_number: style, location, type, status, closed date, list of judgements, eligibility}
+    # (Types: {int : str, str, str, str, datetime, list[str], (bool, str) tuple})
     @staticmethod
     def search(session, login_response, first_name, last_name, middle_name=""):
-        # login_response is used to verify that the credentials are still valid
-
-        # We don't appear to need the following, but just in case it breaks again:
-        # url = URL.login_url()
-        # payload = {'UserName': '', 'Password': '', 'ValidateUser': '1',
-        #            'dbKeyAuth': 'JusticePA', 'SignOn': 'Sign+On'}
-        # r = requests.post(url, payload)
+        # login_response is used to verify that the credentials are still valid,
+        # it is the return value of Crawler.attempt_login()
 
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
         # generate a list of case records, specifically a list of CaseSummary from case_parser.py
         # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
+        # the OECI database named the column 'style', it's the name of the case (i.e. "John Hancock V. John Smith")
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
-        if len(search_result) >= 300:  # max number of cases we want to address
+        # max number of cases we want to address
+        if len(search_result) >= 300:
             raise ValueError(
                 f"Found {len(search_result)} matching cases, exceeding the limit of 300."
             )
 
-        # read the records and generate a list of relevant cases
+        # eviction cases will be of the following types
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
                             "Landlord/Tenant - Residential or Return of Personal Property"]
-        oeci_cases = {}
 
-        if TIMER:
-            start_time = time.time()
-
-        print("\n", len(search_result), " cases found\n")
-
-        cases = []
-        for result in search_result:
+        eviction_cases = {}
+        for case in search_result:
             # Skip over non-eviction cases
-            if result.violation_type not in ACCEPTABLE_TYPES:
+            if case.violation_type not in ACCEPTABLE_TYPES:
                 continue
-            cases.append(Crawler._read_case(session, result))
+            eviction_case = Crawler._read_case(session, case)
 
-        print(len(cases), " cases relevant\n")
-
-        for oeci_case in cases:
             # Test if this eviction is eligible for expungement:
-            eligibility = isEligible(oeci_case.current_status, oeci_case.date, oeci_case.judgements)  # (Bool, Str)
+            eligibility = isEligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
-            key = oeci_case.case_number
-            value = {'style': oeci_case.style, 'location': oeci_case.location,
-                     'violation_type': oeci_case.violation_type, 'status': oeci_case.current_status,
-                     'date': oeci_case.date, 'judgements': oeci_case.judgements, 'eligibility': eligibility}
-            oeci_cases.update({key: value})
+            key = eviction_case.case_number
+            value = {'style': eviction_case.style, 'location': eviction_case.location,
+                     'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
+                     'date': eviction_case.date, 'judgements': eviction_case.judgements, 'eligibility': eligibility}
+            eviction_cases.update({key: value})
             # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
-        if TIMER:
-            print("--- Crawler Time: %s seconds ---" % (time.time() - start_time))
-        return oeci_cases
+        return eviction_cases
 
     # Grab the node_id of the parser given the login_response, and post it
     @staticmethod
@@ -131,26 +115,20 @@ class Crawler:
     def _read_case(session, case):
         # cache the link
         if session:
-            # --- case.case_detail_link takes 0% of time ---
-            # --- 64.06% OF TIME ---
+            # Dear Future Maintainer,
+            #       If you're trying to make this crawler go faster, session.get is your issue.
             session_response = session.get(case.case_detail_link)
-
-            # --- 0% OF TIME ---
             Crawler.cached_links[case.case_detail_link] = session_response
         else:
-            # --- ?% OF TIME --- NEVER CALLED
             session_response = Crawler.cached_links[case.case_detail_link]
 
-        # --- 0% OF TIME ---
         # check if response has acceptable code and text exists
         if session_response.status_code != 200 or session_response.text is None:
             raise ValueError(f"Failed to fetch case detail page. Please rerun the search.")
 
-        # --- 20.26% OF TIME ---
         # parse the case to gather the actual closed date and judgement list, then replace the default with them
         case_parser_data = CaseParser.feed(session_response.text)
 
-        # --- 0% OF TIME ---
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
         judgements = case_parser_data.judgements
