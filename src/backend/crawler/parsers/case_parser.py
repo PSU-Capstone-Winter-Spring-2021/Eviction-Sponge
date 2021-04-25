@@ -5,10 +5,6 @@ import re
 from bs4 import BeautifulSoup
 from typing import List
 
-# Set to True to display time taken to execute each function
-TIMER = False
-if TIMER: import time
-
 
 @dataclass
 class CaseParserData:
@@ -21,9 +17,6 @@ class CaseParserData:
 class CaseParser:
     @staticmethod
     def feed(data) -> CaseParserData:
-        if TIMER:
-            start_time = time.time()
-
         soup = BeautifulSoup(data, "html.parser")
         money = CaseParser.MoneyParser.parse_money(soup)
         closed_date = CaseParser.__parse_closed_date(soup)
@@ -31,15 +24,11 @@ class CaseParser:
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser.__parse_secondary_judgements(soup)
-        if TIMER:
-            print("--- Case Parser Time: %s seconds ---" % (time.time() - start_time))
+
         return CaseParserData(closed_date, judgements, money)
 
     @staticmethod
     def __parse_closed_date(soup) -> date:
-        if TIMER:
-            start_time = time.time()
-
         # Explanation:  Search the HTML of the page for <th class="ssTableHeaderLabel"...> tags
         # Loop through these and look for a <td header="COtherEventsAndHearings...> on the same level,
         # and check its string for the substring "Closed", which indicates we're looking at the right tag
@@ -58,18 +47,11 @@ class CaseParser:
                 # date format: 0-padded decimal month, 0-padded decimal day, 4-digit year
                 # Specifically, decode soup's bytes-like into characters, then parse those characters into a date,
                 # and finally remove the time from the date:
-                if TIMER:
-                    print("--- Closed Date Time: %s seconds ---" % (time.time() - start_time))
                 return datetime.strptime(tag.renderContents().decode("utf-8"), "%m/%d/%Y").date()
-        if TIMER:
-            print("--- Closed Date Time: %s seconds ---" % (time.time() - start_time))
         return datetime(9999, 10, 10)
 
     @staticmethod
     def __parse_judgements(soup) -> List[str]:
-        if TIMER:
-            start_time = time.time()
-
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be
         # chronological
@@ -88,15 +70,10 @@ class CaseParser:
             judgement_string = (re.sub('^.*?<b>', '', as_string)).split("</b>")[0]
             judgements.append(judgement_string)
 
-        if TIMER:
-            print("--- Judgements Time: %s seconds ---" % (time.time() - start_time))
         return judgements
 
     @staticmethod
     def __parse_secondary_judgements(soup) -> List[str]:
-        if TIMER:
-            start_time = time.time()
-
         # Apparently, it's spelled Judgment in American English.  The OECI database uses "Judgment", so it's necessary
         # here, but I don't fancy replacing every other use of the word to match
         JUDGEMENT_KEY = "Judgment"
@@ -107,8 +84,6 @@ class CaseParser:
             if JUDGEMENT_KEY in inner_string:
                 # Trim everything before and after the Judgement, which will be in bold (<b> this is bolded </b>)
                 judgements.append((re.sub('^.*?<b>', '', inner_string)).split("</b>")[0])
-        if TIMER:
-            print("--- Secondary Judgements Time: %s seconds ---" % (time.time() - start_time))
         return judgements
 
     class MoneyParser:

@@ -6,7 +6,7 @@ from crypto import DataCipher
 from crawler.crawler import Crawler
 
 # Set to True to display time taken to execute search
-TIMER = True
+TIMER = False
 
 
 def error(code, message):
