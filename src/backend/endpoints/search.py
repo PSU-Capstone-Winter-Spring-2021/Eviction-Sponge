@@ -6,7 +6,7 @@ from crypto import DataCipher
 from crawler.crawler import Crawler
 
 # Set to True to display time taken to execute search
-TIMER = False
+TIMER = True
 
 
 def error(code, message):
@@ -44,7 +44,7 @@ class Search(MethodView):
                                         search_credentials['middle'])
 
         if TIMER:
-            print("--- %s seconds ---" % (time.time() - start_time))
+            print("--- Total Time: %s seconds ---" % (time.time() - start_time))
         # To view all search results:
         # for key, value in search_results.items():
         #     print(key, " : ", value)
