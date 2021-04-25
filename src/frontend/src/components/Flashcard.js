@@ -19,10 +19,11 @@ export default function Flashcard({ flashcard }) {
     setHeight(Math.max(frontHeight, backHeight, 100))
   }
   return (
+    
     <div
       className={`card ${flip ? 'flip' : ''}`}
       style={{ height: height }}
-      onClick={() => setFlip(!flip)}
+      // onClick={() => setFlip(!flip)}
     >
       <div className="front" ref={frontEl}>
         {flashcard.question}
