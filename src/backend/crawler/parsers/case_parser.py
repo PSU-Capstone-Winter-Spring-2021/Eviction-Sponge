@@ -48,7 +48,7 @@ class CaseParser:
                 # Specifically, decode soup's bytes-like into characters, then parse those characters into a date,
                 # and finally remove the time from the date:
                 return datetime.strptime(tag.renderContents().decode("utf-8"), "%m/%d/%Y").date()
-        return datetime(9999, 10, 10)
+        return datetime(9999, 9, 9)
 
     @staticmethod
     def __parse_judgements(soup) -> List[str]:
