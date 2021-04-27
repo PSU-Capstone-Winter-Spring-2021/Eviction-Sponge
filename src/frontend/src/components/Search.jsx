@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../styles/Search.css";
-import {checkOeciRedirect} from "../cookieService";
+import {checkOeciRedirect, redirectLogin, removeCookie} from "../cookieService";
 
 class Search extends React.Component {
     constructor(props) {
@@ -37,8 +37,15 @@ class Search extends React.Component {
                 this.state.Found = true;
                 this.setState({Results: res});
                 console.log(res);
+                if(res.status == 401 || res.status == 500){
+                    redirectLogin();
+                }
             }
+        }, reason => {
+            redirectLogin();
+            removeCookie();
         })
+
     }
 
     render() {
