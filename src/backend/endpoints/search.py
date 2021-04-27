@@ -44,13 +44,11 @@ class Search(MethodView):
                                         search_credentials['middle'])
 
         if TIMER:
-            print("--- %s seconds ---" % (time.time() - start_time))
+            print("--- Total Time: %s seconds ---" % (time.time() - start_time))
         # To view all search results:
         # for key, value in search_results.items():
         #     print(key, " : ", value)
-        print(search_results)
 
-        print(search_results)
         return json.dumps(search_results)
 
     @staticmethod

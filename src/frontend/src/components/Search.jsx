@@ -20,6 +20,8 @@ class Search extends React.Component {
     async handleSubmit(e) {
         e.preventDefault();
         //let url= "/search";
+        //check if cookie exists (user deleted cookie)
+        checkOeciRedirect();
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
@@ -43,7 +45,7 @@ class Search extends React.Component {
         const notFound = <p class="notFoundText">No results found.</p>
         return (
             <>
-            <form>
+            <form class="bg-light">
                 <div class="searchInputs">
                 {/* <label for="firstName">First Name</label> */}
                 <input class="searchField" type="text" id="firstName" name="firstName" required="true" placeholder="First Name"/>
