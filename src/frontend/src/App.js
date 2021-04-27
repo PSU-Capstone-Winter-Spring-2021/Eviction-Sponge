@@ -33,7 +33,7 @@ function App() {
   <Router history={history}>
     <Navbar />
     <Switch>
-      <Route component={CreatSimpleCardList} exact={true} path="/cards" />
+      <Route component={CreatSimpleCardList} exact={true} path="/cards_demo" />
       <Route component={Landing} exact={true} path="/" />
       <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
