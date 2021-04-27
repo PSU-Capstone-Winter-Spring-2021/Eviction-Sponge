@@ -24,6 +24,7 @@ class CaseParser:
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser.__parse_secondary_judgements(soup)
+
         return CaseParserData(closed_date, judgements, money)
 
     @staticmethod
@@ -119,27 +120,31 @@ class CaseParser:
                         time_difference = today - from_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
-                        interest_time = time_in_seconds/31536000
+                        interest_time = time_in_seconds / 31536000
                         total_interest = float(amount) * float(interest_rate) * float(interest_time)
                         amount_with_interest = float(amount) + total_interest
                         if TOTAL in stuff:
-                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                    UNSATISFIED) == -1:
                                 continue
                             total_money_list.append(amount_with_interest)
                         else:
-                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                    UNSATISFIED) == -1:
                                 continue
                             money_list.append(amount_with_interest)
                         continue
                     if TOTAL in stuff:
-                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                UNSATISFIED) == -1:
                             continue
                         the_total = CaseParser.MoneyParser.extract_one_money(stuff)
                         total_money_list.append(the_total)
                     else:
                         if not type(stuff) == str:
                             continue
-                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                UNSATISFIED) == -1:
                             continue
                         CaseParser.MoneyParser.extract_money(stuff, money_list)
             if not total_money_list and not money_list:
