@@ -15,7 +15,7 @@ import FillFrom from "./components/FillForm"
 import Search from "./components/Search";
 import PartnersPage from "./components/PartnersPage";
 import SearchPage from "./components/SearchPage";
-import FlashcardList from "./components/FlashcardList";
+// import FlashcardList from "./components/FlashcardList";
 import Appendix from "./components/Appendix";
 import SimpleCard from './components/SimpleCard';
 import CreatSimpleCardList from './components/CreatSimpleCardList'
