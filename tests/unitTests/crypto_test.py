@@ -1,8 +1,8 @@
 import sys, os
 import pytest
 
-sys.path.append(os.path.abspath("../.."))
-from crypto import DataCipher
+#sys.path.append(os.path.abspath("../../src/backend"))
+from src.backend.crypto import DataCipher
 
 
 
