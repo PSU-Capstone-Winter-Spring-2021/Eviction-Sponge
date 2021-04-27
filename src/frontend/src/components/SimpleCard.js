@@ -11,39 +11,35 @@ export default class SimpleCard extends React.Component{
     constructor(props) {
                 super(props);
                 this.state = {
-                    // casenumber : "16LT12205",
-                    // location: "Jackson",
-                    // type:"Landlord/Tenant - Residential or Return of Personal Property",
-                    // status:"closed",
-                    // eligibility:"Not Eligible"
+                    caseNum: Object.keys(this.props.res),
                     result: this.props.res
                   };
     }
     render (){
-    console.log("from simple card: ")
-    console.log(this.props.res)
+    const {caseNum} = this.state;
+    const {location, style, status, eligibility, date} = this.state.result[caseNum];
 
     return(
     <div className = "bg-light">
         <Card className='bg-light'>
         <CardContent>
-            <Typography className={this.state.casenumber} color="textSecondary" gutterBottom>
-            {this.state.result}
+            <Typography className={caseNum} color="textSecondary" gutterBottom>
+            {caseNum} 
             </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            Location: {this.state.result.location}
+            <Typography className={caseNum}  gutterBottom>
+            Location: {location}
             </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            Type: {this.state.result.style}
+            <Typography className={caseNum}  gutterBottom>
+            Type: {style}
             </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            status: {this.state.result.status}
-            </Typography>
-            <Typography variant="body2" component="p">
-            date: 2021-04-26
+            <Typography className={caseNum}  gutterBottom>
+            status: {status}
             </Typography>
             <Typography variant="body2" component="p">
-            eligibility: {this.state.result.eligibility}
+            date: {date}
+            </Typography>
+            <Typography variant="body2" component="p">
+            eligibility: {eligibility}
             </Typography>
         </CardContent>
         </Card>

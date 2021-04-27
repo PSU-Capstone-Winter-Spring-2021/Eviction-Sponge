@@ -6,7 +6,7 @@ export default function CreatSimpleCardList(results){
     let len = results.length
     console.log("from Create Simple Card List:");
     console.log(results);
-    results.map((result) => rows.push(<SimpleCard res ={[result]}/>));
+    //results.map((result) => rows.push(<SimpleCard res ={[result]}/>));
     // rows.map((row) => <p>{row}</p>);
-    return <div>{rows}</div>;
+    return <div>{results.map((result) =>(<SimpleCard res ={result}/>))}</div>;
 }
