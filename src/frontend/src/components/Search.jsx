@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import "../styles/Search.css";
 import {checkOeciRedirect} from "../cookieService";
+import CreatSimpleCardList from './CreatSimpleCardList';
+
 
 class Search extends React.Component {
     constructor(props) {
@@ -34,9 +36,11 @@ class Search extends React.Component {
         this.setState({Submitted: true});
         await axios.post("/search", postName).then(res => {
             if(res !== null) {
-                this.state.Found = true;
-                this.setState({Results: res});
-                console.log(res);
+                console.log(res.data);
+                this.setState({Results: res.data, Found: true});
+            }
+            else {
+                this.setState({Found: false});
             }
         })
     }
@@ -56,6 +60,9 @@ class Search extends React.Component {
                 <input class="searchButton" type="submit" value="Search" onClick={this.handleSubmit.bind(this)}/>
                 {this.state.Submitted && 
                     !this.state.Found && <span class="notFoundText"> No results Found</span>
+                }
+                {this.state.Submitted &&
+                    this.state.Found && <div>{CreatSimpleCardList(this.state.Results)}</div>
                 }
                 </div>
             </form>

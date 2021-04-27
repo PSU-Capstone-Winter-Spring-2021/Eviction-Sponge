@@ -68,7 +68,7 @@ class Crawler:
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
                             "Landlord/Tenant - Residential or Return of Personal Property"]
         with ThreadPoolExecutor(max_workers=50) as executor: # TODO: remove this, it don't do much
-            oeci_cases = {}
+            oeci_cases = []
             # below line is a fancy way of replacing the default date and judgement list with the actual closed date
             # and judgement list found when parsing the case
 
@@ -89,7 +89,7 @@ class Crawler:
                 value = {'style': oeci_case.style, 'location': oeci_case.location,
                          'violation_type': oeci_case.violation_type, 'status': oeci_case.current_status,
                          'date': oeci_case.date, 'judgements': oeci_case.judgements, 'eligibility': eligibility}
-                oeci_cases.update({key: value})
+                oeci_cases.append({key: value})
                 # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
         return oeci_cases
 
