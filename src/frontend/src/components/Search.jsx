@@ -11,6 +11,7 @@ class Search extends React.Component {
         this.state = {
             Submitted: false,
             Found: false,
+            Loaded: false,
             Results: [],
         };
     }
@@ -24,6 +25,7 @@ class Search extends React.Component {
         //let url= "/search";
         //check if cookie exists (user deleted cookie)
         checkOeciRedirect();
+        this.setState({Loaded: false, Found: false})
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
         let lastName = String(document.getElementById("lastName").value);
@@ -35,18 +37,19 @@ class Search extends React.Component {
         console.log("clicked, names: " + postName.first_name + " " + postName.last_name +", " + postName.middle_name);
         this.setState({Submitted: true});
         await axios.post("/search", postName).then(res => {
+
             if(res !== null) {
+                this.setState({Loaded: true});
                 console.log(res.data);
                 this.setState({Results: res.data, Found: true});
             }
-            else {
-                this.setState({Found: false});
-            }
         })
+        if(this.state.Results.length === 0) {
+            this.setState({Found: false})
+        }
     }
 
     render() {
-        const notFound = <p class="notFoundText">No results found.</p>
         return (
             <>
             <form class="bg-light">
@@ -59,13 +62,17 @@ class Search extends React.Component {
                 <input class="searchField" type="text" id="lastName" name="lastName" required="true" placeholder="Last Name"/>
                 <input class="searchButton" type="submit" value="Search" onClick={this.handleSubmit.bind(this)}/>
                 {this.state.Submitted && 
-                    !this.state.Found && <span class="notFoundText"> No results Found</span>
+                    !this.state.Found && 
+                    !this.state.Loaded &&<p class="loadingText"> Loading...</p>
                 }
-                {this.state.Submitted &&
-                    this.state.Found && <div>{CreatSimpleCardList(this.state.Results)}</div>
+                {this.state.Submitted &&  
+                    this.state.Loaded &&
+                    !this.state.Found &&<p class="notFoundText"> No results Found</p>
                 }
                 </div>
             </form>
+            {this.state.Submitted &&
+                    this.state.Found && <div>{CreatSimpleCardList(this.state.Results)}</div>}
             </>
         );
     }
