@@ -21,7 +21,7 @@ export default class SimpleCard extends React.Component{
 
     return(
     <div className = "bg-light">
-        <Card className='bg-light'>
+        <Card className='bg-light border'>
         <CardContent>
             <Typography className={caseNum} color="textSecondary" gutterBottom>
             {caseNum} 
