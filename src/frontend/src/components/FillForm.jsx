@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 //     county_name: 'Clark',
 //     case_number: '11001001',
 //     case_name: 'Charles Cheese v Caesar Jr',
-//     date_of_judgement: '6/26/11',
+//     date_of_judgment: '6/26/11',
 
 //     plaintiff_line1: 'Charles Cheese',
 //     plaintiff_line2: 'Nolan Bushnell',
@@ -31,7 +31,7 @@ class FillForm extends React.Component {
             county_name: this.props.county_name || '',
             case_number: this.props.case_number || '',
             case_name: this.props.case_name || '',
-            date_of_judgement: this.props.date_of_judgement || '',
+            date_of_judgment: this.props.date_of_judgment || '',
 
             plaintiff_line1: this.props.plaintiff_line1 || '',
             plaintiff_line2: this.props.plaintiff_line2 || '',
@@ -56,7 +56,7 @@ class FillForm extends React.Component {
             dismissal: false,
             restitution: false,
             money: false,
-            judgement: false,
+            judgment_date: false,
             stipulation: false,
             terms: false,
 
@@ -123,7 +123,7 @@ class FillForm extends React.Component {
     render() {
         return (
             <main className="container">
-                <h1 className="text-left">Generate Expungement Form</h1>
+                <h2 className="text-left">Generate Expungement Form</h2>
                 <p className="text-left">
                     This will fill and download the required paperwork form as a PDF
                     file for the eviction record that is eligible for expungement.
@@ -193,17 +193,17 @@ class FillForm extends React.Component {
                             />
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label text-left" htmlFor="date_of_judgement">
-                                Date of judgement
+                            <label className="col-sm-3 col-form-label text-left" htmlFor="date_of_judgment">
+                                Date of judgment
                             </label>
                             <input
                                 className="col-sm form-control"
-                                id="date_of_judgement"
-                                name="date_of_judgement"
+                                id="date_of_judgment"
+                                name="date_of_judgment"
                                 type="text"
                                 required={true}
                                 onChange={this.handleChange}
-                                value={this.state.date_of_judgement}
+                                value={this.state.date_of_judgment}
                             />
                         </div>
                     </fieldset>
@@ -347,7 +347,6 @@ class FillForm extends React.Component {
                                     required={false}
                                     onChange={this.handleToggle}
                                     value={this.state.money}
-                                    disabled={!this.state.restitution}
                                 />
                                 <label className="form-check-label" htmlFor="money">
                                     I have satisfied any money awards ordered in the judgment
@@ -356,16 +355,15 @@ class FillForm extends React.Component {
                             <div className="form-group form-check ml-4">
                                 <input
                                     className="form-check-input"
-                                    id="judgement"
-                                    name="judgement"
+                                    id="judgment_date"
+                                    name="judgment_date"
                                     type="checkbox"
                                     required={false}
                                     onChange={this.handleToggle}
-                                    value={this.state.judgement}
-                                    disabled={!this.state.restitution}
+                                    value={this.state.judgment_date}
                                 />
-                                <label className="form-check-label" htmlFor="judgement">
-                                    Judgment was entered on {this.state.date_of_judgement} which is more than 5 years before this Motion was filed
+                                <label className="form-check-label" htmlFor="judgment_date">
+                                    Judgment was entered on {this.state.date_of_judgment} which is more than 5 years before this Motion was filed
                                 </label>
                             </div>
 
@@ -392,7 +390,6 @@ class FillForm extends React.Component {
                                     required={false}
                                     onChange={this.handleToggle}
                                     value={this.state.terms}
-                                    disabled={!this.state.stipulation}
                                 />
                                 <label className="form-check-label" htmlFor="terms">
                                     I have satisfied all terms of the agreement and paid any money required
