@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import pdfrw
-import datetime
-from pathlib import Path
-=======
 import datetime
 import io
 from pathlib import Path
@@ -11,7 +6,6 @@ import pdfrw
 
 from form_filling import FormData, PDF_form_template
 from tests import pdf_test_dicts
->>>>>>> main
 
 # CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
 # CreatePDF.data_dict_to_pdf_dict takes the data from the search function and spreads it out to the needed
