@@ -10,7 +10,7 @@ from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
 from models.case_model import CaseCreator, EditStatus
 from concurrent.futures.thread import ThreadPoolExecutor
-from eligibility_eval import isEligible
+from eligibility_eval import is_eligible
 
 
 class UnableToReachOECI(Exception):
@@ -76,7 +76,7 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = isEligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
             key = eviction_case.case_number
