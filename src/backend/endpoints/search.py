@@ -45,9 +45,6 @@ class Search(MethodView):
 
         if TIMER:
             print("--- Total Time: %s seconds ---" % (time.time() - start_time))
-        # To view all search results:
-        # for key, value in search_results.items():
-        #     print(key, " : ", value)
 
         return json.dumps(search_results)
 
