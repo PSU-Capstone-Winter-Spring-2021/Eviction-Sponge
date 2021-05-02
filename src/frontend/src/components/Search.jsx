@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
 import "../styles/Search.css";
-import {checkOeciRedirect} from "../cookieService";
+import {checkOeciRedirect, redirectLogin, removeCookie} from "../cookieService";
 import CreatSimpleCardList from './CreatSimpleCardList';
-
 
 class Search extends React.Component {
     constructor(props) {
@@ -39,14 +38,30 @@ class Search extends React.Component {
         await axios.post("/search", postName).then(res => {
 
             if(res !== null) {
+<<<<<<< HEAD
                 this.setState({Loaded: true});
                 console.log(res.data);
                 this.setState({Results: res.data, Found: true});
+=======
+                this.state.Found = true;
+                this.setState({Results: res});
+                console.log(res);
+                if(res.status == 401 || res.status == 500){
+                    redirectLogin();
+                }
+>>>>>>> 61e80b69fa2d80720f264ef1c51c5382f410a8f8
             }
+        }, reason => {
+            redirectLogin();
+            removeCookie();
         })
+<<<<<<< HEAD
         if(this.state.Results.length === 0) {
             this.setState({Found: false})
         }
+=======
+
+>>>>>>> 61e80b69fa2d80720f264ef1c51c5382f410a8f8
     }
 
     render() {
