@@ -4,7 +4,7 @@ define colors here
 */
 :root{
     --green: #00af00;
-    --light-green: #3cff3c;
+    --darker-green: #186c50;
     --dark-green: #007400;
     --hover-green: #9dff9d;
     --red: #ff0000;
@@ -21,6 +21,10 @@ body{
     text-align: center;
     padding-top: 40px;
     box-sizing: border-box;
+}
+
+a {
+    color:rgb(1, 42, 155);
 }
 
 .navbar {
@@ -68,20 +72,14 @@ body{
     padding-right: 15px;
     padding-left: 15px;
     /*padding: 5px 15px;*/
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .dbtnStyle {
     background-color: white;
-    border: 1px dotted var(--light-green);
+    border: 1px dotted var(--darker-green);
     color: var(--green);
-    padding: 15px 20px;
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 20px;
-    width: 700px;
 }
 
 .dbtnStyle:hover {
@@ -95,7 +93,7 @@ body{
 .button {
     color: white;
     padding: 5px 20px;
-    background: var(--light-green);
+    background: var(--darker-green);
     transition: width 2s, height 2s;
     font-size: 16px;
     font-family: "Roboto Slab", serif;
@@ -115,13 +113,10 @@ body{
 }
 
 .landing {
-    background-color: var(--light-green);
+    background-color: var(--darker-green);
     color: white;
-    padding-top: 30px;
-    padding-bottom: 30px;
     text-align: center;
     font-size: 20px;
-    margin-bottom: 30px;
 }
 
 .landingText {

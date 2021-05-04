@@ -1,9 +1,8 @@
-from dataclasses import dataclass
-import pdfrw
 import datetime
-from form_filling import FormData, PDF_form_template
-from tests import pdf_test_dicts
+import io
 from pathlib import Path
+
+import pdfrw
 
 # CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
 # CreatePDF.data_dict_to_pdf_dict takes the data from the search function and spreads it out to the needed
@@ -46,7 +45,7 @@ from pathlib import Path
 
 TEMPLATE_PATH = 'template.pdf'
 OUTPUT_PATH = 'output1.pdf'
-PDF_FORM_LOCATION = 'C:\\Users\\danfo\\Desktop\\PSU\\Capstone\\Eviction-Sponge\\src\\backend\\files\\EvictionPDF.pdf'
+PDF_FORM_LOCATION = Path('./files/EvictionPDF.pdf')
 
 
 class CreatePDF:
@@ -70,17 +69,17 @@ class CreatePDF:
                     if len(stuff) > third_line or third_line_full:
                         third_line_full = True
                         # this is sticking everything extra on the third line; isn't optimal
-                        third_line_string += stuff + " "
+                        third_line_string += stuff + ' '
                     else:
-                        third_line_string += stuff + " "
+                        third_line_string += stuff + ' '
                         third_line = third_line - len(stuff) - 1
                         continue
                 else:
-                    second_line_string += stuff + " "
+                    second_line_string += stuff + ' '
                     second_line = second_line - len(stuff) - 1
                     continue
             else:
-                first_line_string += stuff + " "
+                first_line_string += stuff + ' '
                 first_line = first_line - len(stuff) - 1
                 continue
 
@@ -107,16 +106,16 @@ class CreatePDF:
             DATE_OF_JUDGEMENT=input_dict['date_of_judgement'],
             STIPULATION=input_dict['stipulation'],
             TERMS=input_dict['terms'],
-            DATE_1=str(datetime.date.today().strftime("%m-%d-%Y")),
+            DATE_1=str(datetime.date.today().strftime('%m-%d-%Y')),
             DEFENDANT_NAME_2=input_dict['defendant_line1'],
             DEFENDANT_ADDRESS=input_dict['def_mailing_address'],
             CITY_STATE_ZIP=input_dict['city_state_zip'],
             PHONE=input_dict['phone_number'],
-            DATE_2=str(datetime.date.today().strftime("%m-%d-%Y")),
+            DATE_2=str(datetime.date.today().strftime('%m-%d-%Y')),
             PLAINTIFF_ADDRESS_1=address_list[0],
             PLAINTIFF_ADDRESS_2=address_list[1],
             PLAINTIFF_ADDRESS_3=address_list[2],
-            DATE_3=str(datetime.date.today().strftime("%m-%d-%Y")),
+            DATE_3=str(datetime.date.today().strftime('%m-%d-%Y')),
             DEFENDANT_NAME_3=input_dict['defendant_line1'],
             COUNTY_2=input_dict['county_name'],
             PLAINTIFF_2_1=input_dict['plaintiff_line1'],
@@ -127,12 +126,12 @@ class CreatePDF:
             DEFENDANT_2_3=input_dict['defendant_line3'],
             DEFENDANT_2_4=input_dict['defendant_line4'],
             PLAINTIFF_NAME=input_dict['plaintiff_line1'],
-            DO_NOT_FILL="",
+            DO_NOT_FILL='',
             DO_NOT_CLICK=False
         )
         return output
 
-    def fill_pdf(self, input_pdf_path, output_pdf_path, data_dict):
+    def fill_pdf(self, input_pdf_path, data_dict):
         ANNOT_KEY = '/Annots'
         ANNOT_FIELD_KEY = '/T'
         SUBTYPE_KEY = '/Subtype'
@@ -155,25 +154,22 @@ class CreatePDF:
                                     pdfrw.PdfDict(V='{}'.format(data_dict[key]))
                                 )
                                 annotation.update(pdfrw.PdfDict(AP=''))
-
-        send_out = pdfrw.PdfWriter()
-        send_out.write(output_pdf_path, template_pdf)
+        pdf_buffer = io.BytesIO()
+        pdfrw.PdfWriter().write(pdf_buffer, template_pdf)
+        pdf_buffer.seek(0)
+        return pdf_buffer
 
     def create_form_name(self, input_dict):
-        defendant_name_list = input_dict["defendant_line1"].split()
-        filename = ''
-        for stuff in defendant_name_list:
-            filename += stuff + "_"
-        filename = filename[:-1]
-        filename = filename + ".pdf"
+        filename = input_dict['defendant_line1'].replace(' ', '_')
+        filename = filename or 'FED-Motion-SetAside'
+        filename = filename + '.pdf'
         return filename
 
     def PDF_filler(self, input_dict):
-        output = CreatePDF.data_dict_to_pdf_dict(self, input_dict)
-        output_name = CreatePDF.create_form_name(self, input_dict)
-        CreatePDF.fill_pdf(self, PDF_FORM_LOCATION, output_name, output)
-        return Path(output_name).absolute()
-
+        pdf_dict = CreatePDF.data_dict_to_pdf_dict(self, input_dict)
+        filename = CreatePDF.create_form_name(self, input_dict)
+        pdf = CreatePDF.fill_pdf(self, PDF_FORM_LOCATION, pdf_dict)
+        return pdf, filename
 
 # taco = CreatePDF()
 # taco.PDF_filler(pdf_test_dicts.test_dict_2)

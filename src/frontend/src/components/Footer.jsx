@@ -16,14 +16,18 @@ class Footer extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <footer className = "footer">
-                <p>
-                    <a href="/">Home</a>
-                    <a href="/about">About Us</a>
-                    <a href="/partners">Partners</a>
-                    <a href="/manual">Manual</a>
-                    <a href="/record-search">Search</a>
-                    <a href="/etc">Etc</a>
+            <footer className = "container-lg text-left">
+                <p className="row">
+                    <a className="col-2" href="/">Home</a>
+                    <a className="col-2" href="/about">About Us</a>
+                </p>
+                <p className="row">
+                    <a className="col-2" href="/manual">Manual</a>
+                    <a className="col-2" href="/record-search">Search</a>
+                </p>
+                <p className="row">
+                    <a className="col-2" href="/partners">Partners</a>
+                    <a className="col-2" href="/etc">Etc</a>
                 </p>
             </footer>
         )

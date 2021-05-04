@@ -1,17 +1,14 @@
 import history from "./history";
 
-export function decodeCookie(cookieName){
+
+
+export function checkCookieExists(cookieName){
     var name = cookieName + "=";
-    var decodedCookie = decodeURIComponent(document.cookie).split(';');
-    for(var i = 0; i < decodedCookie.length; i++){
-        var c = decodedCookie[i];
-        while (c.charAt[0] == ' '){
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0){
-            return true;
-        }
+    if(document.cookie.split(';').some((item)=>item.trim().startsWith(name))){
+        console.log('The cookie "' + cookieName + '" exists');
+        return true;
     }
+    console.log('The cookie "' + cookieName + '" does not exists')
     return false;
 }
 
@@ -22,7 +19,7 @@ export function removeCookie(){
 }
 
 export function hasOeciToken(){
-    return decodeCookie("oeci_token") ? true : false;
+    return checkCookieExists("oeci_token");
 }
 
 export function isAdmin(){
@@ -35,3 +32,14 @@ export function checkOeciRedirect(){
     }
 }
 
+export function validateCookie(){
+    return;
+}
+
+export function redirectSearch(){
+    history.push("/record-search");
+}
+
+export function redirectLogin(){
+    history.push("/oeci-login");
+}
