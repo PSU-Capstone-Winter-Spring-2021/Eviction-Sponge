@@ -72,7 +72,7 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = isEligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
             key = eviction_case.case_number
