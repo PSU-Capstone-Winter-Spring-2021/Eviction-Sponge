@@ -1,8 +1,5 @@
-from dataclasses import dataclass
 import pdfrw
 import datetime
-from form_filling import FormData, PDF_form_template
-from tests import pdf_test_dicts
 from pathlib import Path
 
 # CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
