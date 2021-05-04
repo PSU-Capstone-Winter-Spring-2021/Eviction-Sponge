@@ -17,6 +17,7 @@ import PartnersPage from "./components/PartnersPage";
 import SearchPage from "./components/SearchPage";
 import FlashcardList from "./components/FlashcardList";
 import Appendix from "./components/Appendix";
+import FaqPage from "./components/FaqPage";
 //Example of FlashCardList
   // <div className="container">
   //     <FlashcardList flashcards={flashcards} />
@@ -38,6 +39,7 @@ function App() {
       <Route component={FillFrom} exact={true} path="/fill-form" />
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
+      <Route component={FaqPage} exact={true} path="/faq" />
     </Switch>
     <Footer />
   </Router>
