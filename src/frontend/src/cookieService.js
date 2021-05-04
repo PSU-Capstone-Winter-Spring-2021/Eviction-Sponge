@@ -39,3 +39,7 @@ export function validateCookie(){
 export function redirectSearch(){
     history.push("/record-search");
 }
+
+export function redirectLogin(){
+    history.push("/oeci-login");
+}

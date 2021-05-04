@@ -1,15 +1,11 @@
-import functools
 
-import requests
-from requests import Session
 from dataclasses import replace
 from src.backend.crawler.util import URL, Payload, LRUCache
 from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
 from src.backend.crawler.parsers.record_parser import RecordParser
 from src.backend.crawler.parsers.case_parser import CaseParser
-from src.backend.models.case_model import CaseCreator, EditStatus
-from concurrent.futures.thread import ThreadPoolExecutor
+from src.backend.models.case_model import EditStatus
 from src.backend.eligibility_eval import isEligible
 
 
