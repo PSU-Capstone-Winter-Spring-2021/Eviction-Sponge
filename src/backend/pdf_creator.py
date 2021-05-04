@@ -4,9 +4,6 @@ from pathlib import Path
 
 import pdfrw
 
-from form_filling import FormData, PDF_form_template
-from tests import pdf_test_dicts
-
 # CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
 # CreatePDF.data_dict_to_pdf_dict takes the data from the search function and spreads it out to the needed
 #         form data dict. The PDF needs each form to have a separate name even if the data is the same :(

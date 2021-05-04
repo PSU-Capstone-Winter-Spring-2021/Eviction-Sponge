@@ -29,9 +29,11 @@ class OeciLogin(MethodView):
 
         response = make_response()
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
+        #fake_creds = {'username': 'fakeUser', 'password': 'fakePass'}
 
         cipher = DataCipher(key=current_app.config.get("SECRET_KEY"))
         encrypted_credentials = cipher.encrypt(credentials)
+        #encrypted_fake_credentials = cipher.encrypt(fake_creds)
 
         # Try to log into OECI database
         try:

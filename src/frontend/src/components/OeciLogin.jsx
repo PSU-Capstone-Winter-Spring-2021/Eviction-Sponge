@@ -34,11 +34,13 @@ class OeciLogin extends React.Component {
         const data = new FormData(event.target);
 
         //fetch('/api/form-submit-url', {
-        await fetch('/login', {
+        const response = await fetch('/login', {
             method: 'POST',
             body: data,
         });
-        redirectSearch();
+        if(response.status == 201){
+            redirectSearch();
+        }
     }
 
     // HTML(?) for the component

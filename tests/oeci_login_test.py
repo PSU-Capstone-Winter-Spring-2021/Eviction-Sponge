@@ -1,3 +1,4 @@
+""" NO LONGER USEFUL, NEEDS UPDATE.  KEEPING FOR REFERENCE
 import os
 import sys
 
@@ -82,3 +83,4 @@ def test_login_invalid_login_creds_exception(client, monkeypatch):
     monkeypatch.setattr(oeci_login.Crawler, "attempt_login", throw_invalid_login_creds)
     response = login(client, 'username', 'password')
     assert response.status_code == 401
+"""
