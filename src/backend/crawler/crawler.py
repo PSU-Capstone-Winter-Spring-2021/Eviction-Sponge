@@ -6,7 +6,7 @@ from src.backend.crawler.parsers.param_parser import ParamParser
 from src.backend.crawler.parsers.record_parser import RecordParser
 from src.backend.crawler.parsers.case_parser import CaseParser
 from src.backend.models.case_model import EditStatus
-from src.backend.eligibility_eval import isEligible
+from src.backend.eligibility_eval import is_eligible
 
 
 class UnableToReachOECI(Exception):
