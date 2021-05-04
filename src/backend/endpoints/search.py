@@ -2,8 +2,8 @@ from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
 import requests
 from requests import Session
-from crypto import DataCipher
-from crawler.crawler import Crawler
+from src.backend.crypto import DataCipher
+from src.backend.crawler.crawler import Crawler
 
 # Set to True to display time taken to execute search
 TIMER = False
@@ -44,7 +44,7 @@ class Search(MethodView):
                                         search_credentials['middle'])
 
         if TIMER:
-            print("--- %s seconds ---" % (time.time() - start_time))
+            print("--- Total Time: %s seconds ---" % (time.time() - start_time))
         # To view all search results:
         # for key, value in search_results.items():
         #     print(key, " : ", value)

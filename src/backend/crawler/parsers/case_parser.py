@@ -24,6 +24,7 @@ class CaseParser:
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser.__parse_secondary_judgements(soup)
+
         return CaseParserData(closed_date, judgements, money)
 
     @staticmethod
@@ -47,7 +48,7 @@ class CaseParser:
                 # Specifically, decode soup's bytes-like into characters, then parse those characters into a date,
                 # and finally remove the time from the date:
                 return datetime.strptime(tag.renderContents().decode("utf-8"), "%m/%d/%Y").date()
-        return datetime(9999, 10, 10)
+        return datetime(9999, 9, 9)
 
     @staticmethod
     def __parse_judgements(soup) -> List[str]:
@@ -103,6 +104,8 @@ class CaseParser:
             money_list = []
             total_money_list = []
             final_total = 0
+            interest_rate = 0
+            amount_before_interest = 0
             labels = soup.find_all("td", class_="ssMenuText ssSmallText")
             for tag in labels:
                 for stuff in tag:
@@ -112,34 +115,40 @@ class CaseParser:
                         interest_date = CaseParser.MoneyParser.beginning_interest_date(stuff)
                         only_first_date = True
                     if INTEREST in stuff:
-                        amount = CaseParser.MoneyParser.extract_one_money(stuff)
-                        interest_rate = CaseParser.MoneyParser.extract_interest(stuff)
-                        from_date = datetime.strptime(interest_date, '%m/%d/%Y')
-                        today = datetime.today()
+
+                        amount_before_interest = MoneyParser.extract_one_money(stuff)
+                        interest_rate = MoneyParser.extract_interest(stuff)
+                        from_date = datetime.datetime.strptime(interest_date, '%m/%d/%Y')
+                        today = datetime.datetime.today()
                         time_difference = today - from_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
                         interest_time = time_in_seconds/31536000
-                        total_interest = float(amount) * float(interest_rate) * float(interest_time)
-                        amount_with_interest = float(amount) + total_interest
+                        total_interest = float(amount_before_interest) * float(interest_rate) * float(interest_time)
+                        amount_with_interest = float(amount_before_interest) + total_interest
+
                         if TOTAL in stuff:
-                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                    UNSATISFIED) == -1:
                                 continue
                             total_money_list.append(amount_with_interest)
                         else:
-                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                            if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                    UNSATISFIED) == -1:
                                 continue
                             money_list.append(amount_with_interest)
                         continue
                     if TOTAL in stuff:
-                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                UNSATISFIED) == -1:
                             continue
                         the_total = CaseParser.MoneyParser.extract_one_money(stuff)
                         total_money_list.append(the_total)
                     else:
                         if not type(stuff) == str:
                             continue
-                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                        if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
+                                UNSATISFIED) == -1:
                             continue
                         CaseParser.MoneyParser.extract_money(stuff, money_list)
             if not total_money_list and not money_list:
@@ -151,6 +160,9 @@ class CaseParser:
                         stuff = stuff[1:]
                     final_total += float(stuff)
                 final_total = "{:.2f}".format(final_total)
+                if interest_rate is not None:
+                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% for a total of " + str(final_total) + "."
+                    return extra_string + " The total amount owed appears to be $" + str(final_total)
                 print("The amount owed appears to be $" + str(final_total))
                 return "The amount owed appears to be $" + str(final_total)
             else:

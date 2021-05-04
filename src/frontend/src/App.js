@@ -19,6 +19,7 @@ import SearchPage from "./components/SearchPage";
 import Appendix from "./components/Appendix";
 import SimpleCard from './components/SimpleCard';
 import CreatSimpleCardList from './components/CreatSimpleCardList'
+import FaqPage from "./components/FaqPage";
 
 //Example of FlashCardList
   // <div className="container">
@@ -42,6 +43,7 @@ function App() {
       <Route component={FillFrom} exact={true} path="/fill-form" />
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
+      <Route component={FaqPage} exact={true} path="/faq" />
     </Switch>
     <Footer />
     

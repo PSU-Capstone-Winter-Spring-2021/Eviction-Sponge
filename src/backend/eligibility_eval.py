@@ -22,6 +22,11 @@ def isEligible(current_status, closed_date, judgements) -> (bool, str):
     # else if <5 years old, check judgement:
     #       if judgement dismissed, eligible
     #       else not eligible
+
+    # Edge case: if the parser wasn't able to determine a closed date, the date "9/9/9999" would be used
+    if closed_date == datetime(9999, 9, 9):
+        return False, "Unable to Determine Eligibility - Cannot determine Closed Date"
+
     if current_status == "Open":
         return False, "Not Eligible - Case Still Open"
 
