@@ -2,8 +2,8 @@ from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
 import requests
 from requests import Session
-from src.backend.crypto import DataCipher
-from src.backend.crawler.crawler import Crawler
+from crypto import DataCipher
+from crawler.crawler import Crawler
 
 # Set to True to display time taken to execute search
 TIMER = False
