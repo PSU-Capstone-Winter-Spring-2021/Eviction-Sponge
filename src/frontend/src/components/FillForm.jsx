@@ -64,6 +64,27 @@ class FillForm extends React.Component {
             invalid_plaintiff_zip_code: false,
             invalid_phone: false
         }
+        this.getNames();
+    }
+    
+    getNames() {
+        defendantFlag = false;
+        plaintiffs = [];
+        defendants = [];
+        let names = this.props.res.style.split(" ");
+        for(let i = 0; i < names.length; i++) {
+            if( names[i].toLowerCase() === "vs") {
+                defendantFlag = true;
+            }
+            else if (names[i].slice(-1) === ",") {
+                if (defendantFlag) {
+                    defendants.push(names[i-1] + " " + names[i])
+                }
+                else {
+                    plaintiffs.push(names[i-1] + names[i])
+                }
+            }
+        }
     }
 
     phoneNumberPattern = new RegExp('.*[0-9].*');
