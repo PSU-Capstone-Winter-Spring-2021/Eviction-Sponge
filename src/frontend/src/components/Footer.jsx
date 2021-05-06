@@ -20,29 +20,29 @@ class Footer extends React.Component {
             <footer className = "container-lg text-left center-block">
                 <div className="row">
                     {/* <div className="col-4"> */}
-                        <p className="row">
+                        {/* <p className="row"> */}
                             <a className="col" href="/">Home</a>
                             {/* <a className="col-md-4" href="/">Home</a> */}
                             <a className="col" href="/about">About Us</a>
                             <a className="col" href="/manual">Manual</a>
-                        </p>
+                        {/* </p> */}
                         {/* </p>
                     </div>
                     <div className="col-4">*/}
-                        <p className="row"> 
+                        {/* <p className="row">  */}
                             <a className="col" href="/record-search">Search</a>
                             <a className="col" href="/partners">Partners</a>
                             <a className="col" href="/faq">FAQ</a>
-                        </p>
+                        {/* </p> */}
                         {/* </p>
                     </div>
                     <div className="col-4">
                         <p className="row"> */}
-                        <p className="row">
+                        {/* <p className="row"> */}
                             <a className="col" href="/appendix">Appendix</a>
                             <a className="col" href="/accessibility">Accessibility Statement</a>
                             <a className="col" href="/privacy-policy">Privacy Policy</a>
-                        </p>
+                        {/* </p> */}
                     {/* </div> */}
                 </div>
 
