@@ -1,13 +1,12 @@
 import React from 'react';
 import SimpleCard from './SimpleCard';
-import SearchBar from "./SearchBar";
-import DemoPage from './DemoPage';
-export default function CreatSimpleCardList(){
+
+export default function CreatSimpleCardList(results){
     var rows = []
-    rows.push(<DemoPage/>)
-    rows.push(<SearchBar/>)
-    for(var i = 0; i < 11;i++){
-        rows.push(<SimpleCard/>)
-    }
-    return rows;
+    let len = results.length
+    console.log("from Create Simple Card List:");
+    console.log(results);
+    //results.map((result) => rows.push(<SimpleCard res ={[result]}/>));
+    // rows.map((row) => <p>{row}</p>);
+    return <div>{results.map((result) =>(<SimpleCard res ={result}/>))}</div>;
 }
