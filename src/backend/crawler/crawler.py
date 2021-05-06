@@ -1,12 +1,12 @@
 
 from dataclasses import replace
-from src.backend.crawler.util import URL, Payload, LRUCache
-from src.backend.crawler.parsers.node_parser import NodeParser
-from src.backend.crawler.parsers.param_parser import ParamParser
-from src.backend.crawler.parsers.record_parser import RecordParser
-from src.backend.crawler.parsers.case_parser import CaseParser
-from src.backend.models.case_model import EditStatus
-from src.backend.eligibility_eval import is_eligible
+from crawler.util import URL, Payload, LRUCache
+from crawler.parsers.node_parser import NodeParser
+from crawler.parsers.param_parser import ParamParser
+from crawler.parsers.record_parser import RecordParser
+from crawler.parsers.case_parser import CaseParser
+from models.case_model import EditStatus
+from eligibility_eval import is_eligible
 
 
 class UnableToReachOECI(Exception):
@@ -64,7 +64,7 @@ class Crawler:
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
                             "Landlord/Tenant - Residential or Return of Personal Property"]
 
-        eviction_cases = {}
+        eviction_cases = []
         for case in search_result:
             # Skip over non-eviction cases
             if case.violation_type not in ACCEPTABLE_TYPES:
@@ -82,7 +82,7 @@ class Crawler:
                      'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
                      'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
                      'eligibility': eligibility}
-            eviction_cases.update({key: value})
+            eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
         return eviction_cases
 
