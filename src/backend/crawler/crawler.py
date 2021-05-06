@@ -68,7 +68,7 @@ class Crawler:
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
                             "Landlord/Tenant - Residential or Return of Personal Property"]
 
-        eviction_cases = {}
+        eviction_cases = []
         for case in search_result:
             # Skip over non-eviction cases
             if case.violation_type not in ACCEPTABLE_TYPES:
@@ -83,7 +83,7 @@ class Crawler:
             value = {'style': eviction_case.style, 'location': eviction_case.location,
                      'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
                      'date': eviction_case.date, 'judgements': eviction_case.judgements, 'eligibility': eligibility}
-            eviction_cases.update({key: value})
+            eviction_cases.append({key: value})
             # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
         return eviction_cases
 
