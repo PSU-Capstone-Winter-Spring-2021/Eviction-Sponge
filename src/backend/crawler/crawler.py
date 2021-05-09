@@ -1,12 +1,12 @@
 
 from dataclasses import replace
-from crawler.util import URL, Payload, LRUCache
-from crawler.parsers.node_parser import NodeParser
-from crawler.parsers.param_parser import ParamParser
-from crawler.parsers.record_parser import RecordParser
-from crawler.parsers.case_parser import CaseParser
-from models.case_model import EditStatus
-from eligibility_eval import is_eligible
+from src.backend.crawler.util import URL, Payload, LRUCache
+from src.backend.crawler.parsers.node_parser import NodeParser
+from src.backend.crawler.parsers.param_parser import ParamParser
+from src.backend.crawler.parsers.record_parser import RecordParser
+from src.backend.crawler.parsers.case_parser import CaseParser
+from src.backend.models.case_model import EditStatus
+from src.backend.eligibility_eval import is_eligible
 
 
 class UnableToReachOECI(Exception):
@@ -95,8 +95,9 @@ class Crawler:
 
         return session.post(search_url, data=payload, timeout=30)
 
-    # Search the database for cases that match the names provided, and feed the results to RecordParser
-    # for later parsing
+    # Search the database for cases that match the names provided and return the summaries of each
+    # (specifically, the info provided on OECI's search page: case #, style, date/location, type/status,
+    # and case_detail_link)
     @staticmethod
     def _search_record(session, node_response, search_url, first_name, last_name, middle_name):
         param_parser = ParamParser()
