@@ -49,7 +49,7 @@ class Crawler:
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
-        # generate a list of case records, specifically a list of CaseSummary from case_parser.py
+        # generate a list of case records
         # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
         # the OECI database named the column 'style', it's the name of the case (i.e. "John Hancock V. John Smith")
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
