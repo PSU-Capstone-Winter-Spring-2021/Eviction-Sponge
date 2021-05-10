@@ -1,7 +1,7 @@
 from html.parser import HTMLParser
 import re
 
-from src.backend.models.case_model import CaseCreator
+from models.case_model import CaseCreator
 
 
 # Record Parser gathers information from the list of cases returned by OECI when a name is searched
@@ -88,7 +88,7 @@ class RecordParser(HTMLParser):
         # verify all data entries were filled
         # edge case: style is empty.  I've found one such case that satisfies this
         return (len(self.case_number) > 0) and (len(self.style) >= 0) \
-               and (len(self.date_location) > 0) and (len(self.type_status) > 0)
+            and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
     def __reset_flags(self):
         self.column = 0
