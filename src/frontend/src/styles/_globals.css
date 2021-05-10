@@ -172,9 +172,13 @@ a {
 }
 
 footer {
-    box-shadow: 0px -1px 6px black;
+    box-shadow: 0px -3px 6px black;
 }
 
 .subnav {
     top: 10px;
+}
+
+.oeci-login-container {
+    min-height: 57vh;
 }
