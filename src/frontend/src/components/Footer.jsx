@@ -17,7 +17,7 @@ class Footer extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <footer className = "container-lg text-left">
+            <footer className = "container-lg navbar text-center fixed-bottom">
                 <div className="row">
                     <div className="col-4">
                         <p className="row">

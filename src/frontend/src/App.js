@@ -21,6 +21,7 @@ import SimpleCard from './components/SimpleCard';
 import CreatSimpleCardList from './components/CreatSimpleCardList'
 import FaqPage from "./components/FaqPage";
 import Accessibility from "./components/Accessibility";
+import FooterPadding from "./components/FooterPadding"
 
 //Example of FlashCardList
   // <div className="container">
@@ -47,6 +48,7 @@ function App() {
       <Route component={FaqPage} exact={true} path="/faq" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
     </Switch>
+    <FooterPadding />
     <Footer />
     
   </Router>
