@@ -2,29 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, date
 
 import re
-from enum import Enum
-
 from typing import List
-
-
-class ChargeEligibilityStatus(str, Enum):
-    UNKNOWN = "Unknown"
-    ELIGIBLE_NOW = "Eligible Now"
-    POSSIBLY_ELIGIBILE = "Possibly Eligible"
-    WILL_BE_ELIGIBLE = "Will Be Eligible"
-    POSSIBLY_WILL_BE_ELIGIBLE = "Possibly Will Be Eligible"
-    INELIGIBLE = "Ineligible"
-    NEEDS_MORE_ANALYSIS = "Needs More Analysis"
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}.{self.name}"
-
-
-class EditStatus(str, Enum):
-    UNCHANGED = "UNCHANGED"
-    UPDATE = "UPDATE"
-    ADD = "ADD"
-    DELETE = "DELETE"
 
 
 @dataclass(frozen=True)
@@ -39,14 +17,9 @@ class CaseSummary:
     judgements: List[str]
     case_detail_link: str
     balance_due_in_cents: int
-    edit_status: EditStatus
 
     def get_balance_due(self):
         return self.balance_due_in_cents / 100
-
-    def closed(self):
-        CLOSED_STATUS = ["Closed", "Inactive", "Purgable", "Bankruptcy Pending"]
-        return self.current_status in CLOSED_STATUS
 
 
 @dataclass(frozen=True)
@@ -67,7 +40,6 @@ class OeciCase:
                 judgements=[],
                 case_detail_link="",
                 balance_due_in_cents=0,
-                edit_status=EditStatus.UNCHANGED,
             ),
             (),
         )
@@ -99,7 +71,6 @@ class CaseCreator:
             judgements,
             case_detail_link,
             balance_due_in_cents,
-            EditStatus.UNCHANGED,
         )
 
     @staticmethod
