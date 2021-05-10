@@ -185,6 +185,6 @@ footer {
     top: 10px;
 }
 
-.oeci-login-container {
+.oeci-login-container, .search-container {
     min-height: 57vh;
 }
