@@ -65,6 +65,9 @@ steps:
         ".",
       ]
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/expunge-service:prod']
+
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
@@ -87,3 +90,5 @@ images:
     "gcr.io/$PROJECT_ID/expunge-service:build",
     "gcr.io/$PROJECT_ID/expunge-service:prod",
   ]
+
+timeout: 1500s
