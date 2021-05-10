@@ -5,7 +5,6 @@ from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
 from src.backend.crawler.parsers.record_parser import RecordParser
 from src.backend.crawler.parsers.case_parser import CaseParser
-from src.backend.models.case_model import EditStatus
 from src.backend.eligibility_eval import is_eligible
 
 
@@ -132,6 +131,6 @@ class Crawler:
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
         judgements = case_parser_data.judgements
-        updated_summary = replace(case, date=closed_date, judgements=judgements, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, date=closed_date, judgements=judgements)
 
         return updated_summary
