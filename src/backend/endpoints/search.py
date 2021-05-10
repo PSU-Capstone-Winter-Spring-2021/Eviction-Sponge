@@ -42,7 +42,6 @@ class Search(MethodView):
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
-
         if TIMER:
             print("--- Total Time: %s seconds ---" % (time.time() - start_time))
 
