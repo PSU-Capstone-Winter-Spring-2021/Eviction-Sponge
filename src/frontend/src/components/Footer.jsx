@@ -20,7 +20,7 @@ class Footer extends React.Component {
             <div>
                 <div className="footer-padding d-none d-md-block">
                 </div>
-                <footer className = "d-md-none container-xl navbar justify-content-center">
+                <footer className = "border-top d-md-none navbar justify-content-center">
                     <div className="row">
                         <div className="col-12 p-0">
                             <p className="row m-0 border-bottom">
@@ -45,7 +45,7 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </footer>
-                <footer className = "d-none d-md-flex container-xl navbar justify-content-center fixed-bottom">
+                <footer className = "border-top d-none d-md-flex navbar justify-content-center fixed-bottom">
                     <div className="row">
                         <div className="col-4 p-0">
                             <p className="row">
