@@ -18,8 +18,6 @@ class FooterPadding extends React.Component {
     render() {
         return (
             <div className="footer-padding">
-                {/* <div className="mt-5 d-md-block d-xs-none"></div>
-                <div className="h-50 d-xs-block d-md-none"></div> */}
             </div>
         )
     }

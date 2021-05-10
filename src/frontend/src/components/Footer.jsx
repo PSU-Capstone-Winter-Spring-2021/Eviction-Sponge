@@ -17,31 +17,60 @@ class Footer extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <footer className = "container-lg navbar text-center fixed-bottom">
-                <div className="row">
-                    <div className="col-4">
-                        <p className="row">
-                            <a className="col-4" href="/">Home</a>
-                            <a className="col-4" href="/about">About Us</a>
-                            <a className="col-4" href="/manual">Manual</a>
-                        </p>
-                    </div>
-                    <div className="col-4">
-                        <p className="row">
-                            <a className="col-4" href="/record-search">Search</a>
-                            <a className="col-4" href="/partners">Partners</a>
-                            <a className="col-4" href="/faq">FAQ</a>
-                        </p>
-                    </div>
-                    <div className="col-4">
-                        <p className="row">
-                            <a className="col-4" href="/appendix">Appendix</a>
-                            <a className="col-4" href="/accessibility">Accessibility Statement</a>
-                            <a className="col-4" href="/privacy-policy">Privacy Policy</a>
-                        </p>
-                    </div>
+            <div>
+                <div className="footer-padding d-none d-md-block">
                 </div>
-            </footer>
+                <footer className = "d-md-none container-xl navbar justify-content-center">
+                    <div className="row">
+                        <div className="col-12 p-0">
+                            <p className="row m-0 border-bottom">
+                                <a className="col-4" href="/">Home</a>
+                                <a className="col-4" href="/about">About Us</a>
+                                <a className="col-4" href="/manual">Manual</a>
+                            </p>
+                        </div>
+                        <div className="col-12 p-0">
+                            <p className="row m-0 border-bottom">
+                                <a className="col-4" href="/record-search">Search</a>
+                                <a className="col-4" href="/partners">Partners</a>
+                                <a className="col-4" href="/faq">FAQ</a>
+                            </p>
+                        </div>
+                        <div className="col-12 p-0">
+                            <p className="row m-0">
+                                <a className="col-4" href="/appendix">Appendix</a>
+                                <a className="col-4" href="/accessibility">Accessibility Statement</a>
+                                <a className="col-4" href="/privacy-policy">Privacy Policy</a>
+                            </p>
+                        </div>
+                    </div>
+                </footer>
+                <footer className = "d-none d-md-flex container-xl navbar justify-content-center fixed-bottom">
+                    <div className="row">
+                        <div className="col-4 p-0">
+                            <p className="row">
+                                <a className="col-4" href="/">Home</a>
+                                <a className="col-4" href="/about">About Us</a>
+                                <a className="col-4" href="/manual">Manual</a>
+                            </p>
+                        </div>
+                        <div className="col-4 p-0">
+                            <p className="row">
+                                <a className="col-4" href="/record-search">Search</a>
+                                <a className="col-4" href="/partners">Partners</a>
+                                <a className="col-4" href="/faq">FAQ</a>
+                            </p>
+                        </div>
+                        <div className="col-4 p-0">
+                            <p className="row">
+                                <a className="col-4" href="/appendix">Appendix</a>
+                                <a className="col-4" href="/accessibility">Accessibility Statement</a>
+                                <a className="col-4" href="/privacy-policy">Privacy Policy</a>
+                            </p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         )
     }
 

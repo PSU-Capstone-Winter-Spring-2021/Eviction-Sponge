@@ -168,11 +168,11 @@ a {
 } */
 
 .footer-padding {
-    height: 80px
+    height: 81px
 }
 
 footer {
-    box-shadow: 0px -2px 4px grey;
+    box-shadow: 0px -1px 6px black;
 }
 
 .subnav {

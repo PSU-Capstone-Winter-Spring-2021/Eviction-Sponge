@@ -16,31 +16,31 @@ class Manual extends React.Component {
     // HTML for the component
     render() {
         return (
-            <main className="container bg-light w-100 m-0 mw-100 px-0 pt-3">
+            <main className="container bg-light w-100 m-0 mw-100 px-0 pt-sm-3">
                 <div className="row mx-0">
                     <nav className="col border d-xs-block d-sm-none">
-                        <ul className="list-unstyled">
-                        <li>
+                        <ul className="list-unstyled mb-0">
+                        <li className="border-bottom">
                             <a href="#introduction">
                             Introduction
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#information">
                             General Information
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#howto">
                             How to Use EvictionSponge
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#assumption1">
                             Assumption 1
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#search">
                             Search
                             </a>

@@ -10,7 +10,7 @@ class Landing extends React.Component {
         return (
             <>
                 <main className="container-fluid">
-                    <div className="row justify-content-center py-4 mb-5 landing">
+                    <div className="row justify-content-center py-4 landing">
                         cool message
                     </div>
                     <div className="row justify-content-center align-items-center">

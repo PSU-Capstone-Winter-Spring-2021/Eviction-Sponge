@@ -48,7 +48,6 @@ function App() {
       <Route component={FaqPage} exact={true} path="/faq" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
     </Switch>
-    <FooterPadding />
     <Footer />
     
   </Router>
