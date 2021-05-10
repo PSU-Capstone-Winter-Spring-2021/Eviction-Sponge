@@ -9,13 +9,14 @@ define colors here
     --hover-green: #9dff9d;
     --red: #ff0000;
     --gray: #b8b8b8;
+    --gunmetal: #2A353C;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
 
 body{
     background-color: white;
-    color: var(--dark-green);
+    color: var(--gunmetal);
     /* padding: 40px; */
     font-family: sans-serif, serif;
     text-align: center;
@@ -27,8 +28,13 @@ h1, h2, h3, h4 {
     font-family: 'Roboto Slab', serif;
 }
 
-a {
-    color:rgb(1, 42, 155);
+a, span a, .card-header{
+    color:var(--dark-green);
+    text-decoration: underline;
+}
+
+span p {
+    color: #2A353C;
 }
 
 .navbar {
@@ -172,7 +178,7 @@ a {
 }
 
 footer {
-    box-shadow: 0px -3px 6px black;
+    box-shadow: 0px -3px 6px var(--gunmetal);
 }
 
 .subnav {
