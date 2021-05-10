@@ -1,4 +1,7 @@
 # Various mock classes for unit testing the crawler
+from typing import List
+from datetime import date
+
 
 class MockRequest:
     text = ""
@@ -25,33 +28,26 @@ class MockURL:
         return "search url"
 
 
+# TODO: expand this once money parser is working
 class MockCaseSummary:
-    case_num = ""  # Declaring these outside of init as well for ease of testing
-    style = ""
-    date_location = []
-    type_status = []
-    case_detail_link = ""
+    name: str
+    case_number: str
+    style: str
+    location: str
+    date: date
+    violation_type: str
+    current_status: str
+    judgements: List[str]
+    case_detail_link: str
+    balance_due_in_cents: int
 
-    def __init__(self, case_num, style, date_location, type_status, case_detail_link):
-        self.case_num = case_num
-        self.style = style
-        self.date_location = date_location
-        self.type_status = type_status
-        self.case_detail_link = case_detail_link
-
-
-class MockCaseDetail:
-    case_num = "" # Declaring these outside of init as well for ease of testing
-    style = ""
-    location = ""
-    date = None
-    judgements = []
-    eligibility = None
-
-    def __init__(self, case_num, style, location, date, judgements, eligibility):
-        self.case_num = case_num
+    def __init__(self, case_num, style, location, date, case_type, status, judgements, case_detail_link):
+        self.case_number = case_num
         self.style = style
         self.location = location
         self.date = date
+        self.violation_type = case_type
+        self.current_status = status
         self.judgements = judgements
-        self.eligibility = eligibility
+        self.case_detail_link = case_detail_link
+        self.balance_due_in_cents = 0
