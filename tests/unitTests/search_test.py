@@ -49,14 +49,6 @@ def mock_search(session, login_creds, first_name, last_name, middle_name):
                        'eligibility': (True, 'Eligible')}}]
 
 
-def mock_json_dumps(value):
-    return value
-
-
-def mock_get_json_both_args():
-    return {'first_name': "first_name", 'last_name': "last_name"}
-
-
 def mock_Session():
     return None
 
