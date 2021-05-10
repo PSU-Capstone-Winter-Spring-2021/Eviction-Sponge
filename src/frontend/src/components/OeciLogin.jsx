@@ -46,7 +46,7 @@ class OeciLogin extends React.Component {
     // HTML(?) for the component
     render() {
         return (
-            <main className="oeci-login-container">
+            <main className="oeci-login-container p-3">
             <form onSubmit={this.handleSubmit}>
                 <label>
                     User ID:
