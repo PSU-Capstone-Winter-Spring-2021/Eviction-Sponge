@@ -31,7 +31,7 @@ class FillForm extends React.Component {
             county_name: this.props.location.state.county_name || '',
             case_number: this.props.location.state.case_number || '',
             case_name: this.props.location.state.case_name || '',
-            date_of_judgement: this.props.location.state.date_of_judgement || '',
+            date_of_judgment: this.props.location.state.date_of_judgement || '',
             plaintiff_line1: this.props.plaintiff_line1 || '',
             plaintiff_line2: this.props.plaintiff_line2 || '',
 
