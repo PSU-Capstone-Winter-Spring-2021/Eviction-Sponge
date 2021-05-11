@@ -29,11 +29,11 @@ def is_eligible(current_status, closed_date, judgements) -> (bool, str):
         return False, "Unable to Determine Eligibility - Needs manual analysis"
 
     if current_status == "Open":
-        return False, "Not Eligible - Case Still Open"
+        return False, "Case Still Open"
 
     years_since = ((datetime.date(datetime.now()) - closed_date).total_seconds()) / SECONDS_IN_YEAR
     if years_since >= 5:
-        return True, "Eligible - Older than five years"
+        return True, "Older than five years"
     else:
         # edge case: no judgements
         if not judgements:
@@ -42,8 +42,8 @@ def is_eligible(current_status, closed_date, judgements) -> (bool, str):
             # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
             # "Dismissal", with any characters in between
             if re.match(r"^[jJ]udgment.*[dD]ismissal", judgement) and not re.match(r".*[sS]tipulated", judgement):
-                return True, "Eligible - Case Dismissed"
+                return True, "Case Dismissed"
             continue
 
     eligibleDate = (closed_date + relativedelta(years=5)).strftime("%m/%d/%Y")
-    return False, ("Not Eligible.  Will be eligible on " + eligibleDate + ".")
+    return False, ("Case not dismissed and less than five years old. Will be eligible on " + eligibleDate + ".")
