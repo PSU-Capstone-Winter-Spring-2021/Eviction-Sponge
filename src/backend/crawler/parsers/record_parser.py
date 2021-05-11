@@ -88,7 +88,7 @@ class RecordParser(HTMLParser):
         # verify all data entries were filled
         # edge case: style is empty.  I've found one such case that satisfies this
         return (len(self.case_number) > 0) and (len(self.style) >= 0) \
-               and (len(self.date_location) > 0) and (len(self.type_status) > 0)
+            and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
     def __reset_flags(self):
         self.column = 0
