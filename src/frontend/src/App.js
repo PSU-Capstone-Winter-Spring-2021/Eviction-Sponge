@@ -15,8 +15,12 @@ import FillFrom from "./components/FillForm"
 import Search from "./components/Search";
 import PartnersPage from "./components/PartnersPage";
 import SearchPage from "./components/SearchPage";
-import FlashcardList from "./components/FlashcardList";
+// import FlashcardList from "./components/FlashcardList";
 import Appendix from "./components/Appendix";
+import SimpleCard from './components/SimpleCard';
+import CreatSimpleCardList from './components/CreatSimpleCardList'
+import FaqPage from "./components/FaqPage";
+
 //Example of FlashCardList
   // <div className="container">
   //     <FlashcardList flashcards={flashcards} />
@@ -30,6 +34,7 @@ function App() {
   <Router history={history}>
     <Navbar />
     <Switch>
+      <Route component={CreatSimpleCardList} exact={true} path="/cards_demo" />
       <Route component={Landing} exact={true} path="/" />
       <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
@@ -38,8 +43,10 @@ function App() {
       <Route component={FillFrom} exact={true} path="/fill-form" />
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
+      <Route component={FaqPage} exact={true} path="/faq" />
     </Switch>
     <Footer />
+    
   </Router>
   </>
 

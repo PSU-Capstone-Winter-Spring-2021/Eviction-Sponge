@@ -1,16 +1,12 @@
-import functools
 
-import requests
-from requests import Session
 from dataclasses import replace
 from crawler.util import URL, Payload, LRUCache
 from crawler.parsers.node_parser import NodeParser
 from crawler.parsers.param_parser import ParamParser
 from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
-from models.case_model import CaseCreator, EditStatus
-from concurrent.futures.thread import ThreadPoolExecutor
-from eligibility_eval import isEligible
+from models.case_model import EditStatus
+from eligibility_eval import is_eligible
 
 
 class UnableToReachOECI(Exception):
@@ -68,7 +64,7 @@ class Crawler:
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
                             "Landlord/Tenant - Residential or Return of Personal Property"]
 
-        eviction_cases = {}
+        eviction_cases = []
         for case in search_result:
             # Skip over non-eviction cases
             if case.violation_type not in ACCEPTABLE_TYPES:
@@ -76,15 +72,18 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = isEligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
+            # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
+            #       is called and includes the time
             key = eviction_case.case_number
             value = {'style': eviction_case.style, 'location': eviction_case.location,
                      'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
-                     'date': eviction_case.date, 'judgements': eviction_case.judgements, 'eligibility': eligibility}
-            eviction_cases.update({key: value})
-            # Types {int : str, str, str, str, datetime, list[str], (bool, str) tuple}
+                     'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
+                     'eligibility': eligibility}
+            eviction_cases.append({key: value})
+            # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
         return eviction_cases
 
     # Grab the node_id of the parser given the login_response, and post it

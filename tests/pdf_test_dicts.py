@@ -4,7 +4,7 @@ test_dict_2 = {
     'county_name': "Clark",
     'case_number': "11001001",
     'case_name': 'Charles Cheese v Caesar Jr',
-    'date_of_judgement': '6/26/11',
+    'date_of_judgment': '6/26/11',
 
     'plaintiff_line1': 'Charles Cheese',
     'plaintiff_line2': 'Nolan Bushnell',
@@ -24,7 +24,7 @@ test_dict_2 = {
     'dismissal': False,
     'restitution': False,
     'money': False,
-    'judgement': False,
+    'judgment': False,
     'stipulation': False,
     'terms': True
 }
@@ -50,10 +50,10 @@ test_dict_1 = {
     'DISMISSAL': False,
     'RESTITUTION': True,
     'MONEY': True,
-    'JUDGEMENT': True,
+    'JUDGMENT_DATE': True,
     'STIPULATION': False,
     'TERMS': False,
-    'DATE_OF_JUDGEMENT': '5/29/2015',
+    'DATE_OF_JUDGMENT': '5/29/2015',
     'DATE': datetime.date.today(),
     'NAME_PRINTED': 'Hamburgler',
     'ADDRESS': '10050 SW Barbur Blvd',

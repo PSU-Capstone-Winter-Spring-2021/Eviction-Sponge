@@ -1,34 +1,16 @@
 from flask import json
 from flask.views import MethodView
-import csv
+import os
 
 
-# parse the csv partners.csv and return the info in json format
 class Partners(MethodView):
     def post(self):
-        # Assuming partners info is stored as a csv in the form:
-        # Name, Location, County, AnalysisCost, PaperworkCost, CourtFees, ContactName, ContactInfo
-        # Delimiter is semicolon ;
-        # File has a header row
-        # Empty values are filled with "Unknown"
+        # Get the path information for the source file:
+        path = os.path.relpath('frontend\\src\\data\\partnerData.json', os.path.dirname(__file__))
 
-        partnerDict = {}
-        first_row = True
-        with open("partners.csv", newline='\n') as partnersFile:
-            partners = csv.reader(partnersFile, delimiter=';')
-            for partner in partners:
-                # skip header row
-                if first_row:
-                    first_row = False
-                else:
-                    #  Name
-                    key = partner[0]
-                    # Location, County, AnalysisCost, PaperworkCost, CourtFees, ContactName, ContractInfo
-                    value = (partner[1], partner[2], partner[3], partner[4], partner[6], partner[7])
-                    partnerDict.update({key: value})
-
-        return json.dumps(partnerDict)
-
+        input_file = open(path, 'r')
+        partner_data = json.load(input_file)
+        return partner_data
 
 
 def register(app):
