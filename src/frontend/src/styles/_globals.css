@@ -188,3 +188,7 @@ footer {
 .oeci-login-container, .search-container {
     min-height: 57vh;
 }
+
+footer.navbar a {
+    text-decoration: underline;
+}
