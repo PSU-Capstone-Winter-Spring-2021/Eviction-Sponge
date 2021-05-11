@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 // import Button from 'material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export default class SimpleCard extends React.Component{
     constructor(props) {
@@ -17,7 +18,7 @@ export default class SimpleCard extends React.Component{
     }
     render (){
     const {caseNum} = this.state;
-    const {location, style, status, eligibility, date} = this.state.result[caseNum];
+    const {location: county_name, style: case_name , status, eligibility, date: date_of_judgement} = this.state.result[caseNum];
 
     return(
     <div className = "bg-light">
@@ -27,19 +28,36 @@ export default class SimpleCard extends React.Component{
             {caseNum} 
             </Typography>
             <Typography className={caseNum}  gutterBottom>
-            Location: {location}
+            Location: {county_name}
             </Typography>
             <Typography className={caseNum}  gutterBottom>
-            Type: {style}
+            Type: {case_name}
             </Typography>
             <Typography className={caseNum}  gutterBottom>
             status: {status}
             </Typography>
             <Typography variant="body2" component="p">
-            date: {date}
+            date: {date_of_judgement}
             </Typography>
             <Typography variant="body2" component="p">
-            eligibility: {eligibility}
+                {eligibility[0]
+                    ? <Link
+                    id={caseNum}
+                    to={{
+                        pathname: "/fill-form",
+                        state: {
+                            // res: this.props.all,
+                            case_number: caseNum,
+                            county_name: county_name,
+                            case_name: case_name,
+                            date_of_judgement: date_of_judgement,
+                        },
+                    }}
+                    >
+                    eligibility: {eligibility}
+                    </Link>
+                    : <p>eligibility: {eligibility}</p>
+                }
             </Typography>
         </CardContent>
         </Card>

@@ -37,9 +37,7 @@ export default class PartnersPage extends React.Component{
     render(){
         return(
         <>
-            <div className="container-fluid bg-light">
-
-
+            <div className="container-fluid bg-light pb-4 pt-3">
                 <div
                 className="container bg-light text-left"
                 style={{maxWidth: "720px"}}
