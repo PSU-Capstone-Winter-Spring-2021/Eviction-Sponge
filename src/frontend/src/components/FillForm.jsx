@@ -28,11 +28,10 @@ class FillForm extends React.Component {
         super(props);
         // this.props = testProps
         this.state = {
-            county_name: this.props.county_name || '',
-            case_number: this.props.case_number || '',
-            case_name: this.props.case_name || '',
-            date_of_judgment: this.props.date_of_judgment || '',
-
+            county_name: this.props.location.state.county_name || '',
+            case_number: this.props.location.state.case_number || '',
+            case_name: this.props.location.state.case_name || '',
+            date_of_judgement: this.props.location.state.date_of_judgement || '',
             plaintiff_line1: this.props.plaintiff_line1 || '',
             plaintiff_line2: this.props.plaintiff_line2 || '',
 
@@ -64,7 +63,34 @@ class FillForm extends React.Component {
             invalid_plaintiff_zip_code: false,
             invalid_phone: false
         }
+        // this.getNames();
     }
+    
+    // Don't know that this will be needed
+    // getNames() {
+    //     let defendantFlag = false;
+    //     let plaintiffs = [];
+    //     let defendants = [];
+    //     let names = this.props.location.state.case_name.split(" ");
+    //     for(let i = 0; i < names.length; i++) {
+    //         console.log("current string:" + names[i])
+    //         if( names[i].toLowerCase() === "vs" || names[i].toLowerCase() === "vs.") {
+    //             defendantFlag = true;
+    //         }
+    //         else if(defendantFlag) {
+    //             defendants.push(names[i] + " ")
+    //         }
+    //         else {
+    //             plaintiffs.push(names[i] + " ")
+    //         }
+    //     }
+    //     this.setState({
+    //         plaintiff_line1: plaintiffs.join(' '),
+    //         defendant_line1: defendants.join(' '),
+    //     })
+    //     console.log("Defendants: " + defendants.join(' '));
+    //     console.log("Plaintiffs: " + plaintiffs.join(' '));
+    // }
 
     phoneNumberPattern = new RegExp('.*[0-9].*');
     zipCodePattern = new RegExp('[0-9][0-9][0-9][0-9][0-9].*');
