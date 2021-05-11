@@ -63,7 +63,7 @@ class FillForm extends React.Component {
             invalid_plaintiff_zip_code: false,
             invalid_phone: false
         }
-        this.getNames();
+        // this.getNames();
     }
     
     // Don't know that this will be needed
