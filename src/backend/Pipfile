@@ -10,6 +10,7 @@ cryptography = "*"
 uwsgi = "*"
 pdfrw = "*"
 bs4 = "*"
+python-dateutil = "*"
 
 [dev-packages]
 
