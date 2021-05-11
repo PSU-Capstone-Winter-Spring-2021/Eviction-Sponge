@@ -33,7 +33,7 @@ def is_eligible(current_status, closed_date, judgements) -> (bool, str):
 
     years_since = ((datetime.date(datetime.now()) - closed_date).total_seconds()) / SECONDS_IN_YEAR
     if years_since >= 5:
-        return True, "Eligible - Meets five year requirement"
+        return True, "Eligible - Older than five years"
     else:
         # edge case: no judgements
         if not judgements:
