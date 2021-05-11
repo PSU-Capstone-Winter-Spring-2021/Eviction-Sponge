@@ -5,6 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+
 import 'react-bootstrap';
 
 export default class SimpleCard extends React.Component{
@@ -20,31 +22,35 @@ export default class SimpleCard extends React.Component{
     }
     render (){
     return(
+    <Container maxWidth="sm">
     <div className = "bg-light">
-        <Card className='bg-light'>
-        <CardContent>
-            <Typography className={this.state.casenumber} color="textSecondary" gutterBottom>
-            {this.state.casenumber}
-            </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            Location: {this.state.location}
-            </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            Type: {this.state.type}
-            </Typography>
-            <Typography className={this.state.casenumber}  gutterBottom>
-            status: {this.state.status}
-            </Typography>
-            <Typography variant="body2" component="p">
-            date: 2021-04-26
-            {/* API returned incorrect date */}
-            </Typography>
-            <Typography variant="body2" component="p">
-            eligibility: {this.state.eligibility}
-            </Typography>
-        </CardContent>
-        </Card>
-    </div>
+        {/* <Card className='bg-light '> */}
+        <Card className='bg-light text-left'>
+            <CardContent>
+                <Typography className={this.state.casenumber+" text-center"} color="textSecondary" gutterBottom>
+                {this.state.casenumber}
+                </Typography>
+                <Typography className={this.state.casenumber}  gutterBottom>
+                Location: {this.state.location}
+                </Typography>
+                <Typography className={this.state.casenumber}  gutterBottom>
+                Type: {this.state.type}
+                </Typography>
+                <Typography className={this.state.casenumber}  gutterBottom>
+                status: {this.state.status}
+                </Typography>
+                <Typography variant="body2" component="p">
+                date: 2021-04-26
+                {/* API returned incorrect date */}
+                </Typography>
+                <Typography variant="body2" component="p">
+                eligibility: {this.state.eligibility}
+                </Typography>
+            </CardContent>
+            </Card>
+        </div>
+        <br></br>
+    </Container>
     );
     }
 }
