@@ -4,9 +4,6 @@ from pathlib import Path
 
 import pdfrw
 
-from form_filling import FormData, PDF_form_template
-from tests import pdf_test_dicts
-
 # CreatePDF.fit_address fills the address lines by spacing out the words to fit without size reduction
 # CreatePDF.data_dict_to_pdf_dict takes the data from the search function and spreads it out to the needed
 #         form data dict. The PDF needs each form to have a separate name even if the data is the same :(
@@ -31,8 +28,8 @@ from tests import pdf_test_dicts
 # DISMISSAL (true/false)
 # RESTITUTION (true/false)
 # MONEY (true/false)
-# JUDGEMENT_DATE (true/false)
-# DATE_OF_JUDGEMENT
+# JUDGMENT_DATE (true/false)
+# DATE_OF_JUDGMENT
 # STIPULATION (true/false)
 # TERMS (true/false)
 # DATE_#
@@ -105,8 +102,8 @@ class CreatePDF:
             DISMISSAL=input_dict['dismissal'],
             RESTITUTION=input_dict['restitution'],
             MONEY=input_dict['money'],
-            JUDGEMENT=input_dict['judgement'],
-            DATE_OF_JUDGEMENT=input_dict['date_of_judgement'],
+            JUDGMENT_DATE=input_dict['judgment_date'],
+            DATE_OF_JUDGMENT=input_dict['date_of_judgment'],
             STIPULATION=input_dict['stipulation'],
             TERMS=input_dict['terms'],
             DATE_1=str(datetime.date.today().strftime('%m-%d-%Y')),
@@ -151,11 +148,9 @@ class CreatePDF:
                             if type(data_dict[key]) == bool:
                                 if data_dict[key] == True:
                                     annotation.update(pdfrw.PdfDict(
-                                        AS=pdfrw.PdfName('Yes')))
+                                        AS=pdfrw.PdfName('On')))
                             else:
-                                annotation.update(
-                                    pdfrw.PdfDict(V='{}'.format(data_dict[key]))
-                                )
+                                annotation.update(pdfrw.PdfDict(V='{}'.format(data_dict[key])))
                                 annotation.update(pdfrw.PdfDict(AP=''))
         pdf_buffer = io.BytesIO()
         pdfrw.PdfWriter().write(pdf_buffer, template_pdf)

@@ -1,4 +1,4 @@
-                                import React from "react";
+import React from "react";
 
 
 class Footer extends React.Component {
@@ -7,28 +7,40 @@ class Footer extends React.Component {
         // TODO: Figure out what arguments go into the super call
         super(props);
     };*/
-
+    /*
     componentDidMount(){
         // document.title is the string in the tab, update it to reflect current component
         document.title = "footer"
     };
+    */
 
     // HTML(?) for the component
     render() {
         return (
             <footer className = "container-lg text-left">
-                <p className="row">
-                    <a className="col-2" href="/">Home</a>
-                    <a className="col-2" href="/about">About Us</a>
-                </p>
-                <p className="row">
-                    <a className="col-2" href="/manual">Manual</a>
-                    <a className="col-2" href="/record-search">Search</a>
-                </p>
-                <p className="row">
-                    <a className="col-2" href="/partners">Partners</a>
-                    <a className="col-2" href="/etc">Etc</a>
-                </p>
+                <div className="row">
+                    <div className="col-4">
+                        <p className="row">
+                            <a className="col-4" href="/">Home</a>
+                            <a className="col-4" href="/about">About Us</a>
+                            <a className="col-4" href="/manual">Manual</a>
+                        </p>
+                    </div>
+                    <div className="col-4">
+                        <p className="row">
+                            <a className="col-4" href="/record-search">Search</a>
+                            <a className="col-4" href="/partners">Partners</a>
+                            <a className="col-4" href="/faq">FAQ</a>
+                        </p>
+                    </div>
+                    <div className="col-4">
+                        <p className="row">
+                            <a className="col-4" href="/appendix">Appendix</a>
+                            <a className="col-4" href="/accessibility">Accessibility Statement</a>
+                            <a className="col-4" href="/privacy-policy">Privacy Policy</a>
+                        </p>
+                    </div>
+                </div>
             </footer>
         )
     }
