@@ -16,31 +16,31 @@ class Manual extends React.Component {
     // HTML for the component
     render() {
         return (
-            <main className="container bg-light w-100 m-0 mw-100 px-0">
+            <main className="container bg-light w-100 m-0 mw-100 px-0 pt-sm-3">
                 <div className="row mx-0">
                     <nav className="col border d-xs-block d-sm-none">
-                        <ul className="list-unstyled">
-                        <li>
+                        <ul className="list-unstyled mb-0">
+                        <li className="border-bottom">
                             <a href="#introduction">
                             Introduction
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#information">
                             General Information
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#howto">
                             How to Use EvictionSponge
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#assumption1">
                             Assumption 1
                             </a>
                         </li>
-                        <li>
+                        <li className="border-bottom">
                             <a href="#search">
                             Search
                             </a>
@@ -96,7 +96,7 @@ class Manual extends React.Component {
                             <p>This assumption is redundant with an assumption needed for correct analysis. EvictionSponge has no record of payments so charges marked as eligible do not take into account any payments made. EvictionSponge does it’s best to find the correct monetary value owed, but it is possible that it is incorrect in some cases, please verify the total amount owed before instructing the client to make any payments.</p>
                         </section>
                     </div>
-                    <nav className="col-sm-3 border d-none d-sm-block sticky-top h-25">
+                    <nav className="subnav col-sm-3 border d-none d-sm-block sticky-top h-25">
                         <ul className="list-unstyled text-left">
                         <li>
                             <a href="#introduction">

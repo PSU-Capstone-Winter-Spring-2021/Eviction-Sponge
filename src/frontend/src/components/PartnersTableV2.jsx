@@ -65,7 +65,7 @@ class PartnersTableV2 extends React.Component{
         ));
         return(
             <div 
-                className="container-fluid py-5 my-4"
+                className="container-fluid py-5"
                 style={{backgroundColor:"green"}}>
                 <Accordion
                     className="container-md bg-white rounded pt-2"
