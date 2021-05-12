@@ -16,7 +16,7 @@ class Manual extends React.Component {
     // HTML for the component
     render() {
         return (
-            <main className="container bg-light w-100 m-0 mw-100 px-0 pt-sm-3">
+            <main className="container bg-light w-100 m-0 mw-100 px-0 pt-sm-3 mh57">
                 <div className="row mx-0">
                     <nav className="col border d-xs-block d-sm-none">
                         <ul className="list-unstyled mb-0">
