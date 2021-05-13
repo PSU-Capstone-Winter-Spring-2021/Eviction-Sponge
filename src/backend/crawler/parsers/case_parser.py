@@ -80,7 +80,8 @@ class CaseParser:
             AMENDED = "Amended"
             SUPERSEDE = "Supersede"
             CHANGE = "Change"
-            WAS_AMENDED = "\nNOTE: The judgement was amended in some way, the amount owed may be different!"
+            WAS_AMENDED = "\nNOTE: The judgement was amended in some way, total may be different!"
+            ESTIMATE = "Estimated Money Owed: $"
 
             only_first_date = False
             is_amended = False
@@ -107,7 +108,7 @@ class CaseParser:
                         amount_before_interest = MoneyParser.extract_one_money(stuff)
                         interest_rate = MoneyParser.extract_interest(stuff)
                         today = datetime.datetime.today()
-                        time_difference = today - interest_date
+                        time_difference = today.date() - interest_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
                         interest_time = time_in_seconds/31536000
@@ -117,6 +118,8 @@ class CaseParser:
                         amount_with_interest = float(amount_before_interest) + float(total_interest)
                         if TOTAL in stuff:
                             if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
+                                continue
+                            if amount_with_interest in total_money_list and is_amended is True:
                                 continue
                             total_money_list.append(amount_with_interest)
                         else:
@@ -128,6 +131,8 @@ class CaseParser:
                         if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(UNSATISFIED) == -1:
                             continue
                         the_total = MoneyParser.extract_one_money(stuff)
+                        if the_total in total_money_list and is_amended is True:
+                            continue
                         total_money_list.append(the_total)
                     else:
                         if not type(stuff) == str:
@@ -136,8 +141,7 @@ class CaseParser:
                             continue
                         MoneyParser.extract_money(stuff, money_list)
             if not total_money_list and not money_list:
-                print("There appears to be no remaining amount owed.")
-                return "There appears to be no remaining amount owed."
+                return ESTIMATE + "0.00"
             if total_money_list:
                 for stuff in total_money_list:
                     if DOLLAR_SIGN in stuff:
@@ -145,34 +149,25 @@ class CaseParser:
                     final_total += float(stuff)
                 final_total = "{:.2f}".format(final_total)
                 if interest_rate != 0:
-                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% for a total of $" + str(total_interest) + "."
+                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% which adds $" + str(total_interest) + ". "
                     if is_amended:
-                        print(extra_string + " The total amount owed appears to be $" + str(final_total) + WAS_AMENDED)
-                        return extra_string + " The total amount owed appears to be $" + str(final_total) + WAS_AMENDED
-                    print(extra_string + " The total amount owed appears to be $" + str(final_total))
-                    return extra_string + " The total amount owed appears to be $" + str(final_total)
+                        return extra_string + ESTIMATE + str(final_total) + WAS_AMENDED
+                    return extra_string + ESTIMATE + str(final_total)
                 if is_amended:
-                    print("The amount owed appears to be $" + str(final_total) + WAS_AMENDED)
-                    return "The amount owed appears to be $" + str(final_total + WAS_AMENDED)
-                print("The amount owed appears to be $" + str(final_total))
-                return "The amount owed appears to be $" + str(final_total)
+                    return ESTIMATE + str(final_total + WAS_AMENDED)
+                return ESTIMATE + str(final_total)
             else:
                 for stuff in money_list:
                     final_total += float(stuff)
                 final_total = "{:.2f}".format(final_total)
                 if interest_rate is not None:
-                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% for a total of $" + str(total_interest) + "."
+                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% which adds $" + str(total_interest) + ". "
                     if is_amended:
-                        print(extra_string + " The total amount owed appears to be $" + str(final_total) + WAS_AMENDED)
-                        return extra_string + " The total amount owed appears to be $" + str(final_total) + WAS_AMENDED
-                    print(extra_string + " The total amount owed appears to be $" + str(final_total))
-                    return extra_string + " The total amount owed appears to be $" + str(final_total)
+                        return extra_string + ESTIMATE + str(final_total) + WAS_AMENDED
+                    return extra_string + ESTIMATE + str(final_total)
                 if is_amended:
-                    print("The amount owed appears to be $" + str(final_total) + WAS_AMENDED)
-                    return "The amount owed appears to be $" + str(final_total + WAS_AMENDED)
-                print("The amount owed appears to be $" + str(final_total))
-                return "The amount owed appears to be $" + str(final_total)
-
+                    return ESTIMATE + str(final_total + WAS_AMENDED)
+                return ESTIMATE + str(final_total)
 
         # The following function attempts to extract all occurrences of what could be money from a string
         @staticmethod
@@ -190,7 +185,6 @@ class CaseParser:
         # The following function extracts only the first item that could be money from a string
         @staticmethod
         def extract_one_money(string):
-            show_me_the_money = 0
             string = string.replace(",", "")
             for stuff in string.split():
                 money = re.search(r"^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$", stuff)
@@ -217,6 +211,6 @@ class CaseParser:
                 for stuff in str(string).split():
                     if stuff[0].isnumeric():
                         stuff = stuff[:-1]
-                        the_date = datetime.strptime(stuff, '%m/%d/%Y')
+                        the_date = datetime.datetime.strptime(stuff, '%m/%d/%Y').date()
                         # hoping the courts are consistent with date format...
                         return the_date
