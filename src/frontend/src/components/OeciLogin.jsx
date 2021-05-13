@@ -1,5 +1,5 @@
 import React from "react";
-
+import {redirectSearch} from "../cookieService";
 
 class OeciLogin extends React.Component {
 
@@ -29,20 +29,24 @@ class OeciLogin extends React.Component {
     };
 
     // gather all the user-entered data and post it for the backend to deal with
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const data = new FormData(event.target);
 
         //fetch('/api/form-submit-url', {
-        fetch('/login', {
+        const response = await fetch('/login', {
             method: 'POST',
             body: data,
         });
+        if(response.status == 201){
+            redirectSearch();
+        }
     }
 
     // HTML(?) for the component
     render() {
         return (
+            <main className="oeci-login-container p-3">
             <form onSubmit={this.handleSubmit}>
                 <label>
                     User ID:
@@ -68,6 +72,7 @@ class OeciLogin extends React.Component {
                 />
                 <input type="submit" value="Log In" />
             </form>
+            </main>
         )
     }
 }

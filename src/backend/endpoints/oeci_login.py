@@ -1,11 +1,12 @@
 from flask.views import MethodView
-from flask import request, make_response, current_app, abort, jsonify
+from flask import request, make_response, current_app, abort, jsonify, redirect
 
-from src.backend.crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
+import requests
+from crawler.crawler import Crawler, UnableToReachOECI, InvalidLoginCreds
 
 import os
 
-from src.backend.crypto import DataCipher
+from crypto import DataCipher
 
 # log an error message and stop process
 def error(code, message):
@@ -16,7 +17,7 @@ def error(code, message):
 class OeciLogin(MethodView):
     def post(self):
         data = request.form
-        print(request.cookies)
+        #print(request.cookies)
 
         # Check for data validity:
         if data is None:
@@ -28,13 +29,15 @@ class OeciLogin(MethodView):
 
         response = make_response()
         credentials = {'username': data['oecilogin'], 'password': data['oecipassword']}
+        #fake_creds = {'username': 'fakeUser', 'password': 'fakePass'}
 
         cipher = DataCipher(key=current_app.config.get("SECRET_KEY"))
         encrypted_credentials = cipher.encrypt(credentials)
+        #encrypted_fake_credentials = cipher.encrypt(fake_creds)
 
         # Try to log into OECI database
         try:
-            Crawler.attempt_login(credentials['username'], credentials['password'])
+            Crawler.attempt_login(requests.Session(), credentials['username'], credentials['password'])
             response.set_cookie(
                 "oeci_token",
                 secure=os.getenv("TIER") == "production",

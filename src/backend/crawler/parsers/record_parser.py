@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import re
 
 from models.case_model import CaseCreator
 
@@ -35,20 +36,19 @@ class RecordParser(HTMLParser):
                 self.__reset_case()
             self.__reset_flags()
 
-    # afaik, the following function is not needed as we have no columns with an unpredictable number of entries
-    # def handle_data(self, data):
-    #    if self.__within_valid_table_row():
-    #        switcher = {
-    #            1: self.__set_case_number,
-    #            2: self.__set_style,
-    #            3: self.__set_date_location,
-    #            4: self.__set_type_status,
-    #        }
-    #        # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
-    #        switcher.get(self.column, self._set_charges)(data)
-    #
-    #    elif "Charge(s)" == data:
-    #        self.collect_data = True
+    def handle_data(self, data):
+        if self.__within_valid_table_row():
+            switcher = {
+                1: self.__set_case_number,
+                2: self.__set_style,
+                3: self.__set_date_location,
+            }
+            # ^ is equivalent to a c++ switch(argument) { case 1: return self.__set_case_number; ... }
+            switcher.get(self.column, self.__set_type_status)(data)
+            # switcher.get(case = self.column, default = self.__set_type_status), pass in argument (data)
+
+        elif data == "Type":
+            self.collect_data = True
 
     def error(self, message):
         pass
@@ -57,7 +57,8 @@ class RecordParser(HTMLParser):
         self.case_number = data
 
     def __set_style(self, data):
-        self.style = data
+        # For some reason, whitespaces in the style are encoded as new lines, so fix that:
+        self.style = re.sub('\n', ' ', data)
 
     def __set_date_location(self, data):
         self.date_location.append(data)
@@ -85,8 +86,9 @@ class RecordParser(HTMLParser):
 
     def __valid_row(self):
         # verify all data entries were filled
-        return (len(self.case_number) > 0) and (len(self.style) > 0) \
-               and (len(self.date_location) > 0) and (len(self.type_status) > 0)
+        # edge case: style is empty.  I've found one such case that satisfies this
+        return (len(self.case_number) > 0) and (len(self.style) >= 0) \
+            and (len(self.date_location) > 0) and (len(self.type_status) > 0)
 
     def __reset_flags(self):
         self.column = 0
@@ -116,7 +118,7 @@ class RecordParser(HTMLParser):
         return tag == "tr" and self.within_tr_tag
 
     def __exiting_nested_table(self, tag):
-        return tag == "tr" and self.within_nested_tr
+        return tag == "tr" and self.within_nested_tr  # tr = table row
 
     def __within_valid_table_row(self):
         return self.within_tr_tag and self.collect_data
