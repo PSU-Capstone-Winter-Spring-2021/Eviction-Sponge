@@ -28,16 +28,16 @@ export default class SimpleCard extends React.Component{
         <Card className='bg-light text-left'>
             <CardContent>
                 <Typography className={this.state.casenumber+" text-center"} color="textSecondary" gutterBottom>
-                {this.state.casenumber}
-                </Typography>
-                <Typography className={this.state.casenumber}  gutterBottom>
-                Location: {this.state.location}
-                </Typography>
-                <Typography className={this.state.casenumber}  gutterBottom>
                 Type: {this.state.type}
                 </Typography>
                 <Typography className={this.state.casenumber}  gutterBottom>
+                Case#: {this.state.casenumber}
+                </Typography>
+                <Typography className={this.state.casenumber}  gutterBottom>
                 status: {this.state.status}
+                </Typography>
+                <Typography className={this.state.casenumber}  gutterBottom>
+                Location: {this.state.location}
                 </Typography>
                 <Typography variant="body2" component="p">
                 date: 2021-04-26
