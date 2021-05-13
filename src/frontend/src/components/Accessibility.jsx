@@ -6,8 +6,8 @@ class Accessibility extends React.Component {
         return (
             <main className = "container bg-light text-left font-weight-light" style = {{maxWidth: "720px"}}>
                 <section>
-                    <h2 className = "font-weight-bold mb-4" style = {{maxWidth: "420px"}}>Accessibility Statement for <span class="basic-information website-name">EvictionSponge</span></h2>
-                    <p className = "mb-4">This is an accessibility statement from <span class="basic-information organization-name">Eviction Sponge</span>.</p>
+                    <h2 className = "font-weight-bold mb-4" style = {{maxWidth: "420px"}}>Accessibility Statement for <span className="basic-information website-name">EvictionSponge</span></h2>
+                    <p className = "mb-4">This is an accessibility statement from <span className="basic-information organization-name">Eviction Sponge</span>.</p>
                 </section>
                 <section>
                 <h3 className = "font-weight-bold mb-4">Conformance status</h3>
@@ -17,17 +17,17 @@ class Accessibility extends React.Component {
                     </a>
                      defines requirements for designers and developers to improve accessibility for people with disabilities.
                     It defines three levels of conformance: Level A, Level AA, and Level AAA. 
-                    <span class="basic-information website-name">EvictionSponge </span>
+                    <span className="basic-information website-name">EvictionSponge </span>
                     is
-                    <span class="basic-information conformance-status" data-printfilter="lowercase"> partially conformant </span>
+                    <span className="basic-information conformance-status" data-printfilter="lowercase"> partially conformant </span>
                     with
-                    <span class="basic-information conformance-standard">
+                    <span className="basic-information conformance-standard">
                                     <span data-negate=""> WCAG 2.1 level AA</span>.
                                 </span>
                     <span>
-                                    <span class="basic-information conformance-status"> Partially conformant </span>
+                                    <span className="basic-information conformance-status"> Partially conformant </span>
                                     means that
-	                            <span class="basic-information conformance-meaning"> some parts of the content do not fully conform to the accessibility standard</span>.
+	                            <span className="basic-information conformance-meaning"> some parts of the content do not fully conform to the accessibility standard</span>.
                                 </span>
                 </p>
                 </section>
@@ -35,14 +35,14 @@ class Accessibility extends React.Component {
                     <h3 className = "font-weight-bold mb-4">Feedback</h3>
                     <p className = "mb-4">
                         We welcome your feedback on the accessibility of
-                        <span class="basic-information website-name">EvictionSponge</span>.
+                        <span className="basic-information website-name">EvictionSponge</span>.
                         Please let us know if you encounter accessibility barriers on
-                        <span class="basic-information website-name">EvictionSponge</span>:
+                        <span className="basic-information website-name">EvictionSponge</span>:
                     </p>
-                    <ul class="basic-information feedback h-card mb-4">
+                    <ul className="basic-information feedback h-card mb-4">
                         <li>
                             E-mail:
-                            <a class="email u-email" href="mailto:contact@evictionsponge.com">contact@evictionsponge.com</a>
+                            <a className="email u-email" href="mailto:contact@evictionsponge.com">contact@evictionsponge.com</a>
                         </li>
                     </ul>
                 </section>
@@ -50,11 +50,11 @@ class Accessibility extends React.Component {
                     <h3 className = "font-weight-bold mb-4">Technical specifications</h3>
                     <p className = "mb-4">
                         Accessibility of
-                        <span class="basic-information website-name">EvictionSponge</span>
+                        <span className="basic-information website-name">EvictionSponge</span>
                         relies on the following technologies to work with the particular combination of web browser and any assistive
                         technologies or plugins installed on your computer:
                     </p>
-                    <ul class="technical-information technologies-used mb-4">
+                    <ul className="technical-information technologies-used mb-4">
                         <li>HTML</li>
                         <li>WAI-ARIA</li>
                         <li>CSS</li>
@@ -65,12 +65,12 @@ class Accessibility extends React.Component {
                 <section>
                     <h3 className = "font-weight-bold mb-4">Assessment approach</h3>
                     <p className = "mb-4">
-                        <span class="basic-information organization-name">Eviction Sponge</span>
+                        <span className="basic-information organization-name">Eviction Sponge</span>
                         assessed the accessibility of
-                        <span class="basic-information website-name">EvictionSponge</span>
+                        <span className="basic-information website-name">EvictionSponge</span>
                         by the following approaches:
                     </p>
-                    <ul class="technical-information assessment-approaches mb-4">
+                    <ul className="technical-information assessment-approaches mb-4">
                         <li>Self-evaluation</li>
                     </ul>
                 </section>
