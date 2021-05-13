@@ -189,6 +189,10 @@ footer {
     min-height: 57vh;
 }
 
+.mh57{
+    min-height: 57vh;
+}
+
 footer.navbar a {
     text-decoration: underline;
 }
