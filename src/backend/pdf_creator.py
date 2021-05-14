@@ -125,7 +125,7 @@ class CreatePDF:
             DEFENDANT_2_2=input_dict['defendant_line2'],
             DEFENDANT_2_3=input_dict['defendant_line3'],
             DEFENDANT_2_4=input_dict['defendant_line4'],
-            PLAINTIFF_NAME=input_dict['plaintiff_line1'],
+            PLAINTIFF_NAME='',
             DO_NOT_FILL='',
             DO_NOT_CLICK=False
         )

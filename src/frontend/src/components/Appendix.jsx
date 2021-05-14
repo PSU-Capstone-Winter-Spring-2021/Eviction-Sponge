@@ -3,7 +3,7 @@ import React from "react";
 class Appendix extends React.Component {
     render() {
         return (
-            <main className="bg-light">
+            <main className="bg-light mh57">
                 <section className="container text-left">
                     <div className="w-75">
                         <h2 className="pb-3 pt-4">Appendix</h2>
