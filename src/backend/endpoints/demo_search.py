@@ -1,9 +1,10 @@
 import csv
 import os
+from datetime import datetime
 
 from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
-import requests
+from src.backend import eligibility_eval
 
 
 def error(code, message):
@@ -34,16 +35,21 @@ class DemoSearch(MethodView):
             demoData = csv.reader(demoFile, delimiter=';')
             for fakeCase in demoData:
                 # file format:
-                #   case #, style, location, type, status, closed date, judgements, eligibility T/F, eligibility string
+                #   case #, style, location, type, status, complaint date, closed date,
+                #                       judgements, eligibility T/F, eligibility string
+                eligibility = eligibility_eval.is_eligible(fakeCase[4],
+                                                           datetime.strptime(fakeCase[6], '%m/%d/%Y').date(),
+                                                           split_judgements_string(fakeCase[7]))
                 key = fakeCase[0]
-                value = {'style': fakeCase[1], 'location': fakeCase[2], 'violation_type': fakeCase[3],
-                         'status': fakeCase[4], 'date': fakeCase[5], 'judgements': split_judgements_string(fakeCase[6]),
-                         'eligibility': (fakeCase[7], fakeCase[8])}
+                value = {'style': fakeCase[1],
+                         'location': fakeCase[2],
+                         'violation_type': fakeCase[3],
+                         'status': fakeCase[4],
+                         'complaint_date': fakeCase[5],
+                         'closed_date': fakeCase[6],
+                         'judgements': split_judgements_string(fakeCase[7]),
+                         'eligibility': eligibility}
                 search_results.update({key: value})
-
-        # To view all search results:
-        for key, value in search_results.items():
-            print(key, " : ", value)
 
         return json.dumps(search_results)
 
