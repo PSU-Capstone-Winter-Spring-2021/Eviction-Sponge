@@ -35,24 +35,44 @@ class Search extends React.Component {
         }
         console.log("clicked, names: " + postName.first_name + " " + postName.last_name +", " + postName.middle_name);
         this.setState({Submitted: true});
-        await axios.post("/search", postName).then(res => {
+        if(this.props.demo){
+            await axios.post("/demo", postName).then(res => {
 
-            if(res !== null) {
-                this.setState({Loaded: true});
-                console.log(res.data);
-                this.setState({Results: res.data, Found: true});
-                if(res.status == 401 || res.status == 500){
-                    redirectLogin();
+                if(res !== null) {
+                    this.setState({Loaded: true});
+                    console.log(res.data);
+                    this.setState({Results: res.data, Found: true});
+                    if(res.status == 401 || res.status == 500){
+                        redirectLogin();
+                    }
                 }
-            }
-        }, reason => {
-            redirectLogin();
-            removeCookie();
-        })
+            }, reason => {
+                redirectLogin();
+                removeCookie();
+            })
+        }
+        else{
+            await axios.post("/search", postName).then(res => {
+
+                if(res !== null) {
+                    this.setState({Loaded: true});
+                    console.log(res.data);
+                    this.setState({Results: res.data, Found: true});
+                    if(res.status == 401 || res.status == 500){
+                        redirectLogin();
+                    }
+                }
+            }, reason => {
+                redirectLogin();
+                removeCookie();
+            })
+        }
         if(this.state.Results.length === 0) {
             this.setState({Found: false})
         }
     }
+
+
 
     render() {
         return (

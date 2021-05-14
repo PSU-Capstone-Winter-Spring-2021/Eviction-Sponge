@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import Search from './Search'
 
 class DemoPage extends React.Component {
     render() {
@@ -39,6 +40,7 @@ class DemoPage extends React.Component {
                 convicted charge, it is eligible after three years.
             </p>
           </div>
+          <Search demo='true'></Search>
         </article>
         );
     }
