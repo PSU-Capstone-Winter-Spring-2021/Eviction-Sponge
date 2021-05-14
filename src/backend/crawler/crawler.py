@@ -5,7 +5,6 @@ from crawler.parsers.node_parser import NodeParser
 from crawler.parsers.param_parser import ParamParser
 from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
-from models.case_model import EditStatus
 from eligibility_eval import is_eligible
 
 
@@ -72,15 +71,19 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            eligibility = is_eligible(eviction_case.current_status, eviction_case.closed_date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
             #       is called and includes the time
             key = eviction_case.case_number
-            value = {'style': eviction_case.style, 'location': eviction_case.location,
-                     'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
-                     'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
+            value = {'style': eviction_case.style,
+                     'location': eviction_case.location,
+                     'violation_type': eviction_case.violation_type,
+                     'status': eviction_case.current_status,
+                     'complaint_date': eviction_case.complaint_date,
+                     'closed_date': eviction_case.closed_date.strftime("%m/%d/%Y"),
+                     'judgements': eviction_case.judgements,
                      'eligibility': eligibility}
             eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
@@ -130,7 +133,8 @@ class Crawler:
 
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
+        complaint_date = case_parser_data.complaint_date
         judgements = case_parser_data.judgements
-        updated_summary = replace(case, date=closed_date, judgements=judgements, edit_status=EditStatus.UNCHANGED)
+        updated_summary = replace(case, complaint_date=complaint_date, closed_date=closed_date, judgements=judgements)
 
         return updated_summary
