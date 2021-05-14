@@ -43,9 +43,10 @@ def is_eligible(current_status, closed_date, judgements) -> (bool, str):
         no_judgements = True
 
     # Regular Cases:
-    years_since = ((datetime.date(datetime.now()) - closed_date).total_seconds()) / SECONDS_IN_YEAR
-    if years_since >= 5:
-        five_years = True
+    if not no_date:
+        years_since = ((datetime.date(datetime.now()) - closed_date).total_seconds()) / SECONDS_IN_YEAR
+        if years_since >= 5:
+            five_years = True
     for judgement in judgements:
         # Acceptable judgements must start with "Judgement" (amended judgements & notes won't) and be followed by
         # "Dismissal", with any characters in between.  "Stipulated" disqualifies this
