@@ -42,13 +42,10 @@ class Search extends React.Component {
                     this.setState({Loaded: true});
                     console.log(res.data);
                     this.setState({Results: res.data, Found: true});
-                    if(res.status == 401 || res.status == 500){
-                        redirectLogin();
-                    }
+                    // if(res.status == 401 || res.status == 500){
+                    //     redirectLogin();
+                    // }
                 }
-            }, reason => {
-                redirectLogin();
-                removeCookie();
             })
         }
         else{
