@@ -28,7 +28,7 @@ class DemoSearch(MethodView):
         if data.get('last_name') is None:
             error(400, "Missing last name")
 
-        search_results = {}
+        search_results = []
         path = os.path.relpath('backend\\data\\demo_search_data.csv', os.path.dirname(__file__))
         with open(path, newline='\n') as demoFile:
             demoData = csv.reader(demoFile, delimiter=';')
@@ -39,7 +39,7 @@ class DemoSearch(MethodView):
                 value = {'style': fakeCase[1], 'location': fakeCase[2], 'violation_type': fakeCase[3],
                          'status': fakeCase[4], 'date': fakeCase[5], 'judgements': split_judgements_string(fakeCase[6]),
                          'eligibility': (fakeCase[7], fakeCase[8])}
-                search_results.update({key: value})
+                search_results.append({key: value})
 
         # To view all search results:
         for key, value in search_results.items():
