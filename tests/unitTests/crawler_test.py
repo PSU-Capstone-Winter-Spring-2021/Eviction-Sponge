@@ -6,7 +6,7 @@ import pytest
 
 from src.backend import eligibility_eval
 from src.backend.crawler.crawler import UnableToReachOECI, InvalidLoginCreds, Crawler
-from tests.unitTests.class_mocks import MockRequest, MockSession, MockURL, MockCaseSummary
+from tests.class_mocks import MockRequest, MockSession, MockURL, MockCaseSummary
 from src.backend.crawler.util import URL
 from src.backend.app import create_app
 
