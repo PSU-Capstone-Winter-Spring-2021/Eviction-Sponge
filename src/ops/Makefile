@@ -13,7 +13,7 @@ frontend_clean:
 # build a docker image containing the backend Python environment
 backend_env_build:
 	cd ../backend; \
-	docker build . -t evictionsponge/spongeservice:dev
+	docker build . -t evictionsponge/expungeservice:dev
 
 # make sure RS_ENV is set and not 'dev'
 env_check:
@@ -28,18 +28,18 @@ endif
 
 # remove source from docker image context tree
 clean:
-	rm -rf docker/spongeservice/backend \
-         docker/spongeservice/frontend
+	rm -rf docker/expungeservice/backend \
+         docker/expungeservice/frontend
 
 # synchronize source trees into docker context tree
 rsync:
-	rsync -rlptoD --delete --omit-dir-times ../backend docker/spongeservice
-	rsync -rlptoD --delete --omit-dir-times ../frontend/build docker/spongeservice/frontend
+	rsync -rlptoD --delete --omit-dir-times ../backend docker/expungeservice
+	rsync -rlptoD --delete --omit-dir-times ../frontend/build docker/expungeservice/frontend
 
-# build an spongeservice image with the given RS_ENV tag ('staging', 'prod', etc)
+# build an expungeservice image with the given RS_ENV tag ('staging', 'prod', etc)
 image: rsync env_check
-	cd docker/spongeservice; \
-		docker build . -t evictionsponge/spongeservice:$(RS_ENV)
+	cd docker/expungeservice; \
+		docker build . -t evictionsponge/expungeservice:$(RS_ENV)
 
 # build prod image
 prod_image: clean

@@ -1,12 +1,12 @@
 
 from dataclasses import replace
-
 from src.backend import eligibility_eval
 from src.backend.crawler.util import URL, Payload, LRUCache
 from src.backend.crawler.parsers.node_parser import NodeParser
 from src.backend.crawler.parsers.param_parser import ParamParser
 from src.backend.crawler.parsers.record_parser import RecordParser
 from src.backend.crawler.parsers.case_parser import CaseParser
+
 
 
 class UnableToReachOECI(Exception):
@@ -54,10 +54,10 @@ class Crawler:
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
         # max number of cases we want to address
-        if len(search_result) >= 300:
-            raise ValueError(
-                f"Found {len(search_result)} matching cases, exceeding the limit of 300."
-            )
+        # if len(search_result) >= 300:
+        #     raise ValueError(
+        #         f"Found {len(search_result)} matching cases, exceeding the limit of 300."
+        #     )
 
         # eviction cases will be of the following types
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
@@ -79,9 +79,13 @@ class Crawler:
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
             #       is called and includes the time
             key = eviction_case.case_number
-            value = {'style': eviction_case.style, 'location': eviction_case.location,
-                     'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
-                     'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
+            value = {'style': eviction_case.style,
+                     'location': eviction_case.location,
+                     'violation_type': eviction_case.violation_type,
+                     'status': eviction_case.current_status,
+                     'complaint_date': eviction_case.complaint_date,
+                     'closed_date': eviction_case.closed_date.strftime("%m/%d/%Y"),
+                     'judgements': eviction_case.judgements,
                      'eligibility': eligibility}
             eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
@@ -132,7 +136,8 @@ class Crawler:
 
         # balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(case_parser_data.balance_due)
         closed_date = case_parser_data.closed_date
+        complaint_date = case_parser_data.complaint_date
         judgements = case_parser_data.judgements
-        updated_summary = replace(case, date=closed_date, judgements=judgements)
+        updated_summary = replace(case, complaint_date=complaint_date, closed_date=closed_date, judgements=judgements)
 
         return updated_summary

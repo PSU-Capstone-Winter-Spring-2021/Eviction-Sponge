@@ -64,9 +64,9 @@ class Accessibility extends React.Component {
                 <ul class="technical-information assessment-approaches">
                     <li>Self-evaluation</li>
                 </ul>
-                <hr noshade="noshade">
+                {/* <hr noshade="noshade"> */}
                     <h3>Date</h3>
-                </hr>
+                {/* </hr> */}
             </main>
         );
     }

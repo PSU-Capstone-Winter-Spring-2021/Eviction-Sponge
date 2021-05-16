@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime, date
-
 import re
 from typing import List
 
@@ -11,7 +10,8 @@ class CaseSummary:
     case_number: str
     style: str
     location: str
-    date: date
+    complaint_date: str
+    closed_date: date  # this is a date since we do date arithmetic w/ it
     violation_type: str
     current_status: str
     judgements: List[str]
@@ -34,7 +34,8 @@ class OeciCase:
                 case_number=case_number,
                 style="",
                 location="",
-                date=date.today(),
+                complaint_date="",
+                closed_date=date.today(),
                 violation_type="",
                 current_status="",
                 judgements=[],
@@ -56,16 +57,17 @@ class CaseCreator:
         balance="0",
         judgements=[],
     ) -> CaseSummary:
-        myDate, location = date_location
-        myDate = datetime.date(datetime.strptime(myDate, "%m/%d/%Y"))
+        closed_date, location = date_location
+        closed_date = datetime.date(datetime.strptime(closed_date, "%m/%d/%Y"))
         violation_type, current_status = type_status
         balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(balance)
         return CaseSummary(
-            "",
+            "",  # name
             case_number,
             style,
             location,
-            myDate,
+            "",  # complaint_date
+            closed_date,
             violation_type,
             current_status,
             judgements,

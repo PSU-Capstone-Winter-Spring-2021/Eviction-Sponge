@@ -9,6 +9,7 @@ from typing import List
 @dataclass
 class CaseParserData:
     closed_date: date
+    complaint_date: str
     judgements: []
     money: str
 
@@ -21,11 +22,13 @@ class CaseParser:
         money = CaseParser.MoneyParser.parse_money(soup)
         closed_date = CaseParser.__parse_closed_date(soup)
         judgements = CaseParser.__parse_judgements(soup)
+        complaint_date = CaseParser.__parse_complaint_date(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser.__parse_secondary_judgements(soup)
 
-        return CaseParserData(closed_date, judgements, money)
+        # return CaseParserData(closed_date, complaint_date, judgements, money)
+        return CaseParserData(closed_date, complaint_date, judgements, money)
 
     @staticmethod
     def __parse_closed_date(soup) -> date:
@@ -49,6 +52,27 @@ class CaseParser:
                 # and finally remove the time from the date:
                 return datetime.strptime(tag.renderContents().decode("utf-8"), "%m/%d/%Y").date()
         return datetime(9999, 9, 9)
+
+    @staticmethod
+    def __parse_complaint_date(soup) -> str:
+        # The complaint is always the first entry in OTHER EVENTS AND HEARINGS, so the header is always
+        # "COtherEventsAndHearings RCDER#".  Just grab that block and parse the date (string) out of it
+        # Update: For some reason, RCDER# doesn't always count from 1 (or 0), sometimes starts at higher number
+        date_string = ''
+        for i in range(0, 10):
+            header = "COtherEventsAndHearings RCDER" + str(i)
+            tag = soup.find("td", headers=header)
+            if tag is None:
+                continue
+
+            as_string = tag.renderContents().decode("utf-8")
+            if "Complaint" not in as_string:
+                continue
+            try:
+                date_string = re.search(r'[0-9]{2}\/[0-9]{2}\/[0-9]{4}', as_string).group(0)
+            except AttributeError:
+                date_string = "09/09/9999"
+        return date_string
 
     @staticmethod
     def __parse_judgements(soup) -> List[str]:
@@ -123,7 +147,7 @@ class CaseParser:
                         time_difference = today - from_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
-                        interest_time = time_in_seconds/31536000
+                        interest_time = time_in_seconds / 31536000
                         total_interest = float(amount_before_interest) * float(interest_rate) * float(interest_time)
                         amount_with_interest = float(amount_before_interest) + total_interest
 
@@ -161,7 +185,8 @@ class CaseParser:
                     final_total += float(stuff)
                 final_total = "{:.2f}".format(final_total)
                 if interest_rate is not None:
-                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(interest_rate) + "% for a total of " + str(final_total) + "."
+                    extra_string = "The interest rate on " + str(amount_before_interest) + " is " + str(
+                        interest_rate) + "% for a total of " + str(final_total) + "."
                     return extra_string + " The total amount owed appears to be $" + str(final_total)
                 print("The amount owed appears to be $" + str(final_total))
                 return "The amount owed appears to be $" + str(final_total)

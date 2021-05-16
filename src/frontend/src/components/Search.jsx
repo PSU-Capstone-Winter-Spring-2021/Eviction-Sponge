@@ -56,29 +56,29 @@ class Search extends React.Component {
 
     render() {
         return (
-            <>
-            <form class="bg-light">
-                <div class="searchInputs">
-                {/* <label for="firstName">First Name</label> */}
-                <input class="searchField" type="text" id="firstName" name="firstName" required="true" placeholder="First Name"/>
-                {/* <label for="middleName">Middle Name</label> */}
-                <input class="searchField" type="text" id="middleName" name="middleName" placeholder="Middle Name(Opt.)"/>
-                {/* <label for="lastName">Last Name</label> */}
-                <input class="searchField" type="text" id="lastName" name="lastName" required="true" placeholder="Last Name"/>
-                <input class="searchButton" type="submit" value="Search" onClick={this.handleSubmit.bind(this)}/>
-                {this.state.Submitted && 
-                    !this.state.Found && 
-                    !this.state.Loaded &&<p class="loadingText"> Loading...</p>
-                }
-                {this.state.Submitted &&  
-                    this.state.Loaded &&
-                    !this.state.Found &&<p class="notFoundText"> No results Found</p>
-                }
-                </div>
-            </form>
-            {this.state.Submitted &&
-                    this.state.Found && <div>{CreatSimpleCardList(this.state.Results)}</div>}
-            </>
+            <main className="search-container bg-light">
+                <form class="bg-light">
+                    <div class="searchInputs">
+                    {/* <label for="firstName">First Name</label> */}
+                    <input class="searchField" type="text" id="firstName" name="firstName" required="true" placeholder="First Name"/>
+                    {/* <label for="middleName">Middle Name</label> */}
+                    <input class="searchField" type="text" id="middleName" name="middleName" placeholder="Middle Name(Opt.)"/>
+                    {/* <label for="lastName">Last Name</label> */}
+                    <input class="searchField" type="text" id="lastName" name="lastName" required="true" placeholder="Last Name"/>
+                    <input class="searchButton" type="submit" value="Search" onClick={this.handleSubmit.bind(this)}/>
+                    {this.state.Submitted && 
+                        !this.state.Found && 
+                        !this.state.Loaded &&<p class="loadingText"> Loading...</p>
+                    }
+                    {this.state.Submitted &&  
+                        this.state.Loaded &&
+                        !this.state.Found &&<p class="notFoundText"> No results Found</p>
+                    }
+                    </div>
+                </form>
+                {this.state.Submitted &&
+                        this.state.Found && <div>{CreatSimpleCardList(this.state.Results)}</div>}
+            </main>
         );
     }
 }

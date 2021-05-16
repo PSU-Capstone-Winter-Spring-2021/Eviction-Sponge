@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 export default class navbar extends React.Component{
     render(){
         return(
-        <div className="container-fluid mb-4 bg-white">
+        <div className="container-fluid pb-2 bg-white border-bottom">
           <nav className="row justify-content-center align-items-end"
             aria-label="Primary"
           >
