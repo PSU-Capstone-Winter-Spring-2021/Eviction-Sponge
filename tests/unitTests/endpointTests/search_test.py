@@ -47,8 +47,8 @@ def mock_crawler_attempt_login(session, username, password):
 
 def mock_crawler_search(session, login_creds, first_name, last_name, middle_name):
     return [{'12345': {'style': 'style', 'location': 'location', 'violation_type': 'type',
-                       'status': 'status', 'date': '09/09/9999', 'judgements': ['judgement1', 'judgement2'],
-                       'eligibility': (True, 'Eligible')}}]
+                       'status': 'status', 'complaint_date': '09/09/9999', 'closed_date': '09/09/9999',
+                       'judgements': ['judgement1', 'judgement2'], 'eligibility': (True, 'Eligible')}}]
 
 
 def mock_requests_Session():
