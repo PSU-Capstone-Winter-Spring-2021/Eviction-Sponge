@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 from flask.views import MethodView
-from flask import request, make_response, current_app, abort, jsonify, json
+from flask import make_response, current_app, abort, jsonify, json
 from src.backend import eligibility_eval
 
 
@@ -22,13 +22,10 @@ class DemoSearch(MethodView):
     def post(self):
         search_results = {}
         path = os.path.relpath('backend\\data\\demo_search_data.csv', os.path.dirname(__file__))
-        with open(path, newline='\n') as demoFile:
+        #with open(path, newline='\n') as demoFile:
+        with open(path) as demoFile:
             demoData = csv.reader(demoFile, delimiter=';')
             for fakeCase in demoData:
-                print(fakeCase)
-                # file format:
-                #   case #, style, location, type, status, complaint date, closed date,
-                #                       judgements, eligibility T/F, eligibility string
                 eligibility = eligibility_eval.is_eligible(fakeCase[4],
                                                            datetime.strptime(fakeCase[6], '%m/%d/%Y').date(),
                                                            split_judgements_string(fakeCase[7]))
