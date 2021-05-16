@@ -1,9 +1,8 @@
 from flask.views import MethodView
 from flask import request, make_response, current_app, abort, jsonify, json
 import requests
-from requests import Session
-from crypto import DataCipher
-from crawler.crawler import Crawler
+from src.backend.crypto import DataCipher
+from src.backend.crawler.crawler import Crawler
 
 # Set to True to display time taken to execute search
 TIMER = False
@@ -21,12 +20,13 @@ class Search(MethodView):
             start_time = time.time()
 
         data = request.get_json()
+
         # Check for data validity:
         if data is None:
-            error(400, "Missing one or more required fields")
-        if data.get('first_name') is None:
+            error(400, "Missing first and last name")
+        if len(data.get('first_name')) == 0:
             error(400, "Missing first name")
-        if data.get('last_name') is None:
+        if len(data.get('last_name')) == 0:
             error(400, "Missing last name")
 
         search_credentials = {'first': data['first_name'],
@@ -42,7 +42,6 @@ class Search(MethodView):
                                         search_credentials['first'],
                                         search_credentials['last'],
                                         search_credentials['middle'])
-
         if TIMER:
             print("--- Total Time: %s seconds ---" % (time.time() - start_time))
 

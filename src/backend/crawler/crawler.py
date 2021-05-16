@@ -1,11 +1,12 @@
 
 from dataclasses import replace
-from crawler.util import URL, Payload, LRUCache
-from crawler.parsers.node_parser import NodeParser
-from crawler.parsers.param_parser import ParamParser
-from crawler.parsers.record_parser import RecordParser
-from crawler.parsers.case_parser import CaseParser
-from eligibility_eval import is_eligible
+from src.backend import eligibility_eval
+from src.backend.crawler.util import URL, Payload, LRUCache
+from src.backend.crawler.parsers.node_parser import NodeParser
+from src.backend.crawler.parsers.param_parser import ParamParser
+from src.backend.crawler.parsers.record_parser import RecordParser
+from src.backend.crawler.parsers.case_parser import CaseParser
+
 
 
 class UnableToReachOECI(Exception):
@@ -48,8 +49,7 @@ class Crawler:
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
-        # generate a list of case records, specifically a list of CaseSummary from case_parser.py
-        # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
+        # generate a list of case records (see CaseSummary in case_model.py)
         # the OECI database named the column 'style', it's the name of the case (i.e. "John Hancock V. John Smith")
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
@@ -71,7 +71,9 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = is_eligible(eviction_case.current_status, eviction_case.closed_date, eviction_case.judgements)
+            # Aside: eligibility_eval.is_eligible is non-intuitive, but makes testing so much easier than
+            # from ... import is_eligible and calling is_eligible(...)
+            eligibility = eligibility_eval.is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
@@ -98,8 +100,9 @@ class Crawler:
 
         return session.post(search_url, data=payload, timeout=30)
 
-    # Search the database for cases that match the names provided, and feed the results to RecordParser
-    # for later parsing
+    # Search the database for cases that match the names provided and return the summaries of each
+    # (specifically, the info provided on OECI's search page: case #, style, date/location, type/status,
+    # and case_detail_link)
     @staticmethod
     def _search_record(session, node_response, search_url, first_name, last_name, middle_name):
         param_parser = ParamParser()

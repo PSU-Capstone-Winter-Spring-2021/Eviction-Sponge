@@ -20,20 +20,12 @@ def split_judgements_string(judgements):
 # From an outside perspective, it functions the same as the search endpoint, but the data is made up
 class DemoSearch(MethodView):
     def post(self):
-        data = request.get_json()
-        # Check for data validity:
-        if data is None:
-            error(400, "Missing one or more required fields")
-        if data.get('first_name') is None:
-            error(400, "Missing first name")
-        if data.get('last_name') is None:
-            error(400, "Missing last name")
-
         search_results = {}
         path = os.path.relpath('backend\\data\\demo_search_data.csv', os.path.dirname(__file__))
         with open(path, newline='\n') as demoFile:
             demoData = csv.reader(demoFile, delimiter=';')
             for fakeCase in demoData:
+                print(fakeCase)
                 # file format:
                 #   case #, style, location, type, status, complaint date, closed date,
                 #                       judgements, eligibility T/F, eligibility string
