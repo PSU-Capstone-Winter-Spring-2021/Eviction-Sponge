@@ -1,9 +1,9 @@
 import React from 'react';
-// import { makeStyles } from 'material-ui/core/styles';
+import { makeStyles } from 'material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import CardActions from 'material-ui/core/CardActions';
+import CardActions from 'material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import Button from 'material-ui/core/Button';
+import Button from 'material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import 'react-bootstrap';
@@ -56,11 +56,16 @@ export default class SimpleCard extends React.Component{
                             },
                         }}
                         >
-                        Eligibility: {eligibility}
+                    <Button variant="contained" size="small" color="secondary">
+                    Eligible Now
+                    </Button> : {eligibility}
                         </Link>
                         : <p>Eligibility: {eligibility}</p>
                     }
                 </Typography>
+                <CardActions>
+                    <Button color="primary" variant="contained" size="small">Click to autofill application pdf</Button>
+                </CardActions>
             </CardContent>
             </Card>
         </div>
