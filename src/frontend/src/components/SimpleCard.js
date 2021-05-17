@@ -46,10 +46,10 @@ export default class SimpleCard extends React.Component{
                 <Typography variant="body2" component="p">
                 <Button variant="contained" size="small" color="secondary">
                 Eligible Now
-                </Button>    : {this.state.eligibility}
+                </Button>    : {this.state.eligibility}<Button color="primary" variant="contained" size="small">Click to autofill application pdf</Button>
                 </Typography>
                 <CardActions>
-                    <Button color="#F2F1F9" variant="contained" size="small">Click to autofill application pdf</Button>
+                    
                 </CardActions>
             </CardContent>
             </Card>
