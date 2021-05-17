@@ -1,9 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import Container from '@material-ui/core/Container';
 
 class DemoPage extends React.Component {
     render() {
         return (
+        <Container>
         <article className="lh-copy">
             <div className="bg-white shadow bl bw3 b--blue mv4 pv4 ph4 ph5-l br3">
                 <h1 className="f3 fw9 ma0 mb2">App Demo</h1>
@@ -40,6 +42,7 @@ class DemoPage extends React.Component {
             </p>
           </div>
         </article>
+        </Container>
         );
     }
 }
