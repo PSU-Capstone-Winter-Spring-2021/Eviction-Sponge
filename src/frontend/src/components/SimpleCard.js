@@ -27,19 +27,19 @@ export default class SimpleCard extends React.Component{
             <Card className='bg-light border'>
             <CardContent>
                 <Typography className={caseNum+" text-center"} color="textSecondary" gutterBottom>
-                Type: {case_name}
+                Case Name: {case_name}
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
                 {caseNum} 
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
-                status: {status}
+                Status: {status}
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
                 Location: {county_name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                date: {date_of_judgement}
+                Date: {date_of_judgement}
                 </Typography>
                 <Typography variant="body2" component="p">
                     {eligibility[0]
@@ -56,9 +56,9 @@ export default class SimpleCard extends React.Component{
                             },
                         }}
                         >
-                        eligibility: {eligibility}
+                        Eligibility: {eligibility}
                         </Link>
-                        : <p>eligibility: {eligibility}</p>
+                        : <p>Eligibility: {eligibility}</p>
                     }
                 </Typography>
             </CardContent>
