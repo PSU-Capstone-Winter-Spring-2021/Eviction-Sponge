@@ -42,8 +42,8 @@ class DemoSearch(MethodView):
                 search_results.append({key: value})
 
         # To view all search results:
-        for key, value in search_results.items():
-            print(key, " : ", value)
+        # for key, value in search_results.items():
+        #     print(key, " : ", value)
 
         return json.dumps(search_results)
 
