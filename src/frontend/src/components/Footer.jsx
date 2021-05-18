@@ -33,7 +33,7 @@ class Footer extends React.Component {
                             <p className="row m-0 border-bottom">
                                 <a className="col-4" href="/record-search">Search</a>
                                 <a className="col-4" href="/partners">Partners</a>
-                                <a className="col-4" href="/faq">FAQ</a>
+                                {/* <a className="col-4" href="/faq">FAQ</a> */}
                             </p>
                         </div>
                         <div className="col-12 p-0">
@@ -54,11 +54,11 @@ class Footer extends React.Component {
                                 <a className="col-4" href="/manual">Manual</a>
                             </p>
                         </div>
-                        <div className="col-4 p-0">
+                        <div className="col-3 p-0">
                             <p className="row">
                                 <a className="col-4" href="/record-search">Search</a>
-                                <a className="col-4" href="/partners">Partners</a>
-                                <a className="col-4" href="/faq">FAQ</a>
+                                <a className="col-5" href="/partners">Partners</a>
+                                {/* <a className="col-4" href="/faq">FAQ</a> */}
                             </p>
                         </div>
                         <div className="col-4 p-0">

@@ -45,7 +45,6 @@ function App() {
       <Route component={FillFrom} exact={true} path="/fill-form" />
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
-      <Route component={FaqPage} exact={true} path="/faq" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
     </Switch>
     <Footer />
