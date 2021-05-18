@@ -1,4 +1,3 @@
-
 from dataclasses import replace
 from crawler.util import URL, Payload, LRUCache
 from crawler.parsers.node_parser import NodeParser
@@ -112,7 +111,7 @@ class Crawler:
     # Parse the detailed case page for judgements and the closed date of a case
     @staticmethod
     def _read_case(session, case):
-        # cache the link
+        # cache the link for future use
         if session:
             # Dear Future Maintainer,
             #       If you're trying to make this crawler go faster, session.get is your issue.
@@ -134,3 +133,7 @@ class Crawler:
         updated_summary = replace(case, date=closed_date, judgements=judgements, edit_status=EditStatus.UNCHANGED)
 
         return updated_summary
+
+    @staticmethod
+    def fetch_case_detail_link(url):
+        return Crawler.cached_links[url]
