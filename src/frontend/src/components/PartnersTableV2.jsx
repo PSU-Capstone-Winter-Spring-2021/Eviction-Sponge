@@ -2,29 +2,16 @@ import React from "react";
 import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import defaultPartnerData from "../data/partnerData.json";
+import partnerData from "../data/partnerData.json";
 import "bootstrap/dist/css/bootstrap.css";
 
 class PartnersTableV2 extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            dataLoaded: false,
-            partnerData: [],
-        }
-    }
-
-    async getPartnerData(){
-        await axios.post('/').then ((response) => {
-            console.log(response);
-        }, (error) => {
-            console.log(error);
-        })
     }
 
     render(){
-        //this.getPartnerData();
-        let partners = defaultPartnerData.map((partner, index) => (
+        let partners = partnerData.map((partner, index) => (
             <Card className="row bg-light" key={partner.id}>
                 <Accordion.Toggle
                 as={Card.Header}
