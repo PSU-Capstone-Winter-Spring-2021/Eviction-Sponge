@@ -36,13 +36,13 @@ def mock_fetch_search_page(session, search_url, login_response):
 
 # Used specifically in test_search_returns_eviction_type_cases, returns a mix of eviction and non-eviction type cases
 def mock_search_record_two_evictions_four_cases(session, node_response, search_url, first, last, middle):
-    return [MockCaseSummary('100', 'style', 'location', datetime(9999, 9, 9), 'type', 'status', ['judgement'],
+    return [MockCaseSummary('100', 'style', 'location', '10/10/1010', datetime(9999, 9, 9), 'type', 'status', ['judgement'],
                             'detail link'),
-            MockCaseSummary('101', 'style', 'location', datetime(9999, 9, 9), 'Forcible Entry Detainer: Residential',
+            MockCaseSummary('101', 'style', 'location', '10/10/1010', datetime(9999, 9, 9), 'Forcible Entry Detainer: Residential',
                             'status', ['judgement'], 'detail link'),
-            MockCaseSummary('102', 'style', 'location', datetime(9999, 9, 9), 'type', 'status', ['judgement'],
+            MockCaseSummary('102', 'style', 'location', '10/10/1010', datetime(9999, 9, 9), 'type', 'status', ['judgement'],
                             'detail link'),
-            MockCaseSummary('103', 'style', 'location', datetime(9999, 9, 9),
+            MockCaseSummary('103', 'style', 'location', '10/10/10', datetime(9999, 9, 9),
                             'Landlord/Tenant - Residential or Return of Personal Property', 'status', ['judgement'],
                             'detail link')]
 

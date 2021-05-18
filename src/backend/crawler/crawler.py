@@ -54,10 +54,10 @@ class Crawler:
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
         # max number of cases we want to address
-        # if len(search_result) >= 300:
-        #     raise ValueError(
-        #         f"Found {len(search_result)} matching cases, exceeding the limit of 300."
-        #     )
+        if len(search_result) >= 300:
+            raise ValueError(
+                f"Found {len(search_result)} matching cases, exceeding the limit of 300."
+            )
 
         # eviction cases will be of the following types
         ACCEPTABLE_TYPES = ["Forcible Entry Detainer: Residential",
@@ -73,7 +73,7 @@ class Crawler:
             # Test if this eviction is eligible for expungement:
             # Aside: eligibility_eval.is_eligible is non-intuitive, but makes testing so much easier than
             # from ... import is_eligible and calling is_eligible(...)
-            eligibility = eligibility_eval.is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            eligibility = eligibility_eval.is_eligible(eviction_case.current_status, eviction_case.closed_date, eviction_case.judgements)
 
             # Build a dictionary of all eviction cases found.  Using json format
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string

@@ -34,18 +34,20 @@ class MockCaseSummary:
     case_number: str
     style: str
     location: str
-    date: date
+    complaint_date = str
+    closed_date: date
     violation_type: str
     current_status: str
     judgements: List[str]
     case_detail_link: str
     balance_due_in_cents: int
 
-    def __init__(self, case_num, style, location, date, case_type, status, judgements, case_detail_link):
+    def __init__(self, case_num, style, location, complaint_date, closed_date, case_type, status, judgements, case_detail_link):
         self.case_number = case_num
         self.style = style
         self.location = location
-        self.date = date
+        self.complaint_date = complaint_date
+        self.closed_date = closed_date
         self.violation_type = case_type
         self.current_status = status
         self.judgements = judgements
