@@ -17,6 +17,15 @@ class Search extends React.Component {
     componentDidMount() {
         this.props.demo || checkOeciRedirect();
         document.title="EvictionSponge";
+        let local = [];
+        if(local =localStorage.getItem('Results')) {
+            let res = JSON.parse(local)
+            this.setState({
+                Results: res,
+                Submitted: true,
+                Found: true,
+            });
+        }
     }
 
     async handleSubmit(e) {
@@ -41,6 +50,7 @@ class Search extends React.Component {
                 this.setState({Loaded: true});
                 console.log(res.data);
                 this.setState({Results: res.data, Found: true});
+                localStorage.setItem('Results', JSON.stringify(res.data))
                 if(res.status == 401 || res.status == 500){
                     redirectLogin();
                 }

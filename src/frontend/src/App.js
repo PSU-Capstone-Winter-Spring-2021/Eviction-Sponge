@@ -19,7 +19,7 @@ import SearchPage from "./components/SearchPage";
 import Appendix from "./components/Appendix";
 import SimpleCard from './components/SimpleCard';
 import CreatSimpleCardList from './components/CreatSimpleCardList'
-import FaqPage from "./components/FaqPage";
+// import FaqPage from "./components/FaqPage";
 import Accessibility from "./components/Accessibility";
 import FooterPadding from "./components/FooterPadding"
 
@@ -45,7 +45,6 @@ function App() {
       <Route component={FillFrom} exact={true} path="/fill-form" />
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
-      <Route component={FaqPage} exact={true} path="/faq" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
     </Switch>
     <Footer />
