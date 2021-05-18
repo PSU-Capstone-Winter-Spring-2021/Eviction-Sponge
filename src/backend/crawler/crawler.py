@@ -73,6 +73,10 @@ class Crawler:
             # Test if this eviction is eligible for expungement:
             eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
+            # Grab the OECI ID number for this case, to be used when calling the case detail endpoint
+            case_id = case.case_detail_link.split('CaseID=')[1]
+            print(case_id)
+
             # Build a dictionary of all eviction cases found.  Using json format
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
             #       is called and includes the time
@@ -80,7 +84,7 @@ class Crawler:
             value = {'style': eviction_case.style, 'location': eviction_case.location,
                      'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
                      'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
-                     'eligibility': eligibility}
+                     'eligibility': eligibility, 'case_id': case_id}
             eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
         return eviction_cases
