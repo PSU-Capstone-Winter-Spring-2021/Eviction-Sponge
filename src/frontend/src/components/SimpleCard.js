@@ -44,12 +44,11 @@ export default class SimpleCard extends React.Component{
                 {/* API returned incorrect date */}
                 </Typography>
                 <Typography variant="body2" component="p">
-                <Button variant="contained" size="small" color="secondary">
+                <Button size="small" className="bg-primary">
                 Eligible Now
                 </Button>    : {this.state.eligibility}<Button color="primary" variant="contained" size="small">Click to autofill application pdf</Button>
                 </Typography>
                 <CardActions>
-                    
                 </CardActions>
             </CardContent>
             </Card>
