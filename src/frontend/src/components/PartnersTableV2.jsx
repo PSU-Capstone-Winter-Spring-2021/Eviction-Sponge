@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import partnerData from "../data/partnerData.json";
