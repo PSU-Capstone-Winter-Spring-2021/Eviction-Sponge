@@ -56,7 +56,7 @@ export default class SimpleCard extends React.Component{
                             },
                         }}
                         >
-                    <Button variant="contained" size="small" color="secondary">
+                    <Button  size="small" color="secondary">
                     Eligible Now
                     </Button> : {eligibility}
                         </Link>
@@ -69,7 +69,8 @@ export default class SimpleCard extends React.Component{
                 </CardActions>
             </CardContent>
             </Card>
-        </div>
+            <br></br>
+        </div>  
     </Container>
     );
     }
