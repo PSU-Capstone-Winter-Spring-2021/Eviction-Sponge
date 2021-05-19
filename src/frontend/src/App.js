@@ -55,4 +55,8 @@ function App() {
   );
 }
 
+window.onbeforeunload = function() {
+  localStorage.clear();
+}
+
 export default App;
