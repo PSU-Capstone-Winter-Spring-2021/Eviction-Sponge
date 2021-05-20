@@ -1,4 +1,3 @@
-
 from dataclasses import replace
 from crawler.util import URL, Payload, LRUCache
 from crawler.parsers.node_parser import NodeParser
@@ -74,6 +73,10 @@ class Crawler:
             # Test if this eviction is eligible for expungement:
             eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
 
+            # Grab the OECI ID number for this case, to be used when calling the case detail endpoint
+            case_id = case.case_detail_link.split('CaseID=')[1]
+            print(case_id)
+
             # Build a dictionary of all eviction cases found.  Using json format
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
             #       is called and includes the time
@@ -81,7 +84,7 @@ class Crawler:
             value = {'style': eviction_case.style, 'location': eviction_case.location,
                      'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
                      'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
-                     'eligibility': eligibility}
+                     'eligibility': eligibility, 'case_id': case_id}
             eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
         return eviction_cases
@@ -112,7 +115,7 @@ class Crawler:
     # Parse the detailed case page for judgements and the closed date of a case
     @staticmethod
     def _read_case(session, case):
-        # cache the link
+        # cache the link for future use
         if session:
             # Dear Future Maintainer,
             #       If you're trying to make this crawler go faster, session.get is your issue.
@@ -134,3 +137,7 @@ class Crawler:
         updated_summary = replace(case, date=closed_date, judgements=judgements, edit_status=EditStatus.UNCHANGED)
 
         return updated_summary
+
+    @staticmethod
+    def fetch_case_detail_link(url):
+        return Crawler.cached_links[url]
