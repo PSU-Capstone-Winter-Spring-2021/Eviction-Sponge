@@ -1,6 +1,11 @@
 import React from "react";
 
 class Appendix extends React.Component {
+
+    componentDidMount(){
+        document.title = "Appendix - EvictionSponge";
+    }
+
     render() {
         return (
             <main className="bg-light mh57">

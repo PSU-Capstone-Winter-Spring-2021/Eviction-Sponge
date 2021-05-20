@@ -24,6 +24,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 // }
 
 class FillForm extends React.Component {
+
+    componentDidMount(){
+        document.title = "Generate Expungement Form - EvictionSponge";
+    }
+
     constructor(props) {
         super(props);
         // this.props = testProps
@@ -65,7 +70,7 @@ class FillForm extends React.Component {
         }
         // this.getNames();
     }
-    
+
     // Don't know that this will be needed
     // getNames() {
     //     let defendantFlag = false;
