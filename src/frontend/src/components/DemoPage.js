@@ -6,9 +6,9 @@ import Container from '@material-ui/core/Container';
 class DemoPage extends React.Component {
     render() {
         return (
-        <Container>
+          <Container>
           <article className="lh-copy">
-              <div className="bg-white shadow bl bw3 b--blue mv4 pv4 ph4 ph5-l br3">
+              <div className="bg-white bl bw3 b--blue mv4 pv4 ph4 ph5-l br3">
                   <h1 className="f3 fw9 ma0 mb2">App Demo</h1>
                   <p className="mw7 mb3">
                       This demo provides example Eviction that demonstrate the complex
@@ -44,7 +44,7 @@ class DemoPage extends React.Component {
             </div>
             <Search demo='true'></Search>
           </article>
-        </Container>
+          </Container>
         );
     }
 }
