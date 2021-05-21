@@ -50,6 +50,11 @@ def mock_soup_find_all_with_contents(arg1, arg2, headers):
     return [MockTag(data=str.encode('10/10/1010'))]
 
 
+# Used for parse_secondary_judgements happy path. Judgment is not misspelled, OECI uses 'American spelling'
+def mock_soup_find_all_judgement(arg1, arg2, headers):
+    return [MockTag(data=str.encode('<b>Judgment</b>'))]
+
+
 # Used for parse_judgements happy path
 def mock_soup_find_judgement(arg1, arg2, headers):
     return MockTag(data=str.encode('<b>judgement</b>'))
@@ -151,8 +156,27 @@ def test_parse_judgements_no_match(monkeypatch):
 # Test judgements found
 def test_parse_judgements_matches(monkeypatch):
     # We could give MockSoup an actual list of tags with actual judgement values, but this will suffice for testing
-    # logic
+    # logic.  MockSoup.find gets called 20 times.
     monkeypatch.setattr(MockSoup, "find", mock_soup_find_judgement)
 
     data = CaseParser()._parse_judgements(MockSoup())
     assert len(data) == 20
+
+
+''' ---------- _PARSE_SECONDARY_JUDGEMENTS() TESTS ---------- '''
+
+
+# Testing no secondary judgements found
+def test_parse_secondary_judgements_no_match(monkeypatch):
+    monkeypatch.setattr(MockSoup, "find_all", mock_soup_find_all_returns_empty_list)
+
+    data = CaseParser()._parse_secondary_judgements(MockSoup())
+    assert data == []
+
+
+# Testing secondary judgements found
+def test_parse_secondary_judgements_matches(monkeypatch):
+    monkeypatch.setattr(MockSoup, "find_all", mock_soup_find_all_judgement)
+
+    data = CaseParser()._parse_secondary_judgements(MockSoup())
+    assert data == ['Judgment']  # again, fancy American spelling required
