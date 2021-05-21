@@ -55,7 +55,7 @@ def mock_soup_find_all_judgement(arg1, arg2, headers):
     return [MockTag(data=str.encode('<b>Judgment</b>'))]
 
 
-# Used for parse_judgements happy path
+# Used for parse_judgements happy path.  Don't care what the string is, just that it is <b>bolded</b>
 def mock_soup_find_judgement(arg1, arg2, headers):
     return MockTag(data=str.encode('<b>judgement</b>'))
 
