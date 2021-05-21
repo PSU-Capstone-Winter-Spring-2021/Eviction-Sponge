@@ -48,7 +48,6 @@ class CaseParser:
                 # date format: 0-padded decimal month, 0-padded decimal day, 4-digit year
                 # Specifically, decode soup's bytes-like into characters, then parse those characters into a date,
                 # and finally remove the time from the date:
-                print(tag.renderContents().decode('utf-8'))
                 return datetime.strptime(tag.renderContents().decode('utf-8'), '%m/%d/%Y').date()
         return datetime(9999, 9, 9)
 
