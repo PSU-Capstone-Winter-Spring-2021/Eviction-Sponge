@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime, date
-import re
 
-from bs4 import BeautifulSoup
+import bs4
 from typing import List
 import re
 
@@ -19,18 +18,18 @@ class CaseParserData:
 class CaseParser:
     @staticmethod
     def feed(data) -> CaseParserData:
-        soup = BeautifulSoup(data, "html.parser")
+        soup = bs4.BeautifulSoup(data, "html.parser")
         money = CaseParser.MoneyParser.parse_money(soup)
-        closed_date = CaseParser.__parse_closed_date(soup)
-        judgements = CaseParser.__parse_judgements(soup)
+        closed_date = CaseParser._parse_closed_date(soup)
+        judgements = CaseParser._parse_judgements(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
-            judgements = CaseParser.__parse_secondary_judgements(soup)
+            judgements = CaseParser._parse_secondary_judgements(soup)
 
         return CaseParserData(closed_date, judgements, money)
 
     @staticmethod
-    def __parse_closed_date(soup) -> date:
+    def _parse_closed_date(soup) -> date:
         # Explanation:  Search the HTML of the page for <th class="ssTableHeaderLabel"...> tags
         # Loop through these and look for a <td header="COtherEventsAndHearings...> on the same level,
         # and check its string for the substring "Closed", which indicates we're looking at the right tag
@@ -53,7 +52,7 @@ class CaseParser:
         return datetime(9999, 9, 9)
 
     @staticmethod
-    def __parse_judgements(soup) -> List[str]:
+    def _parse_judgements(soup) -> List[str]:
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be
         # chronological
@@ -75,7 +74,7 @@ class CaseParser:
         return judgements
 
     @staticmethod
-    def __parse_secondary_judgements(soup) -> List[str]:
+    def _parse_secondary_judgements(soup) -> List[str]:
         # Apparently, it's spelled Judgment in American English.  The OECI database uses "Judgment", so it's necessary
         # here, but I don't fancy replacing every other use of the word to match
         JUDGEMENT_KEY = "Judgment"
