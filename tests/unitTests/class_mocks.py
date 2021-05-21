@@ -30,6 +30,9 @@ class MockSoup:
     def find_all(self, arg1, arg2):
         return None
 
+    def find(self, arg1, headers):
+        return None
+
 
 # Used to mock BeautifulSoup's find_all return. Functions are individually mocked over to adjust return value
 class MockTag:

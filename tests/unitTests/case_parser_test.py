@@ -45,9 +45,14 @@ def mock_soup_find_all_returns_empty_list(arg1, arg2, headers):
     return []
 
 
-# Used for the happy path, return a MockTag that has actual contents for .renderContents() to return
+# Used for parse_closed_date happy path, return a MockTag that has actual contents for .renderContents()
 def mock_soup_find_all_with_contents(arg1, arg2, headers):
     return [MockTag(data=str.encode('10/10/1010'))]
+
+
+# Used for parse_judgements happy path
+def mock_soup_find_judgement(arg1, arg2, headers):
+    return MockTag(data=str.encode('<b>judgement</b>'))
 
 
 def mock_tag_find(arg1, headers):
@@ -136,3 +141,18 @@ def test_parse_closed_date_happy_path(monkeypatch):
 ''' ---------- _PARSE_JUDGEMENTS() TESTS ---------- '''
 
 
+# Testing no judgements found
+def test_parse_judgements_no_match(monkeypatch):
+    # MockSoup.find() default return is None, so no need to patch anything
+    data = CaseParser()._parse_judgements(MockSoup())
+    assert data == []
+
+
+# Test judgements found
+def test_parse_judgements_matches(monkeypatch):
+    # We could give MockSoup an actual list of tags with actual judgement values, but this will suffice for testing
+    # logic
+    monkeypatch.setattr(MockSoup, "find", mock_soup_find_judgement)
+
+    data = CaseParser()._parse_judgements(MockSoup())
+    assert len(data) == 20
