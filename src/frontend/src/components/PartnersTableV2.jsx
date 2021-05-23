@@ -23,7 +23,7 @@ class PartnersTableV2 extends React.Component{
 
     render() {
         let partners = this.state.partnerData.map((partner, index) => (
-            <Card className="row bg-light">
+            <Card className="row bg-light" key={partner.id}>
                 <Accordion.Toggle
                 as={Card.Header}
                 eventKey={partner.id}
@@ -52,17 +52,17 @@ class PartnersTableV2 extends React.Component{
                                 <span className="col-4 font-weight-bold text-left">{"Court Fees: "}</span>
                                 <span className="col text-left">{partner.courtFees}</span>
                             </li>
-                            <p className="row mb-2">
+                            <li className="row mb-2">
                                 <span className="col text-left">{partner.feeInfo}</span>
-                            </p>
+                            </li>
                         </ul>
                         <hr/>
                         <ul>
-                            <p className="row mb-2">
+                            <li className="row mb-2">
                                 <span className="col font-weight-bold text-left">{"Contact: "}</span>
-                            </p>
+                            </li>
                             {partner.contacts.map((contact, index) => (
-                                <li className="row mb-2">
+                                <li key={partner.id + index.toString()} className="row mb-2">
                                     <span className="col text-left">{contact}</span>
                                 </li>
                             ))}
