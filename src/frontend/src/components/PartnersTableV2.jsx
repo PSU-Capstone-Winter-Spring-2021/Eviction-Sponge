@@ -1,16 +1,28 @@
 import React from "react";
+import axios from 'axios';
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import partnerData from "../data/partnerData.json";
 import "bootstrap/dist/css/bootstrap.css";
 
 class PartnersTableV2 extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            partnerData: []
+        };
     }
 
-    render(){
-        let partners = partnerData.map((partner, index) => (
+    componentDidMount() {
+        axios.get('/partners-table')
+            .then(({ data }) => {
+                this.setState({
+                    partnerData: data
+                });
+            })
+    }
+
+    render() {
+        let partners = this.state.partnerData.map((partner, index) => (
             <Card className="row bg-light" key={partner.id}>
                 <Accordion.Toggle
                 as={Card.Header}
@@ -64,7 +76,7 @@ class PartnersTableV2 extends React.Component{
             </Card>
         ));
         return(
-            <div 
+            <div
                 className="container-fluid py-5"
                 style={{backgroundColor:"green"}}>
                 <Accordion

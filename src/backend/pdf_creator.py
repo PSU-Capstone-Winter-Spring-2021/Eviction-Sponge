@@ -117,15 +117,6 @@ class CreatePDF:
             PLAINTIFF_ADDRESS_3=address_list[2],
             DATE_3=str(datetime.date.today().strftime('%m-%d-%Y')),
             DEFENDANT_NAME_3=input_dict['defendant_line1'],
-            COUNTY_2=input_dict['county_name'],
-            PLAINTIFF_2_1=input_dict['plaintiff_line1'],
-            PLAINTIFF_2_2=input_dict['plaintiff_line2'],
-            CASE_NO_2=input_dict['case_number'],
-            DEFENDANT_2_1=input_dict['defendant_line1'],
-            DEFENDANT_2_2=input_dict['defendant_line2'],
-            DEFENDANT_2_3=input_dict['defendant_line3'],
-            DEFENDANT_2_4=input_dict['defendant_line4'],
-            PLAINTIFF_NAME='',
             DO_NOT_FILL='',
             DO_NOT_CLICK=False
         )
@@ -144,7 +135,7 @@ class CreatePDF:
                 if annotation[SUBTYPE_KEY] == WIDGET_SUBTYPE_KEY:
                     if annotation[ANNOT_FIELD_KEY]:
                         key = annotation[ANNOT_FIELD_KEY][1:-1]
-                        if key in data_dict.keys():
+                        if key in data_dict:
                             if type(data_dict[key]) == bool:
                                 if data_dict[key] == True:
                                     annotation.update(pdfrw.PdfDict(
