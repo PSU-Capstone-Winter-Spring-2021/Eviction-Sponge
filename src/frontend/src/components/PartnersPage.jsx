@@ -38,11 +38,8 @@ export default class PartnersPage extends React.Component{
         return(
         <>
             <div className="container-fluid bg-light pb-4 pt-3">
-                <div
-                className="container bg-light text-left"
-                style={{maxWidth: "720px"}}
-                >
-
+                <div className="container bg-light text-left" style={{maxWidth: "720px"}}>
+                    <h1 className="hidden">Partners Interest Page</h1>
                     <div className="row mb-4">
                         <h2 className="col font-weight-bold text-left">
                             'Sah Dude
@@ -73,7 +70,7 @@ export default class PartnersPage extends React.Component{
                     <p className="text-center">If so, click the button below!</p>
                     <p className="text-center">
                         <a href="https://docs.google.com/forms/u/1/d/1nD3nfYfKj9PSFXESRcME0ufSKhmmXFGTdhLBhRdhErk/edit?usp=drive_web"
-                           className="btn btn-info" role="button">Partner Interest</a>
+                           className="btn btn-info button" role="button">Partner Interest</a>
                     </p>
                 </div>
             </div>

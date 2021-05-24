@@ -17,6 +17,7 @@ class Manual extends React.Component {
     render() {
         return (
             <main className="container bg-light w-100 m-0 mw-100 px-0 pt-sm-3 mh57">
+                <h1>EvictionSponge Manual</h1>
                 <div className="row mx-0">
                     <nav className="col border d-xs-block d-sm-none">
                         <ul className="list-unstyled mb-0">
@@ -81,7 +82,7 @@ class Manual extends React.Component {
                                             </ul>
                                         </li>
                                         <li><a href="/record-search">Search records</a> by First and Last name</li>
-                                        <li>For eligible records of eviction judgments, <a href="#assumption1">Assumption 1</a> is met</li>
+                                        <li>For eligible records of eviction judgments, <a href="#assumption">Assumption 1</a> is met</li>
                                         <li>Confirm positive search results with Michael: <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a></li>
                                         <li>Complete forms (See note below on Forms)</li>
                                         <li>Instruct clients to file paperwork in appropriate courts</li>
