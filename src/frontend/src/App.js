@@ -21,14 +21,8 @@ import SimpleCard from './components/SimpleCard';
 import CreatSimpleCardList from './components/CreatSimpleCardList'
 // import FaqPage from "./components/FaqPage";
 import Accessibility from "./components/Accessibility";
-import FooterPadding from "./components/FooterPadding"
-
-//Example of FlashCardList
-  // <div className="container">
-  //     <FlashcardList flashcards={flashcards} />
-  //   </div>
-// import SearchCase from './components/searchcase';
-// import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
+import FooterPadding from "./components/FooterPadding";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 function App() {
   return (
@@ -46,6 +40,7 @@ function App() {
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
+      <Route component={PrivacyPolicy} exact={true} path="/privacy-policy" />
     </Switch>
     <Footer />
     
