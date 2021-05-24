@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from flask.views import MethodView
 
-from src.backend.crawler.crawler import Crawler
+from crawler.crawler import Crawler
 
 
 class CaseDetail(MethodView):
