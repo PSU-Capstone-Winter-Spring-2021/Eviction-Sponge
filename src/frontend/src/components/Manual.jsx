@@ -36,18 +36,13 @@ class Manual extends React.Component {
                             </a>
                         </li>
                         <li className="border-bottom">
-                            <a href="#assumption1">
-                            Assumption 1
+                            <a href="#assumption">
+                            Assumption
                             </a>
                         </li>
                         <li className="border-bottom">
-                            <a href="#search">
-                            Search
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#file">
-                            File for Eviction Expungement
+                            <a href="#formNotes">
+                            Notes on Forms
                             </a>
                         </li>
                         </ul>
@@ -63,7 +58,7 @@ class Manual extends React.Component {
                             <p>This Manual explains how EvictionSponge is used and the process of expunging eviction records. </p>
                         </section>
                         <section className="">
-                            <h2>General Info</h2>
+                            <h2 id="information">General Info</h2>
                                 <p>Having an eviction in your pase can make finding affordable housing more difficult. Oregon law allows for certain types of eviction records to be removed from public view, or "expunged." Expunged evictions should not show up during a background check and the tenant can answer housing applications as if they eviction had not occurred. EvictionSponge aims to make finding eligible expungements easy and accessible.</p>
                                 <p>Please not that EvictionSponge can only be used to find eviction records for Oregon cases.</p>
                             <h3 className="h5">Eviction casese are eligible if they meet any of the following criteria:</h3>
@@ -77,21 +72,21 @@ class Manual extends React.Component {
                             <p>Please contact <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a> if you would like to set up EvictionSponge at your organization.</p>
                         </section>
                         <section>
-                            <h2>How to Use EvictionSponge</h2>
+                            <h2 id="howto">How to Use EvictionSponge</h2>
                                 <h3>Overview</h3>
                                     <ol>
-                                        <li>Log in
+                                        <li><a href="oeci-login">Log in</a>
                                             <ul>
                                                 <li>You will need an Oregon eCourt Case Information (OECI) account to search for civil records. You can purchase a subscription <a href="https://www.courts.oregon.gov/services/online/pages/ojcin.aspx">here</a>.</li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Search records</a> by First and Last name</li>
+                                        <li><a href="/record-search">Search records</a> by First and Last name</li>
                                         <li>For eligible records of eviction judgments, <a href="#assumption1">Assumption 1</a> is met</li>
                                         <li>Confirm positive search results with Michael: <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a></li>
                                         <li>Complete forms (See note below on Forms)</li>
                                         <li>Instruct clients to file paperwork in appropriate courts</li>
                                     </ol>
-                            <h2 id="assumption1">Assumption 1 (Eviction judgment filing fees paid)</h2>
+                            <h2 id="assumption">Assumption (Eviction judgment filing fees paid)</h2>
                             <p>Eviction judgments are eligible after five years IF a person pays off the landlord’s filing fees associated with the case. This is not the same thing as back-rent. It is usually an amount less than $300, which you can find by going to the eCourts link for that case.</p>
                             <p className="font-weight-bold">Therefore, if a client has an eviction judgment, check with the tenant that the tenant does not owe the filing fees or they pay it before filing the application.</p>
                             <p>EvictionSponge has no record of payments, so charges marked as eligible do not take whether any payments were made on the filing fees. </p>
@@ -119,18 +114,13 @@ class Manual extends React.Component {
                             </a>
                         </li>
                         <li>
-                            <a href="#assumption1">
-                            Assumption 1
+                            <a href="#assumption">
+                            Assumption
                             </a>
                         </li>
                         <li>
-                            <a href="#search">
-                            Search
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#file">
-                            File for Eviction Expungement
+                            <a href="#formNotes">
+                            Notes on Forms
                             </a>
                         </li>
                         </ul>
