@@ -12,14 +12,13 @@ class OeciLogin extends React.Component {
         // TODO: Figure out what arguments go into the super call
         super(props);
         this.state= {value: ''};
-        
+
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     componentDidMount(){
-        // document.title is the string in the tab, update it to reflect current component
-        document.title = "OECI Login"
+        document.title = "OECI Login - EvictionSponge";
     };
 
     onChange = (e) => {

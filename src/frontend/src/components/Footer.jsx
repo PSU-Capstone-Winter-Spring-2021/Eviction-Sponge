@@ -33,12 +33,12 @@ class Footer extends React.Component {
                             <p className="row m-0 border-bottom">
                                 <a className="col-4" href="/record-search">Search</a>
                                 <a className="col-4" href="/partners">Partners</a>
-                                <a className="col-4" href="/faq">FAQ</a>
+                                <a className="col-4" href="/appendix">Appendix</a>
+                                {/* <a className="col-4" href="/faq">FAQ</a> */}
                             </p>
                         </div>
                         <div className="col-12 p-0">
                             <p className="row m-0">
-                                <a className="col-4" href="/appendix">Appendix</a>
                                 <a className="col-4" href="/accessibility">Accessibility Statement</a>
                                 <a className="col-4" href="/privacy-policy">Privacy Policy</a>
                             </p>
@@ -47,25 +47,16 @@ class Footer extends React.Component {
                 </footer>
                 <footer className = "border-top d-none d-md-flex navbar justify-content-center fixed-bottom">
                     <div className="row">
-                        <div className="col-4 p-0">
+                        <div className="col-12 p-0">
                             <p className="row">
-                                <a className="col-4" href="/">Home</a>
-                                <a className="col-4" href="/about">About Us</a>
-                                <a className="col-4" href="/manual">Manual</a>
-                            </p>
-                        </div>
-                        <div className="col-4 p-0">
-                            <p className="row">
-                                <a className="col-4" href="/record-search">Search</a>
-                                <a className="col-4" href="/partners">Partners</a>
-                                <a className="col-4" href="/faq">FAQ</a>
-                            </p>
-                        </div>
-                        <div className="col-4 p-0">
-                            <p className="row">
-                                <a className="col-4" href="/appendix">Appendix</a>
-                                <a className="col-4" href="/accessibility">Accessibility Statement</a>
-                                <a className="col-4" href="/privacy-policy">Privacy Policy</a>
+                                <a className="col" href="/">Home</a>
+                                <a className="col" href="/about">About Us</a>
+                                <a className="col" href="/manual">Manual</a>
+                                <a className="col" href="/record-search">Search</a>
+                                <a className="col" href="/partners">Partners</a>
+                                <a className="col" href="/appendix">Appendix</a>
+                                <a className="col" href="/accessibility">Accessibility Statement</a>
+                                <a className="col" href="/privacy-policy">Privacy Policy</a>
                             </p>
                         </div>
                     </div>

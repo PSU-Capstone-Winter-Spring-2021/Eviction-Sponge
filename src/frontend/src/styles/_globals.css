@@ -24,6 +24,10 @@ body{
     box-sizing: border-box;
 }
 
+main {
+    min-height: 100vh !important;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Roboto Slab', serif;
 }
@@ -185,10 +189,22 @@ footer {
     top: 10px;
 }
 
-.oeci-login-container, .search-container {
+/* .oeci-login-container, .search-container {
     min-height: 57vh;
 }
 
+.mh57{
+    min-height: 57vh;
+} */
+
 footer.navbar a {
     text-decoration: underline;
+}
+
+.hidden {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+    margin: 0;
+    padding: 0;
 }

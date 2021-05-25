@@ -24,6 +24,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 // }
 
 class FillForm extends React.Component {
+
+    componentDidMount(){
+        document.title = "Generate Expungement Form - EvictionSponge";
+    }
+
     constructor(props) {
         super(props);
         // this.props = testProps
@@ -65,7 +70,7 @@ class FillForm extends React.Component {
         }
         // this.getNames();
     }
-    
+
     // Don't know that this will be needed
     // getNames() {
     //     let defendantFlag = false;
@@ -159,7 +164,7 @@ class FillForm extends React.Component {
                     On this page, you may optionally provide the person's name,
                     address, and other information and it will be used to populate
                     the form. It is not required if you would prefer to fill out
-                    the information later, and we do not save any of this
+                    the information later. We do not save any of this
                     information.
                 </p>
 
@@ -347,7 +352,7 @@ class FillForm extends React.Component {
                                     value={this.state.dismissal}
                                 />
                                 <label className="form-check-label" htmlFor="dismissal">
-                                    dismissal in my favor (I was not ordered to leave the property)
+                                    Dismissal in my favor (I was not ordered to leave the property)
                                 </label>
                             </div>
                             <div className="form-group form-check">
@@ -361,7 +366,7 @@ class FillForm extends React.Component {
                                     value={this.state.restitution}
                                 />
                                 <label className="form-check-label" htmlFor="restitution">
-                                    restitution in Plaintiff’s favor (I was ordered to leave the property)
+                                    Restitution in Plaintiff’s favor (I was ordered to leave the property)
                                 </label>
                             </div>
                             <div className="form-group form-check ml-4">
@@ -389,7 +394,7 @@ class FillForm extends React.Component {
                                     value={this.state.judgment_date}
                                 />
                                 <label className="form-check-label" htmlFor="judgment_date">
-                                    Judgment was entered on {this.state.date_of_judgment} which is more than 5 years before this Motion was filed
+                                    Judgment was entered on {this.state.date_of_judgment}, which is 5 or more years ago.
                                 </label>
                             </div>
 
@@ -404,7 +409,7 @@ class FillForm extends React.Component {
                                     value={this.state.stipulation}
                                 />
                                 <label className="form-check-label" htmlFor="stipulation">
-                                    stipulation (agreement)
+                                    Stipulation (agreement)
                                 </label>
                             </div>
                             <div className="form-group form-check ml-4">
@@ -496,7 +501,7 @@ class FillForm extends React.Component {
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-3 col-form-label text-left" htmlFor="phone_number">
-                                Phome Number
+                                Phone Number
                             </label>
                             <input
                                 className="col-sm form-control"

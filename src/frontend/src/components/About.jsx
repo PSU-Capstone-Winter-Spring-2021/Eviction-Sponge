@@ -2,9 +2,14 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 class About extends React.Component {
+
+    componentDidMount(){
+        document.title = "About - EvictionSponge";
+    }
+
     render() {
         return (
-            <main className="container bg-light w-100 m-0 mw-100 px-0">
+            <main className="container bg-light w-100 m-0 mw-100 px-0 mh57">
                 <div className="row mx-0 justify-content-center">
                     <div className="col-md-8 text-left col-md-offset-2">
                         <h1>EvictionSponge provides a resource for

@@ -52,7 +52,10 @@ class Search(MethodView):
         cipher = DataCipher(key=current_app.config.get("SECRET_KEY"))
         if not "oeci_token" in request.cookies.keys():
             error(401, "Missing login credentials to OECI.")
-        decrypted_credentials = cipher.decrypt(request.cookies["oeci_token"])
+        try:
+            decrypted_credentials = cipher.decrypt(request.cookies["oeci_token"])
+        except:
+            error(401, "Missing login credentials to OECI.")
         return decrypted_credentials["username"], decrypted_credentials["password"]
 
 

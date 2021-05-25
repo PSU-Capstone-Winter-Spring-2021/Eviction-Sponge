@@ -16,10 +16,7 @@ class CaseSummary:
     current_status: str
     judgements: List[str]
     case_detail_link: str
-    balance_due_in_cents: int
-
-    def get_balance_due(self):
-        return self.balance_due_in_cents / 100
+    balance_due: str
 
 
 @dataclass(frozen=True)
@@ -40,7 +37,7 @@ class OeciCase:
                 current_status="",
                 judgements=[],
                 case_detail_link="",
-                balance_due_in_cents=0,
+                balance_due="",
             ),
             (),
         )
@@ -54,13 +51,12 @@ class CaseCreator:
         date_location,
         type_status,
         case_detail_link,
-        balance="0",
+        balance_due='',
         judgements=[],
     ) -> CaseSummary:
         closed_date, location = date_location
         closed_date = datetime.date(datetime.strptime(closed_date, "%m/%d/%Y"))
         violation_type, current_status = type_status
-        balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(balance)
         return CaseSummary(
             "",  # name
             case_number,
@@ -72,7 +68,7 @@ class CaseCreator:
             current_status,
             judgements,
             case_detail_link,
-            balance_due_in_cents,
+            balance_due,
         )
 
     @staticmethod
