@@ -33,7 +33,10 @@ export default class SimpleCard extends React.Component{
     handleClick(e) {
         e.preventDefault()
         let oeciPage = window.open()
+        oeciPage.document.open()
         oeciPage.document.write(this.state.casePage)
+        oeciPage.document.close()
+
     }
 
     render (){
@@ -46,8 +49,7 @@ export default class SimpleCard extends React.Component{
         <CardContent>
             <Typography className={caseNum} color="textSecondary" gutterBottom>
                 <a href= "#" onClick={this.handleClick.bind(this)} target="blank">
-
-                {caseNum} 
+                    {caseNum} 
                 </a>
             </Typography>
             <Typography className={caseNum}  gutterBottom>
