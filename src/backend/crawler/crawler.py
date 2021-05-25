@@ -130,7 +130,7 @@ class Crawler:
         # parse the case to gather the actual closed date and judgement list, then replace the default with them
         case_parser_data = CaseParser.feed(session_response.text)
 
-        balance_due = case_parser_data.balance_due
+        balance_due = case_parser_data.money
         closed_date = case_parser_data.closed_date
         complaint_date = case_parser_data.complaint_date
         judgements = case_parser_data.judgements
