@@ -107,17 +107,6 @@ class PrivacyPolicy extends React.Component {
                     OTHER DEALINGS IN THE MANUAL.
                   </p>
                   <p className="fw7 mb2">Short list of Credits</p>
-                  <ul className="list mb3">
-                    <li className="mb2">Thomas Pollard</li>
-                    <li className="mb2">Zayne Stites</li>
-                    <li className="mb2">Logan Voruz</li>
-                    <li className="mb2">Caillie Juergens</li>
-                    <li className="mb2">Samuel Youngs</li>
-                    <li className="mb2">Ping Chun Chung</li>
-                    <li className="mb2">Danford Compton</li>
-                    <li className="mb2">Zhengmao Zhang</li>
-                    <li className="mb2">Michael Zhang</li>
-                  </ul>
                 </section>
               </article>
             </main>
