@@ -4,7 +4,7 @@ from datetime import datetime
 
 from flask.views import MethodView
 from flask import make_response, current_app, abort, jsonify, json
-from src.backend import eligibility_eval
+import eligibility_eval
 
 
 def error(code, message):

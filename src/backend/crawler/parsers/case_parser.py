@@ -21,9 +21,9 @@ class CaseParser:
     def feed(data) -> CaseParserData:
         soup = bs4.BeautifulSoup(data, 'html.parser')
         money = CaseParser.MoneyParser.parse_money(soup)
-        closed_date = CaseParser.__parse_closed_date(soup)
-        judgements = CaseParser.__parse_judgements(soup)
-        complaint_date = CaseParser.__parse_complaint_date(soup)
+        closed_date = CaseParser._parse_closed_date(soup)
+        judgements = CaseParser._parse_judgements(soup)
+        complaint_date = CaseParser._parse_complaint_date(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser._parse_secondary_judgements(soup)
@@ -55,7 +55,7 @@ class CaseParser:
         return datetime(9999, 9, 9)
 
     @staticmethod
-    def __parse_complaint_date(soup) -> str:
+    def _parse_complaint_date(soup) -> str:
         # The complaint is always the first entry in OTHER EVENTS AND HEARINGS, so the header is always
         # "COtherEventsAndHearings RCDER#".  Just grab that block and parse the date (string) out of it
         # Update: For some reason, RCDER# doesn't always count from 1 (or 0), sometimes starts at higher number
@@ -76,7 +76,7 @@ class CaseParser:
         return date_string
 
     @staticmethod
-    def __parse_judgements(soup) -> List[str]:
+    def _parse_judgements(soup) -> List[str]:
 
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be

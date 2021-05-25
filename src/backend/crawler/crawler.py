@@ -4,7 +4,7 @@ from crawler.parsers.node_parser import NodeParser
 from crawler.parsers.param_parser import ParamParser
 from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
-from eligibility_eval import is_eligible
+import eligibility_eval
 
 
 class UnableToReachOECI(Exception):
@@ -75,6 +75,7 @@ class Crawler:
             #       is called and includes the time
             key = eviction_case.case_number
             value = {'style': eviction_case.style,
+                     'case_id': case_id,
                      'location': eviction_case.location,
                      'violation_type': eviction_case.violation_type,
                      'status': eviction_case.current_status,
