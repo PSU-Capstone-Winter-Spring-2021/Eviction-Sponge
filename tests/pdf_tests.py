@@ -1,5 +1,5 @@
 
-from src.backend.pdf_creator import CreatePDF
+from pdf_creator import CreatePDF
 import pytest
 import datetime
 

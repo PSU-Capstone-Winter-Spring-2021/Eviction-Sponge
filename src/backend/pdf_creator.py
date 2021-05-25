@@ -104,7 +104,7 @@ class CreatePDF:
             DISMISSAL=input_dict['dismissal'],
             RESTITUTION=input_dict['restitution'],
             MONEY=input_dict['money'],
-            #JUDGMENT_DATE=input_dict['judgment_date'],
+            #   JUDGMENT_DATE=input_dict['judgment_date'],
             DATE_OF_JUDGMENT=input_dict['date_of_judgment'],
             STIPULATION=input_dict['stipulation'],
             TERMS=input_dict['terms'],
