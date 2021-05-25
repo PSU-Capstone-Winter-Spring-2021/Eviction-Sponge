@@ -5,6 +5,7 @@ import {checkOeciRedirect, redirectLogin, removeCookie} from "../cookieService";
 import CreatSimpleCardList from './CreatSimpleCardList';
 
 class Search extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -14,16 +15,17 @@ class Search extends React.Component {
             Results: [],
         };
     }
+
     componentDidMount() {
         this.props.demo || checkOeciRedirect();
-        document.title="EvictionSponge";
+        document.title="Search Records - EvictionSponge";
         let local = [];
         if(local = localStorage.getItem('Results')) {
             let res = JSON.parse(local)
             if (res.Expiration < Date.now()) {
                 localStorage.removeItem('Results');
             }
-            else 
+            else
             {
                 this.setState({
                 Results: res.Results,
@@ -95,11 +97,11 @@ class Search extends React.Component {
                             </div>
 
 
-                        {this.state.Submitted && 
-                            !this.state.Found && 
+                        {this.state.Submitted &&
+                            !this.state.Found &&
                             !this.state.Loaded &&<p class="loadingText"> Loading...</p>
                         }
-                        {this.state.Submitted &&  
+                        {this.state.Submitted &&
                             this.state.Loaded &&
                             !this.state.Found &&<p class="notFoundText"> No results Found</p>
                         }

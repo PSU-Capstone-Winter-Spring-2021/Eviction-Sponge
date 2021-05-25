@@ -2,6 +2,11 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 class About extends React.Component {
+
+    componentDidMount(){
+        document.title = "About - EvictionSponge";
+    }
+
     render() {
         return (
             <main className="container bg-light w-100 m-0 mw-100 px-0 mh57">

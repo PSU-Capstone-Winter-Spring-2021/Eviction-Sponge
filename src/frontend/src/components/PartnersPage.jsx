@@ -4,9 +4,10 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default class PartnersPage extends React.Component{
+
     componentDidMount(){
-        document.title="PartnersPage";
-    }
+        document.title="Partner with us - EvictionSponge";
+    };
 
     state = {
         email: "",
