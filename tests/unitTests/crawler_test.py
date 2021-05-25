@@ -4,7 +4,7 @@ import sys
 import pytest
 
 from src.backend.crawler.crawler import UnableToReachOECI, InvalidLoginCreds, Crawler
-from class_mocks import MockRequest, MockSession, MockURL
+from tests.class_mocks import MockRequest, MockSession, MockURL
 
 # Need this little tidbit for pytest to work
 from src.backend.crawler.util import URL
