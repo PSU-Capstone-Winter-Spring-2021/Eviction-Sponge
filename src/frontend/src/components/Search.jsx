@@ -47,7 +47,6 @@ class Search extends React.Component {
             "last_name": lastName,
             "middle_name": middleName
         }
-        console.log("clicked, names: " + postName.first_name + " " + postName.last_name +", " + postName.middle_name);
         this.setState({Submitted: true});
         await axios.post("/search", postName).then(res => {
 
@@ -58,7 +57,6 @@ class Search extends React.Component {
                 localStorage.setItem('Results', JSON.stringify({
                     Expiration: Date.now() + 600000, //This should set expiration for search to 10 minutes.
                     Results: res.data}))
-                    console.log("expiration time: " + Date.now()+600000)
                 if(res.status == 401 || res.status == 500){
                     redirectLogin();
                 }

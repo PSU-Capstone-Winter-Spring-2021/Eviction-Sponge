@@ -496,7 +496,7 @@ class FillForm extends React.Component {
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-3 col-form-label text-left" htmlFor="phone_number">
-                                Phome Number
+                                Phone Number
                             </label>
                             <input
                                 className="col-sm form-control"
