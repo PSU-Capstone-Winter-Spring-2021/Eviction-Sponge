@@ -121,16 +121,19 @@ class CaseParser:
                     index = labels.index(tag)
                     # print(tag.text)
                     if not only_first_date:
-                        interest_date = MoneyParser.get_date(stuff)
+                        interest_date = CaseParser.MoneyParser.get_date(stuff)
                         only_first_date = True
                     if INTEREST in stuff:
-                        amount_before_interest = MoneyParser.extract_one_money(stuff)
-                        interest_rate = MoneyParser.extract_interest(stuff)
-                        today = datetime.datetime.today()
+                        amount_before_interest = CaseParser.MoneyParser.extract_one_money(stuff)
+                        interest_rate = CaseParser.MoneyParser.extract_interest(stuff)
+                        today = datetime.today()
                         time_difference = today.date() - interest_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
                         interest_time = time_in_seconds/31536000
+                        print(amount_before_interest)
+                        print(interest_rate)
+                        print(interest_time)
                         total_interest = float(amount_before_interest) * (float(interest_rate)/100) * float(interest_time)
                         total_interest = float(total_interest)
                         total_interest = '{:.2f}'.format(total_interest)
@@ -152,7 +155,7 @@ class CaseParser:
                         if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
                                 UNSATISFIED) == -1:
                             continue
-                        the_total = MoneyParser.extract_one_money(stuff)
+                        the_total = CaseParser.MoneyParser.extract_one_money(stuff)
                         if the_total in total_money_list and is_amended is True:
                             continue
                         total_money_list.append(the_total)
@@ -208,6 +211,7 @@ class CaseParser:
         # The following function extracts only the first item that could be money from a string
         @staticmethod
         def extract_one_money(string):
+            show_me_the_money = "0"
             string = string.replace(',', '')
             for stuff in string.split():
                 money = re.search(r'^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$', stuff)
@@ -234,6 +238,7 @@ class CaseParser:
                 for stuff in str(string).split():
                     if stuff[0].isnumeric():
                         stuff = stuff[:-1]
-                        the_date = datetime.datetime.strptime(stuff, '%m/%d/%Y').date()
+                        the_date = datetime.strptime(stuff, '%m/%d/%Y').date()
                         # hoping the courts are consistent with date format...
                         return the_date
+            return datetime.strptime(date.today().strftime('%m/%d/%Y'), '%m/%d/%Y').date()
