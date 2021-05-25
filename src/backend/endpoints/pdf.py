@@ -1,6 +1,6 @@
 from flask import abort, current_app, jsonify, make_response, request, send_file
 from flask.views import MethodView
-from pdf_creator import CreatePDF
+from src.backend.pdf_creator import CreatePDF
 
 
 def error(code, message):

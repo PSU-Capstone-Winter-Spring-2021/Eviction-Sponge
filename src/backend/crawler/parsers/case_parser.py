@@ -10,6 +10,7 @@ import re
 @dataclass
 class CaseParserData:
     closed_date: date
+    complaint_date: str
     judgements: []
     money: str
 
@@ -20,13 +21,15 @@ class CaseParser:
     def feed(data) -> CaseParserData:
         soup = bs4.BeautifulSoup(data, 'html.parser')
         money = CaseParser.MoneyParser.parse_money(soup)
-        closed_date = CaseParser._parse_closed_date(soup)
-        judgements = CaseParser._parse_judgements(soup)
+        closed_date = CaseParser.__parse_closed_date(soup)
+        judgements = CaseParser.__parse_judgements(soup)
+        complaint_date = CaseParser.__parse_complaint_date(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser._parse_secondary_judgements(soup)
 
-        return CaseParserData(closed_date, judgements, money)
+        # return CaseParserData(closed_date, complaint_date, judgements, money)
+        return CaseParserData(closed_date, complaint_date, judgements, money)
 
     @staticmethod
     def _parse_closed_date(soup) -> date:
@@ -52,7 +55,29 @@ class CaseParser:
         return datetime(9999, 9, 9)
 
     @staticmethod
-    def _parse_judgements(soup) -> List[str]:
+    def __parse_complaint_date(soup) -> str:
+        # The complaint is always the first entry in OTHER EVENTS AND HEARINGS, so the header is always
+        # "COtherEventsAndHearings RCDER#".  Just grab that block and parse the date (string) out of it
+        # Update: For some reason, RCDER# doesn't always count from 1 (or 0), sometimes starts at higher number
+        date_string = ''
+        for i in range(0, 10):
+            header = "COtherEventsAndHearings RCDER" + str(i)
+            tag = soup.find("td", headers=header)
+            if tag is None:
+                continue
+
+            as_string = tag.renderContents().decode("utf-8")
+            if "Complaint" not in as_string:
+                continue
+            try:
+                date_string = re.search(r'[0-9]{2}\/[0-9]{2}\/[0-9]{4}', as_string).group(0)
+            except AttributeError:
+                date_string = "09/09/9999"
+        return date_string
+
+    @staticmethod
+    def __parse_judgements(soup) -> List[str]:
+
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be
         # chronological
