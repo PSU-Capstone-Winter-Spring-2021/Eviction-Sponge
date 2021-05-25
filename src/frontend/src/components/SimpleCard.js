@@ -7,25 +7,50 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import 'react-bootstrap';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 export default class SimpleCard extends React.Component{
     constructor(props) {
                 super(props);
                 this.state = {
                     caseNum: Object.keys(this.props.res),
-                    result: this.props.res
+                    result: this.props.res,
+                    casePage: {}
                   };
     }
+
+    async componentDidMount() {
+        console.log("calling to: " + `/case-detail/${this.state.result[this.state.caseNum].case_id}`)
+        await axios.get(`/case-detail/${parseInt(this.state.result[this.state.caseNum].case_id)}`).then(res => {
+            if (res) {
+                this.setState({casePage: res.data})
+                console.log(res.data)
+            }
+        })
+    }
+
+    handleClick(e) {
+        e.preventDefault()
+        let oeciPage = window.open()
+        oeciPage.document.open()
+        oeciPage.document.write(this.state.casePage)
+        oeciPage.document.close()
+
+    }
+
     render (){
     const {caseNum} = this.state;
-    const {location: county_name, style: case_name , status, eligibility, date: date_of_judgement} = this.state.result[caseNum];
-
+    const {location: county_name, style: case_name , status, eligibility, closed_dagit te: date_of_judgement, case_id} = this.state.result[caseNum];
+    console.log("Id is; " + case_id)
     return(
     <div className = "bg-light">
         <Card className='bg-light border'>
         <CardContent>
             <Typography className={caseNum} color="textSecondary" gutterBottom>
-            {caseNum} 
+                <a href= "#" onClick={this.handleClick.bind(this)} target="blank">
+                    {caseNum} 
+                </a>
             </Typography>
             <Typography className={caseNum}  gutterBottom>
             Location: {county_name}

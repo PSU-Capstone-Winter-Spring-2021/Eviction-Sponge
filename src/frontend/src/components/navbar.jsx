@@ -12,11 +12,10 @@ export default class navbar extends React.Component{
           <nav className="row justify-content-center align-items-end"
             aria-label="Primary"
           >
-            <Link className="col-lg-1 offset-lg-2" to="/" aria-label="Home">
+            <Link className="col-lg-4" to="/" aria-label="Home">
               <Logo />
             </Link>
-            <h1 className="col-lg-1">EvictionSponge</h1>
-            <div className= "col-md">
+            <div className= "col-lg-4">
               <Link
                 to="/manual"
                 className="mx-2"
