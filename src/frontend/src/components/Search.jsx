@@ -15,7 +15,7 @@ class Search extends React.Component {
         };
     }
     componentDidMount() {
-        this.props.demo || checkOeciRedirect();
+        this.props.demo || checkOeciRedirect(this.props.demo);
         document.title="EvictionSponge";
     }
 
@@ -23,7 +23,7 @@ class Search extends React.Component {
         e.preventDefault();
         //let url= "/search";
         //check if cookie exists (user deleted cookie)
-        checkOeciRedirect();
+        checkOeciRedirect(this.props.demo);
         this.setState({Loaded: false, Found: false})
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
@@ -37,7 +37,6 @@ class Search extends React.Component {
         this.setState({Submitted: true});
         if(this.props.demo){
             await axios.post("/demo", postName).then(res => {
-
                 if(res !== null) {
                     this.setState({Loaded: true});
                     console.log(res.data);
@@ -49,6 +48,7 @@ class Search extends React.Component {
             })
         }
         else{
+            
             await axios.post("/search", postName).then(res => {
 
                 if(res !== null) {
