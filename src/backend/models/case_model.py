@@ -2,29 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, date
 
 import re
-from enum import Enum
-
 from typing import List
-
-
-class ChargeEligibilityStatus(str, Enum):
-    UNKNOWN = "Unknown"
-    ELIGIBLE_NOW = "Eligible Now"
-    POSSIBLY_ELIGIBILE = "Possibly Eligible"
-    WILL_BE_ELIGIBLE = "Will Be Eligible"
-    POSSIBLY_WILL_BE_ELIGIBLE = "Possibly Will Be Eligible"
-    INELIGIBLE = "Ineligible"
-    NEEDS_MORE_ANALYSIS = "Needs More Analysis"
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}.{self.name}"
-
-
-class EditStatus(str, Enum):
-    UNCHANGED = "UNCHANGED"
-    UPDATE = "UPDATE"
-    ADD = "ADD"
-    DELETE = "DELETE"
 
 
 @dataclass(frozen=True)
@@ -38,15 +16,7 @@ class CaseSummary:
     current_status: str
     judgements: List[str]
     case_detail_link: str
-    balance_due_in_cents: int
-    edit_status: EditStatus
-
-    def get_balance_due(self):
-        return self.balance_due_in_cents / 100
-
-    def closed(self):
-        CLOSED_STATUS = ["Closed", "Inactive", "Purgable", "Bankruptcy Pending"]
-        return self.current_status in CLOSED_STATUS
+    balance_due: str
 
 
 @dataclass(frozen=True)
@@ -66,8 +36,6 @@ class OeciCase:
                 current_status="",
                 judgements=[],
                 case_detail_link="",
-                balance_due_in_cents=0,
-                edit_status=EditStatus.UNCHANGED,
             ),
             (),
         )
@@ -81,13 +49,12 @@ class CaseCreator:
         date_location,
         type_status,
         case_detail_link,
-        balance="0",
+        balance_due='',
         judgements=[],
     ) -> CaseSummary:
         myDate, location = date_location
         myDate = datetime.date(datetime.strptime(myDate, "%m/%d/%Y"))
         violation_type, current_status = type_status
-        balance_due_in_cents = CaseCreator.compute_balance_due_in_cents(balance)
         return CaseSummary(
             "",
             case_number,
@@ -98,8 +65,7 @@ class CaseCreator:
             current_status,
             judgements,
             case_detail_link,
-            balance_due_in_cents,
-            EditStatus.UNCHANGED,
+            balance_due,
         )
 
     @staticmethod

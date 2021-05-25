@@ -91,7 +91,6 @@ class CaseParser:
 
         @staticmethod
         def parse_money(soup):
-            return '$0.00'
             TOTAL = 'Total:'
             DOLLAR_SIGN = '$'
             INTEREST = '%'
