@@ -2,6 +2,11 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 class Accessibility extends React.Component {
+
+    componentDidMount(){
+        document.title = "Accessibility Statement - EvictionSponge";
+    }
+
     render() {
         return (
             <main className = "container bg-light text-left font-weight-light" style = {{maxWidth: "720px"}}>
@@ -16,7 +21,7 @@ class Accessibility extends React.Component {
                         (WCAG)
                     </a>
                      defines requirements for designers and developers to improve accessibility for people with disabilities.
-                    It defines three levels of conformance: Level A, Level AA, and Level AAA. 
+                    It defines three levels of conformance: Level A, Level AA, and Level AAA.
                     <span className="basic-information website-name">EvictionSponge </span>
                     is
                     <span className="basic-information conformance-status" data-printfilter="lowercase"> partially conformant </span>

@@ -9,8 +9,7 @@ class Manual extends React.Component {
     };
 
     componentDidMount(){
-        // document.title is the string in the tab, update it to reflect current component
-        document.title = "Manual"
+        document.title = "Manual - EvictionSponge";
     };
 
     // HTML for the component

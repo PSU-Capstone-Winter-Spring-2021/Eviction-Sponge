@@ -3,9 +3,11 @@ import PartnersTableV2 from "./PartnersTableV2";
 import "bootstrap/dist/css/bootstrap.css";
 
 class Landing extends React.Component {
+
     componentDidMount() {
-        document.title="EvictionSponge";
+        document.title="EvictionSponge - Home";
     }
+
     render() {
         return (
             <>
