@@ -11,7 +11,7 @@ import re
 class CaseParserData:
     closed_date: date
     complaint_date: str
-    judgements: []
+    judgements: List[str]
     money: str
 
 
