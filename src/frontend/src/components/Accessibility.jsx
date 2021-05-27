@@ -1,7 +1,9 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 
 class Accessibility extends React.Component {
+    componentDidMount(){
+        document.title="Accessibility";
+    }
     render() {
         return (
             <main className = "container bg-light text-left font-weight-light" style = {{maxWidth: "720px"}}>

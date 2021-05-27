@@ -1,6 +1,5 @@
 // Currently the FAQ page is unused.
 // import React from "react";
-// import "bootstrap/dist/css/bootstrap.css";
 
 // class FaqPage extends React.Component{
 //     componentDidMount(){

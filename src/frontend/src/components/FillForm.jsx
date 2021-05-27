@@ -3,8 +3,6 @@ import axios from 'axios';
 import InvalidInputs from "./InvalidInputs";
 import fileDownload from "js-file-download";
 
-import 'bootstrap/dist/css/bootstrap.css';
-
 
 // const testProps = {
 //     county_name: 'Clark',

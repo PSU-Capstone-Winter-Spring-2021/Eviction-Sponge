@@ -1,7 +1,9 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 
 class DemoPage extends React.Component {
+    componentDidMount(){
+      document.title="Demo";
+    }
     render() {
         return (
         <article className="lh-copy">
