@@ -2,13 +2,16 @@ import React from "react";
 import PartnersTableV2 from "./PartnersTableV2";
 
 class Landing extends React.Component {
+
     componentDidMount() {
-        document.title="EvictionSponge";
+        document.title="EvictionSponge - Home";
     }
+
     render() {
         return (
             <>
                 <main className="container-fluid mh57">
+                    <h1 className="hidden">EvictionSponge Homepage</h1>
                     <div className="row justify-content-center py-4 landing">
                         <p>
                         EvictionSponge was made possible by a group of students at <br/> 
@@ -27,9 +30,9 @@ class Landing extends React.Component {
                         </p>
                     </div>
                     <div className="row justify-content-center align-items-center">
-                        <h1 className="col-md-4">
+                        <h2 className="col-md-4">
                             Easing the Process of Eviction Expungement
-                        </h1>
+                        </h2>
                         <p className= "col-md-4">
                             Eviction Sponge is a software that helps organizations
                             determine if an individual is elligable for eviction

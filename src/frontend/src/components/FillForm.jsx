@@ -22,6 +22,11 @@ import fileDownload from "js-file-download";
 // }
 
 class FillForm extends React.Component {
+
+    componentDidMount(){
+        document.title = "Generate Expungement Form - EvictionSponge";
+    }
+
     constructor(props) {
         super(props);
         // this.props = testProps
@@ -63,7 +68,7 @@ class FillForm extends React.Component {
         }
         // this.getNames();
     }
-    
+
     // Don't know that this will be needed
     // getNames() {
     //     let defendantFlag = false;
@@ -494,7 +499,7 @@ class FillForm extends React.Component {
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-3 col-form-label text-left" htmlFor="phone_number">
-                                Phome Number
+                                Phone Number
                             </label>
                             <input
                                 className="col-sm form-control"

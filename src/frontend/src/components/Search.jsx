@@ -5,6 +5,7 @@ import {checkOeciRedirect, redirectLogin, removeCookie} from "../cookieService";
 import CreatSimpleCardList from './CreatSimpleCardList';
 
 class Search extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -14,16 +15,17 @@ class Search extends React.Component {
             Results: [],
         };
     }
+
     componentDidMount() {
         this.props.demo || checkOeciRedirect();
-        document.title="EvictionSponge";
+        document.title="Search Records - EvictionSponge";
         let local = [];
         if(local = localStorage.getItem('Results')) {
             let res = JSON.parse(local)
             if (res.Expiration < Date.now()) {
                 localStorage.removeItem('Results');
             }
-            else 
+            else
             {
                 this.setState({
                 Results: res.Results,
@@ -47,7 +49,6 @@ class Search extends React.Component {
             "last_name": lastName,
             "middle_name": middleName
         }
-        console.log("clicked, names: " + postName.first_name + " " + postName.last_name +", " + postName.middle_name);
         this.setState({Submitted: true});
         await axios.post("/search", postName).then(res => {
 
@@ -58,7 +59,6 @@ class Search extends React.Component {
                 localStorage.setItem('Results', JSON.stringify({
                     Expiration: Date.now() + 600000, //This should set expiration for search to 10 minutes.
                     Results: res.data}))
-                    console.log("expiration time: " + Date.now()+600000)
                 if(res.status == 401 || res.status == 500){
                     redirectLogin();
                 }
@@ -75,6 +75,7 @@ class Search extends React.Component {
     render() {
         return (
                 <main className="container-fluid search-container bg-light p-sm-3 pt-1">
+                    <h1 className="hidden">Eviction Case Search</h1>
                     <form className="row justify-content-center bg-light">
                         <div className="row searchInputs col-sm-9 border p-md-3 p-1">
                             <div className="col-sm-4 px-1">
@@ -95,11 +96,11 @@ class Search extends React.Component {
                             </div>
 
 
-                        {this.state.Submitted && 
-                            !this.state.Found && 
+                        {this.state.Submitted &&
+                            !this.state.Found &&
                             !this.state.Loaded &&<p class="loadingText"> Loading...</p>
                         }
-                        {this.state.Submitted &&  
+                        {this.state.Submitted &&
                             this.state.Loaded &&
                             !this.state.Found &&<p class="notFoundText"> No results Found</p>
                         }
