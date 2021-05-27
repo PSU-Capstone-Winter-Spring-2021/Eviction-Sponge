@@ -1,6 +1,7 @@
+from pathlib import PurePath
 from bs4 import BeautifulSoup
+from flask import send_file
 from flask.views import MethodView
-
 from crawler.crawler import Crawler
 
 
@@ -22,5 +23,12 @@ class CaseDetail(MethodView):
         return soup.prettify()
 
 
+class CaseDetailCSS(MethodView):
+    def get(self):
+        path = PurePath(__file__).parent / "resources" / "oeci.css"
+        return send_file(str(path), mimetype="text/css")
+
+
 def register(app):
     app.add_url_rule("/case-detail/<int:case_id>", view_func=CaseDetail.as_view("case-detail"))
+    app.add_url_rule("/case-detail/CSS/PublicAccess.css", view_func=CaseDetailCSS.as_view("case-detail-css"))
