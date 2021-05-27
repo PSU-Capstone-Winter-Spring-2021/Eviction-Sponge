@@ -5,6 +5,7 @@ from datetime import datetime
 from flask.views import MethodView
 from flask import make_response, current_app, abort, jsonify, json
 import eligibility_eval
+import requests
 
 
 def error(code, message):
@@ -25,7 +26,7 @@ def string_to_date(string, format):
 # From an outside perspective, it functions the same as the search endpoint, but the data is made up
 class DemoSearch(MethodView):
     def post(self):
-        search_results = {}
+        search_results = []
         path = os.path.relpath('backend\\data\\demo_search_data.csv', os.path.dirname(__file__))
         with open(path, newline='\n') as demoFile:
             demoData = csv.reader(demoFile, delimiter=';')
@@ -34,15 +35,14 @@ class DemoSearch(MethodView):
                                                            string_to_date(fakeCase[6], '%m/%d/%Y'),
                                                            split_judgements_string(fakeCase[7]))
                 key = fakeCase[0]
-                value = {'style': fakeCase[1],
-                         'location': fakeCase[2],
-                         'violation_type': fakeCase[3],
-                         'status': fakeCase[4],
-                         'complaint_date': fakeCase[5],
-                         'closed_date': fakeCase[6],
-                         'judgements': split_judgements_string(fakeCase[7]),
-                         'eligibility': eligibility}
-                search_results.update({key: value})
+                value = {'style': fakeCase[1], 'location': fakeCase[2], 'violation_type': fakeCase[3],
+                         'status': fakeCase[4], 'date': fakeCase[5], 'judgements': split_judgements_string(fakeCase[6]),
+                         'eligibility': (fakeCase[7], fakeCase[8])}
+                search_results.append({key: value})
+
+        # To view all search results:
+        # for key, value in search_results.items():
+        #     print(key, " : ", value)
 
         return json.dumps(search_results)
 

@@ -22,6 +22,7 @@ import CreatSimpleCardList from './components/CreatSimpleCardList'
 // import FaqPage from "./components/FaqPage";
 import Accessibility from "./components/Accessibility";
 import FooterPadding from "./components/FooterPadding"
+import DemoPage from "./components/DemoPage"
 
 //Example of FlashCardList
   // <div className="container">
@@ -36,7 +37,7 @@ function App() {
   <Router history={history}>
     <Navbar />
     <Switch>
-      <Route component={CreatSimpleCardList} exact={true} path="/cards_demo" />
+      <Route component={DemoPage} exact={true} path="/cards_demo" />
       <Route component={Landing} exact={true} path="/" />
       <Route component={OECILogin} exact={true} path="/oeci-login" />
       <Route component={Manual} exact={true} path="/manual" />
