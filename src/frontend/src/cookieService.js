@@ -26,8 +26,8 @@ export function isAdmin(){
     return document.cookie.includes("is_admin");
 }
 
-export function checkOeciRedirect(){
-    if(!hasOeciToken()){
+export function checkOeciRedirect(isDemo){
+    if(!isDemo && !hasOeciToken()){
         history.push("/oeci-login");
     }
 }

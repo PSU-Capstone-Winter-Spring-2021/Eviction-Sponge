@@ -35,7 +35,7 @@ class Landing extends React.Component {
                         </h2>
                         <p className= "col-md-4">
                             Eviction Sponge is a software that helps organizations
-                            determine if an individual is elligable for eviction
+                            determine if an individual is eligible for eviction
                             expungement.
                         </p>
                     </div>

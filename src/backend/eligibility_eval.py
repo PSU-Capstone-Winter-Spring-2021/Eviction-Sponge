@@ -66,8 +66,8 @@ def is_eligible(current_status, closed_date, judgements) -> (bool, str):
     if not five_years and not case_dismissed:
         return False, ("FUTURE: Not Dismissed & Not Older than 5 Years. Eligible on: " + eligibleDate)
     if not five_years and case_dismissed:
-        return True, "ELIGIBLE NOW: Not Older than 5 Years, but Case Dismissed"
+        return True, "Not Older than 5 Years, but Case Dismissed"
     if five_years and not case_dismissed:
-        return True, "ELIGIBLE NOW: Not Dismissed, but Older than 5 Years"
+        return True, "Not Dismissed, but Older than 5 Years"
     if five_years and case_dismissed:
-        return True, "ELIGIBLE NOW: Case Dismissed & Older than 5 Years"
+        return True, "Case Dismissed & Older than 5 Years"
