@@ -33,7 +33,7 @@ class Search extends React.Component {
     async handleSubmit(e) {
         e.preventDefault();
         //check if cookie exists (user deleted cookie)
-        checkOeciRedirect();
+        checkOeciRedirect(this.props.demo);
         this.setState({Loaded: false, Found: false})
         let firstName = String(document.getElementById("firstName").value);
         let middleName = String(document.getElementById("middleName").value);
@@ -44,7 +44,21 @@ class Search extends React.Component {
             "middle_name": middleName
         }
         this.setState({Submitted: true});
-        await axios.post("/search", postName).then(res => {
+        if(this.props.demo){
+            await axios.post("/demo", postName).then(res => {
+                if(res !== null) {
+                    this.setState({Loaded: true});
+                    console.log(res.data);
+                    this.setState({Results: res.data, Found: true});
+                    // if(res.status == 401 || res.status == 500){
+                    //     redirectLogin();
+                    // }
+                }
+            })
+        }
+        else{
+            
+            await axios.post("/search", postName).then(res => {
 
             if(res !== null) {
                 this.setState({Loaded: true});
@@ -57,14 +71,17 @@ class Search extends React.Component {
                     redirectLogin();
                 }
             }
-        }, reason => {
-            redirectLogin();
-            removeCookie();
-        })
+            }, reason => {
+                redirectLogin();
+                removeCookie();
+            })
+        }
         if(this.state.Results.length === 0) {
             this.setState({Found: false})
         }
     }
+
+
 
     render() {
         return (
