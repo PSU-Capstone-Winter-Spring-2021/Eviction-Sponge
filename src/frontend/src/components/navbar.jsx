@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Button, Navbar,Nav,Form,FormControl } from 'react-bootstrap'
-import "bootstrap/dist/css/bootstrap.css";
 
 
 export default class navbar extends React.Component{
@@ -17,6 +16,12 @@ export default class navbar extends React.Component{
             </Link>
             <div className= "col-lg-4">
               <Link
+                to="/"
+                className="mx-2"
+              >
+                Home
+              </Link>
+              <Link
                 to="/manual"
                 className="mx-2"
               >
@@ -26,7 +31,7 @@ export default class navbar extends React.Component{
                 to="/record-search"
                 className="mx-2"
               >
-                <Button className = "button">Search</Button>
+                <Button className= "btn btn-primary">Search</Button>
               </Link>
             </div>
           </nav>
