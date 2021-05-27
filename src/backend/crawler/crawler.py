@@ -4,7 +4,7 @@ from crawler.parsers.node_parser import NodeParser
 from crawler.parsers.param_parser import ParamParser
 from crawler.parsers.record_parser import RecordParser
 from crawler.parsers.case_parser import CaseParser
-from eligibility_eval import is_eligible
+import eligibility_eval
 
 
 class UnableToReachOECI(Exception):
@@ -47,8 +47,7 @@ class Crawler:
         search_url = URL.search_url()
         node_response = Crawler._fetch_search_page(session, search_url, login_response)
 
-        # generate a list of case records, specifically a list of CaseSummary from case_parser.py
-        # (for each case: case #, style, filed/location, type/status, and link to detailed case info)
+        # generate a list of case records (see CaseSummary in case_model.py)
         # the OECI database named the column 'style', it's the name of the case (i.e. "John Hancock V. John Smith")
         search_result = Crawler._search_record(session, node_response, search_url, first_name, last_name, middle_name)
 
@@ -64,7 +63,9 @@ class Crawler:
             eviction_case = Crawler._read_case(session, case)
 
             # Test if this eviction is eligible for expungement:
-            eligibility = is_eligible(eviction_case.current_status, eviction_case.date, eviction_case.judgements)
+            # Aside: eligibility_eval.is_eligible is non-intuitive, but makes testing so much easier than
+            # from ... import is_eligible and calling is_eligible(...)
+            eligibility = eligibility_eval.is_eligible(eviction_case.current_status, eviction_case.closed_date, eviction_case.judgements)
 
             # Grab the OECI ID number for this case, to be used when calling the case detail endpoint
             case_id = case.case_detail_link.split('CaseID=')[1]
@@ -73,10 +74,16 @@ class Crawler:
             # Note: converting date to a string manually in the form mm/dd/yyyy, as otherwise the default date->string
             #       is called and includes the time
             key = eviction_case.case_number
-            value = {'style': eviction_case.style, 'location': eviction_case.location,
-                     'violation_type': eviction_case.violation_type, 'status': eviction_case.current_status,
-                     'date': eviction_case.date.strftime("%m/%d/%Y"), 'judgements': eviction_case.judgements,
-                     'eligibility': eligibility, 'case_id': case_id, 'balance': eviction_case.balance_due}
+            value = {'style': eviction_case.style,
+                     'case_id': case_id,
+                     'location': eviction_case.location,
+                     'violation_type': eviction_case.violation_type,
+                     'status': eviction_case.current_status,
+                     'complaint_date': eviction_case.complaint_date,
+                     'closed_date': eviction_case.closed_date.strftime("%m/%d/%Y"),
+                     'judgements': eviction_case.judgements,
+                     'eligibility': eligibility,
+                     'balance': eviction_case.balance_due}
             eviction_cases.append({key: value})
             # Types {int : str, str, str, str, str, list[str], (bool, str) tuple}
         return eviction_cases
@@ -90,8 +97,9 @@ class Crawler:
 
         return session.post(search_url, data=payload, timeout=30)
 
-    # Search the database for cases that match the names provided, and feed the results to RecordParser
-    # for later parsing
+    # Search the database for cases that match the names provided and return the summaries of each
+    # (specifically, the info provided on OECI's search page: case #, style, date/location, type/status,
+    # and case_detail_link)
     @staticmethod
     def _search_record(session, node_response, search_url, first_name, last_name, middle_name):
         param_parser = ParamParser()
@@ -123,10 +131,12 @@ class Crawler:
         # parse the case to gather the actual closed date and judgement list, then replace the default with them
         case_parser_data = CaseParser.feed(session_response.text)
 
-        balance_due = case_parser_data.balance_due
+        balance_due = case_parser_data.money
         closed_date = case_parser_data.closed_date
+        complaint_date = case_parser_data.complaint_date
         judgements = case_parser_data.judgements
-        updated_summary = replace(case, date=closed_date, judgements=judgements, balance_due=balance_due)
+        updated_summary = replace(case, complaint_date=complaint_date, closed_date=closed_date, judgements=judgements, balance_due=balance_due)
+
 
         return updated_summary
 
