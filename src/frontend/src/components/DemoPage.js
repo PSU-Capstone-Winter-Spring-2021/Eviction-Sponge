@@ -1,10 +1,4 @@
 import React from "react";
-<<<<<<< importCleanUpAndBootStrapOverride
-=======
-import "bootstrap/dist/css/bootstrap.css";
-import Search from './Search';
-import Container from '@material-ui/core/Container';
->>>>>>> main
 
 class DemoPage extends React.Component {
     componentDidMount(){
