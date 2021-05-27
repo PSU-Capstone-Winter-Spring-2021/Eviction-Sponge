@@ -10,7 +10,8 @@ import re
 @dataclass
 class CaseParserData:
     closed_date: date
-    judgements: []
+    complaint_date: str
+    judgements: List[str]
     money: str
 
 
@@ -22,11 +23,13 @@ class CaseParser:
         money = CaseParser.MoneyParser.parse_money(soup)
         closed_date = CaseParser._parse_closed_date(soup)
         judgements = CaseParser._parse_judgements(soup)
+        complaint_date = CaseParser._parse_complaint_date(soup)
         # If there were no judgements in the disposition section, check if they got put in the other events
         if not judgements:
             judgements = CaseParser._parse_secondary_judgements(soup)
 
-        return CaseParserData(closed_date, judgements, money)
+        # return CaseParserData(closed_date, complaint_date, judgements, money)
+        return CaseParserData(closed_date, complaint_date, judgements, money)
 
     @staticmethod
     def _parse_closed_date(soup) -> date:
@@ -52,7 +55,29 @@ class CaseParser:
         return datetime(9999, 9, 9)
 
     @staticmethod
+    def _parse_complaint_date(soup) -> str:
+        # The complaint is always the first entry in OTHER EVENTS AND HEARINGS, so the header is always
+        # "COtherEventsAndHearings RCDER#".  Just grab that block and parse the date (string) out of it
+        # Update: For some reason, RCDER# doesn't always count from 1 (or 0), sometimes starts at higher number
+        date_string = ''
+        for i in range(0, 10):
+            header = "COtherEventsAndHearings RCDER" + str(i)
+            tag = soup.find("td", headers=header)
+            if tag is None:
+                continue
+
+            as_string = tag.renderContents().decode("utf-8")
+            if "Complaint" not in as_string:
+                continue
+            try:
+                date_string = re.search(r'[0-9]{2}\/[0-9]{2}\/[0-9]{4}', as_string).group(0)
+            except AttributeError:
+                date_string = "09/09/9999"
+        return date_string
+
+    @staticmethod
     def _parse_judgements(soup) -> List[str]:
+
         # Explanation:  Look for tags with the header CDisp RDISPDATE#, as these contain the judgement information
         # Start from judgement #1 and work up, note that judgement #1 always occurs earliest so the list will be
         # chronological
@@ -91,7 +116,6 @@ class CaseParser:
 
         @staticmethod
         def parse_money(soup):
-            return '$0.00'
             TOTAL = 'Total:'
             DOLLAR_SIGN = '$'
             INTEREST = '%'
@@ -122,16 +146,19 @@ class CaseParser:
                     index = labels.index(tag)
                     # print(tag.text)
                     if not only_first_date:
-                        interest_date = MoneyParser.get_date(stuff)
+                        interest_date = CaseParser.MoneyParser.get_date(stuff)
                         only_first_date = True
                     if INTEREST in stuff:
-                        amount_before_interest = MoneyParser.extract_one_money(stuff)
-                        interest_rate = MoneyParser.extract_interest(stuff)
-                        today = datetime.datetime.today()
+                        amount_before_interest = CaseParser.MoneyParser.extract_one_money(stuff)
+                        interest_rate = CaseParser.MoneyParser.extract_interest(stuff)
+                        today = datetime.today()
                         time_difference = today.date() - interest_date
                         time_in_seconds = time_difference.total_seconds()
                         # 3153600 is total seconds in a year
                         interest_time = time_in_seconds/31536000
+                        print(amount_before_interest)
+                        print(interest_rate)
+                        print(interest_time)
                         total_interest = float(amount_before_interest) * (float(interest_rate)/100) * float(interest_time)
                         total_interest = float(total_interest)
                         total_interest = '{:.2f}'.format(total_interest)
@@ -153,7 +180,7 @@ class CaseParser:
                         if labels[index - 1].text.find(SATISFIED) != -1 and labels[index - 1].text.find(
                                 UNSATISFIED) == -1:
                             continue
-                        the_total = MoneyParser.extract_one_money(stuff)
+                        the_total = CaseParser.MoneyParser.extract_one_money(stuff)
                         if the_total in total_money_list and is_amended is True:
                             continue
                         total_money_list.append(the_total)
@@ -209,6 +236,7 @@ class CaseParser:
         # The following function extracts only the first item that could be money from a string
         @staticmethod
         def extract_one_money(string):
+            show_me_the_money = "0"
             string = string.replace(',', '')
             for stuff in string.split():
                 money = re.search(r'^\$?\d{1,3}(\d+(?!,))?(,\d{3})*(\.\d{2})?$', stuff)
@@ -235,6 +263,7 @@ class CaseParser:
                 for stuff in str(string).split():
                     if stuff[0].isnumeric():
                         stuff = stuff[:-1]
-                        the_date = datetime.datetime.strptime(stuff, '%m/%d/%Y').date()
+                        the_date = datetime.strptime(stuff, '%m/%d/%Y').date()
                         # hoping the courts are consistent with date format...
                         return the_date
+            return datetime.strptime(date.today().strftime('%m/%d/%Y'), '%m/%d/%Y').date()
