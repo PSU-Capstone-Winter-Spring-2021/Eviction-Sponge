@@ -12,8 +12,8 @@ class Landing extends React.Component {
             <>
                 <main className="container-fluid mh57">
                     <h1 className="hidden">EvictionSponge Homepage</h1>
-                    <div className="row justify-content-center py-4 landing">
-                        <p>
+                    <div className="row justify-content-center py-2 landing">
+                        <p className="mb-0">
                         EvictionSponge was made possible by a group of students at <br/> 
                         Portland State University for their senior capstone project.<br/>
                             <a href="/about" style={{color:"white"}}>Come meet the team
