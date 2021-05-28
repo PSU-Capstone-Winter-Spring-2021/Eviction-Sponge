@@ -11,7 +11,7 @@ class CaseDetail(MethodView):
         page_html = Crawler.fetch_case_detail_link(url)
 
         if not page_html:
-            return "Unable to retrieve case detail page for case with ID " + case_id + "."
+            return "Unable to retrieve case detail page for case with ID " + str(case_id) + "."
 
         soup = BeautifulSoup(page_html.text, "html.parser")
 
