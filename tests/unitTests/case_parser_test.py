@@ -1,7 +1,7 @@
 from datetime import datetime
 import bs4
 from src.backend.crawler.parsers.case_parser import CaseParser
-from tests.unitTests.class_mocks import MockSoup, MockTag
+from tests.class_mocks import MockSoup, MockTag
 
 ''' MOCKS '''
 

@@ -11,12 +11,12 @@ class Appendix extends React.Component {
             <main className="bg-light mh57">
                 <section className="container text-left">
                     <div className="w-75">
-                        <h2 className="pb-3 pt-4">Appendix</h2>
+                        <h1 className="pb-3 pt-4">Appendix</h1>
                         <p className="font-weight-bold">Form to file for expungement</p>
                         <p>
                             EvictionSponge supports automatic form-filling for the form
                             listed below. You can also fill out the form manually if
-                            preferred. <a href="/manual#file">Learn more in the Manual</a>.
+                            preferred. <a href="/manual">Learn more in the Manual</a>.
                         </p>
                         <hr />
                         <div className="my-3 pb-5">

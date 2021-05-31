@@ -200,3 +200,11 @@ footer {
 footer.navbar a {
     text-decoration: underline;
 }
+
+.hidden {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+    margin: 0;
+    padding: 0;
+}

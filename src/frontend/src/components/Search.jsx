@@ -92,6 +92,7 @@ class Search extends React.Component {
     render() {
         return (
                 <main className="container-fluid search-container bg-light p-sm-3 pt-1">
+                    <h1 className="hidden">Eviction Case Search</h1>
                     <form className="row justify-content-center bg-light">
                         <div className="row searchInputs col-sm-9 border p-md-3 p-1">
                             <div className="col-sm-4 px-1">

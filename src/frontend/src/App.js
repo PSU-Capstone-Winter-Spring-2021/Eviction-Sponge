@@ -8,7 +8,7 @@ import OECILogin from "./components/OeciLogin";
 import Manual from "./components/Manual";
 import Footer from "./components/Footer";
 import Navbar from "./components/navbar";
-import './styles/_globals.css'
+import "./index.css";
 import About from "./components/About";
 import RecordSearch from "./components/RecordSearch";
 import FillFrom from "./components/FillForm"

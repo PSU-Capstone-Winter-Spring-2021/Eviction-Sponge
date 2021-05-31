@@ -7,9 +7,9 @@ class DemoPage extends React.Component {
     render() {
         return (
           <Container>
-          <article className="lh-copy">
+          <article className="lh-copy text-left">
               <div className="bg-white bl bw3 b--blue mv4 pv4 ph4 ph5-l br3">
-                  <h1 className="f3 fw9 ma0 mb2">App Demo</h1>
+                  <h1 className="f3 fw9 ma0 mb2 text-center">App Demo</h1>
                   <p className="mw7 mb3">
                       This demo provides example Eviction that demonstrate the complex
                       rules of expungement and the analysis features of EvictionSponge. The
@@ -30,11 +30,10 @@ class DemoPage extends React.Component {
               <p className="flex lh-title mb3">
                 <div className="mr4">
                   <div className="fw6">First Name</div>
-                  <div>Single</div>
+                  <div>Middle Name (optional)</div>
                 </div>
                 <div>
                   <div className="fw6">Last Name</div>
-                  <div>Conviction</div>
                 </div>
               </p>
               <p className="pb2">

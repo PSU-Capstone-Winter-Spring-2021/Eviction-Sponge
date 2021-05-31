@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.css";
 
 export default class PartnersPage extends React.Component{
 
@@ -39,20 +38,17 @@ export default class PartnersPage extends React.Component{
         return(
         <>
             <div className="container-fluid bg-light pb-4 pt-3">
-                <div
-                className="container bg-light text-left"
-                style={{maxWidth: "720px"}}
-                >
-
+                <div className="container bg-light text-left" style={{maxWidth: "720px"}}>
+                    <h1 className="hidden">Partners Interest Page</h1>
                     <div className="row mb-4">
                         <h2 className="col font-weight-bold text-left">
-                            'Sah Dude
+                            Interested in becoming a partner?
                         </h2>
                     </div>
                     <div className="row mb-4">
                         <p className="col">
                             EvictionSponge is made for organizations looking for help in determining
-                            whether or not their clients are elligable for eviction expungement. We
+                            whether or not their clients are eligable for eviction expungement. We
                             provide the software, while organizations provide the clients and
                             expungement service.
                         </p>
@@ -61,7 +57,7 @@ export default class PartnersPage extends React.Component{
                         <p className="col">
                             We are looking to partner with organizations in contact with people who
                             have been evicted. If you would like to learn more, please fill out the
-                            contact form bellow.
+                            contact form below.
                         </p>
                     </div>
                     <div className="row mb-4">
@@ -74,7 +70,7 @@ export default class PartnersPage extends React.Component{
                     <p className="text-center">If so, click the button below!</p>
                     <p className="text-center">
                         <a href="https://docs.google.com/forms/u/1/d/1nD3nfYfKj9PSFXESRcME0ufSKhmmXFGTdhLBhRdhErk/edit?usp=drive_web"
-                           className="btn btn-info" role="button">Partner Interest</a>
+                           className="btn btn-info button" role="button">Partner Interest</a>
                     </p>
                 </div>
             </div>
