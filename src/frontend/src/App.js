@@ -32,6 +32,7 @@ import DemoPage from "./components/DemoPage"
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
+  const redirect = () => <Redirect to="/" />;
   return (
   <>
   <Router history={history}>
@@ -47,9 +48,9 @@ function App() {
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
+      <Route render={redirect} />
     </Switch>
     <Footer />
-    
   </Router>
   </>
 
