@@ -42,7 +42,7 @@ export default class SimpleCard extends React.Component{
 
     render (){
     const {caseNum} = this.state;
-    const {location: county_name, style: case_name , status, eligibility, closed_dagit te: date_of_judgement, case_id} = this.state.result[caseNum];
+    const {location: county_name, style: case_name , status, eligibility, closed_date: date_of_judgement, case_id, complaint_date, balance} = this.state.result[caseNum];
     console.log("Id is; " + case_id)
     return(
     <Container maxWidth="sm">
@@ -62,7 +62,13 @@ export default class SimpleCard extends React.Component{
                 Location: {county_name}
                 </Typography>
                 <Typography variant="body2" component="p">
-                Date: {date_of_judgement}
+                Complaint Date: {complaint_date}
+                </Typography>
+                <Typography variant="body2" component="p">
+                Closed Date: {date_of_judgement}
+                </Typography>
+                <Typography variant="body2" component="p">
+                {balance}
                 </Typography>
                 <Typography variant="body2" component="p">
                     {eligibility[0]
