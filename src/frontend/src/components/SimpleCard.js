@@ -42,7 +42,7 @@ export default class SimpleCard extends React.Component{
 
     render (){
     const {caseNum} = this.state;
-    const {location: county_name, style: case_name , status, eligibility, closed_date: date_of_judgement, case_id} = this.state.result[caseNum];
+    const {location: county_name, style: case_name , status, eligibility, date: date_of_judgement, case_id} = this.state.result[caseNum];
     console.log("Id is; " + case_id)
     return(
     <Container maxWidth="sm">
@@ -85,9 +85,8 @@ export default class SimpleCard extends React.Component{
                         <Button color="primary" variant="contained" size="small" href="/fill-form">Click to autofill application pdf</Button>    
                         <br></br>
                         </Link>
-                        : <p>Eligibility: {eligibility}</p>
+                        : <p>Eligibility:{eligibility}</p>
                     }
-                    
                 </Typography>
                 <CardActions>    
                 </CardActions>
