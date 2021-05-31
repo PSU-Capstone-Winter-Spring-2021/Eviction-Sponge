@@ -21,15 +21,15 @@ export default class SimpleCard extends React.Component{
                   };
     }
 
-    async componentDidMount() {
-        console.log("calling to: " + `/case-detail/${this.state.result[this.state.caseNum].case_id}`)
-        await axios.get(`/case-detail/${parseInt(this.state.result[this.state.caseNum].case_id)}`).then(res => {
-            if (res) {
-                this.setState({casePage: res.data})
-                console.log(res.data)
-            }
-        })
-    }
+    // async componentDidMount() {
+    //     console.log("calling to: " + `/case-detail/${this.state.result[this.state.caseNum].case_id}`)
+    //     await axios.get(`/case-detail/${parseInt(this.state.result[this.state.caseNum].case_id)}`).then(res => {
+    //         if (res) {
+    //             this.setState({casePage: res.data})
+    //             console.log(res.data)
+    //         }
+    //     })
+    // }
 
     handleClick(e) {
         e.preventDefault()
@@ -50,7 +50,7 @@ export default class SimpleCard extends React.Component{
             <Card className='bg-light border'>
             <CardContent>
                 <Typography className={caseNum+" text-center"} color="textSecondary" gutterBottom>
-                    <a href={`/case-detail/${case_id}`}>
+                    <a href={`/case-detail/${case_id}`} target="_blank">
                     Case Name: {case_name}
                     </a>
                 </Typography>
