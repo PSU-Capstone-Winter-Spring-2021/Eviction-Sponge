@@ -50,7 +50,9 @@ export default class SimpleCard extends React.Component{
             <Card className='bg-light border'>
             <CardContent>
                 <Typography className={caseNum+" text-center"} color="textSecondary" gutterBottom>
-                Case Name: {case_name}
+                    <a href={`/case-detail/${case_id}`}>
+                    Case Name: {case_name}
+                    </a>
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
                 {caseNum} 
