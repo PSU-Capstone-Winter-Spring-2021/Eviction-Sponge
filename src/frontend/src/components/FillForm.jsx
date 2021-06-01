@@ -31,7 +31,6 @@ class FillForm extends React.Component {
         super(props);
         // this.props = testProps
         if (this.props && this.props.location && this.props.location.state) {
-            console.log(this.props.location);
             this.state = {
                 county_name: this.props.location.state.county_name || '',
                 case_number: this.props.location.state.case_number || '',
