@@ -133,6 +133,14 @@ span p {
     font-size: 20px;
 }
 
+.bg-darker-green{
+    background-color: var(--darker-green);
+}
+
+.text-color-white{
+    color: white;
+}
+
 .landingText {
     text-align: left;
     background-color: white;
