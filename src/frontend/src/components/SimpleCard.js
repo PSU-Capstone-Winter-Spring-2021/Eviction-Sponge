@@ -83,7 +83,6 @@ export default class SimpleCard extends React.Component{
                         }}
                         >
                         <Button color="primary" variant="contained" size="small" href="/fill-form">Click to autofill application pdf</Button>    
-                        <br></br>
                         </Link>
                         : <p>Eligibility:{eligibility}</p>
                     }
