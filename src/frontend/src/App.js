@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import CacheBuster from 'react-cache-buster';
+import {version} from '../package.json';
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import axios from '../node_modules/axios';
 import history from "./history";
@@ -32,8 +34,15 @@ import DemoPage from "./components/DemoPage"
 // import { Button, Navbar,Nav,Form,FormControl } from '../node_modules/react-bootstrap'
 
 function App() {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const redirect = () => <Redirect to="/" />;
   return (
   <>
+  <CacheBuster
+  currentVestion={version}
+  isEnabled={isProduction}
+  isVerboseMode={false}
+  >
   <Router history={history}>
     <Navbar />
     <Switch>
@@ -47,10 +56,11 @@ function App() {
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
+      <Route render={redirect} />
     </Switch>
     <Footer />
-    
   </Router>
+  </CacheBuster>
   </>
 
   );
