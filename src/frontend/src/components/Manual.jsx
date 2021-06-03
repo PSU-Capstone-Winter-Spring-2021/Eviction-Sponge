@@ -55,6 +55,7 @@ class Manual extends React.Component {
                             </h2>
                             <p className="">EvictionSponge is a web application used to facilitate the expungement process for evictions that occured in Oregon. It is built by a team of students at PSU for their capstone project and is based on the RecordSponge project by Code for PDX. The codebase is published under an open source MIT license.</p>
                             <p>This Manual explains how EvictionSponge is used and the process of expunging eviction records. </p>
+                            <a href="/cards_demo">Jump to search demo.</a>
                         </section>
                         <section className="">
                             <h2 id="information">General Info</h2>
@@ -81,7 +82,7 @@ class Manual extends React.Component {
                                                 <li>You will need an Oregon eCourt Case Information (OECI) account to search for civil records. You can purchase a subscription <a href="https://www.courts.oregon.gov/services/online/pages/ojcin.aspx">here</a>.</li>
                                             </ul>
                                         </li>
-                                        <li><a href="/record-search">Search records</a> by First and Last name</li>
+                                        <li><a href="/record-search">Search records</a> by First and Last name. <a href="/cards_demo"> Jump to search demo.</a></li>
                                         <li>For eligible records of eviction judgments, <a href="#assumption">Assumption 1</a> is met</li>
                                         <li>Confirm positive search results with Michael: <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a></li>
                                         <li>Complete forms (See note below on Forms)</li>
