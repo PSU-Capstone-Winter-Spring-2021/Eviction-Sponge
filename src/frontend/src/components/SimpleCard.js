@@ -65,7 +65,7 @@ export default class SimpleCard extends React.Component{
                 Date: {date_of_judgement}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    <Button  size="small" color="secondary">
+                    <Button  size="small" style={{backgroundColor: "#4caf50"}}>
                             Eligible Now
                     </Button> : {eligibility}
                     {eligibility[0]
