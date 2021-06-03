@@ -25,75 +25,113 @@ class FillForm extends React.Component {
 
     componentDidMount(){
         document.title = "Generate Expungement Form - EvictionSponge";
+        this.getNames();
     }
 
     constructor(props) {
         super(props);
         // this.props = testProps
-        this.state = {
-            county_name: this.props.location.state.county_name || '',
-            case_number: this.props.location.state.case_number || '',
-            case_name: this.props.location.state.case_name || '',
-            date_of_judgment: this.props.location.state.date_of_judgement || '',
-            plaintiff_line1: this.props.plaintiff_line1 || '',
-            plaintiff_line2: this.props.plaintiff_line2 || '',
+        if (this.props && this.props.location && this.props.location.state) {
+            this.state = {
+                county_name: this.props.location.state.county_name || '',
+                case_number: this.props.location.state.case_number || '',
+                case_name: this.props.location.state.case_name || '',
+                date_of_judgment: this.props.location.state.date_of_judgement || '',
+                plaintiff_line1: this.props.plaintiff_line1 || '',
+                plaintiff_line2: this.props.plaintiff_line2 || '',
 
-            defendant_line1: this.props.defendant_line1 || '',
-            defendant_line2: this.props.defendant_line2 || '',
-            defendant_line3: this.props.defendant_line3 || '',
-            defendant_line4: this.props.defendant_line4 || '',
+                defendant_line1: this.props.defendant_line1 || '',
+                defendant_line2: this.props.defendant_line2 || '',
+                defendant_line3: this.props.defendant_line3 || '',
+                defendant_line4: this.props.defendant_line4 || '',
 
-            def_full_name: this.props.def_full_name || '',
-            def_mailing_address: '',
-            def_city: '',
-            def_state: '',
-            def_zip: '',
-            phone_number: '',
+                def_full_name: this.props.def_full_name || '',
+                def_mailing_address: '',
+                def_city: '',
+                def_state: '',
+                def_zip: '',
+                phone_number: '',
 
-            plaintiff_mailing_address: '',
-            plaintiff_city: '',
-            plaintiff_state: '',
-            plaintiff_zip: '',
+                plaintiff_mailing_address: '',
+                plaintiff_city: '',
+                plaintiff_state: '',
+                plaintiff_zip: '',
 
-            dismissal: false,
-            restitution: false,
-            money: false,
-            judgment_date: false,
-            stipulation: false,
-            terms: false,
+                dismissal: false,
+                restitution: false,
+                money: false,
+                judgment_date: false,
+                stipulation: false,
+                terms: false,
 
-            invalid_defendant_zip_code: false,
-            invalid_plaintiff_zip_code: false,
-            invalid_phone: false
+                invalid_defendant_zip_code: false,
+                invalid_plaintiff_zip_code: false,
+                invalid_phone: false
+            }
         }
-        // this.getNames();
+        else {
+            this.state = {
+                county_name: '',
+                case_number: '',
+                case_name: '',
+                date_of_judgment: '',
+                plaintiff_line1: '',
+                plaintiff_line2: '',
+
+                defendant_line1: '',
+                defendant_line2: '',
+                defendant_line3: '',
+                defendant_line4: '',
+
+                def_full_name: '',
+                def_mailing_address: '',
+                def_city: '',
+                def_state: '',
+                def_zip: '',
+                phone_number: '',
+
+                plaintiff_mailing_address: '',
+                plaintiff_city: '',
+                plaintiff_state: '',
+                plaintiff_zip: '',
+
+                dismissal: false,
+                restitution: false,
+                money: false,
+                judgment_date: false,
+                stipulation: false,
+                terms: false,
+
+                invalid_defendant_zip_code: false,
+                invalid_plaintiff_zip_code: false,
+                invalid_phone: false
+            }
+        }
     }
 
     // Don't know that this will be needed
-    // getNames() {
-    //     let defendantFlag = false;
-    //     let plaintiffs = [];
-    //     let defendants = [];
-    //     let names = this.props.location.state.case_name.split(" ");
-    //     for(let i = 0; i < names.length; i++) {
-    //         console.log("current string:" + names[i])
-    //         if( names[i].toLowerCase() === "vs" || names[i].toLowerCase() === "vs.") {
-    //             defendantFlag = true;
-    //         }
-    //         else if(defendantFlag) {
-    //             defendants.push(names[i] + " ")
-    //         }
-    //         else {
-    //             plaintiffs.push(names[i] + " ")
-    //         }
-    //     }
-    //     this.setState({
-    //         plaintiff_line1: plaintiffs.join(' '),
-    //         defendant_line1: defendants.join(' '),
-    //     })
-    //     console.log("Defendants: " + defendants.join(' '));
-    //     console.log("Plaintiffs: " + plaintiffs.join(' '));
-    // }
+    getNames() {
+        let defendantFlag = false;
+        let plaintiff = [];
+        let defendant = [];
+        let names = this.props.location.state.case_name.split(" ");
+        for(let i = 0; i < names.length; i++) {
+            console.log("current string:" + names[i])
+            if( names[i].toLowerCase() === "vs" || names[i].toLowerCase() === "vs.") {
+                defendantFlag = true;
+            }
+            else if(defendantFlag) {
+                defendant.push(names[i] + " ")
+            }
+            else {
+                plaintiff.push(names[i] + " ")
+            }
+        }
+        this.setState({
+            plaintiff_line1: plaintiff.join(''),
+            defendant_line1: defendant.join(''),
+        })
+    }
 
     phoneNumberPattern = new RegExp('.*[0-9].*');
     zipCodePattern = new RegExp('[0-9][0-9][0-9][0-9][0-9].*');
