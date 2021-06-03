@@ -22,11 +22,6 @@ class Search extends React.Component {
         let local = [];
         if(local = localStorage.getItem('Results')) {
             let res = JSON.parse(local)
-            if (res.Expiration < Date.now()) {
-                localStorage.removeItem('Results');
-            }
-            else
-            {
                 this.setState({
                 Results: res.Results,
                 Submitted: true,
@@ -34,7 +29,6 @@ class Search extends React.Component {
                 });
             }
         }
-    }
 
     async handleSubmit(e) {
         e.preventDefault();
