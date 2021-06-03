@@ -73,6 +73,9 @@ export default class SimpleCard extends React.Component{
                 {balance}
                 </Typography>
                 <Typography variant="body2" component="p">
+                    <Button  size="small" style={{backgroundColor: "#4caf50"}}>
+                            Eligible Now
+                    </Button> : {eligibility}
                     {eligibility[0]
                         ? <Link
                         id={caseNum}
@@ -87,16 +90,12 @@ export default class SimpleCard extends React.Component{
                             },
                         }}
                         >
-                    <Button  size="small" color="secondary">
-                    Eligible Now
-                    </Button> : {eligibility}
+                        <Button color="primary" variant="contained" size="small" href="/fill-form">Click to autofill application pdf</Button>    
                         </Link>
-                        : <p>Eligibility: {eligibility}</p>
+                        : <p>Eligibility:{eligibility}</p>
                     }
-                    <Button color="primary" variant="contained" size="small">Click to autofill application pdf</Button>
                 </Typography>
-                <CardActions>
-                    
+                <CardActions>    
                 </CardActions>
             </CardContent>
             </Card>
