@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 
 class Manual extends React.Component {
 
@@ -65,9 +64,11 @@ class Manual extends React.Component {
                                 <ul>
                                     <li>The case went to trial and the tenant won at trial</li>
                                     <li>The case resulted in a judgment, and the judgment is at least five years old, AND
-                                        <li>The tenant doesn't owe any money that was included in the judgment</li>
+                                        <ul>
+                                            <li>The tenant doesn't owe any money that was included in the judgment</li>
+                                            <li>If the case resulted in a negotiated agreement, the tenant has complied with any terms in court agreements</li>
+                                        </ul>
                                     </li>
-                                    <li>The case resulted in a negotiated agreement and the tenant has complied with any terms in court agreements</li>
                                 </ul>
                             <p>Please contact <a href="mailto:michael@qiu-qiulaw.com">michael@qiu-qiulaw.com</a> if you would like to set up EvictionSponge at your organization.</p>
                         </section>

@@ -50,7 +50,8 @@ PDF_FORM_LOCATION = Path('./files/EvictionPDF.pdf')
 
 class CreatePDF:
 
-    def fit_address(self, address):
+    @staticmethod
+    def fit_address(address):
         first_line = 22
         first_line_full = False
         second_line = 72
@@ -86,8 +87,9 @@ class CreatePDF:
         address_output = [first_line_string, second_line_string, third_line_string]
         return address_output
 
-    def data_dict_to_pdf_dict(self, input_dict):
-        address_list = self.fit_address(input_dict['plaintiff_address'])
+    @staticmethod
+    def data_dict_to_pdf_dict(input_dict):
+        address_list = CreatePDF.fit_address(input_dict['plaintiff_address'])
         output = dict(
             COUNTY_1=input_dict['county_name'],
             PLAINTIFF_1_1=input_dict['plaintiff_line1'],
@@ -102,7 +104,7 @@ class CreatePDF:
             DISMISSAL=input_dict['dismissal'],
             RESTITUTION=input_dict['restitution'],
             MONEY=input_dict['money'],
-            JUDGMENT_DATE=input_dict['judgment_date'],
+            #   JUDGMENT_DATE=input_dict['judgment_date'],
             DATE_OF_JUDGMENT=input_dict['date_of_judgment'],
             STIPULATION=input_dict['stipulation'],
             TERMS=input_dict['terms'],
@@ -122,7 +124,8 @@ class CreatePDF:
         )
         return output
 
-    def fill_pdf(self, input_pdf_path, data_dict):
+    @staticmethod
+    def fill_pdf(input_pdf_path, data_dict):
         ANNOT_KEY = '/Annots'
         ANNOT_FIELD_KEY = '/T'
         SUBTYPE_KEY = '/Subtype'
@@ -148,16 +151,18 @@ class CreatePDF:
         pdf_buffer.seek(0)
         return pdf_buffer
 
-    def create_form_name(self, input_dict):
+    @staticmethod
+    def create_form_name(input_dict):
         filename = input_dict['defendant_line1'].replace(' ', '_')
         filename = filename or 'FED-Motion-SetAside'
         filename = filename + '.pdf'
         return filename
 
-    def PDF_filler(self, input_dict):
-        pdf_dict = CreatePDF.data_dict_to_pdf_dict(self, input_dict)
-        filename = CreatePDF.create_form_name(self, input_dict)
-        pdf = CreatePDF.fill_pdf(self, PDF_FORM_LOCATION, pdf_dict)
+    @staticmethod
+    def PDF_filler(input_dict):
+        pdf_dict = CreatePDF.data_dict_to_pdf_dict(input_dict)
+        filename = CreatePDF.create_form_name(input_dict)
+        pdf = CreatePDF.fill_pdf(PDF_FORM_LOCATION, pdf_dict)
         return pdf, filename
 
 # taco = CreatePDF()

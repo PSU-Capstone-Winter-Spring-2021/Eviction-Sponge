@@ -2,21 +2,29 @@ import React from "react";
 import axios from 'axios';
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import "bootstrap/dist/css/bootstrap.css";
 
 class PartnersTableV2 extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            partnerData: []
+            partnerData: [],
+            dataLoaded: false
         };
     }
 
     componentDidMount() {
         axios.get('/partners-table')
             .then(({ data }) => {
+                if(data.length > 0){
+                    this.setState({
+                        partnerData: data,
+                        dataLoaded: true
+                    });
+                }
+            }, reason =>{
+                console.log("Internal Server Error, can't retrieve data")
                 this.setState({
-                    partnerData: data
+                    dataLoaded: false
                 });
             })
     }
@@ -75,10 +83,11 @@ class PartnersTableV2 extends React.Component{
                 </Accordion.Collapse>
             </Card>
         ));
+        if(this.state.dataLoaded){
         return(
             <div
-                className="container-fluid py-5"
-                style={{backgroundColor:"green"}}>
+            className="container-fluid py-5"
+            style={{backgroundColor:"green"}}>
                 <Accordion
                     className="container-md bg-white rounded pt-2"
                     style={{maxWidth: "720px"}}>
@@ -89,6 +98,40 @@ class PartnersTableV2 extends React.Component{
                 </Accordion>
             </div>
         );
+        }
+        else{
+            return(
+                <div
+                className="container-fluid py-5"
+                style={{backgroundColor:"green"}}>
+                    <div
+                    className = "container-md bg-white rounded pt-2"
+                    style={{maxWidth: "720px"}}>
+                        <div className="row">
+                            <h2 className="col">We're looking for Partners!</h2>
+                        </div>
+                        <div className="row">
+                            <p className ="col">
+                                If you're interested in working with EvictionSponge and putting
+                                our services in the hands of more people, please let us know by
+                                contacting us - We'd love to work with you! <br/>
+                                <a href="/partners">Contact Us
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-arrow-right"
+                                viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

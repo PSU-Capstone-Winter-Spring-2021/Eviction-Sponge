@@ -11,7 +11,7 @@ import re
 class CaseParserData:
     closed_date: date
     complaint_date: str
-    judgements: []
+    judgements: List[str]
     money: str
 
 
@@ -263,7 +263,10 @@ class CaseParser:
                 for stuff in str(string).split():
                     if stuff[0].isnumeric():
                         stuff = stuff[:-1]
-                        the_date = datetime.strptime(stuff, '%m/%d/%Y').date()
+                        try:
+                            the_date = datetime.strptime(stuff, '%m/%d/%Y').date()
+                        except:
+                            break
                         # hoping the courts are consistent with date format...
                         return the_date
             return datetime.strptime(date.today().strftime('%m/%d/%Y'), '%m/%d/%Y').date()

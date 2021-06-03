@@ -3,8 +3,6 @@ import axios from 'axios';
 import InvalidInputs from "./InvalidInputs";
 import fileDownload from "js-file-download";
 
-import 'bootstrap/dist/css/bootstrap.css';
-
 
 // const testProps = {
 //     county_name: 'Clark',
@@ -32,41 +30,81 @@ class FillForm extends React.Component {
     constructor(props) {
         super(props);
         // this.props = testProps
-        this.state = {
-            county_name: this.props.location.state.county_name || '',
-            case_number: this.props.location.state.case_number || '',
-            case_name: this.props.location.state.case_name || '',
-            date_of_judgment: this.props.location.state.date_of_judgement || '',
-            plaintiff_line1: this.props.plaintiff_line1 || '',
-            plaintiff_line2: this.props.plaintiff_line2 || '',
+        if (this.props && this.props.location && this.props.location.state) {
+            this.state = {
+                county_name: this.props.location.state.county_name || '',
+                case_number: this.props.location.state.case_number || '',
+                case_name: this.props.location.state.case_name || '',
+                date_of_judgment: this.props.location.state.date_of_judgement || '',
+                plaintiff_line1: this.props.plaintiff_line1 || '',
+                plaintiff_line2: this.props.plaintiff_line2 || '',
 
-            defendant_line1: this.props.defendant_line1 || '',
-            defendant_line2: this.props.defendant_line2 || '',
-            defendant_line3: this.props.defendant_line3 || '',
-            defendant_line4: this.props.defendant_line4 || '',
+                defendant_line1: this.props.defendant_line1 || '',
+                defendant_line2: this.props.defendant_line2 || '',
+                defendant_line3: this.props.defendant_line3 || '',
+                defendant_line4: this.props.defendant_line4 || '',
 
-            def_full_name: this.props.def_full_name || '',
-            def_mailing_address: '',
-            def_city: '',
-            def_state: '',
-            def_zip: '',
-            phone_number: '',
+                def_full_name: this.props.def_full_name || '',
+                def_mailing_address: '',
+                def_city: '',
+                def_state: '',
+                def_zip: '',
+                phone_number: '',
 
-            plaintiff_mailing_address: '',
-            plaintiff_city: '',
-            plaintiff_state: '',
-            plaintiff_zip: '',
+                plaintiff_mailing_address: '',
+                plaintiff_city: '',
+                plaintiff_state: '',
+                plaintiff_zip: '',
 
-            dismissal: false,
-            restitution: false,
-            money: false,
-            judgment_date: false,
-            stipulation: false,
-            terms: false,
+                dismissal: false,
+                restitution: false,
+                money: false,
+                judgment_date: false,
+                stipulation: false,
+                terms: false,
 
-            invalid_defendant_zip_code: false,
-            invalid_plaintiff_zip_code: false,
-            invalid_phone: false
+                invalid_defendant_zip_code: false,
+                invalid_plaintiff_zip_code: false,
+                invalid_phone: false
+            }
+        }
+        else {
+            this.state = {
+                county_name: '',
+                case_number: '',
+                case_name: '',
+                date_of_judgment: '',
+                plaintiff_line1: '',
+                plaintiff_line2: '',
+
+                defendant_line1: '',
+                defendant_line2: '',
+                defendant_line3: '',
+                defendant_line4: '',
+
+                def_full_name: '',
+                def_mailing_address: '',
+                def_city: '',
+                def_state: '',
+                def_zip: '',
+                phone_number: '',
+
+                plaintiff_mailing_address: '',
+                plaintiff_city: '',
+                plaintiff_state: '',
+                plaintiff_zip: '',
+
+                dismissal: false,
+                restitution: false,
+                money: false,
+                judgment_date: false,
+                stipulation: false,
+                terms: false,
+
+                invalid_defendant_zip_code: false,
+                invalid_plaintiff_zip_code: false,
+                invalid_phone: false
+            }
         }
         // this.getNames();
     }
