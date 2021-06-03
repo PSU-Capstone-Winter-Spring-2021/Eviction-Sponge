@@ -88,8 +88,8 @@ class FillForm extends React.Component {
             }
         }
         this.setState({
-            plaintiff_line1: plaintiff.join(' '),
-            defendant_line1: defendant.join(' '),
+            plaintiff_line1: plaintiff.join(''),
+            defendant_line1: defendant.join(''),
         })
     }
 
