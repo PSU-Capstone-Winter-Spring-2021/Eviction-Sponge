@@ -15,7 +15,7 @@ export default class SimpleCard extends React.Component{
     constructor(props) {
                 super(props);
                 this.state = {
-                    caseNum: Object.keys(this.props.res),
+                    caseNum: Object.keys(this.props.res)[0],
                     result: this.props.res,
                     casePage: {}
                   };
@@ -50,12 +50,12 @@ export default class SimpleCard extends React.Component{
             <Card className='bg-light border'>
             <CardContent>
                 <Typography className={caseNum+" text-center"} color="textSecondary" gutterBottom>
-                    <a href={`/case-detail/${case_id}`} target="_blank">
+                    <a href={`/case-detail/${case_id}`} target="_blank" rel="noreferrer">
                     Case Name: {case_name}
                     </a>
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
-                {caseNum} 
+                {caseNum}
                 </Typography>
                 <Typography className={caseNum}  gutterBottom>
                 Status: {status}
@@ -95,12 +95,12 @@ export default class SimpleCard extends React.Component{
                         : <p>Eligibility:{eligibility}</p>
                     }
                 </Typography>
-                <CardActions>    
+                <CardActions>
                 </CardActions>
             </CardContent>
             </Card>
             <br></br>
-        </div>  
+        </div>
     </Container>
     );
     }
