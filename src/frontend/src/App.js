@@ -35,6 +35,7 @@ import DemoPage from "./components/DemoPage"
 
 function App() {
   const isProduction = process.env.NODE_ENV === 'production';
+  const redirect = () => <Redirect to="/" />;
   return (
   <>
   <CacheBuster
@@ -55,9 +56,9 @@ function App() {
       <Route component={PartnersPage} exact={true} path="/partners" />
       <Route component={Appendix} exact={true} path="/appendix" />
       <Route component={Accessibility} exact={true} path="/accessibility" />
+      <Route render={redirect} />
     </Switch>
     <Footer />
-    
   </Router>
   </CacheBuster>
   </>
