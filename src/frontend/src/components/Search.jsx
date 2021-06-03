@@ -90,16 +90,16 @@ class Search extends React.Component {
                     <form className="row justify-content-center bg-light">
                         <div className="row searchInputs col-sm-9 border p-md-3 p-1">
                             <div className="col-sm-4 px-1">
-                                <label for="firstName">First Name*:</label>
-                                <input className="searchField w-100" type="text" id="firstName" name="firstName" required="true" placeholder="First Name"/>
+                                <label htmlFor="firstName">First Name*:</label>
+                                <input className="searchField w-100" type="text" id="firstName" name="firstName" required={true} placeholder="First Name"/>
                             </div>
                             <div className="col-sm-4 px-1">
-                                <label for="middleName">Middle Name:</label>
+                                <label htmlFor="middleName">Middle Name:</label>
                                 <input className="searchField w-100" type="text" id="middleName" name="middleName" placeholder="Middle Name(Opt.)"/>
                             </div>
                             <div className="col-sm-4 px-1">
-                                <label for="lastName">Last Name*:</label>
-                                <input className="searchField w-100" type="text" id="lastName" name="lastName" required="true" placeholder="Last Name"/>
+                                <label htmlFor="lastName">Last Name*:</label>
+                                <input className="searchField w-100" type="text" id="lastName" name="lastName" required={true} placeholder="Last Name"/>
                             </div>
                             <p className="col-12 text-right">* indicates a required field</p>
                             <div className="col-sm-4 col-12 px-1">
