@@ -39,9 +39,9 @@ function App() {
   return (
   <>
   <CacheBuster
-  currentVestion={version}
+  currentVersion={version}
   isEnabled={isProduction}
-  isVerboseMode={false}
+  isVerboseMode={true}
   >
   <Router history={history}>
     <Navbar />

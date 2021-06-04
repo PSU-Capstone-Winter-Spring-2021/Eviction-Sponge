@@ -19,23 +19,19 @@ class DemoPage extends React.Component {
                   <p className="mw7 mb3">
                       You can also "Enable Editing" below the search panel to build and
                       evaluate different examples. If you are looking to evaluate your own
-                      Eviction for expungement eligibility, we urge you to contact{" "}
+                      Eviction for expungement eligibility, we urge you to contact Michael at <a href='mailto:michael@qiuqiulaw.com'>Michael@quiquilaw.com</a>
                   </p>
                   <p className="mb3 mw7 ">
                       Try searching any of the following examples by entering them in the
                       search panel below.
                   </p>
               </div>
+              <div className="flex lh-title mb3 mr4">
+                  <p className="fw6">First Name</p>
+                  <p>Middle Name (optional)</p>
+                  <p className="fw6">Last Name</p>
+              </div>
               <div>
-              <p className="flex lh-title mb3">
-                <div className="mr4">
-                  <div className="fw6">First Name</div>
-                  <div>Middle Name (optional)</div>
-                </div>
-                <div>
-                  <div className="fw6">Last Name</div>
-                </div>
-              </p>
               <p className="pb2">
                   As a simple example, if a person's record has only a single
                   convicted charge, it is eligible after three years.
