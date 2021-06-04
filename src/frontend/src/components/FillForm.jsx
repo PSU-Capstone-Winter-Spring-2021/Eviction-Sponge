@@ -25,11 +25,13 @@ class FillForm extends React.Component {
 
     componentDidMount(){
         document.title = "Generate Expungement Form - EvictionSponge";
+        window.scrollTo(0,0)
         this.getNames();
     }
 
     constructor(props) {
         super(props);
+        this.myRef = React.createRef()
         // this.props = testProps
         if (this.props && this.props.location && this.props.location.state) {
             this.state = {
