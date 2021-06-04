@@ -48,7 +48,7 @@ class Search extends React.Component {
             await axios.post("/demo", postName).then(res => {
                 if(res !== null) {
                     this.setState({Loaded: true});
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.setState({Results: res.data, Found: true});
                     // if(res.status == 401 || res.status == 500){
                     //     redirectLogin();
@@ -62,7 +62,7 @@ class Search extends React.Component {
 
             if(res !== null) {
                 this.setState({Loaded: true});
-                console.log(res.data);
+                // console.log(res.data);
                 this.setState({Results: res.data, Found: true});
                 localStorage.setItem('Results', JSON.stringify({
                     Expiration: Date.now() + 600000, //This should set expiration for search to 10 minutes.

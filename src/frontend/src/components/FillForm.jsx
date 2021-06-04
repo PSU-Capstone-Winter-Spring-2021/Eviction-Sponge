@@ -118,7 +118,7 @@ class FillForm extends React.Component {
         let defendant = [];
         let names = this.props.location.state.case_name.split(" ");
         for(let i = 0; i < names.length; i++) {
-            console.log("current string:" + names[i])
+            // console.log("current string:" + names[i])
             if( names[i].toLowerCase() === "vs" || names[i].toLowerCase() === "vs.") {
                 defendantFlag = true;
             }
