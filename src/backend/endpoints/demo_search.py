@@ -36,8 +36,8 @@ class DemoSearch(MethodView):
                                                            split_judgements_string(fakeCase[7]))
                 key = fakeCase[0]
                 value = {'style': fakeCase[1], 'location': fakeCase[2], 'violation_type': fakeCase[3],
-                         'status': fakeCase[4], 'date': fakeCase[5], 'judgements': split_judgements_string(fakeCase[6]),
-                         'eligibility': (fakeCase[7], fakeCase[8])}
+                         'status': fakeCase[4], 'complaint_date': fakeCase[5], 'closed_date': fakeCase[6], 'judgements': split_judgements_string(fakeCase[7]),
+                         'eligibility': [True if fakeCase[8] == "True" else False, fakeCase[9]], 'case_id' : fakeCase[10], 'balance': fakeCase[11]}
                 search_results.append({key: value})
 
         # To view all search results:
