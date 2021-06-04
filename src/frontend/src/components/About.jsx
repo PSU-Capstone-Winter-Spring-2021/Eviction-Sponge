@@ -34,7 +34,7 @@ class About extends React.Component {
                             <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Thomas Pollard</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
+                            <p>Capstone project team lead. Computer science undergraduate at Portland State University, graduated June 2021</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
