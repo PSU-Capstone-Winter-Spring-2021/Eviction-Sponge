@@ -109,11 +109,11 @@ class Search extends React.Component {
 
                         {this.state.Submitted &&
                             !this.state.Found &&
-                            !this.state.Loaded &&<p class="loadingText"> Loading...</p>
+                            !this.state.Loaded &&<p className="loadingText"> Loading...</p>
                         }
                         {this.state.Submitted &&
                             this.state.Loaded &&
-                            !this.state.Found &&<p class="notFoundText"> No results Found</p>
+                            !this.state.Found &&<p className="notFoundText"> No results Found</p>
                         }
                         </div>
                     </form>
