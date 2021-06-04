@@ -17,22 +17,17 @@ class About extends React.Component {
                         <p>The eviction sponge project is a web-hosted
                         service that allows users to check their
                         eligibility for eviction record expungement
-                        and, if they are eligible, provide the
-                        necessary legal documentation already
-                        filled in.
+                        and, if they are eligible, provides the
+                        necessary legal documentation auto-filled with their information.
                         </p>
                         <h2>Our Mission</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim atque, autem dolor ab
-                        voluptatem voluptas officiis esse fugiat quos quisquam eligendi ea quasi aut labore cum
-                        mollitia impedit dolorum a.</p>
-                        <p>Debitis, nisi nobis a deleniti quam accusantium veniam dignissimos consectetur sit
-                        delectus, quidem voluptatum unde laborum aliquid illo quo molestiae perspiciatis!</p>
-                        <p>Quis vero earum ullam explicabo. Quae ratione rem illo!
-                        Aut ratione veritatis necessitatibus ipsam! Sunt assumenda fuga omnis odit voluptatem
-                        temporibus nulla quaerat minima vitae corporis debitis cum quas illo nisi consequuntur,
-                        unde esse officia, alias nemo recusandae laboriosam.
-                        </p>
-                        <h2>Our Team</h2>
+                        <p>This website began as a senior project for eight undergraduate computer science
+                            students at Portland State University in the beginning of 2021. </p>
+                        <p>The EvictionSponge development team quickly grew passionate about the project  when they learned about the positive
+                            impact this software would have on the local community.</p>
+                        <p>The team wants to thank Michael Zhang for sponsoring this project and giving them the necessary
+                            tools to be successful.</p>
+                        <h2>Meet the Team</h2>
                         <div class="row text-left">
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
@@ -63,7 +58,7 @@ class About extends React.Component {
                             <p><img src="https://i.imgur.com/FC9HJSm.jpg"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Caillie Juergens</p>
-                            <p>Computer science undergraduate at Portland State University, class of '21</p>
+                            <p>Computer Science Undergraduate at Portland State University, Class of '21</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
