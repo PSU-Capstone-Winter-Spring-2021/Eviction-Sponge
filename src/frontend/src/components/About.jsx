@@ -58,7 +58,7 @@ class About extends React.Component {
                             <p><img src="https://i.imgur.com/FC9HJSm.jpg"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Caillie Juergens</p>
-                            <p>Computer science undergraduate at portland state university, class of '21</p>
+                            <p>Computer science undergraduate at Portland State University, graduated June 2021</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
