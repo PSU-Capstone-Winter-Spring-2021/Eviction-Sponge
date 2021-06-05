@@ -17,11 +17,21 @@ class About extends React.Component {
                         <p>The eviction sponge project is a web-hosted
                         service that allows users to check their
                         eligibility for eviction record expungement
-                        and, if they are eligible, provide the
-                        necessary legal documentation already
-                        filled in.
+                        and, if they are eligible, provides the
+                        necessary legal documentation auto-filled with their information.
                         </p>
+<<<<<<< HEAD
                         <h2>Our Team</h2>
+=======
+                        <h2>Our Mission</h2>
+                        <p>This website began as a senior project for eight undergraduate computer science
+                            students at Portland State University in the beginning of 2021. </p>
+                        <p>The EvictionSponge development team quickly grew passionate about the project  when they learned about the positive
+                            impact this software would have on the local community.</p>
+                        <p>The team wants to thank Michael Zhang for sponsoring this project and giving them the necessary
+                            tools to be successful.</p>
+                        <h2>Meet the Team</h2>
+>>>>>>> e8ba19c447806b0a02fddda0fc76f6ad96c9a8c0
                         <div class="row text-left">
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
@@ -52,7 +62,7 @@ class About extends React.Component {
                             <p><img src="https://i.imgur.com/FC9HJSm.jpg"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Caillie Juergens</p>
-                            <p>Computer science undergraduate at Portland State University, class of '21</p>
+                            <p>Computer science undergraduate at Portland State University, graduated June 2021</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
