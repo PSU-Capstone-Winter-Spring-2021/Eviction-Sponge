@@ -20,18 +20,14 @@ class About extends React.Component {
                         and, if they are eligible, provides the
                         necessary legal documentation auto-filled with their information.
                         </p>
-<<<<<<< HEAD
-                        <h2>Our Team</h2>
-=======
                         <h2>Our Mission</h2>
                         <p>This website began as a senior project for eight undergraduate computer science
                             students at Portland State University in the beginning of 2021. </p>
-                        <p>The EvictionSponge development team quickly grew passionate about the project  when they learned about the positive
+                        <p>The EvictionSponge development team quickly grew passionate about the project when they learned about the positive
                             impact this software would have on the local community.</p>
                         <p>The team wants to thank Michael Zhang for sponsoring this project and giving them the necessary
                             tools to be successful.</p>
                         <h2>Meet the Team</h2>
->>>>>>> e8ba19c447806b0a02fddda0fc76f6ad96c9a8c0
                         <div class="row text-left">
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
