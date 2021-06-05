@@ -27,7 +27,7 @@ def string_to_date(string, format):
 class DemoSearch(MethodView):
     def post(self):
         search_results = []
-        path = os.path.relpath('backend\data\demo_search_data.csv', os.path.dirname(__file__))
+        path = os.path.relpath('backend\\data\\demo_search_data.csv', os.path.dirname(__file__))
         with open(path, newline='\n') as demoFile:
             demoData = csv.reader(demoFile, delimiter=';')
             for fakeCase in demoData:
