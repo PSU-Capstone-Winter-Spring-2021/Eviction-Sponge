@@ -21,17 +21,6 @@ class About extends React.Component {
                         necessary legal documentation already
                         filled in.
                         </p>
-                        <h2>Our Mission</h2>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim atque, autem dolor ab
-                        voluptatem voluptas officiis esse fugiat quos quisquam eligendi ea quasi aut labore cum
-                        mollitia impedit dolorum a.</p>
-                        <p>Debitis, nisi nobis a deleniti quam accusantium veniam dignissimos consectetur sit
-                        delectus, quidem voluptatum unde laborum aliquid illo quo molestiae perspiciatis!</p>
-                        <p>Quis vero earum ullam explicabo. Quae ratione rem illo!
-                        Aut ratione veritatis necessitatibus ipsam! Sunt assumenda fuga omnis odit voluptatem
-                        temporibus nulla quaerat minima vitae corporis debitis cum quas illo nisi consequuntur,
-                        unde esse officia, alias nemo recusandae laboriosam.
-                        </p>
                         <h2>Our Team</h2>
                         <div class="row text-left">
                           <div class="col-sm-6">
