@@ -44,10 +44,10 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
+                            <p><img src="https://i.imgur.com/IDFW5cc.jpg"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Zayne Stites</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
+                            <p>Backend developer</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
