@@ -39,10 +39,10 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://i.imgur.com/IDFW5cc.jpg"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Zayne Stites</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
+                            <p>Backend developer.  Graduated June 2021.</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
