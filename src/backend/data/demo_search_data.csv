@@ -1,3 +1,3 @@
-D00001;LANDLORD 1 V TENANT;Washington;Forcible Entry Detainer: Residential;Closed;05/23/1989;10/10/1989;Judgment;True;Not Dismissed, but older than 5 years;00001;Estimated money owed: $0.00
-D00002;LANDLORD 2 V TENANT;Marion;Landlord/Tenant - Residential or Return of Personal Property;Open;11/15/2020;3/30/2021;None;False;FUTURE: Not Dismissed & not older than 5 years;00002;Estimated money owed: $0.00
-D00003;LANDLORD 3 V TENANT;Multnomah;Landlord/Tenant - Residential or Return of Personal Property;Closed;01/01/2019;10/19/2019;Judgment General Dismissal;True;Case Dismissed;00003;Estimated money owed: $12.50
+D00001,LANDLORD 1 V TENANT,Washington,Forcible Entry Detainer: Residential,Closed,05/23/1989,10/10/1989,Judgment,True,Not Dismissed\, but older than 5 years,00001,Estimated money owed: $0.00
+D00002,LANDLORD 2 V TENANT,Marion,Landlord/Tenant - Residential or Return of Personal Property,Open,11/15/2020,3/30/2021,None,False,FUTURE: Not Dismissed & not older than 5 years,00002,Estimated money owed: $0.00
+D00003,LANDLORD 3 V TENANT,Multnomah,Landlord/Tenant - Residential or Return of Personal Property,Closed,01/01/2019,10/19/2019,Judgment General Dismissal,True,Case Dismissed,00003,Estimated money owed: $12.50
