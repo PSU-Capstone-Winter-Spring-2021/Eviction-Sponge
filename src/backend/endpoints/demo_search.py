@@ -27,7 +27,7 @@ def string_to_date(string, format):
 class DemoSearch(MethodView):
     def post(self):
         search_results = []
-        path = os.path.abspath('data\\demo_search_data.csv')
+        path = os.path.abspath('data/demo_search_data.csv')
         # print(path)
         with open(path, newline='') as demoFile:
             demoData = csv.reader(demoFile, delimiter=',')
