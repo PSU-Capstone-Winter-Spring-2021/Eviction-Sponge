@@ -36,7 +36,7 @@ class About extends React.Component {
                         <div class="row text-left">
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Thomas Pollard</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -44,7 +44,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Zayne Stites</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -52,7 +52,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                  className="img-responsive" width="250" height="250"/></p>
                             <p>Logan Voruz</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -68,7 +68,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Samuel Youngs</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -76,7 +76,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Ping Chun Chung</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -84,7 +84,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Danford Compton</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
@@ -92,7 +92,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.freepnglogos.com/uploads/spongebob-png/photo-editing-effects-master-effetcs-spongebob-25.png"
+                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Zhengmao Zhang</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
