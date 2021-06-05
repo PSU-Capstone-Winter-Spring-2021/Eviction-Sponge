@@ -5,10 +5,10 @@ import history from "./history";
 export function checkCookieExists(cookieName){
     var name = cookieName + "=";
     if(document.cookie.split(';').some((item)=>item.trim().startsWith(name))){
-        console.log('The cookie "' + cookieName + '" exists');
+        // console.log('The cookie "' + cookieName + '" exists');
         return true;
     }
-    console.log('The cookie "' + cookieName + '" does not exists')
+    // console.log('The cookie "' + cookieName + '" does not exists')
     return false;
 }
 

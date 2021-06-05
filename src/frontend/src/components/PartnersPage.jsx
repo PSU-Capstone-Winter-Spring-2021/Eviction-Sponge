@@ -26,7 +26,7 @@ export default class PartnersPage extends React.Component{
         else{
             this.setState({invalidEmail: false});
         }
-        console.log(this.state.invalidEmail);
+        // console.log(this.state.invalidEmail);
     };
 
     const
