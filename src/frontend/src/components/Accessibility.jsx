@@ -71,16 +71,13 @@ class Accessibility extends React.Component {
                     <p className = "mb-4">
                         <span className="basic-information organization-name">Eviction Sponge</span>
                         assessed the accessibility of
-                        <span className="basic-information website-name">EvictionSponge</span>
+                        <span className="basic-information website-name"> EvictionSponge </span>
                         by the following approaches:
                     </p>
                     <ul className="technical-information assessment-approaches mb-4">
                         <li>Self-evaluation</li>
                     </ul>
                 </section>
-                {/* <hr noshade="noshade"> */}
-                    <h2 className = "font-weight-bold mb-4">Date</h2>
-                {/* </hr> */}
             </main>
         );
     }
