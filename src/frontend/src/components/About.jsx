@@ -50,7 +50,7 @@ class About extends React.Component {
                             <p><img src="https://i.imgur.com/Ytrq24C.jpg"
                                  className="img-responsive" width="250" height="250"/></p>
                             <p>Logan Voruz</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
+                            <p>Frontend Developer, Computer Science undergraduate at Portland State University, class of 2021</p>
                           </div>
                           </div>
                           <div class="col-sm-6">
