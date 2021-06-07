@@ -1,0 +1,6 @@
+flask
+requests
+cryptography
+pdfrw
+bs4
+python-dateutil
