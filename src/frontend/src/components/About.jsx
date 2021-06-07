@@ -87,9 +87,10 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
+                            <p><img src="https://scontent.fhio2-1.fna.fbcdn.net/v/t1.18169-9/22046575_765710706964789_2717801391033859401_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=gv3ehxCyy00AX--IgDg&_nc_ht=scontent.fhio2-1.fna&oh=0d9a839229549fbfb3c3c7dcd76cb8eb&oe=60E28127"
                                     className="img-responsive" width="250" height="250"/></p>
                             <p>Zhengmao Zhang</p>
+                            <p>Computer science undergraduate at Portland State University and Changchun University of Technology, graduated June 2021</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
                           </div>
                           </div>
