@@ -4,7 +4,7 @@ The EvictionSponge project is a web-hosted service that allows users to check th
 ## Project Tech Stack
 EvictionSponge is built using [React.js](https://www.reactjs.org/) for the front end interface and [Flask](https://flask.palletsprojects.com/en/1.1.x/) for the backend framework. Frontend packages are managed with NPM.
 
-# Running a local version
+## Running a local version
 You can run a local version of EvictionSponge by doing the following:
 
 1. Clone the repo to your local machine
@@ -14,3 +14,9 @@ You can run a local version of EvictionSponge by doing the following:
 5. In the src/backend directory, run `python3 app.py`
 
 You can now visit localhost:5000 to see your local version of EvictionSponge.
+
+## Editing the partners table
+The partner information is located in src/backend/data/partnerData.json.
+partnerDataTemplate.txt is an example formatting of the information that needs to be included for each partner
+in partnerData.json. Edit partnerData.json to change the partner data the backend serves without having 
+to rebuild the front end React.js app
