@@ -47,7 +47,7 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://i.imgur.com/n7Ezuyh.jpg"
+                            <p><img src="https://i.imgur.com/Ytrq24C.jpg"
                                  className="img-responsive" width="250" height="250"/></p>
                             <p>Logan Voruz</p>
                             <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
