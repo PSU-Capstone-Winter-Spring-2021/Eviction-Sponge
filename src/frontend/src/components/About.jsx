@@ -2,7 +2,7 @@ import React from "react";
 
 class About extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         document.title = "About - EvictionSponge";
     }
 
@@ -29,76 +29,74 @@ class About extends React.Component {
                             tools to be successful.</p>
                         <h2>Meet the Team</h2>
                         <div class="row text-left">
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://scontent.fhio2-2.fna.fbcdn.net/v/t1.18169-9/10639514_850907448266229_4213876653792762123_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=FXHyxkl_uxgAX-X3mMt&_nc_ht=scontent.fhio2-2.fna&oh=1bfa89cde8853d15613044ff0292e57b&oe=60E07ED4"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Thomas Pollard</p>
-                            <p>Capstone project team lead. Computer science undergraduate at Portland State University, graduated June 2021</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://i.imgur.com/IDFW5cc.jpg"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Zayne Stites</p>
-                            <p>Backend developer.  Graduated June 2021.</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
-                                 className="img-responsive" width="250" height="250"/></p>
-                            <p>Logan Voruz</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://i.imgur.com/FC9HJSm.jpg"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Caillie Juergens</p>
-                            <p>Computer science undergraduate at Portland State University, graduated June 2021</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://i.imgur.com/9PJCYu9.jpg"
-                                    className="img-responsive" maxwidth="250" height="250"/></p>
-                            <p>Samuel Youngs</p>
-                            <p>Computer science undergrad and front end developer.</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Ping Chun Chung</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Danford Compton</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div className="col-md-12 well">
-                            <p><img src="https://www.kindpng.com/picc/m/144-1447559_profile-icon-missing-profile-picture-icon-hd-png.png"
-                                    className="img-responsive" width="250" height="250"/></p>
-                            <p>Zhengmao Zhang</p>
-                            <p>Quis vero earum ullam explicabo. Quae ratione rem illo!</p>
-                          </div>
-                          </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://scontent.fhio2-2.fna.fbcdn.net/v/t1.18169-9/10639514_850907448266229_4213876653792762123_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=FXHyxkl_uxgAX-X3mMt&_nc_ht=scontent.fhio2-2.fna&oh=1bfa89cde8853d15613044ff0292e57b&oe=60E07ED4"
+                                        className="img-responsive" alt="Thomas Pollard" width="250" height="250" /></p>
+                                    <p>Thomas Pollard</p>
+                                    <p>Capstone project team lead. Computer science undergraduate at Portland State University, graduated June 2021</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://i.imgur.com/IDFW5cc.jpg"
+                                        className="img-responsive" alt="Zayne Stites" width="250" height="250" /></p>
+                                    <p>Zayne Stites</p>
+                                    <p>Backend developer.  Graduated June 2021.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://i.imgur.com/Ytrq24C.jpg"
+                                        className="img-responsive" alt="Logan Voruz" width="250" height="250" /></p>
+                                    <p>Logan Voruz</p>
+                                    <p>Frontend Developer, Computer Science undergraduate at Portland State University, class of 2021</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://i.imgur.com/FC9HJSm.jpg"
+                                        className="img-responsive" alt="Caillie Juergens" width="250" height="250" /></p>
+                                    <p>Caillie Juergens</p>
+                                    <p>Computer science undergraduate at Portland State University, graduated June 2021</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://media-exp1.licdn.com/dms/image/C5603AQGERE1qc0M9wA/profile-displayphoto-shrink_800_800/0/1619299758622?e=1628726400&v=beta&t=Al9PvbMrHfv-EXt2irAUo89yrru8hGSJw9R0iTyoytM"
+                                        className="img-responsive" alt="Samuel Youngs" width="250" height="250" /></p>
+                                    <p>Samuel Youngs</p>
+                                    <p>Computer science undergrad and front end developer.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://i.imgur.com/NG4c1xv.jpg"
+                                        className="img-responsive" alt="Ping Chun Chung" width="250" height="250" /></p>
+                                    <p>Ping Chun Chung</p>
+                                    <p>Computer science undergrad at Portland State University</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://i.imgur.com/WOSKxmJ.jpg"
+                                        className="img-responsive" alt="Danford Compton" width="250" height="250" /></p>
+                                    <p>Danford Compton</p>
+                                    <p>Backend developer, computer science undergrad, Portland State University class of 2021</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div className="col-md-12 well">
+                                    <p><img src="https://scontent.fhio2-1.fna.fbcdn.net/v/t1.18169-9/22046575_765710706964789_2717801391033859401_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=gv3ehxCyy00AX--IgDg&_nc_ht=scontent.fhio2-1.fna&oh=0d9a839229549fbfb3c3c7dcd76cb8eb&oe=60E28127"
+                                        className="img-responsive" alt="Zhengmao Zhang" width="250" height="250" /></p>
+                                    <p>Zhengmao Zhang</p>
+                                    <p>Computer science undergraduate at Portland State University and Changchun University of Technology, graduated June 2021</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </main>
-
-
         );
     }
 }
