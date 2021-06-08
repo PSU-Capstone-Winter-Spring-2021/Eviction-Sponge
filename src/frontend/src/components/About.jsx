@@ -63,8 +63,8 @@ class About extends React.Component {
                           </div>
                           <div class="col-sm-6">
                             <div className="col-md-12 well">
-                            <p><img src="https://media-exp1.licdn.com/dms/image/C5603AQGERE1qc0M9wA/profile-displayphoto-shrink_800_800/0/1619299758622?e=1628726400&v=beta&t=Al9PvbMrHfv-EXt2irAUo89yrru8hGSJw9R0iTyoytM"
-                                    className="img-responsive" width="250" height="250"/></p>
+                            <p><img src="https://i.imgur.com/9PJCYu9.jpg"
+                                    className="img-responsive" maxwidth="250" height="250"/></p>
                             <p>Samuel Youngs</p>
                             <p>Computer science undergrad and front end developer.</p>
                           </div>
