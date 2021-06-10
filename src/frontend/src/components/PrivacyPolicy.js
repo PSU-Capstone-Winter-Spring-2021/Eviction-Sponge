@@ -106,7 +106,6 @@ class PrivacyPolicy extends React.Component {
                     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     OTHER DEALINGS IN THE MANUAL.
                   </p>
-                  <p className="fw7 mb2">Short list of Credits</p>
                 </section>
               </article>
             </main>
