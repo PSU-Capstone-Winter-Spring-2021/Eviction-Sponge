@@ -31,7 +31,7 @@ class About extends React.Component {
                         <div class="row text-left">
                             <div class="col-sm-6">
                                 <div className="col-md-12 well">
-                                    <p><img src="https://scontent.fhio2-2.fna.fbcdn.net/v/t1.18169-9/10639514_850907448266229_4213876653792762123_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=FXHyxkl_uxgAX-X3mMt&_nc_ht=scontent.fhio2-2.fna&oh=1bfa89cde8853d15613044ff0292e57b&oe=60E07ED4"
+                                    <p><img src="https://i.imgur.com/ayXf4pz.jpg"
                                         className="img-responsive" alt="Thomas Pollard" width="250" height="250" /></p>
                                     <p>Thomas Pollard</p>
                                     <p>Capstone project team lead. Computer science undergraduate at Portland State University, graduated June 2021</p>
