@@ -30,5 +30,21 @@
          "Bro@Broseph.com"
       ],
       "website": "https://www.youtube.com/watch?v=LJdKdITUyLM"
+   },
+   {
+      "id": "1",
+      "name": "Broseph Co.",
+      "area": "Northeast Portland",
+      "locations": "Multnomah County",
+      "incomeRestrictions": "None",
+      "analysisCost": "Free",
+      "paperWorkCost": "Free",
+      "courtFees": "Not Included",
+      "feeInfo": "The majority of court fees are subject to waiver",
+      "contacts": [
+         "Broseidon",
+         "Bro@Broseph.com"
+      ],
+      "website": "https://www.youtube.com/watch?v=LJdKdITUyLM"
    }
 ]
