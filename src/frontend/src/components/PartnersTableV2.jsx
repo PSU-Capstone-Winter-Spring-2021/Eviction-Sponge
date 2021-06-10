@@ -2,35 +2,36 @@ import React from "react";
 import axios from 'axios';
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
+import partnerData from "../data/partnerData.json"
 
 class PartnersTableV2 extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            partnerData: [],
+            // partnerData: partnerData,
             dataLoaded: false
         };
     }
 
     componentDidMount() {
-        axios.get('/partners-table')
-            .then(({ data }) => {
-                if(data.length > 0){
+        // axios.get('/partners-table')
+        //     .then(({ data }) => {
+                if(partnerData.length > 0){
                     this.setState({
-                        partnerData: data,
+                        // partnerData: data,
                         dataLoaded: true
                     });
                 }
-            }, reason =>{
-                console.log("Internal Server Error, can't retrieve data")
-                this.setState({
-                    dataLoaded: false
-                });
-            })
+            // }, reason =>{
+            //     console.log("Internal Server Error, can't retrieve data")
+            //     this.setState({
+            //         dataLoaded: false
+            //     });
+            // })
     }
 
     render() {
-        let partners = this.state.partnerData.map((partner, index) => (
+        let partners = partnerData.map((partner, index) => (
             <Card className="row bg-light" key={partner.id}>
                 <Accordion.Toggle
                 as={Card.Header}
